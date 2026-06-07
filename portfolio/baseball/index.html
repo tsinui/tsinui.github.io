@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Washington Nationals 2019 batting dashboard for The Sinasera."
+    />
+    <title>Washington Nationals 2019 Batting Dashboard | The Sinasera</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+    <script defer src="./app.js"></script>
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="page-brandbar">
+        <a class="page-brand" href="../../index.html" aria-label="The Sinasera home">
+          <span class="brand-prefix">the</span>
+          <span class="brand-name">sinasera</span>
+        </a>
+      </header>
+      <header class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow"><a href="../../portfolio.html">Portfolio</a> / Baseball analysis</p>
+          <h1>Washington Nationals 2019 Batting Dashboard</h1>
+          <p class="hero-tagline">
+            The 0.1% Comeback: Data Analysis on Batting Strategies behind Nationals' Championship Season
+          </p>
+        </div>
+        <div class="hero-meta">
+          <a class="hero-link" href="../../portfolio.html">Back to portfolio</a>
+          <a
+            class="hero-link"
+            href="https://chenweiho.shinyapps.io/WSN2019/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Original Shiny App
+          </a>
+        </div>
+      </header>
+
+      <main class="dashboard">
+        <aside class="filters-panel">
+          <div class="panel-header">
+            <h2>Filters</h2>
+            <button id="resetFilters" class="ghost-button" type="button">Reset</button>
+          </div>
+
+          <label class="control">
+            <span>Date range</span>
+            <div class="date-range-readout">
+              <span id="dateStartLabel">-</span>
+              <span id="dateEndLabel">-</span>
+            </div>
+            <div class="date-range">
+              <div id="dateTrack" class="date-track"></div>
+              <input id="dateStartRange" type="range" min="0" max="0" step="1" />
+              <input id="dateEndRange" type="range" min="0" max="0" step="1" />
+            </div>
+          </label>
+
+          <label class="control">
+            <span>Player</span>
+            <select id="playerFilter"></select>
+            <small class="control-hint">Choose one player or All players.</small>
+          </label>
+
+          <div class="control">
+            <div class="control-header">
+              <span>Game phase</span>
+              <button class="mini-action" type="button" data-toggle="gamePhases" data-action="all">All</button>
+            </div>
+            <div id="gamePhaseFilter" class="chip-group"></div>
+          </div>
+
+          <div class="control">
+            <div class="control-header">
+              <span>Situation</span>
+              <button class="mini-action" type="button" data-toggle="situations" data-action="all">All</button>
+            </div>
+            <div id="situationFilter" class="chip-group"></div>
+          </div>
+
+          <div class="control">
+            <div class="control-header">
+              <span>Events</span>
+              <button class="mini-action" type="button" data-toggle="events" data-action="all">All</button>
+            </div>
+            <div id="eventsFilter" class="chip-group"></div>
+          </div>
+
+          <div class="control">
+            <div class="control-header">
+              <span>Scenario</span>
+              <button class="mini-action" type="button" data-toggle="scenarios" data-action="all">All</button>
+            </div>
+            <div id="scenarioFilter" class="chip-group"></div>
+          </div>
+
+          <label class="control">
+            <span>Outcome stat</span>
+            <select id="yAxisVar"></select>
+          </label>
+
+          <div class="note">
+            All summaries are recalculated in the browser, so this can live on GitHub Pages
+            without a Shiny server.
+          </div>
+        </aside>
+
+        <section class="content-panel">
+          <nav class="tabs" aria-label="Visualization tabs">
+            <button class="tab-button active" data-tab="overviewTab" type="button">Project Overview</button>
+            <button class="tab-button" data-tab="sprayTab" type="button">Spray Chart</button>
+            <button class="tab-button" data-tab="launchTab" type="button">Launch Speed vs Angle</button>
+            <button class="tab-button" data-tab="directionTab" type="button">Bat Direction</button>
+            <button class="tab-button" data-tab="pitchTab" type="button">Pitch Type</button>
+            <button class="tab-button" data-tab="plateTab" type="button">Plate Discipline</button>
+          </nav>
+
+          <section class="tab-panel active" id="overviewTab">
+            <div class="chart-card overview-panel">
+              <div class="chart-header">
+                <h3>Project Overview</h3>
+                <p>A compact narrative summary of the analysis and findings.</p>
+              </div>
+
+              <div class="overview-card">
+                <figure class="overview-poster overview-poster-full">
+                  <img
+                    src="../../images/nationals-analysis-poster.png"
+                    alt="Project poster for the 2019 Washington Nationals batting analysis"
+                  />
+                </figure>
+
+                <div class="overview-feature-copy">
+                  <p>
+                    This project examines how the 2019 Washington Nationals adjusted controllable batting decisions over the season, contributing to their historic comeback from a 19–31 start to winning the World Series.
+                  </p>
+                  <p>
+                    Using MLB Statcast data, the analysis focuses on temporal shifts in batting strategies that players can actively control.
+                  </p>
+                  <ul class="mini-list">
+                    <li>Spatial-temporal visualization of batted ball locations and spray angles</li>
+                    <li>Analysis of launch metrics and pitch-type performance</li>
+                    <li>Interactive dashboards built with Shiny to track strategic adjustments</li>
+                  </ul>
+                </div>
+
+                <h4>Research Focus</h4>
+                <p>
+                  The study investigates how changes in directional control, plate discipline, and launch quality evolved over time, particularly under high-leverage game situations.
+                </p>
+                <h4>Key Findings</h4>
+                <ul>
+                  <li>Restored ability to drive the ball to all field directions as the season progressed</li>
+                  <li>Increased run expectancy from opposite-field hard hits in late-season and postseason games</li>
+                  <li>Improved plate discipline in high-leverage counts (e.g., 2–2, 3–1)</li>
+                  <li>Significant improvement in weighted on-base average (wOBA) against horizontal breaking balls, indicating reduced directional constraint in batting decisions</li>
+                </ul>
+                <h4>Recognition</h4>
+                <p>
+                  Best Term Project, Spatial-Temporal Data Visualization<br />
+                  Department of Geography, National Taiwan University (Fall 2024)
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <section class="tab-panel" id="sprayTab">
+            <div class="chart-card">
+              <div class="chart-header">
+                <h3>Spray Chart by Stance</h3>
+                <p>Where the balls were hit, grouped by batter stance and pitch type.</p>
+              </div>
+              <div id="sprayByStand" class="chart"></div>
+            </div>
+            <div class="chart-card">
+              <div class="chart-header">
+                <h3>Spray Chart by Situation</h3>
+                <p>Hit locations compared across base-out situations and hard-hit status.</p>
+              </div>
+              <div id="sprayBySituation" class="chart"></div>
+            </div>
+          </section>
+
+          <section class="tab-panel" id="launchTab">
+            <div class="chart-card">
+              <div class="chart-header">
+                <h3>Launch Speed vs Angle by Situation</h3>
+                <p>Bat angle and exit velocity, colored by game situation.</p>
+              </div>
+              <div id="launchBySituation" class="chart"></div>
+            </div>
+            <div class="chart-card">
+              <div class="chart-header">
+                <h3>Launch Speed vs Angle by Pitch Type</h3>
+                <p>Same relationship, grouped by pitch classification.</p>
+              </div>
+              <div id="launchByPitch" class="chart"></div>
+            </div>
+            <div class="chart-card">
+              <div class="chart-header">
+                <h3>Spray Chart by Launch Angle</h3>
+                <p>Spray pattern encoded by launch angle and split by stance / situation.</p>
+              </div>
+              <div id="sprayByLaunch" class="chart"></div>
+            </div>
+          </section>
+
+          <section class="tab-panel" id="directionTab">
+            <div class="chart-card">
+              <div class="chart-header">
+                <h3>Delta Run Expectancy by Batted Direction</h3>
+                <p>Pull, opposite field, and center contact compared with hard-hit status.</p>
+              </div>
+              <div id="directionBox" class="chart"></div>
+            </div>
+            <div class="chart-card">
+              <div class="chart-header">
+                <h3>Spray Chart by Batted Direction</h3>
+                <p>Directional contact patterns on the field, split by stance and hard-hit.</p>
+              </div>
+              <div id="directionSpray" class="chart"></div>
+            </div>
+          </section>
+
+          <section class="tab-panel" id="pitchTab">
+            <div class="chart-card">
+              <div class="chart-header">
+                <h3>Monthly Performance by Pitch Type</h3>
+                <p id="pitchChartSubtitle">Change the metric from the filter panel to update the axis.</p>
+              </div>
+              <div id="monthlyPitchPerformance" class="chart tall"></div>
+            </div>
+          </section>
+
+          <section class="tab-panel" id="plateTab">
+            <div class="chart-card">
+              <div class="chart-header">
+                <h3>Performance Over Time by Count</h3>
+                <p id="plateChartSubtitle">This chart updates with the same metric selector.</p>
+              </div>
+              <div id="countPerformance" class="chart tall"></div>
+            </div>
+          </section>
+
+        </section>
+      </main>
+
+      <footer class="footer">
+        Built from the 2019 Washington Nationals batting dataset. Designed as a static
+        portfolio piece for GitHub Pages.
+      </footer>
+    </div>
+
+    <div id="loading" class="loading-overlay">
+      <div class="loading-card">
+        <div class="spinner"></div>
+        <strong>Loading data</strong>
+        <span>Parsing the CSV and preparing browser-side summaries.</span>
+      </div>
+    </div>
+  </body>
+</html>

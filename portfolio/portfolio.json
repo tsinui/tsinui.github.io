@@ -1,0 +1,28 @@
+[
+  {
+    "sport": "Baseball",
+    "items": [
+      {
+        "type": "dashboard",
+        "id": "baseball-2019",
+        "title": "Washington Nationals 2019 Batting Dashboard",
+        "description": "The 0.1% Comeback: Data Analysis on Batting Strategies behind Nationals' Championship Season",
+        "url": "portfolio/baseball/index.html",
+        "date": "2024"
+      }
+    ]
+  },
+  {
+    "sport": "Basketball",
+    "items": [
+      {
+        "type": "article",
+        "id": "ntu-beast-ucla-offense",
+        "title": "臺大獸昆7號戰術UCLA進攻",
+        "description": "戰術拆解與進攻結構分析",
+        "url": "portfolio/basketball/ntu-beast-ucla-offense.html",
+        "date": "2024"
+      }
+    ]
+  }
+]

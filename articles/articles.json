@@ -1,0 +1,55 @@
+[
+  {
+    "slug": "admission-to-wageningen",
+    "title": "Next Stop: Wageningen.",
+    "titleZh": "收到瓦大錄取信的所思所想",
+    "date": "2026-02-15",
+    "tags": ["Reflect", "Feature Story"],
+    "image": "../images/r508-celebration-admission.JPG",
+    "imageAlt": "Admission celebration photo",
+    "description": "收到瓦大錄取信的所思所想"
+  },
+  {
+    "slug": "brain-overload-march",
+    "title": "關於大腦過載、連結依賴，與慢慢學會照顧自己的三月回顧",
+    "titleZh": "",
+    "date": "2026-04-05",
+    "tags": ["Reflect"],
+    "image": "../images/practice-3.webp",
+    "imageAlt": "三月回顧",
+    "description": "關於大腦過載、連結依賴，與慢慢學會照顧自己",
+    "externalUrl": "https://citipedia.substack.com/p/39b"
+  },
+  {
+    "slug": "ntu-geography-dept-graduation-speech",
+    "title": "Speaking at the NTU Geography Commencement.",
+    "titleZh": "臺大地理系小畢典畢業生代表致詞",
+    "date": "2025-05-24",
+    "tags": ["Public Comment"],
+    "image": "../images/ntu-geography-speech-01.jpg",
+    "imageAlt": "NTU Geography commencement speech photo",
+    "description": "臺大地理系小畢典畢業生代表致詞"
+  },
+  {
+    "slug": "accepting-stuck-self",
+    "title": "練習接受卡住的自己，是我靠近恆星時刻的第一步",
+    "titleZh": "",
+    "date": "2025-09-01",
+    "tags": ["Reflect"],
+    "image": "../images/practice-2.jpeg",
+    "imageAlt": "練習接受卡住的自己",
+    "description": "練習接受卡住的自己，是我靠近恆星時刻的第一步",
+    "externalUrl": "https://citipedia.substack.com/p/002"
+  },
+  {
+    "slug": "research-distance-from-people",
+    "title": "我以為自己適合做研究，直到我發現自己離人群與土地越來越遠",
+    "titleZh": "",
+    "date": "2025-08-18",
+    "tags": ["Reflect"],
+    "image": "../images/practice-1.JPG",
+    "imageAlt": "離人群與土地越來越遠",
+    "description": "我以為自己適合做研究，直到我發現自己離人群與土地越來越遠",
+    "externalUrl": "https://citipedia.substack.com/p/001"
+  }
+]

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>The Sinasera</title>
+    <link>https://tsinui.github.io</link>
+    <description>Writing by Herman — geographer, thinker, storyteller.</description>
+    <language>zh-TW</language>
+    <atom:link href="https://tsinui.github.io/feed.xml" rel="self" type="application/rss+xml"/>
+    <lastBuildDate>Sat, 28 Jun 2026 00:00:00 +0000</lastBuildDate>
+
+    <item>
+      <title>Next Stop: Wageningen.</title>
+      <link>https://tsinui.github.io/articles/admission-to-wageningen.html</link>
+      <guid>https://tsinui.github.io/articles/admission-to-wageningen.html</guid>
+      <pubDate>Sun, 15 Feb 2026 00:00:00 +0000</pubDate>
+      <description>收到瓦大錄取信的所思所想</description>
+    </item>
+
+    <item>
+      <title>Speaking at the NTU Geography Commencement.</title>
+      <link>https://tsinui.github.io/articles/ntu-geography-dept-graduation-speech.html</link>
+      <guid>https://tsinui.github.io/articles/ntu-geography-dept-graduation-speech.html</guid>
+      <pubDate>Sat, 24 May 2025 00:00:00 +0000</pubDate>
+      <description>臺大地理系小畢典畢業生代表致詞</description>
+    </item>
+
+  </channel>
+</rss>

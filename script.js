@@ -107,6 +107,11 @@ async function loadArticles() {
     }
     renderHome(homeContainer, ordered, root);
   }
+  // The container was empty (height 0) when IntersectionObserver first ran,
+  // so re-check visibility now that content is rendered.
+  if (homeContainer.getBoundingClientRect().top < window.innerHeight) {
+    homeContainer.classList.add("is-visible");
+  }
 }
 
 async function loadWorldMap() {

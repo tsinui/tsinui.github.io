@@ -27,9 +27,6 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
-      - name: Remove unused static fonts
-        run: rm -rf assets/fonts/Noto_Sans_TC/static
-
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:

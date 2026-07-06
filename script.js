@@ -161,7 +161,7 @@ async function loadWorldMap() {
     { id: 344, name: "Hong Kong" },
     { id: 156, name: "China" },
     { id: 496, name: "Mongolia" },
-    { id: 410, name: "South Korea" },
+    { id: 703, name: "Slovakia" },
     { id: 392, name: "Japan" },
     { id: 792, name: "Turkey" },
     { id: 528, name: "Netherlands" },

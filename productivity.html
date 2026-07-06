@@ -629,6 +629,14 @@ function App() {
     if (!token) return;
     ghGetCSV(token).then(({entries: e, sha: s}) => {
       setEntries(e); setSha(s); setLoaded(true);
+      // Merge subjects from CSV into local list
+      const csvSubjects = [...new Set(e.map(entry => entry.subject).filter(Boolean))];
+      setSubjects(prev => {
+        const merged = [...prev];
+        csvSubjects.forEach(s => { if (!merged.includes(s)) merged.push(s); });
+        localStorage.setItem(SUBJECTS_KEY, JSON.stringify(merged));
+        return merged;
+      });
     }).catch(() => { handleLogout(); });
   }, [token]);
 

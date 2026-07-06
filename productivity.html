@@ -183,24 +183,44 @@
     .ll-preset-btn:hover { border-color: var(--p-teal); color: var(--p-teal); }
     .ll-preset-btn.active { background: var(--p-teal); color: #fff; border-color: var(--p-teal); }
 
-    /* Subject manager */
-    .ll-subject-manager {
-      border: 1px solid var(--p-dark); padding: 14px 16px;
-      margin-bottom: 18px; background: rgba(255,255,255,0.35);
+    /* Kanban board */
+    .ll-kanban-wrap {
+      border: 1px solid var(--p-dark); margin-bottom: 18px;
+      background: rgba(255,255,255,0.35);
     }
-    .ll-subject-manager-label { font-size: 10px; text-transform: uppercase; letter-spacing: 1.5px; color: #756a54; margin-bottom: 10px; }
-    .ll-subject-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
-    .ll-subject-chip {
-      display: inline-flex; align-items: center; gap: 6px;
-      font-size: 11.5px; color: #fff; padding: 3px 6px 3px 10px; border-radius: 2px;
+    .ll-kanban-header {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 12px; padding: 12px 16px 10px; border-bottom: 1px solid rgba(19,30,33,0.1);
+      flex-wrap: wrap;
     }
-    .ll-subject-chip button {
-      background: rgba(0,0,0,0.18); border: none; color: #fff;
-      width: 16px; height: 16px; line-height: 16px; border-radius: 50%;
-      cursor: pointer; font-size: 11px; padding: 0;
+    .ll-kanban-board {
+      display: grid; grid-template-columns: repeat(3,1fr); gap: 0;
     }
-    .ll-subject-chip button:hover { background: rgba(0,0,0,0.4); }
-    .ll-subject-chip button:disabled { opacity: 0.35; cursor: not-allowed; }
+    .ll-kanban-col {
+      padding: 10px 12px; border-right: 1px solid rgba(19,30,33,0.1);
+      min-height: 90px; transition: background 150ms;
+    }
+    .ll-kanban-col:last-child { border-right: none; }
+    .ll-kanban-col-over { background: rgba(0,130,142,0.08); }
+    .ll-kanban-col-title {
+      font-size: 9px; font-weight: 800; letter-spacing: 1.5px;
+      text-transform: uppercase; color: #756a54; margin-bottom: 8px;
+    }
+    .ll-kanban-card {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 6px; background: #fff; border: 1px solid rgba(19,30,33,0.15);
+      border-radius: 3px; padding: 6px 8px; margin-bottom: 6px;
+      font-size: 12px; cursor: grab; user-select: none;
+    }
+    .ll-kanban-card:active { cursor: grabbing; opacity: 0.7; }
+    .ll-kanban-card span { flex: 1; }
+    @media (max-width: 540px) {
+      .ll-kanban-board { grid-template-columns: 1fr; }
+      .ll-kanban-col { border-right: none; border-bottom: 1px solid rgba(19,30,33,0.1); }
+      .ll-kanban-col:last-child { border-bottom: none; }
+    }
+    /* Subject manager label reused */
+    .ll-subject-manager-label { font-size: 10px; text-transform: uppercase; letter-spacing: 1.5px; color: #756a54; margin-bottom: 0; }
     .ll-subject-add-row { display: flex; gap: 8px; }
     .ll-subject-add-row input {
       flex: 1; font-family: 'IBM Plex Mono', monospace; font-size: 12.5px;
@@ -378,9 +398,9 @@ const { useState, useEffect, useMemo, useRef, useCallback } = React;
 const GH_OWNER = 'tsinui';
 const GH_REPO  = 'tsinui.github.io';
 const GH_PATH  = 'data/learning-log.csv';
+const GH_PROJECTS_PATH = 'data/projects.csv';
 const GH_BRANCH = 'main';
 const TOKEN_KEY = 'll-gh-token';
-const SUBJECTS_KEY = 'll-subjects';
 
 // ── GitHub API helpers ──
 function ghHeaders(token) {
@@ -423,6 +443,27 @@ async function ghPutCSV(token, sha, entries) {
   return data.content.sha;
 }
 
+// ── Projects GitHub API ──
+async function ghGetProjects(token) {
+  const res = await fetch(`https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${GH_PROJECTS_PATH}`, {
+    headers: ghHeaders(token)
+  });
+  if (res.status === 404) return { projects: [], sha: null };
+  if (!res.ok) throw new Error('fetch');
+  const data = await res.json();
+  return { projects: parseProjectsCSV(fromB64(data.content)), sha: data.sha };
+}
+async function ghPutProjects(token, sha, projects) {
+  const csv = projectsToCSV(projects);
+  const body = { message: 'Update projects', content: toB64(csv), branch: GH_BRANCH };
+  if (sha) body.sha = sha;
+  const res = await fetch(`https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${GH_PROJECTS_PATH}`, {
+    method: 'PUT', headers: ghHeaders(token), body: JSON.stringify(body),
+  });
+  if (!res.ok) throw new Error('save');
+  return (await res.json()).content.sha;
+}
+
 // ── CSV helpers ──
 function csvEscape(v) {
   const s = String(v ?? '');
@@ -457,6 +498,19 @@ function downloadCSV(entries) {
   const url = URL.createObjectURL(new Blob([csv], { type: 'text/csv;charset=utf-8;' }));
   const a = Object.assign(document.createElement('a'), { href: url, download: `learning-log-${todayStr()}.csv` });
   document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url);
+}
+
+function parseProjectsCSV(text) {
+  const lines = text.trim().split(/\r?\n/);
+  if (lines.length < 2) return [];
+  return lines.slice(1).map(line => {
+    const [id, name, status] = line.split(',');
+    return { id: id?.trim(), name: name?.trim(), status: status?.trim() || 'Not Started' };
+  }).filter(p => p.id && p.name);
+}
+function projectsToCSV(projects) {
+  const rows = projects.map(p => [p.id, p.name, p.status].map(v => csvEscape(v||'')).join(','));
+  return ['id,name,status', ...rows].join('\r\n') + '\r\n';
 }
 
 // ── Utilities ──
@@ -504,8 +558,58 @@ const RATING_OPTIONS = [
   {value:4,label:'4 — 熟練，能自然運用'},
   {value:5,label:'5 — 已內化，不假思索'},
 ];
-const DEFAULT_SUBJECTS = ['法文','荷蘭文','足球分析'];
+const KANBAN_COLS = ['Not Started','In Progress','Done'];
 const STOPWATCH_PRESETS = [15,25,45,60];
+
+// ── Kanban Board ──
+function KanbanBoard({ projects, onMove, onAdd, onDelete, saving }) {
+  const [newName, setNewName] = React.useState('');
+  const [dragId, setDragId] = React.useState(null);
+  const [overCol, setOverCol] = React.useState(null);
+
+  const add = () => {
+    const name = newName.trim();
+    if (!name) return;
+    const id = Date.now().toString(36);
+    onAdd({ id, name, status: 'Not Started' });
+    setNewName('');
+  };
+
+  return (
+    <div className="ll-kanban-wrap">
+      <div className="ll-kanban-header">
+        <div className="ll-subject-manager-label">專案看板</div>
+        <div className="ll-subject-add-row" style={{marginBottom:0}}>
+          <input placeholder="新增專案…" value={newName}
+            onChange={e=>setNewName(e.target.value)}
+            onKeyDown={e=>{if(e.key==='Enter'){e.preventDefault();add();}}} />
+          <button className="ll-subject-add-btn" type="button" onClick={add} disabled={!newName.trim()}>新增</button>
+        </div>
+      </div>
+      <div className="ll-kanban-board">
+        {KANBAN_COLS.map(col => (
+          <div key={col}
+            className={`ll-kanban-col${overCol===col?' ll-kanban-col-over':''}`}
+            onDragOver={e=>{e.preventDefault();setOverCol(col);}}
+            onDragLeave={()=>setOverCol(null)}
+            onDrop={e=>{e.preventDefault();setOverCol(null);if(dragId)onMove(dragId,col);}}>
+            <div className="ll-kanban-col-title">{col}</div>
+            {projects.filter(p=>p.status===col).map(p=>(
+              <div key={p.id} className="ll-kanban-card"
+                draggable
+                onDragStart={()=>setDragId(p.id)}
+                onDragEnd={()=>setDragId(null)}>
+                <span>{p.name}</span>
+                <button className="ll-del-btn" type="button" onClick={()=>onDelete(p.id)} title="刪除">×</button>
+              </div>
+            ))}
+          </div>
+        ))}
+      </div>
+      {saving && <div className="ll-saving-note">更新專案至 GitHub…</div>}
+    </div>
+  );
+}
 
 // ── Stopwatch ──
 function StudyStopwatch({ onBank }) {
@@ -600,17 +704,15 @@ function App() {
   const [token, setToken] = useState(() => localStorage.getItem(TOKEN_KEY) || '');
   const [entries, setEntries] = useState([]);
   const [sha, setSha] = useState(null);
-  const [subjects, setSubjects] = useState(() => {
-    try { const s = JSON.parse(localStorage.getItem(SUBJECTS_KEY)); return Array.isArray(s)&&s.length?s:DEFAULT_SUBJECTS; }
-    catch { return DEFAULT_SUBJECTS; }
-  });
+  const [projects, setProjects] = useState([]);
+  const [projectSha, setProjectSha] = useState(null);
   const [loaded, setLoaded] = useState(false);
   const [saving, setSaving] = useState(false);
-  const [newSubject, setNewSubject] = useState('');
-  const [filterSubject, setFilterSubject] = useState('__all__');
+  const [savingProjects, setSavingProjects] = useState(false);
+  const [filterProject, setFilterProject] = useState('__all__');
 
   const [date, setDate] = useState(todayStr());
-  const [subject, setSubject] = useState(subjects[0]||'');
+  const [project, setProject] = useState('');
   const [subtopic, setSubtopic] = useState('');
   const [minutes, setMinutes] = useState('0');
   const [note, setNote] = useState('');
@@ -622,59 +724,47 @@ function App() {
   };
   const handleLogout = () => {
     localStorage.removeItem(TOKEN_KEY);
-    setToken(''); setEntries([]); setSha(null); setLoaded(false);
+    setToken(''); setEntries([]); setSha(null); setProjects([]); setProjectSha(null); setLoaded(false);
   };
 
   useEffect(() => {
     if (!token) return;
-    ghGetCSV(token).then(({entries: e, sha: s}) => {
-      setEntries(e); setSha(s); setLoaded(true);
-      // Merge subjects from CSV into local list
-      const csvSubjects = [...new Set(e.map(entry => entry.subject).filter(Boolean))];
-      setSubjects(prev => {
-        const merged = [...prev];
-        csvSubjects.forEach(name => { if (!merged.includes(name)) merged.push(name); });
-        localStorage.setItem(SUBJECTS_KEY, JSON.stringify(merged));
-        return merged;
-      });
+    Promise.all([ghGetCSV(token), ghGetProjects(token)]).then(([{entries: e, sha: s}, {projects: p, sha: ps}]) => {
+      setEntries(e); setSha(s);
+      setProjects(p); setProjectSha(ps);
+      setLoaded(true);
+      const first = p.find(x => x.status === 'In Progress') || p[0];
+      if (first) setProject(first.name);
     }).catch(() => { handleLogout(); });
   }, [token]);
 
   const saveEntries = async (next) => {
     setEntries(next); setSaving(true);
-    try {
-      const newSha = await ghPutCSV(token, sha, next);
-      setSha(newSha);
-    } catch { alert('儲存失敗，請稍後再試。'); }
+    try { const newSha = await ghPutCSV(token, sha, next); setSha(newSha); }
+    catch { alert('儲存失敗，請稍後再試。'); }
     setSaving(false);
   };
 
-  const persistSubjects = (next) => {
-    setSubjects(next);
-    localStorage.setItem(SUBJECTS_KEY, JSON.stringify(next));
+  const saveProjects = async (next) => {
+    setProjects(next); setSavingProjects(true);
+    try { const newSha = await ghPutProjects(token, projectSha, next); setProjectSha(newSha); }
+    catch { alert('專案儲存失敗。'); }
+    setSavingProjects(false);
   };
-  const addSubject = () => {
-    const name = newSubject.trim();
-    if (!name || subjects.includes(name)) return;
-    persistSubjects([...subjects, name]);
-    setNewSubject('');
-    if (!subject) setSubject(name);
+
+  const handleProjectMove = (id, status) => {
+    saveProjects(projects.map(p => p.id === id ? {...p, status} : p));
   };
-  const removeSubject = (name) => {
-    if (subjects.length <= 1) return;
-    const next = subjects.filter(s => s !== name);
-    persistSubjects(next);
-    if (subject === name) setSubject(next[0]||'');
-    if (filterSubject === name) setFilterSubject('__all__');
-  };
+  const handleProjectAdd = (p) => saveProjects([...projects, p]);
+  const handleProjectDelete = (id) => saveProjects(projects.filter(p => p.id !== id));
 
   const addEntry = async (e) => {
     e.preventDefault();
-    if (!minutes || Number(minutes) <= 0 || !subject) return;
-    const entry = { id: Date.now().toString(36), date, subject, subtopic: subtopic.trim(), minutes: Number(minutes), note, rating };
+    if (!minutes || Number(minutes) <= 0 || !project) return;
+    const entry = { id: Date.now().toString(36), date, subject: project, subtopic: subtopic.trim(), minutes: Number(minutes), note, rating };
     const next = [entry, ...entries].sort((a,b) => b.date.localeCompare(a.date)||b.id.localeCompare(a.id));
     await saveEntries(next);
-    setNote(''); setSubtopic(''); setMinutes('0'); setRating(3); setFilterSubject('__all__');
+    setNote(''); setSubtopic(''); setMinutes('0'); setRating(3); setFilterProject('__all__');
   };
   const removeEntry = (id) => saveEntries(entries.filter(e => e.id !== id));
 
@@ -683,7 +773,7 @@ function App() {
   const totalMin = useMemo(() => entries.reduce((s,e) => s+Number(e.minutes||0), 0), [entries]);
   const breakdown = useMemo(() => subjectBreakdown(entries), [entries]);
   const maxBreak = breakdown.length ? breakdown[0].minutes : 0;
-  const visibleEntries = useMemo(() => filterSubject==='__all__'?entries:entries.filter(e=>e.subject===filterSubject), [entries, filterSubject]);
+  const visibleEntries = useMemo(() => filterProject==='__all__'?entries:entries.filter(e=>e.subject===filterProject), [entries, filterProject]);
 
   if (!token) return <LoginScreen onLogin={handleLogin} />;
   if (!loaded) return <div style={{padding:40,fontFamily:'monospace',color:'#756a54'}}>載入紀錄中…</div>;
@@ -737,23 +827,13 @@ function App() {
 
       <StudyStopwatch onBank={min => setMinutes(prev => String((Number(prev)||0)+min))} />
 
-      <div className="ll-subject-manager">
-        <div className="ll-subject-manager-label">學科管理</div>
-        <div className="ll-subject-chips">
-          {subjects.map(s => (
-            <span className="ll-subject-chip" style={{background:colorForSubject(s)}} key={s}>
-              {s}
-              <button type="button" onClick={()=>removeSubject(s)} disabled={subjects.length<=1} aria-label={`刪除 ${s}`}>×</button>
-            </span>
-          ))}
-        </div>
-        <div className="ll-subject-add-row">
-          <input placeholder="新增學科，如：西班牙文、資料分析…" value={newSubject}
-            onChange={e=>setNewSubject(e.target.value)}
-            onKeyDown={e=>{if(e.key==='Enter'){e.preventDefault();addSubject();}}} />
-          <button className="ll-subject-add-btn" type="button" onClick={addSubject} disabled={!newSubject.trim()}>新增</button>
-        </div>
-      </div>
+      <KanbanBoard
+        projects={projects}
+        onMove={handleProjectMove}
+        onAdd={handleProjectAdd}
+        onDelete={handleProjectDelete}
+        saving={savingProjects}
+      />
 
       <form className="ll-entry" onSubmit={addEntry}>
         <div className="row">
@@ -762,9 +842,9 @@ function App() {
             <input type="date" value={date} onChange={e=>setDate(e.target.value)} max={todayStr()} required />
           </div>
           <div className="col">
-            <label>學科</label>
-            <select value={subject} onChange={e=>setSubject(e.target.value)}>
-              {subjects.map(s => <option key={s} value={s}>{s}</option>)}
+            <label>專案</label>
+            <select value={project} onChange={e=>setProject(e.target.value)}>
+              {projects.map(p => <option key={p.id} value={p.name}>{p.name} {p.status==='In Progress'?'▶':p.status==='Done'?'✓':''}</option>)}
             </select>
           </div>
           <div className="col" style={{maxWidth:100}}>
@@ -792,7 +872,7 @@ function App() {
             </select>
           </div>
         </div>
-        <button className="ll-submit-btn" type="submit" disabled={saving||subjects.length===0}>
+        <button className="ll-submit-btn" type="submit" disabled={saving||projects.length===0}>
           {saving ? '儲存至 GitHub…' : '蓋章打卡'}
         </button>
         {saving && <div className="ll-saving-note">正在更新 GitHub 上的 CSV…</div>}
@@ -801,9 +881,9 @@ function App() {
       <div className="ll-log-heading-row">
         <div className="ll-log-heading">紀錄</div>
         <div className="ll-log-heading-actions">
-          <select className="ll-filter-select" value={filterSubject} onChange={e=>setFilterSubject(e.target.value)}>
-            <option value="__all__">全部學科</option>
-            {subjects.map(s => <option key={s} value={s}>{s}</option>)}
+          <select className="ll-filter-select" value={filterProject} onChange={e=>setFilterProject(e.target.value)}>
+            <option value="__all__">全部專案</option>
+            {projects.map(p => <option key={p.id} value={p.name}>{p.name}</option>)}
           </select>
           <button className="ll-export-btn" onClick={()=>downloadCSV(visibleEntries)} disabled={visibleEntries.length===0}>匯出 CSV</button>
         </div>
@@ -813,7 +893,7 @@ function App() {
         <div className="ll-empty-state">
           {entries.length===0
             ? <>還沒有紀錄。<br/>今天學了什麼，寫下來蓋第一個章吧。</>
-            : '這個學科目前沒有紀錄。'}
+            : '這個專案目前沒有紀錄。'}
         </div>
       ) : (
         <>

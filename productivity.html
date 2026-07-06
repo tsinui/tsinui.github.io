@@ -1,0 +1,838 @@
+<!doctype html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Productivity | The Sinasera</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script defer src="script.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    /* ── Learning log scoped styles ── */
+    #ll-root {
+      font-family: 'IBM Plex Mono', monospace;
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 32px 20px 80px;
+    }
+
+    /* Login screen */
+    .ll-login {
+      max-width: 420px;
+      margin: 60px auto;
+      border: 1px solid var(--p-dark);
+      padding: 28px 24px;
+      background: rgba(255,255,255,0.6);
+    }
+    .ll-login h2 {
+      font-family: 'Source Serif 4', serif;
+      font-size: 1.2rem;
+      margin: 0 0 6px;
+    }
+    .ll-login p {
+      font-size: 11px;
+      color: #756a54;
+      margin: 0 0 20px;
+      line-height: 1.7;
+    }
+    .ll-login input {
+      width: 100%;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 13px;
+      border: none;
+      border-bottom: 1px solid var(--p-dark);
+      padding: 6px 2px;
+      background: transparent;
+      margin-bottom: 14px;
+    }
+    .ll-login input:focus { outline: none; border-bottom: 2px solid var(--p-teal); }
+    .ll-login-btn {
+      background: var(--p-teal);
+      color: #fff;
+      border: none;
+      padding: 9px 20px;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      cursor: pointer;
+    }
+    .ll-login-btn:hover { background: var(--p-dark); }
+    .ll-login-error { color: #c0392b; font-size: 11px; margin-top: 8px; }
+
+    /* Masthead */
+    .ll-masthead {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      border-bottom: 3px double var(--p-dark);
+      padding-bottom: 10px;
+      margin-bottom: 4px;
+    }
+    .ll-masthead h1 {
+      font-family: 'Source Serif 4', serif;
+      font-weight: 700;
+      font-size: 1.5rem;
+      margin: 0;
+    }
+    .ll-masthead .ll-subtitle {
+      font-size: 10px;
+      color: #756a54;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-top: 3px;
+    }
+    .ll-logout-btn {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px;
+      background: none;
+      border: 1px solid #b0a898;
+      color: #756a54;
+      padding: 4px 10px;
+      cursor: pointer;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    .ll-logout-btn:hover { border-color: var(--p-teal); color: var(--p-teal); }
+
+    .ll-stamp {
+      border: 2px solid var(--p-red);
+      color: var(--p-red);
+      border-radius: 50%;
+      width: 62px;
+      height: 62px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transform: rotate(-8deg);
+      font-family: 'Source Serif 4', serif;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+    .ll-stamp .n { font-size: 22px; font-weight: 700; }
+    .ll-stamp .label { font-size: 7px; letter-spacing: 1px; text-transform: uppercase; margin-top: 2px; }
+
+    /* Stats */
+    .ll-stats-row { display: flex; gap: 14px; margin: 18px 0 16px; flex-wrap: wrap; }
+    .ll-stat {
+      flex: 1; min-width: 130px;
+      border: 1px solid var(--p-dark);
+      padding: 10px 12px;
+      background: rgba(255,255,255,0.25);
+    }
+    .ll-stat .num { font-family: 'Source Serif 4', serif; font-size: 22px; font-weight: 700; color: var(--p-teal); }
+    .ll-stat .lbl { font-size: 10px; color: #756a54; text-transform: uppercase; letter-spacing: 1px; margin-top: 2px; }
+
+    /* Breakdown */
+    .ll-breakdown-card {
+      border: 1px solid var(--p-dark);
+      background: rgba(255,255,255,0.25);
+      padding: 12px 14px 4px;
+      margin-bottom: 22px;
+    }
+    .ll-breakdown-title { font-size: 10px; text-transform: uppercase; letter-spacing: 1.5px; color: #756a54; margin-bottom: 10px; }
+    .ll-breakdown-row { display: flex; align-items: center; gap: 10px; margin-bottom: 9px; font-size: 11.5px; }
+    .ll-breakdown-name { width: 92px; flex-shrink: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .ll-breakdown-track { flex: 1; height: 8px; background: rgba(0,0,0,0.08); position: relative; }
+    .ll-breakdown-fill { height: 100%; }
+    .ll-breakdown-mins { width: 64px; flex-shrink: 0; text-align: right; color: #756a54; font-size: 10.5px; }
+    .ll-breakdown-empty { font-size: 11px; color: #756a54; padding-bottom: 10px; }
+
+    /* Timer */
+    .ll-timer-card {
+      border: 1px solid var(--p-dark);
+      background: rgba(0, 130, 142, 0.05);
+      padding: 16px;
+      margin-bottom: 26px;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+    .ll-timer-dial {
+      width: 84px; height: 84px;
+      border-radius: 50%;
+      border: 2px solid var(--p-teal);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; position: relative;
+    }
+    .ll-timer-dial.goal-reached { border-color: var(--p-red); background: rgba(255,25,3,0.06); }
+    .ll-timer-dial .time { font-family: 'Source Serif 4', serif; font-size: 19px; font-weight: 700; }
+    .ll-timer-info { flex: 1; min-width: 160px; }
+    .ll-timer-mode-label { font-size: 10px; text-transform: uppercase; letter-spacing: 1.5px; color: #756a54; margin-bottom: 4px; }
+    .ll-timer-sessions { font-size: 11px; color: #756a54; margin-bottom: 8px; }
+    .ll-timer-controls { display: flex; gap: 8px; flex-wrap: wrap; }
+    .ll-timer-btn {
+      border: 1px solid var(--p-dark); background: transparent; color: var(--p-dark);
+      padding: 6px 12px; font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px; text-transform: uppercase; letter-spacing: 1px; cursor: pointer;
+    }
+    .ll-timer-btn.primary { background: var(--p-teal); color: #fff; border-color: var(--p-teal); }
+    .ll-timer-btn.primary:hover { background: var(--p-dark); border-color: var(--p-dark); }
+    .ll-timer-btn:not(.primary):hover { background: rgba(0,0,0,0.06); }
+    .ll-timer-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+    .ll-timer-presets { display: flex; gap: 6px; margin-top: 10px; align-items: center; flex-wrap: wrap; }
+    .ll-timer-presets-label { font-size: 10px; color: #756a54; text-transform: uppercase; letter-spacing: 1px; }
+    .ll-preset-btn {
+      border: 1px solid #b0a898; background: transparent; color: #756a54;
+      padding: 3px 10px; font-family: 'IBM Plex Mono', monospace;
+      font-size: 10.5px; cursor: pointer; border-radius: 12px;
+    }
+    .ll-preset-btn:hover { border-color: var(--p-teal); color: var(--p-teal); }
+    .ll-preset-btn.active { background: var(--p-teal); color: #fff; border-color: var(--p-teal); }
+
+    /* Subject manager */
+    .ll-subject-manager {
+      border: 1px solid var(--p-dark); padding: 14px 16px;
+      margin-bottom: 18px; background: rgba(255,255,255,0.35);
+    }
+    .ll-subject-manager-label { font-size: 10px; text-transform: uppercase; letter-spacing: 1.5px; color: #756a54; margin-bottom: 10px; }
+    .ll-subject-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
+    .ll-subject-chip {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 11.5px; color: #fff; padding: 3px 6px 3px 10px; border-radius: 2px;
+    }
+    .ll-subject-chip button {
+      background: rgba(0,0,0,0.18); border: none; color: #fff;
+      width: 16px; height: 16px; line-height: 16px; border-radius: 50%;
+      cursor: pointer; font-size: 11px; padding: 0;
+    }
+    .ll-subject-chip button:hover { background: rgba(0,0,0,0.4); }
+    .ll-subject-chip button:disabled { opacity: 0.35; cursor: not-allowed; }
+    .ll-subject-add-row { display: flex; gap: 8px; }
+    .ll-subject-add-row input {
+      flex: 1; font-family: 'IBM Plex Mono', monospace; font-size: 12.5px;
+      background: transparent; border: none; border-bottom: 1px solid var(--p-dark);
+      padding: 5px 2px; color: var(--p-dark);
+    }
+    .ll-subject-add-row input:focus { outline: none; border-bottom: 2px solid var(--p-teal); }
+    .ll-subject-add-btn {
+      border: 1px solid var(--p-dark); background: transparent; color: var(--p-dark);
+      padding: 4px 12px; font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px; text-transform: uppercase; letter-spacing: 1px; cursor: pointer;
+    }
+    .ll-subject-add-btn:hover { background: var(--p-teal); color: #fff; border-color: var(--p-teal); }
+    .ll-subject-add-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+    /* Entry form */
+    form.ll-entry {
+      border: 1px solid var(--p-dark); padding: 16px;
+      margin-bottom: 26px; background: rgba(255,255,255,0.35);
+    }
+    form.ll-entry .row { display: flex; gap: 10px; margin-bottom: 10px; flex-wrap: wrap; }
+    form.ll-entry label {
+      font-size: 10px; text-transform: uppercase; letter-spacing: 1px;
+      color: #756a54; display: block; margin-bottom: 4px;
+    }
+    form.ll-entry input, form.ll-entry select, form.ll-entry textarea {
+      width: 100%; font-family: 'IBM Plex Mono', monospace; font-size: 13px;
+      background: transparent; border: none; border-bottom: 1px solid var(--p-dark);
+      padding: 5px 2px; color: var(--p-dark);
+    }
+    form.ll-entry select { cursor: pointer; }
+    form.ll-entry input:focus, form.ll-entry select:focus, form.ll-entry textarea:focus {
+      outline: none; border-bottom: 2px solid var(--p-teal);
+    }
+    form.ll-entry .col { flex: 1; min-width: 130px; }
+    form.ll-entry textarea { resize: vertical; min-height: 40px; }
+
+    .ll-submit-btn {
+      margin-top: 6px; background: var(--p-teal); color: #fff;
+      border: none; padding: 9px 18px; font-family: 'IBM Plex Mono', monospace;
+      font-size: 12px; text-transform: uppercase; letter-spacing: 1.5px; cursor: pointer;
+    }
+    .ll-submit-btn:hover { background: var(--p-dark); }
+    .ll-submit-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+    .ll-saving-note { font-size: 11px; color: #756a54; margin-top: 8px; }
+
+    /* Log */
+    .ll-log-heading-row {
+      display: flex; justify-content: space-between; align-items: center;
+      border-bottom: 1px solid var(--p-dark); padding-bottom: 6px;
+      margin-bottom: 14px; gap: 10px; flex-wrap: wrap;
+    }
+    .ll-log-heading {
+      font-family: 'Source Serif 4', serif; font-size: 15px;
+      text-transform: uppercase; letter-spacing: 2px; color: var(--p-teal);
+    }
+    .ll-log-heading-actions { display: flex; gap: 10px; align-items: center; }
+    .ll-filter-select {
+      font-family: 'IBM Plex Mono', monospace; font-size: 10.5px;
+      background: transparent; border: 1px solid #b0a898; color: #756a54; padding: 4px 6px; cursor: pointer;
+    }
+    .ll-export-btn {
+      background: none; border: 1px solid #b0a898; color: #756a54;
+      font-size: 10px; padding: 4px 10px; letter-spacing: 1px;
+      text-transform: uppercase; cursor: pointer; font-family: 'IBM Plex Mono', monospace;
+    }
+    .ll-export-btn:hover { border-color: var(--p-teal); color: var(--p-teal); }
+    .ll-export-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+    .ll-table-header {
+      display: grid;
+      grid-template-columns: 56px 84px 84px 52px 60px minmax(0,1fr) 30px;
+      gap: 10px; align-items: center; padding: 0 0 6px;
+      font-size: 9.5px; text-transform: uppercase; letter-spacing: 1px;
+      color: #756a54; border-bottom: 1px solid var(--p-dark);
+    }
+    .ll-entry-row {
+      display: grid;
+      grid-template-columns: 56px 84px 84px 52px 60px minmax(0,1fr) 30px;
+      gap: 10px; align-items: start; padding: 10px 0;
+      border-bottom: 1px dashed #d8d0c0;
+    }
+    @media (max-width: 520px) {
+      .ll-table-header, .ll-entry-row {
+        grid-template-columns: 48px 70px 44px 54px minmax(0,1fr) 24px;
+      }
+      .ll-table-header > *:nth-child(3),
+      .ll-entry-row .entry-subtopic { display: none; }
+    }
+    .ll-entry-date {
+      font-family: 'Source Serif 4', serif; font-weight: 700;
+      font-size: 12.5px; color: var(--p-red); padding-top: 1px;
+    }
+    .ll-entry-topic {
+      font-size: 11.5px; font-weight: 600; display: inline-block;
+      color: #fff; padding: 2px 7px; line-height: 1.4;
+    }
+    .ll-entry-subtopic {
+      font-size: 10.5px; color: #756a54; padding-top: 3px;
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    }
+    .ll-entry-minutes { font-size: 11px; color: #756a54; padding-top: 3px; text-align: right; white-space: nowrap; }
+    .ll-entry-rating { font-size: 10.5px; color: var(--p-teal); padding-top: 3px; white-space: nowrap; }
+    .ll-entry-note { font-size: 12px; color: var(--p-dark); line-height: 1.5; padding-top: 2px; word-break: break-word; }
+    .ll-del-btn {
+      background: none; border: none; color: #b0a898;
+      font-size: 10px; cursor: pointer; text-decoration: underline;
+      padding: 0; padding-top: 3px; justify-self: end;
+    }
+    .ll-del-btn:hover { color: var(--p-red); }
+
+    .ll-empty-state {
+      text-align: center; padding: 30px 10px;
+      color: #756a54; font-size: 12px; line-height: 1.8;
+    }
+    .ll-footer-note {
+      text-align: center; font-size: 10px; color: #b0a898;
+      margin-top: 30px; letter-spacing: 1px;
+    }
+  </style>
+</head>
+<body>
+  <div class="page-shell">
+    <div class="ambient ambient-left"></div>
+    <div class="ambient ambient-right"></div>
+
+    <header class="site-header">
+      <a class="brand" href="index.html" aria-label="The Sinasera home">
+        <span class="brand-text brand-wordmark">
+          <span class="brand-prefix">the</span>
+          <span class="brand-name">sinasera</span>
+        </span>
+      </a>
+      <nav class="site-nav" aria-label="Primary">
+        <a href="index.html">Home</a>
+        <a href="articles/index.html">Writing</a>
+        <a href="portfolio.html">Portfolio</a>
+        <a href="productivity.html" aria-current="page">Productivity</a>
+        <a href="index.html#about">About</a>
+      </nav>
+
+      <button class="nav-toggle" aria-label="開啟選單" aria-expanded="false" aria-controls="nav-drawer">
+        <span></span><span></span><span></span>
+      </button>
+    </header>
+
+    <div class="nav-backdrop" id="nav-backdrop"></div>
+    <nav class="nav-drawer" id="nav-drawer" aria-label="Primary">
+      <a href="index.html">Home</a>
+      <a href="articles/index.html">Writing</a>
+      <a href="portfolio.html">Portfolio</a>
+      <a href="productivity.html" aria-current="page">Productivity</a>
+      <a href="index.html#about">About</a>
+    </nav>
+
+    <main>
+      <div id="ll-root"></div>
+    </main>
+  </div>
+
+  <footer class="site-footer">
+    <p>Herman · Sinasera</p>
+    <p class="footer-center">
+      <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">CC BY 4.0</a>
+    </p>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.5/babel.min.js"></script>
+  <script type="text/babel">
+const { useState, useEffect, useMemo, useRef, useCallback } = React;
+
+// ── GitHub config ──
+const GH_OWNER = 'tsinui';
+const GH_REPO  = 'tsinui.github.io';
+const GH_PATH  = 'data/learning-log.csv';
+const GH_BRANCH = 'main';
+const TOKEN_KEY = 'll-gh-token';
+const SUBJECTS_KEY = 'll-subjects';
+
+// ── GitHub API helpers ──
+function ghHeaders(token) {
+  return { Authorization: `token ${token}`, 'Content-Type': 'application/json' };
+}
+
+function toB64(str) {
+  return btoa(encodeURIComponent(str).replace(/%([0-9A-F]{2})/g, (_, p) => String.fromCharCode(parseInt(p, 16))));
+}
+function fromB64(b64) {
+  return decodeURIComponent(Array.from(atob(b64.replace(/\n/g,'')), c => '%' + c.charCodeAt(0).toString(16).padStart(2,'0')).join(''));
+}
+
+async function ghGetCSV(token) {
+  const res = await fetch(`https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${GH_PATH}`, {
+    headers: ghHeaders(token)
+  });
+  if (res.status === 404) return { entries: [], sha: null };
+  if (res.status === 401 || res.status === 403) throw new Error('auth');
+  if (!res.ok) throw new Error('fetch');
+  const data = await res.json();
+  return { entries: parseCSV(fromB64(data.content)), sha: data.sha };
+}
+
+async function ghPutCSV(token, sha, entries) {
+  const csv = entriesToCSV(entries);
+  const body = {
+    message: `learning-log update ${new Date().toISOString().slice(0,10)}`,
+    content: toB64(csv),
+    branch: GH_BRANCH,
+  };
+  if (sha) body.sha = sha;
+  const res = await fetch(`https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${GH_PATH}`, {
+    method: 'PUT',
+    headers: ghHeaders(token),
+    body: JSON.stringify(body),
+  });
+  if (!res.ok) throw new Error('save');
+  const data = await res.json();
+  return data.content.sha;
+}
+
+// ── CSV helpers ──
+function csvEscape(v) {
+  const s = String(v ?? '');
+  return /[",\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s;
+}
+function parseCSV(text) {
+  const lines = text.trim().split(/\r?\n/);
+  if (lines.length < 2) return [];
+  return lines.slice(1).map(line => {
+    const cols = [];
+    let cur = '', inQ = false;
+    for (let i = 0; i < line.length; i++) {
+      const ch = line[i];
+      if (ch === '"') { inQ ? (line[i+1] === '"' ? (cur += '"', i++) : inQ = false) : inQ = true; }
+      else if (ch === ',' && !inQ) { cols.push(cur); cur = ''; }
+      else cur += ch;
+    }
+    cols.push(cur);
+    const [id, date, subject, subtopic, minutes, rating, ...noteParts] = cols;
+    return { id, date, subject, subtopic, minutes: Number(minutes)||0, rating: Number(rating)||3, note: noteParts.join(',') };
+  }).filter(e => e.id && e.date);
+}
+function entriesToCSV(entries) {
+  const header = 'id,date,subject,subtopic,minutes,rating,note';
+  const rows = entries.map(e =>
+    [e.id, e.date, e.subject, e.subtopic||'', e.minutes, e.rating, e.note||''].map(csvEscape).join(',')
+  );
+  return [header, ...rows].join('\r\n') + '\r\n';
+}
+function downloadCSV(entries) {
+  const csv = '﻿' + entriesToCSV(entries);
+  const url = URL.createObjectURL(new Blob([csv], { type: 'text/csv;charset=utf-8;' }));
+  const a = Object.assign(document.createElement('a'), { href: url, download: `learning-log-${todayStr()}.csv` });
+  document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url);
+}
+
+// ── Utilities ──
+function todayStr() { return new Date().toISOString().slice(0,10); }
+function fmtDate(iso) {
+  const d = new Date(iso + 'T00:00:00');
+  return `${d.getMonth()+1}/${d.getDate()} (${'日一二三四五六'[d.getDay()]})`;
+}
+function mmss(s) { return `${String(Math.floor(s/60)).padStart(2,'0')}:${String(s%60).padStart(2,'0')}`; }
+function formatHM(m) {
+  const h = Math.floor(m/60), rem = m%60;
+  return h > 0 ? `${h} 時 ${rem} 分` : `${rem} 分`;
+}
+function calcStreak(entries) {
+  const dates = new Set(entries.map(e => e.date));
+  let streak = 0, cursor = new Date();
+  while (dates.has(cursor.toISOString().slice(0,10))) {
+    streak++; cursor.setDate(cursor.getDate()-1);
+  }
+  return streak;
+}
+function last7DaysMinutes(entries) {
+  const cutoff = new Date(); cutoff.setDate(cutoff.getDate()-6); cutoff.setHours(0,0,0,0);
+  return entries.filter(e => new Date(e.date+'T00:00:00') >= cutoff).reduce((s,e) => s+Number(e.minutes||0), 0);
+}
+function subjectBreakdown(entries) {
+  const map = new Map();
+  entries.forEach(e => map.set(e.subject, (map.get(e.subject)||0)+Number(e.minutes||0)));
+  return [...map.entries()].map(([subject,minutes]) => ({subject,minutes})).sort((a,b) => b.minutes-a.minutes);
+}
+
+const SUBJECT_PALETTE = ['#4f6b52','#9c4a34','#7a6a9c','#ab8a3c','#3c7a86','#8a5a3c'];
+function colorForSubject(name) {
+  let h = 0; for (let c of String(name||'')) h = (h*31+c.charCodeAt(0))>>>0;
+  return SUBJECT_PALETTE[h % SUBJECT_PALETTE.length];
+}
+
+const RATING_OPTIONS = [
+  {value:1,label:'1 — 還很生疏，幾乎要重學'},
+  {value:2,label:'2 — 有點印象，但不熟練'},
+  {value:3,label:'3 — 大致掌握，偶爾卡住'},
+  {value:4,label:'4 — 熟練，能自然運用'},
+  {value:5,label:'5 — 已內化，不假思索'},
+];
+const DEFAULT_SUBJECTS = ['法文','荷蘭文','足球分析'];
+const STOPWATCH_PRESETS = [15,25,45,60];
+
+// ── Stopwatch ──
+function StudyStopwatch({ onBank }) {
+  const [seconds, setSeconds] = useState(0);
+  const [running, setRunning] = useState(false);
+  const [targetMin, setTargetMin] = useState(null);
+  const ref = useRef(null);
+
+  useEffect(() => {
+    if (running) { ref.current = setInterval(() => setSeconds(s => s+1), 1000); }
+    return () => clearInterval(ref.current);
+  }, [running]);
+
+  const reset = () => { setRunning(false); setSeconds(0); };
+  const bank = () => { const m = Math.floor(seconds/60); if (m>0) onBank(m); reset(); };
+  const reached = targetMin !== null && seconds >= targetMin*60;
+
+  return (
+    <div className="ll-timer-card">
+      <div className={`ll-timer-dial${reached?' goal-reached':''}`}>
+        <div className="time">{mmss(seconds)}</div>
+      </div>
+      <div className="ll-timer-info">
+        <div className="ll-timer-mode-label">
+          {targetMin===null ? '正計時中' : reached ? `已達成 ${targetMin} 分鐘！` : `目標 ${targetMin} 分鐘`}
+        </div>
+        <div className="ll-timer-sessions">已累積 {Math.floor(seconds/60)} 分 {seconds%60} 秒</div>
+        <div className="ll-timer-controls">
+          <button className="ll-timer-btn primary" onClick={() => setRunning(r => !r)}>{running?'暫停':'開始'}</button>
+          <button className="ll-timer-btn" onClick={reset}>重置</button>
+          <button className="ll-timer-btn" onClick={bank} disabled={seconds<60}>帶入打卡表單 →</button>
+        </div>
+        <div className="ll-timer-presets">
+          <span className="ll-timer-presets-label">目標</span>
+          {STOPWATCH_PRESETS.map(m => (
+            <button key={m} type="button"
+              className={`ll-preset-btn${targetMin===m?' active':''}`}
+              onClick={() => setTargetMin(p => p===m?null:m)}>{m} 分</button>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ── Login screen ──
+function LoginScreen({ onLogin }) {
+  const [token, setToken] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+
+  const submit = async (e) => {
+    e.preventDefault();
+    if (!token.trim()) return;
+    setLoading(true); setError('');
+    try {
+      await ghGetCSV(token.trim());
+      onLogin(token.trim());
+    } catch {
+      setError('Token 無效或沒有權限，請確認後再試。');
+    }
+    setLoading(false);
+  };
+
+  return (
+    <div className="ll-login">
+      <h2>自學紀錄</h2>
+      <p>
+        請輸入 GitHub Personal Access Token（需要 <code>contents: write</code> 權限）。<br/>
+        Token 只會存在你的瀏覽器裡，不會出現在原始碼中。
+      </p>
+      <form onSubmit={submit}>
+        <input
+          type="password"
+          placeholder="ghp_xxxxxxxxxxxxxxxxxxxx"
+          value={token}
+          onChange={e => setToken(e.target.value)}
+          autoComplete="off"
+          spellCheck={false}
+        />
+        <button className="ll-login-btn" type="submit" disabled={loading || !token.trim()}>
+          {loading ? '驗證中…' : '登入'}
+        </button>
+        {error && <div className="ll-login-error">{error}</div>}
+      </form>
+    </div>
+  );
+}
+
+// ── Main App ──
+function App() {
+  const [token, setToken] = useState(() => localStorage.getItem(TOKEN_KEY) || '');
+  const [entries, setEntries] = useState([]);
+  const [sha, setSha] = useState(null);
+  const [subjects, setSubjects] = useState(() => {
+    try { const s = JSON.parse(localStorage.getItem(SUBJECTS_KEY)); return Array.isArray(s)&&s.length?s:DEFAULT_SUBJECTS; }
+    catch { return DEFAULT_SUBJECTS; }
+  });
+  const [loaded, setLoaded] = useState(false);
+  const [saving, setSaving] = useState(false);
+  const [newSubject, setNewSubject] = useState('');
+  const [filterSubject, setFilterSubject] = useState('__all__');
+
+  const [date, setDate] = useState(todayStr());
+  const [subject, setSubject] = useState(subjects[0]||'');
+  const [subtopic, setSubtopic] = useState('');
+  const [minutes, setMinutes] = useState('0');
+  const [note, setNote] = useState('');
+  const [rating, setRating] = useState(3);
+
+  const handleLogin = (t) => {
+    localStorage.setItem(TOKEN_KEY, t);
+    setToken(t);
+  };
+  const handleLogout = () => {
+    localStorage.removeItem(TOKEN_KEY);
+    setToken(''); setEntries([]); setSha(null); setLoaded(false);
+  };
+
+  useEffect(() => {
+    if (!token) return;
+    ghGetCSV(token).then(({entries: e, sha: s}) => {
+      setEntries(e); setSha(s); setLoaded(true);
+    }).catch(() => { handleLogout(); });
+  }, [token]);
+
+  const saveEntries = async (next) => {
+    setEntries(next); setSaving(true);
+    try {
+      const newSha = await ghPutCSV(token, sha, next);
+      setSha(newSha);
+    } catch { alert('儲存失敗，請稍後再試。'); }
+    setSaving(false);
+  };
+
+  const persistSubjects = (next) => {
+    setSubjects(next);
+    localStorage.setItem(SUBJECTS_KEY, JSON.stringify(next));
+  };
+  const addSubject = () => {
+    const name = newSubject.trim();
+    if (!name || subjects.includes(name)) return;
+    persistSubjects([...subjects, name]);
+    setNewSubject('');
+    if (!subject) setSubject(name);
+  };
+  const removeSubject = (name) => {
+    if (subjects.length <= 1) return;
+    const next = subjects.filter(s => s !== name);
+    persistSubjects(next);
+    if (subject === name) setSubject(next[0]||'');
+    if (filterSubject === name) setFilterSubject('__all__');
+  };
+
+  const addEntry = async (e) => {
+    e.preventDefault();
+    if (!minutes || Number(minutes) <= 0 || !subject) return;
+    const entry = { id: Date.now().toString(36), date, subject, subtopic: subtopic.trim(), minutes: Number(minutes), note, rating };
+    const next = [entry, ...entries].sort((a,b) => b.date.localeCompare(a.date)||b.id.localeCompare(a.id));
+    await saveEntries(next);
+    setNote(''); setSubtopic(''); setMinutes('0'); setRating(3); setFilterSubject('__all__');
+  };
+  const removeEntry = (id) => saveEntries(entries.filter(e => e.id !== id));
+
+  const streak = useMemo(() => calcStreak(entries), [entries]);
+  const last7 = useMemo(() => last7DaysMinutes(entries), [entries]);
+  const totalMin = useMemo(() => entries.reduce((s,e) => s+Number(e.minutes||0), 0), [entries]);
+  const breakdown = useMemo(() => subjectBreakdown(entries), [entries]);
+  const maxBreak = breakdown.length ? breakdown[0].minutes : 0;
+  const visibleEntries = useMemo(() => filterSubject==='__all__'?entries:entries.filter(e=>e.subject===filterSubject), [entries, filterSubject]);
+
+  if (!token) return <LoginScreen onLogin={handleLogin} />;
+  if (!loaded) return <div style={{padding:40,fontFamily:'monospace',color:'#756a54'}}>載入紀錄中…</div>;
+
+  return (
+    <div>
+      <div className="ll-masthead">
+        <div>
+          <h1>自學紀錄工具</h1>
+          <div className="ll-subtitle">Self-Study Log</div>
+        </div>
+        <div style={{display:'flex',flexDirection:'column',alignItems:'flex-end',gap:8}}>
+          <div className="ll-stamp">
+            <div className="n">{streak}</div>
+            <div className="label">Day Streak</div>
+          </div>
+          <button className="ll-logout-btn" onClick={handleLogout}>登出</button>
+        </div>
+      </div>
+
+      <div className="ll-stats-row">
+        <div className="ll-stat">
+          <div className="num">{formatHM(last7)}</div>
+          <div className="lbl">過去 7 天</div>
+        </div>
+        <div className="ll-stat">
+          <div className="num">{formatHM(totalMin)}</div>
+          <div className="lbl">累計時數</div>
+        </div>
+        <div className="ll-stat">
+          <div className="num">{entries.length}</div>
+          <div className="lbl">總紀錄數</div>
+        </div>
+      </div>
+
+      <div className="ll-breakdown-card">
+        <div className="ll-breakdown-title">依學科累計</div>
+        {breakdown.length === 0
+          ? <div className="ll-breakdown-empty">還沒有資料。</div>
+          : breakdown.map(b => (
+            <div className="ll-breakdown-row" key={b.subject}>
+              <div className="ll-breakdown-name">{b.subject}</div>
+              <div className="ll-breakdown-track">
+                <div className="ll-breakdown-fill" style={{width:`${maxBreak?(b.minutes/maxBreak)*100:0}%`,background:colorForSubject(b.subject)}} />
+              </div>
+              <div className="ll-breakdown-mins">{formatHM(b.minutes)}</div>
+            </div>
+          ))
+        }
+      </div>
+
+      <StudyStopwatch onBank={min => setMinutes(prev => String((Number(prev)||0)+min))} />
+
+      <div className="ll-subject-manager">
+        <div className="ll-subject-manager-label">學科管理</div>
+        <div className="ll-subject-chips">
+          {subjects.map(s => (
+            <span className="ll-subject-chip" style={{background:colorForSubject(s)}} key={s}>
+              {s}
+              <button type="button" onClick={()=>removeSubject(s)} disabled={subjects.length<=1} aria-label={`刪除 ${s}`}>×</button>
+            </span>
+          ))}
+        </div>
+        <div className="ll-subject-add-row">
+          <input placeholder="新增學科，如：西班牙文、資料分析…" value={newSubject}
+            onChange={e=>setNewSubject(e.target.value)}
+            onKeyDown={e=>{if(e.key==='Enter'){e.preventDefault();addSubject();}}} />
+          <button className="ll-subject-add-btn" type="button" onClick={addSubject} disabled={!newSubject.trim()}>新增</button>
+        </div>
+      </div>
+
+      <form className="ll-entry" onSubmit={addEntry}>
+        <div className="row">
+          <div className="col">
+            <label>日期</label>
+            <input type="date" value={date} onChange={e=>setDate(e.target.value)} max={todayStr()} required />
+          </div>
+          <div className="col">
+            <label>學科</label>
+            <select value={subject} onChange={e=>setSubject(e.target.value)}>
+              {subjects.map(s => <option key={s} value={s}>{s}</option>)}
+            </select>
+          </div>
+          <div className="col" style={{maxWidth:100}}>
+            <label>分鐘</label>
+            <input type="number" min="1" value={minutes} onChange={e=>setMinutes(e.target.value)} required />
+          </div>
+        </div>
+        <div className="row">
+          <div className="col">
+            <label>細項主題（選填）</label>
+            <input placeholder="例：發音、戰術分析、動詞變化…" value={subtopic} onChange={e=>setSubtopic(e.target.value)} />
+          </div>
+        </div>
+        <div className="row">
+          <div className="col">
+            <label>今天學到 / 練了什麼</label>
+            <textarea value={note} onChange={e=>setNote(e.target.value)} placeholder="例：搞懂越位規則、複習荷蘭文動詞變化…" />
+          </div>
+        </div>
+        <div className="row">
+          <div className="col">
+            <label>掌握度自評</label>
+            <select value={rating} onChange={e=>setRating(Number(e.target.value))}>
+              {RATING_OPTIONS.map(r => <option key={r.value} value={r.value}>{r.label}</option>)}
+            </select>
+          </div>
+        </div>
+        <button className="ll-submit-btn" type="submit" disabled={saving||subjects.length===0}>
+          {saving ? '儲存至 GitHub…' : '蓋章打卡'}
+        </button>
+        {saving && <div className="ll-saving-note">正在更新 GitHub 上的 CSV…</div>}
+      </form>
+
+      <div className="ll-log-heading-row">
+        <div className="ll-log-heading">紀錄</div>
+        <div className="ll-log-heading-actions">
+          <select className="ll-filter-select" value={filterSubject} onChange={e=>setFilterSubject(e.target.value)}>
+            <option value="__all__">全部學科</option>
+            {subjects.map(s => <option key={s} value={s}>{s}</option>)}
+          </select>
+          <button className="ll-export-btn" onClick={()=>downloadCSV(visibleEntries)} disabled={visibleEntries.length===0}>匯出 CSV</button>
+        </div>
+      </div>
+
+      {visibleEntries.length === 0 ? (
+        <div className="ll-empty-state">
+          {entries.length===0
+            ? <>還沒有紀錄。<br/>今天學了什麼，寫下來蓋第一個章吧。</>
+            : '這個學科目前沒有紀錄。'}
+        </div>
+      ) : (
+        <>
+          <div className="ll-table-header">
+            <span>日期</span><span>學科</span><span>細項</span>
+            <span>時長</span><span>掌握度</span><span>學到什麼</span><span></span>
+          </div>
+          {visibleEntries.map(e => {
+            const rl = RATING_OPTIONS.find(r => r.value===e.rating);
+            return (
+              <div className="ll-entry-row" key={e.id}>
+                <div className="ll-entry-date">{fmtDate(e.date)}</div>
+                <span className="ll-entry-topic" style={{background:colorForSubject(e.subject)}}>{e.subject}</span>
+                <span className="ll-entry-subtopic entry-subtopic" title={e.subtopic||''}>{e.subtopic||'—'}</span>
+                <span className="ll-entry-minutes">{e.minutes} 分</span>
+                <span className="ll-entry-rating" title={rl?rl.label:''}>掌握 {e.rating}/5</span>
+                <span className="ll-entry-note">{e.note||'—'}</span>
+                <button className="ll-del-btn" onClick={()=>removeEntry(e.id)}>刪除</button>
+              </div>
+            );
+          })}
+        </>
+      )}
+
+      <div className="ll-footer-note">資料同步至 GitHub · {GH_OWNER}/{GH_REPO}</div>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('ll-root')).render(<App />);
+  </script>
+</body>
+</html>

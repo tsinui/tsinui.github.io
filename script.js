@@ -1,10 +1,48 @@
 document.addEventListener("DOMContentLoaded", () => {
   initReveal();
   initHeroParallax();
+  initNavDrawer();
   loadPortfolio();
   loadArticles();
   loadWorldMap();
 });
+
+function initNavDrawer() {
+  const toggle = document.querySelector(".nav-toggle");
+  const drawer = document.getElementById("nav-drawer");
+  const backdrop = document.getElementById("nav-backdrop");
+  if (!toggle || !drawer || !backdrop) return;
+
+  // Move out of page-shell so overflow:hidden doesn't clip them
+  document.body.appendChild(backdrop);
+  document.body.appendChild(drawer);
+
+  function openDrawer() {
+    drawer.classList.add("is-open");
+    backdrop.classList.add("is-open");
+    toggle.setAttribute("aria-expanded", "true");
+    toggle.setAttribute("aria-label", "關閉選單");
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeDrawer() {
+    drawer.classList.remove("is-open");
+    backdrop.classList.remove("is-open");
+    toggle.setAttribute("aria-expanded", "false");
+    toggle.setAttribute("aria-label", "開啟選單");
+    document.body.style.overflow = "";
+  }
+
+  toggle.addEventListener("click", () => {
+    toggle.getAttribute("aria-expanded") === "true" ? closeDrawer() : openDrawer();
+  });
+
+  backdrop.addEventListener("click", closeDrawer);
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeDrawer();
+  });
+}
 
 function initHeroParallax() {
   const img = document.querySelector(".site-hero-img");

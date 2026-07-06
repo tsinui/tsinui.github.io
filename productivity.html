@@ -633,7 +633,7 @@ function App() {
       const csvSubjects = [...new Set(e.map(entry => entry.subject).filter(Boolean))];
       setSubjects(prev => {
         const merged = [...prev];
-        csvSubjects.forEach(s => { if (!merged.includes(s)) merged.push(s); });
+        csvSubjects.forEach(name => { if (!merged.includes(name)) merged.push(name); });
         localStorage.setItem(SUBJECTS_KEY, JSON.stringify(merged));
         return merged;
       });

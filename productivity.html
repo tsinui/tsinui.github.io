@@ -460,7 +460,10 @@ function downloadCSV(entries) {
 }
 
 // ── Utilities ──
-function todayStr() { return new Date().toISOString().slice(0,10); }
+function todayStr() {
+  const d = new Date();
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+}
 function fmtDate(iso) {
   const d = new Date(iso + 'T00:00:00');
   return `${d.getMonth()+1}/${d.getDate()} (${'日一二三四五六'[d.getDay()]})`;

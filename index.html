@@ -24,11 +24,23 @@
         <a href="#about">About</a>
       </nav>
 
+      <button class="nav-toggle hero-toggle" aria-label="開啟選單" aria-expanded="false" aria-controls="nav-drawer">
+        <span></span><span></span><span></span>
+      </button>
+
       <div class="hero-masthead">
         <h1 class="hero-brand">The Sinasera</h1>
         <p class="hero-tagline">Reading the land. Reading the game.</p>
       </div>
     </div>
+
+    <div class="nav-backdrop" id="nav-backdrop"></div>
+    <nav class="nav-drawer" id="nav-drawer" aria-label="Primary">
+      <a href="articles/index.html">Writing</a>
+      <a href="portfolio.html">Portfolio</a>
+      <a href="productivity.html">Productivity</a>
+      <a href="#about">About</a>
+    </nav>
 
 <main class="home-content">
       <div class="home-articles reveal" id="writing" data-articles-root="articles"></div>

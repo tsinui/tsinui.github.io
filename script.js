@@ -260,19 +260,25 @@ function renderHome(container, articles, root) {
   const leadHref = articleHref(lead, root);
   const leadTarget = articleTarget(lead);
   const leadImg = lead.image.replace(/^\.\.\//, "");
-  const leadTags = (lead.tags || []).filter(t => t !== "Feature Story").join(" · ") || (lead.tags || []).join(" · ");
+  const leadOtherTags = (lead.tags || []).filter(t => t !== "Feature Story");
+  const leadOtherTagsHtml = leadOtherTags.map(t =>
+    `<span class="story-card-tag" style="background:var(--p-teal)">${t}</span>`
+  ).join("");
 
   const featureHtml = `
+  <div class="home-feature-wrap">
+    <p class="stories-section-label">Feature Story</p>
   <a class="home-feature-card" href="${leadHref}"${leadTarget}>
     <img src="${leadImg}" alt="${lead.imageAlt}" />
     <div class="home-feature-card-overlay"></div>
     <div class="home-feature-card-content">
-      <span class="card-tag-pill">Feature Story${leadTags ? " · " + leadTags : ""}</span>
+      ${leadOtherTagsHtml}
       <h2 class="home-feature-card-title">${lead.title}</h2>
       ${lead.titleZh ? `<p class="home-feature-card-sub">${lead.titleZh}</p>` : ""}
       <p class="home-feature-card-date">${lead.date}</p>
     </div>
-  </a>`;
+  </a>
+  </div>`;
 
   const gridHtml = rest.map((a) => {
     const href = articleHref(a, root);

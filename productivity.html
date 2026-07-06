@@ -213,7 +213,20 @@
       font-size: 12px; cursor: grab; user-select: none;
     }
     .ll-kanban-card:active { cursor: grabbing; opacity: 0.7; }
-    .ll-kanban-card span { flex: 1; }
+    .ll-kanban-name { flex: 1; cursor: text; }
+    .ll-kanban-name:hover { text-decoration: underline; text-decoration-style: dotted; }
+    .ll-kanban-edit {
+      flex: 1; font-family: 'IBM Plex Mono', monospace; font-size: 12px;
+      border: none; border-bottom: 1px solid var(--p-teal); background: transparent;
+      outline: none; padding: 0; min-width: 0;
+    }
+    .ll-kanban-actions { display: flex; align-items: center; gap: 2px; flex-shrink: 0; }
+    .ll-kanban-move {
+      background: none; border: 1px solid rgba(19,30,33,0.2); color: #756a54;
+      font-size: 14px; line-height: 1; padding: 1px 5px; border-radius: 2px;
+      cursor: pointer; font-weight: bold;
+    }
+    .ll-kanban-move:hover { background: var(--p-teal); color: #fff; border-color: var(--p-teal); }
     @media (max-width: 540px) {
       .ll-kanban-board { grid-template-columns: 1fr; }
       .ll-kanban-col { border-right: none; border-bottom: 1px solid rgba(19,30,33,0.1); }
@@ -562,17 +575,25 @@ const KANBAN_COLS = ['Not Started','In Progress','Done'];
 const STOPWATCH_PRESETS = [15,25,45,60];
 
 // ── Kanban Board ──
-function KanbanBoard({ projects, onMove, onAdd, onDelete, saving }) {
+function KanbanBoard({ projects, onMove, onAdd, onDelete, onRename, saving }) {
   const [newName, setNewName] = React.useState('');
   const [dragId, setDragId] = React.useState(null);
   const [overCol, setOverCol] = React.useState(null);
+  const [editingId, setEditingId] = React.useState(null);
+  const [editVal, setEditVal] = React.useState('');
 
   const add = () => {
     const name = newName.trim();
     if (!name) return;
-    const id = Date.now().toString(36);
-    onAdd({ id, name, status: 'Not Started' });
+    onAdd({ id: Date.now().toString(36), name, status: 'Not Started' });
     setNewName('');
+  };
+
+  const startEdit = (p) => { setEditingId(p.id); setEditVal(p.name); };
+  const commitEdit = (p) => {
+    const name = editVal.trim();
+    if (name && name !== p.name) onRename(p.id, p.name, name);
+    setEditingId(null);
   };
 
   return (
@@ -594,15 +615,28 @@ function KanbanBoard({ projects, onMove, onAdd, onDelete, saving }) {
             onDragLeave={()=>setOverCol(null)}
             onDrop={e=>{e.preventDefault();setOverCol(null);if(dragId)onMove(dragId,col);}}>
             <div className="ll-kanban-col-title">{col}</div>
-            {projects.filter(p=>p.status===col).map(p=>(
-              <div key={p.id} className="ll-kanban-card"
-                draggable
-                onDragStart={()=>setDragId(p.id)}
-                onDragEnd={()=>setDragId(null)}>
-                <span>{p.name}</span>
-                <button className="ll-del-btn" type="button" onClick={()=>onDelete(p.id)} title="刪除">×</button>
-              </div>
-            ))}
+            {projects.filter(p=>p.status===col).map(p=>{
+              const colIdx = KANBAN_COLS.indexOf(col);
+              return (
+                <div key={p.id} className="ll-kanban-card"
+                  draggable={editingId!==p.id}
+                  onDragStart={()=>editingId!==p.id&&setDragId(p.id)}
+                  onDragEnd={()=>setDragId(null)}>
+                  {editingId===p.id
+                    ? <input className="ll-kanban-edit" autoFocus value={editVal}
+                        onChange={e=>setEditVal(e.target.value)}
+                        onBlur={()=>commitEdit(p)}
+                        onKeyDown={e=>{if(e.key==='Enter')commitEdit(p);if(e.key==='Escape')setEditingId(null);}} />
+                    : <span className="ll-kanban-name" onClick={()=>startEdit(p)} title="點擊改名">{p.name}</span>
+                  }
+                  <div className="ll-kanban-actions">
+                    {colIdx>0&&<button className="ll-kanban-move" type="button" onClick={()=>onMove(p.id,KANBAN_COLS[colIdx-1])} title="往左移">‹</button>}
+                    {colIdx<KANBAN_COLS.length-1&&<button className="ll-kanban-move" type="button" onClick={()=>onMove(p.id,KANBAN_COLS[colIdx+1])} title="往右移">›</button>}
+                    <button className="ll-del-btn" type="button" onClick={()=>onDelete(p.id)} title="刪除">×</button>
+                  </div>
+                </div>
+              );
+            })}
           </div>
         ))}
       </div>
@@ -757,6 +791,21 @@ function App() {
   };
   const handleProjectAdd = (p) => saveProjects([...projects, p]);
   const handleProjectDelete = (id) => saveProjects(projects.filter(p => p.id !== id));
+  const handleProjectRename = async (id, oldName, newName) => {
+    const nextProjects = projects.map(p => p.id === id ? {...p, name: newName} : p);
+    const nextEntries = entries.map(e => e.subject === oldName ? {...e, subject: newName} : e);
+    setSaving(true); setSavingProjects(true);
+    try {
+      const [newPSha, newESha] = await Promise.all([
+        ghPutProjects(token, projectSha, nextProjects),
+        ghPutCSV(token, sha, nextEntries),
+      ]);
+      setProjects(nextProjects); setProjectSha(newPSha);
+      setEntries(nextEntries); setSha(newESha);
+      if (project === oldName) setProject(newName);
+    } catch { alert('改名儲存失敗。'); }
+    setSaving(false); setSavingProjects(false);
+  };
 
   const addEntry = async (e) => {
     e.preventDefault();
@@ -810,7 +859,7 @@ function App() {
       </div>
 
       <div className="ll-breakdown-card">
-        <div className="ll-breakdown-title">依學科累計</div>
+        <div className="ll-breakdown-title">依專案累計</div>
         {breakdown.length === 0
           ? <div className="ll-breakdown-empty">還沒有資料。</div>
           : breakdown.map(b => (
@@ -832,6 +881,7 @@ function App() {
         onMove={handleProjectMove}
         onAdd={handleProjectAdd}
         onDelete={handleProjectDelete}
+        onRename={handleProjectRename}
         saving={savingProjects}
       />
 

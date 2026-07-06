@@ -527,9 +527,9 @@ function projectsToCSV(projects) {
 }
 
 // ── Utilities ──
-function todayStr() {
-  const d = new Date();
-  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+function todayStr(d) {
+  const t = d || new Date();
+  return `${t.getFullYear()}-${String(t.getMonth()+1).padStart(2,'0')}-${String(t.getDate()).padStart(2,'0')}`;
 }
 function fmtDate(iso) {
   const d = new Date(iso + 'T00:00:00');
@@ -543,7 +543,7 @@ function formatHM(m) {
 function calcStreak(entries) {
   const dates = new Set(entries.map(e => e.date));
   let streak = 0, cursor = new Date();
-  while (dates.has(cursor.toISOString().slice(0,10))) {
+  while (dates.has(todayStr(cursor))) {
     streak++; cursor.setDate(cursor.getDate()-1);
   }
   return streak;
@@ -760,6 +760,14 @@ function App() {
     localStorage.removeItem(TOKEN_KEY);
     setToken(''); setEntries([]); setSha(null); setProjects([]); setProjectSha(null); setLoaded(false);
   };
+  const handleRefresh = () => {
+    setLoaded(false);
+    Promise.all([ghGetCSV(token), ghGetProjects(token)]).then(([{entries: e, sha: s}, {projects: p, sha: ps}]) => {
+      setEntries(e); setSha(s);
+      setProjects(p); setProjectSha(ps);
+      setLoaded(true);
+    }).catch(() => { handleLogout(); });
+  };
 
   useEffect(() => {
     if (!token) return;
@@ -861,6 +869,7 @@ function App() {
             <div className="n">{streak}</div>
             <div className="label">Day Streak</div>
           </div>
+          <button className="ll-logout-btn" onClick={handleRefresh} style={{marginBottom:4}}>重新整理</button>
           <button className="ll-logout-btn" onClick={handleLogout}>登出</button>
         </div>
       </div>

@@ -774,15 +774,34 @@ function App() {
 
   const saveEntries = async (next) => {
     setEntries(next); setSaving(true);
-    try { const newSha = await ghPutCSV(token, sha, next); setSha(newSha); }
-    catch { alert('儲存失敗，請稍後再試。'); }
+    try {
+      const latestSha = sha || (await ghGetCSV(token)).sha;
+      const newSha = await ghPutCSV(token, latestSha, next);
+      setSha(newSha);
+    } catch {
+      // Retry once with a fresh SHA on conflict
+      try {
+        const { sha: freshSha } = await ghGetCSV(token);
+        const newSha = await ghPutCSV(token, freshSha, next);
+        setSha(newSha);
+      } catch { alert('儲存失敗，請稍後再試。'); }
+    }
     setSaving(false);
   };
 
   const saveProjects = async (next) => {
     setProjects(next); setSavingProjects(true);
-    try { const newSha = await ghPutProjects(token, projectSha, next); setProjectSha(newSha); }
-    catch { alert('專案儲存失敗。'); }
+    try {
+      const latestSha = projectSha || (await ghGetProjects(token)).sha;
+      const newSha = await ghPutProjects(token, latestSha, next);
+      setProjectSha(newSha);
+    } catch {
+      try {
+        const { sha: freshSha } = await ghGetProjects(token);
+        const newSha = await ghPutProjects(token, freshSha, next);
+        setProjectSha(newSha);
+      } catch { alert('專案儲存失敗。'); }
+    }
     setSavingProjects(false);
   };
 
@@ -792,13 +811,16 @@ function App() {
   const handleProjectAdd = (p) => saveProjects([...projects, p]);
   const handleProjectDelete = (id) => saveProjects(projects.filter(p => p.id !== id));
   const handleProjectRename = async (id, oldName, newName) => {
-    const nextProjects = projects.map(p => p.id === id ? {...p, name: newName} : p);
-    const nextEntries = entries.map(e => e.subject === oldName ? {...e, subject: newName} : e);
     setSaving(true); setSavingProjects(true);
     try {
+      // Always fetch latest SHAs before writing to avoid stale-SHA conflicts
+      const [{ sha: latestESha, entries: latestEntries }, { sha: latestPSha, projects: latestProjects }] =
+        await Promise.all([ghGetCSV(token), ghGetProjects(token)]);
+      const nextProjects = latestProjects.map(p => p.id === id ? {...p, name: newName} : p);
+      const nextEntries = latestEntries.map(e => e.subject === oldName ? {...e, subject: newName} : e);
       const [newPSha, newESha] = await Promise.all([
-        ghPutProjects(token, projectSha, nextProjects),
-        ghPutCSV(token, sha, nextEntries),
+        ghPutProjects(token, latestPSha, nextProjects),
+        ghPutCSV(token, latestESha, nextEntries),
       ]);
       setProjects(nextProjects); setProjectSha(newPSha);
       setEntries(nextEntries); setSha(newESha);

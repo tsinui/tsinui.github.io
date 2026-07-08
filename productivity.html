@@ -9,43 +9,35 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
   <style>
-    /* ── Self-study tool scoped styles ── */
+    /* ── Self-study tool: scoped under #ll-root ── */
     :root {
-      --sl-ink: #1c2b2f;
-      --sl-paper: #eee7d6;
-      --sl-paper-line: #d8cdb2;
-      --sl-moss: #4f6b52;
-      --sl-moss-dark: #37492f;
-      --sl-rust: #9c4a34;
-      --sl-rust-light: #c97a5f;
-      --sl-muted: #756a54;
-      --sl-sub-1: #4f6b52;
+      --sl-muted: rgba(19,30,33,0.45);
+      --sl-border: rgba(19,30,33,0.18);
+      --sl-card: rgba(255,255,255,0.72);
+      --sl-teal-bg: rgba(0,130,142,0.07);
+      --sl-yellow-bg: rgba(255,205,0,0.12);
+      --sl-sub-1: #00828E;
       --sl-sub-2: #9c4a34;
-      --sl-sub-3: #7a6a9c;
+      --sl-sub-3: #6a529c;
       --sl-sub-4: #ab8a3c;
       --sl-sub-5: #3c7a86;
-      --sl-sub-6: #8a5a3c;
+      --sl-sub-6: #4f6b52;
     }
 
     #ll-root {
       font-family: 'IBM Plex Mono', monospace;
-      background: var(--sl-paper);
-      background-image: repeating-linear-gradient(transparent, transparent 27px, var(--sl-paper-line) 28px);
-      color: var(--sl-ink);
-      min-height: 100vh;
-      padding: 28px 20px 60px;
+      color: var(--p-dark);
+      padding: 28px 20px 80px;
     }
 
-    #ll-root .sl-page {
-      max-width: 720px;
-      margin: 0 auto;
-    }
+    #ll-root .sl-page { max-width: 720px; margin: 0 auto; }
 
+    /* ---- Masthead ---- */
     #ll-root .masthead {
       display: flex;
       justify-content: space-between;
       align-items: flex-end;
-      border-bottom: 3px double var(--sl-ink);
+      border-bottom: 3px double var(--p-dark);
       padding-bottom: 10px;
       margin-bottom: 4px;
     }
@@ -63,744 +55,516 @@
       text-transform: uppercase;
       margin-top: 3px;
     }
-
     #ll-root .stamp {
-      border: 2px solid var(--sl-rust);
-      color: var(--sl-rust);
+      border: 2px solid var(--p-yellow);
+      color: var(--p-dark);
+      background: var(--sl-yellow-bg);
       border-radius: 50%;
-      width: 62px;
-      height: 62px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
+      width: 62px; height: 62px;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
       transform: rotate(-8deg);
       font-family: 'Source Serif 4', serif;
-      line-height: 1;
-      flex-shrink: 0;
+      line-height: 1; flex-shrink: 0;
     }
     #ll-root .stamp .n { font-size: 22px; font-weight: 700; }
     #ll-root .stamp .label { font-size: 7px; letter-spacing: 1px; text-transform: uppercase; margin-top: 2px; }
 
-    /* ---- Sync status bar ---- */
+    /* ---- Sync bar ---- */
     #ll-root .sync-bar {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
-      font-size: 10.5px;
-      color: var(--sl-muted);
-      margin: 10px 0 16px;
+      display: flex; align-items: center; gap: 10px;
+      flex-wrap: wrap; font-size: 10.5px;
+      color: var(--sl-muted); margin: 10px 0 16px;
     }
     #ll-root .sync-repo { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 100px; }
-    #ll-root .sync-status.ok { color: var(--sl-moss-dark); }
-    #ll-root .sync-status.err { color: var(--sl-rust); }
-    #ll-root .lock-btn, #ll-root .refresh-btn {
-      background: none;
-      border: 1px solid var(--sl-muted);
-      color: var(--sl-muted);
-      font-size: 10px;
-      padding: 3px 9px;
-      cursor: pointer;
-      font-family: 'IBM Plex Mono', monospace;
+    #ll-root .sync-status.ok { color: var(--p-teal); }
+    #ll-root .sync-status.err { color: var(--p-red); }
+    #ll-root .sl-btn-ghost {
+      background: none; border: 1px solid var(--sl-border);
+      color: var(--sl-muted); font-size: 10px; padding: 3px 9px;
+      cursor: pointer; font-family: 'IBM Plex Mono', monospace;
       letter-spacing: 0.5px;
     }
-    #ll-root .lock-btn:hover, #ll-root .refresh-btn:hover { border-color: var(--sl-rust); color: var(--sl-rust); }
+    #ll-root .sl-btn-ghost:hover { border-color: var(--p-teal); color: var(--p-teal); }
     #ll-root .sync-error-banner {
-      border: 1px solid var(--sl-rust);
-      color: var(--sl-rust);
-      background: rgba(156,74,52,0.08);
-      padding: 8px 12px;
-      font-size: 11px;
-      margin-bottom: 14px;
-      line-height: 1.5;
+      border: 1px solid var(--p-red); color: var(--p-red);
+      background: rgba(255,25,3,0.06);
+      padding: 8px 12px; font-size: 11px; margin-bottom: 14px; line-height: 1.5;
     }
 
-    /* ---- Gate screens ---- */
+    /* ---- Gate ---- */
     #ll-root .gate-wrap {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: calc(100vh - 88px);
+      display: flex; align-items: center; justify-content: center;
+      min-height: calc(100vh - 120px);
     }
     #ll-root .gate-card {
-      border: 1px solid var(--sl-ink);
-      background: rgba(255,255,255,0.4);
-      padding: 26px 24px;
-      max-width: 440px;
-      width: 100%;
+      border: 1px solid var(--p-dark);
+      background: var(--sl-card);
+      padding: 26px 24px; max-width: 440px; width: 100%;
     }
     #ll-root .gate-title {
       font-family: 'Source Serif 4', serif;
-      font-size: 20px;
-      font-weight: 700;
-      margin-bottom: 4px;
+      font-size: 20px; font-weight: 700; margin-bottom: 4px;
     }
     #ll-root .gate-subtitle {
-      font-size: 11px;
-      color: var(--sl-muted);
-      margin-bottom: 18px;
-      letter-spacing: 0.3px;
-      line-height: 1.6;
+      font-size: 11px; color: var(--sl-muted);
+      margin-bottom: 18px; line-height: 1.6;
     }
     #ll-root .gate-field { margin-bottom: 14px; }
     #ll-root .gate-field label {
-      font-size: 10px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      color: var(--sl-muted);
-      display: block;
-      margin-bottom: 4px;
+      font-size: 10px; text-transform: uppercase;
+      letter-spacing: 1px; color: var(--sl-muted); display: block; margin-bottom: 4px;
     }
     #ll-root .gate-field input {
-      width: 100%;
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 13px;
-      background: transparent;
-      border: none;
-      border-bottom: 1px solid var(--sl-ink);
-      padding: 6px 2px;
-      color: var(--sl-ink);
+      width: 100%; font-family: 'IBM Plex Mono', monospace;
+      font-size: 13px; background: transparent;
+      border: none; border-bottom: 1px solid var(--p-dark);
+      padding: 6px 2px; color: var(--p-dark); box-sizing: border-box;
     }
-    #ll-root .gate-field input:focus { outline: none; border-bottom: 2px solid var(--sl-rust); }
-    #ll-root .gate-error { font-size: 11px; color: var(--sl-rust); margin: 10px 0; line-height: 1.5; }
+    #ll-root .gate-field input:focus { outline: none; border-bottom: 2px solid var(--p-teal); }
+    #ll-root .gate-error { font-size: 11px; color: var(--p-red); margin: 10px 0; line-height: 1.5; }
     #ll-root .gate-btn {
-      width: 100%;
-      margin-top: 8px;
-      background: var(--sl-moss-dark);
-      color: var(--sl-paper);
-      border: none;
-      padding: 10px;
+      width: 100%; margin-top: 8px;
+      background: var(--p-dark); color: #fff;
+      border: none; padding: 10px;
       font-family: 'IBM Plex Mono', monospace;
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-      cursor: pointer;
+      font-size: 12px; text-transform: uppercase;
+      letter-spacing: 1.5px; cursor: pointer;
     }
-    #ll-root .gate-btn:hover { background: var(--sl-rust); }
+    #ll-root .gate-btn:hover { background: var(--p-teal); }
     #ll-root .gate-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
     /* ---- Stats ---- */
-    #ll-root .stats-row {
-      display: flex;
-      gap: 14px;
-      margin: 18px 0 16px;
-      flex-wrap: wrap;
-    }
+    #ll-root .stats-row { display: flex; gap: 14px; margin: 18px 0 16px; flex-wrap: wrap; }
     #ll-root .stat {
-      flex: 1;
-      min-width: 130px;
-      border: 1px solid var(--sl-ink);
-      padding: 10px 12px;
-      background: rgba(255,255,255,0.25);
+      flex: 1; min-width: 130px;
+      border: 1px solid var(--sl-border);
+      padding: 10px 12px; background: var(--sl-card);
     }
-    #ll-root .stat .num { font-family: 'Source Serif 4', serif; font-size: 20px; font-weight: 700; color: var(--sl-moss-dark); }
+    #ll-root .stat .num { font-family: 'Source Serif 4', serif; font-size: 20px; font-weight: 700; color: var(--p-teal); }
     #ll-root .stat .lbl { font-size: 10px; color: var(--sl-muted); text-transform: uppercase; letter-spacing: 1px; margin-top: 2px; }
 
-    /* ---- Project breakdown ---- */
+    /* ---- Breakdown ---- */
     #ll-root .breakdown-card {
-      border: 1px solid var(--sl-ink);
-      background: rgba(255,255,255,0.25);
-      padding: 12px 14px 4px;
-      margin-bottom: 22px;
+      border: 1px solid var(--sl-border);
+      background: var(--sl-card);
+      padding: 12px 14px 4px; margin-bottom: 22px;
     }
-    #ll-root .breakdown-title {
-      font-size: 10px;
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-      color: var(--sl-muted);
-      margin-bottom: 10px;
+    #ll-root .sl-card-title {
+      font-size: 10px; text-transform: uppercase;
+      letter-spacing: 1.5px; color: var(--sl-muted); margin-bottom: 10px;
     }
     #ll-root .breakdown-row {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 9px;
-      font-size: 11.5px;
+      display: flex; align-items: center;
+      gap: 10px; margin-bottom: 9px; font-size: 11.5px;
     }
     #ll-root .breakdown-name {
-      width: 92px;
-      flex-shrink: 0;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      width: 92px; flex-shrink: 0;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
     }
     #ll-root .breakdown-track {
-      flex: 1;
-      height: 8px;
-      background: rgba(28,43,47,0.08);
-      position: relative;
+      flex: 1; height: 6px;
+      background: rgba(0,130,142,0.12); position: relative;
     }
     #ll-root .breakdown-fill { height: 100%; }
-    #ll-root .breakdown-mins {
-      width: 64px;
-      flex-shrink: 0;
-      text-align: right;
-      color: var(--sl-muted);
-      font-size: 10.5px;
-    }
+    #ll-root .breakdown-mins { width: 64px; flex-shrink: 0; text-align: right; color: var(--sl-muted); font-size: 10.5px; }
     #ll-root .breakdown-empty { font-size: 11px; color: var(--sl-muted); padding-bottom: 10px; }
 
     /* ---- Timer ---- */
     #ll-root .timer-card {
-      border: 1px solid var(--sl-ink);
-      background: rgba(55,73,47,0.06);
-      padding: 16px;
-      margin-bottom: 26px;
-      display: flex;
-      align-items: center;
-      gap: 18px;
-      flex-wrap: wrap;
+      border: 1px solid var(--sl-border);
+      background: var(--sl-teal-bg);
+      padding: 16px; margin-bottom: 26px;
+      display: flex; align-items: center; gap: 18px; flex-wrap: wrap;
     }
     #ll-root .timer-dial {
-      width: 84px;
-      height: 84px;
-      border-radius: 50%;
-      border: 2px solid var(--sl-moss-dark);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      position: relative;
-      background: var(--sl-paper);
+      width: 84px; height: 84px; border-radius: 50%;
+      border: 2px solid var(--p-teal);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; background: #fff;
     }
-    #ll-root .timer-dial.goal-reached { border-color: var(--sl-rust); background: rgba(156,74,52,0.08); }
-    #ll-root .timer-dial .time {
-      font-family: 'Source Serif 4', serif;
-      font-size: 19px;
-      font-weight: 700;
-    }
+    #ll-root .timer-dial.goal-reached { border-color: var(--p-yellow); background: var(--sl-yellow-bg); }
+    #ll-root .timer-dial .time { font-family: 'Source Serif 4', serif; font-size: 19px; font-weight: 700; }
     #ll-root .timer-info { flex: 1; min-width: 160px; }
-    #ll-root .timer-mode-label {
-      font-size: 10px;
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-      color: var(--sl-muted);
-      margin-bottom: 4px;
-    }
+    #ll-root .timer-mode-label { font-size: 10px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--sl-muted); margin-bottom: 4px; }
     #ll-root .timer-sessions { font-size: 11px; color: var(--sl-muted); margin-bottom: 8px; }
     #ll-root .timer-controls { display: flex; gap: 8px; flex-wrap: wrap; }
     #ll-root .timer-btn {
-      border: 1px solid var(--sl-ink);
-      background: transparent;
-      color: var(--sl-ink);
-      padding: 6px 12px;
+      border: 1px solid var(--sl-border); background: transparent;
+      color: var(--p-dark); padding: 6px 12px;
       font-family: 'IBM Plex Mono', monospace;
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      cursor: pointer;
+      font-size: 11px; text-transform: uppercase;
+      letter-spacing: 1px; cursor: pointer;
     }
-    #ll-root .timer-btn.primary { background: var(--sl-moss-dark); color: var(--sl-paper); border-color: var(--sl-moss-dark); }
-    #ll-root .timer-btn.primary:hover { background: var(--sl-rust); border-color: var(--sl-rust); }
-    #ll-root .timer-btn:hover { background: rgba(0,0,0,0.06); }
+    #ll-root .timer-btn.primary { background: var(--p-dark); color: #fff; border-color: var(--p-dark); }
+    #ll-root .timer-btn.primary:hover { background: var(--p-teal); border-color: var(--p-teal); }
+    #ll-root .timer-btn:not(.primary):hover { background: rgba(0,0,0,0.05); }
     #ll-root .timer-btn:disabled { opacity: 0.4; cursor: not-allowed; }
     #ll-root .timer-presets { display: flex; gap: 6px; margin-top: 10px; align-items: center; flex-wrap: wrap; }
-    #ll-root .timer-presets-label {
-      font-size: 10px;
-      color: var(--sl-muted);
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-right: 2px;
-    }
+    #ll-root .timer-presets-label { font-size: 10px; color: var(--sl-muted); text-transform: uppercase; letter-spacing: 1px; margin-right: 2px; }
     #ll-root .preset-btn {
-      border: 1px solid var(--sl-muted);
-      background: transparent;
-      color: var(--sl-muted);
-      padding: 3px 10px;
+      border: 1px solid var(--sl-border); background: transparent;
+      color: var(--sl-muted); padding: 3px 10px;
       font-family: 'IBM Plex Mono', monospace;
-      font-size: 10.5px;
-      cursor: pointer;
-      border-radius: 12px;
+      font-size: 10.5px; cursor: pointer; border-radius: 12px;
     }
-    #ll-root .preset-btn:hover { border-color: var(--sl-moss-dark); color: var(--sl-moss-dark); }
-    #ll-root .preset-btn.active { background: var(--sl-moss-dark); color: var(--sl-paper); border-color: var(--sl-moss-dark); }
+    #ll-root .preset-btn:hover { border-color: var(--p-teal); color: var(--p-teal); }
+    #ll-root .preset-btn.active { background: var(--p-teal); color: #fff; border-color: var(--p-teal); }
 
-    /* ---- Project board add row ---- */
-    #ll-root .project-add-row { display: flex; gap: 8px; }
-    #ll-root .project-add-row input {
-      flex: 1;
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 12.5px;
-      background: transparent;
-      border: none;
-      border-bottom: 1px solid var(--sl-ink);
-      padding: 5px 2px;
-      color: var(--sl-ink);
+    /* ---- Project board ---- */
+    #ll-root .project-board {
+      border: 1px solid var(--sl-border);
+      background: var(--sl-card);
+      padding: 16px; margin-bottom: 26px;
     }
-    #ll-root .project-add-row input:focus { outline: none; border-bottom: 2px solid var(--sl-rust); }
-    #ll-root .project-add-btn {
-      border: 1px solid var(--sl-ink);
-      background: transparent;
-      color: var(--sl-ink);
-      padding: 4px 12px;
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      cursor: pointer;
+    #ll-root .project-board-header {
+      display: flex; justify-content: space-between;
+      align-items: center; gap: 12px; margin-bottom: 16px; flex-wrap: wrap;
     }
-    #ll-root .project-add-btn:hover { background: var(--sl-moss-dark); color: var(--sl-paper); border-color: var(--sl-moss-dark); }
-    #ll-root .project-add-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+    #ll-root .sl-section-title {
+      font-family: 'Source Serif 4', serif;
+      font-size: 15px; text-transform: uppercase;
+      letter-spacing: 2px; color: var(--p-dark);
+    }
+    #ll-root .project-board-add { display: flex; gap: 8px; align-items: center; }
+    #ll-root .project-board-add input {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 12.5px; background: transparent;
+      border: none; border-bottom: 1px solid var(--p-dark);
+      padding: 4px 2px; color: var(--p-dark); min-width: 140px;
+    }
+    #ll-root .project-board-add input:focus { outline: none; border-bottom: 2px solid var(--p-teal); }
+    #ll-root .sl-add-btn {
+      border: 1px solid var(--p-dark); background: transparent;
+      color: var(--p-dark); padding: 4px 12px;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px; text-transform: uppercase;
+      letter-spacing: 1px; cursor: pointer;
+    }
+    #ll-root .sl-add-btn:hover { background: var(--p-dark); color: #fff; }
+    #ll-root .sl-add-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+    #ll-root .kanban-columns { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    @media (max-width: 560px) { #ll-root .kanban-columns { grid-template-columns: 1fr; } }
+    #ll-root .kanban-column { border-left: 1px solid var(--sl-border); padding-left: 12px; }
+    #ll-root .kanban-column:first-child { border-left: none; padding-left: 0; }
+    #ll-root .kanban-column-title {
+      font-size: 10px; text-transform: uppercase;
+      letter-spacing: 1.5px; color: var(--sl-muted); margin-bottom: 10px;
+    }
+    #ll-root .kanban-card {
+      display: flex; align-items: center; gap: 8px;
+      border: 1px solid var(--sl-border); background: #fff;
+      padding: 8px 10px; margin-bottom: 8px;
+    }
+    #ll-root .kanban-card-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+    #ll-root .kanban-card-name { flex: 1; font-size: 12.5px; color: var(--p-dark); word-break: break-word; }
+    #ll-root .kanban-card-actions { display: flex; gap: 2px; flex-shrink: 0; }
+    #ll-root .kanban-card-actions button {
+      background: none; border: none; color: var(--sl-muted);
+      font-size: 12px; line-height: 1; cursor: pointer; padding: 2px 4px;
+    }
+    #ll-root .kanban-card-actions button:hover { color: var(--p-teal); }
+    #ll-root .kanban-card-actions button:last-child:hover { color: var(--p-red); }
+    #ll-root .kanban-card-actions button:disabled { opacity: 0.25; cursor: not-allowed; }
+
+    /* ---- Daily & Reflection cards ---- */
+    #ll-root .daily-card {
+      border: 1px solid var(--sl-border);
+      background: var(--sl-card);
+      padding: 16px; margin-bottom: 26px;
+    }
+    #ll-root .daily-header {
+      display: flex; justify-content: space-between;
+      align-items: center; margin-bottom: 10px;
+      flex-wrap: wrap; gap: 8px;
+    }
+    #ll-root .daily-date-picker { display: flex; align-items: center; gap: 8px; }
+    #ll-root .daily-date-picker input[type="date"] {
+      font-family: 'IBM Plex Mono', monospace; font-size: 12px;
+      border: 1px solid var(--sl-border); background: transparent;
+      padding: 4px 6px; color: var(--p-dark);
+    }
+    #ll-root .sl-link-btn {
+      background: none; border: none; color: var(--sl-muted);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px; letter-spacing: 0.5px; cursor: pointer; padding: 2px 0;
+      text-decoration: underline; text-underline-offset: 2px;
+    }
+    #ll-root .sl-link-btn:hover { color: var(--p-teal); }
+
+    /* Back-3-days quick nav */
+    #ll-root .back-days-row {
+      display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 12px;
+    }
+    #ll-root .back-day-btn {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px; padding: 3px 8px;
+      border: 1px solid var(--sl-border);
+      background: transparent; cursor: pointer;
+      color: var(--sl-muted); position: relative;
+      border-radius: 2px;
+    }
+    #ll-root .back-day-btn:hover { border-color: var(--p-teal); color: var(--p-teal); }
+    #ll-root .back-day-btn.active { border-color: var(--p-teal); background: var(--sl-teal-bg); color: var(--p-teal); }
+    #ll-root .back-day-btn .day-dot {
+      display: inline-block; width: 5px; height: 5px;
+      border-radius: 50%; background: var(--p-yellow);
+      margin-left: 4px; vertical-align: middle;
+    }
+
+    #ll-root .highlight-list { margin-bottom: 12px; }
+    #ll-root .highlight-item { display: flex; align-items: center; gap: 8px; margin-bottom: 7px; }
+    #ll-root .highlight-item input[type="checkbox"] {
+      width: 16px; height: 16px; accent-color: var(--p-teal);
+      flex-shrink: 0; cursor: pointer;
+    }
+    #ll-root .highlight-item input[type="text"] {
+      flex: 1; font-family: 'IBM Plex Mono', monospace; font-size: 13px;
+      background: transparent; border: none;
+      border-bottom: 1px solid var(--sl-border);
+      padding: 4px 2px; color: var(--p-dark);
+    }
+    #ll-root .highlight-item input[type="text"]:focus { outline: none; border-bottom: 2px solid var(--p-teal); }
+    #ll-root .highlight-item.done input[type="text"] { text-decoration: line-through; color: var(--sl-muted); }
+    #ll-root .highlight-remove-btn {
+      background: none; border: none; color: var(--sl-muted);
+      font-size: 15px; line-height: 1; cursor: pointer; flex-shrink: 0; padding: 0 2px;
+    }
+    #ll-root .highlight-remove-btn:hover { color: var(--p-red); }
+    #ll-root .highlight-add-btn {
+      border: 1px dashed var(--sl-border); background: transparent;
+      color: var(--sl-muted); padding: 5px 12px;
+      font-family: 'IBM Plex Mono', monospace; font-size: 11px;
+      letter-spacing: 0.5px; cursor: pointer;
+    }
+    #ll-root .highlight-add-btn:hover { border-color: var(--p-teal); color: var(--p-teal); border-style: solid; }
+
+    #ll-root .reflection-textarea {
+      width: 100%; font-family: 'IBM Plex Mono', monospace;
+      font-size: 13px; background: transparent;
+      border: 1px solid var(--sl-border);
+      padding: 8px; min-height: 90px; color: var(--p-dark);
+      resize: vertical; box-sizing: border-box;
+    }
+    #ll-root .reflection-textarea:focus { outline: none; border-color: var(--p-teal); }
+
+    #ll-root .daily-save-row {
+      display: flex; align-items: center; gap: 12px; margin-top: 12px; flex-wrap: wrap;
+    }
+    #ll-root .daily-save-status { font-size: 10.5px; }
+    #ll-root .daily-save-status.dirty { color: var(--p-red); }
+    #ll-root .daily-save-status.saved { color: var(--p-teal); }
+    #ll-root .reflection-date-label { font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--sl-muted); }
 
     /* ---- Entry form ---- */
     #ll-root form.entry {
-      border: 1px solid var(--sl-ink);
-      padding: 16px;
-      margin-bottom: 26px;
-      background: rgba(255,255,255,0.35);
+      border: 1px solid var(--sl-border);
+      padding: 16px; margin-bottom: 26px; background: var(--sl-card);
     }
     #ll-root form.entry .row { display: flex; gap: 10px; margin-bottom: 10px; flex-wrap: wrap; }
     #ll-root form.entry label {
-      font-size: 10px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      color: var(--sl-muted);
-      display: block;
-      margin-bottom: 4px;
+      font-size: 10px; text-transform: uppercase;
+      letter-spacing: 1px; color: var(--sl-muted); display: block; margin-bottom: 4px;
     }
     #ll-root form.entry input, #ll-root form.entry select, #ll-root form.entry textarea {
-      width: 100%;
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 13px;
-      background: transparent;
-      border: none;
-      border-bottom: 1px solid var(--sl-ink);
-      padding: 5px 2px;
-      color: var(--sl-ink);
+      width: 100%; font-family: 'IBM Plex Mono', monospace;
+      font-size: 13px; background: transparent;
+      border: none; border-bottom: 1px solid var(--p-dark);
+      padding: 5px 2px; color: var(--p-dark);
     }
     #ll-root form.entry select { cursor: pointer; }
     #ll-root form.entry input:focus, #ll-root form.entry select:focus, #ll-root form.entry textarea:focus {
-      outline: none;
-      border-bottom: 2px solid var(--sl-rust);
+      outline: none; border-bottom: 2px solid var(--p-teal);
     }
     #ll-root form.entry .col { flex: 1; min-width: 130px; }
     #ll-root form.entry textarea { resize: vertical; min-height: 40px; }
-
     #ll-root .rating-hint { font-size: 10.5px; color: var(--sl-muted); margin-top: 4px; font-style: italic; }
 
     #ll-root .submit-btn {
-      margin-top: 6px;
-      background: var(--sl-moss-dark);
-      color: var(--sl-paper);
-      border: none;
-      padding: 9px 18px;
+      margin-top: 6px; background: var(--p-dark); color: #fff;
+      border: none; padding: 9px 18px;
       font-family: 'IBM Plex Mono', monospace;
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-      cursor: pointer;
+      font-size: 12px; text-transform: uppercase;
+      letter-spacing: 1.5px; cursor: pointer;
     }
-    #ll-root .submit-btn:hover { background: var(--sl-rust); }
+    #ll-root .submit-btn:hover { background: var(--p-teal); }
     #ll-root .submit-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
     /* ---- Log card ---- */
     #ll-root .log-card {
-      border: 1px solid var(--sl-ink);
-      background: rgba(255,255,255,0.35);
-      padding: 16px;
-      margin-bottom: 26px;
+      border: 1px solid var(--sl-border);
+      background: var(--sl-card);
+      padding: 16px; margin-bottom: 26px;
     }
     #ll-root .log-heading-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid var(--sl-ink);
-      padding-bottom: 6px;
-      margin-bottom: 14px;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-    #ll-root .log-heading {
-      font-family: 'Source Serif 4', serif;
-      font-size: 15px;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      color: var(--sl-moss-dark);
+      display: flex; justify-content: space-between; align-items: center;
+      border-bottom: 1px solid var(--sl-border);
+      padding-bottom: 6px; margin-bottom: 14px; gap: 10px; flex-wrap: wrap;
     }
     #ll-root .log-heading-actions { display: flex; gap: 10px; align-items: center; }
     #ll-root .filter-select {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 10.5px;
-      background: transparent;
-      border: 1px solid var(--sl-muted);
-      color: var(--sl-muted);
-      padding: 4px 6px;
-      cursor: pointer;
+      font-family: 'IBM Plex Mono', monospace; font-size: 10.5px;
+      background: transparent; border: 1px solid var(--sl-border);
+      color: var(--sl-muted); padding: 4px 6px; cursor: pointer;
     }
     #ll-root .export-btn {
-      background: none;
-      border: 1px solid var(--sl-muted);
-      color: var(--sl-muted);
-      font-size: 10px;
-      padding: 4px 10px;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      cursor: pointer;
-      font-family: 'IBM Plex Mono', monospace;
+      background: none; border: 1px solid var(--sl-border);
+      color: var(--sl-muted); font-size: 10px; padding: 4px 10px;
+      letter-spacing: 1px; text-transform: uppercase;
+      cursor: pointer; font-family: 'IBM Plex Mono', monospace;
     }
-    #ll-root .export-btn:hover { border-color: var(--sl-moss-dark); color: var(--sl-moss-dark); }
+    #ll-root .export-btn:hover { border-color: var(--p-teal); color: var(--p-teal); }
     #ll-root .export-btn:disabled { opacity: 0.4; cursor: not-allowed; }
 
     #ll-root .log-table-header {
       display: grid;
       grid-template-columns: 56px 84px 84px 52px 60px minmax(0,1fr) 30px;
-      gap: 10px;
-      align-items: center;
+      gap: 10px; align-items: center;
       padding: 0 0 6px;
-      font-size: 9.5px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      color: var(--sl-muted);
-      border-bottom: 1px solid var(--sl-ink);
+      font-size: 9.5px; text-transform: uppercase;
+      letter-spacing: 1px; color: var(--sl-muted);
+      border-bottom: 1px solid var(--sl-border);
     }
     #ll-root .entry-row {
       display: grid;
       grid-template-columns: 56px 84px 84px 52px 60px minmax(0,1fr) 30px;
-      gap: 10px;
-      align-items: start;
+      gap: 10px; align-items: start;
       padding: 10px 0;
-      border-bottom: 1px dashed var(--sl-paper-line);
+      border-bottom: 1px dashed var(--sl-border);
     }
     @media (max-width: 520px) {
       #ll-root .log-table-header, #ll-root .entry-row {
         grid-template-columns: 48px 70px 44px 54px minmax(0,1fr) 24px;
       }
       #ll-root .log-table-header > *:nth-child(3),
-      #ll-root .entry-row .entry-subtopic {
-        display: none;
-      }
+      #ll-root .entry-row .entry-subtopic { display: none; }
     }
     #ll-root .entry-date {
       font-family: 'Source Serif 4', serif;
-      font-weight: 700;
-      font-size: 12.5px;
-      color: var(--sl-rust);
-      padding-top: 1px;
+      font-weight: 700; font-size: 12.5px;
+      color: var(--p-teal); padding-top: 1px;
     }
     #ll-root .entry-topic {
-      font-size: 11.5px;
-      font-weight: 600;
-      display: inline-block;
-      color: var(--sl-paper);
-      padding: 2px 7px;
-      line-height: 1.4;
+      font-size: 11.5px; font-weight: 600;
+      display: inline-block; color: #fff;
+      padding: 2px 7px; line-height: 1.4;
     }
     #ll-root .entry-subtopic {
-      font-size: 10.5px;
-      color: var(--sl-muted);
-      padding-top: 3px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
+      font-size: 10.5px; color: var(--sl-muted);
+      padding-top: 3px; overflow: hidden;
+      text-overflow: ellipsis; white-space: nowrap;
     }
     #ll-root .entry-minutes { font-size: 11px; color: var(--sl-muted); padding-top: 3px; text-align: right; white-space: nowrap; }
-    #ll-root .entry-rating-short { font-size: 10.5px; color: var(--sl-moss-dark); padding-top: 3px; white-space: nowrap; }
-    #ll-root .entry-note { font-size: 12px; color: var(--sl-ink); line-height: 1.5; padding-top: 2px; word-break: break-word; }
+    #ll-root .entry-rating-short { font-size: 10.5px; color: var(--p-teal); padding-top: 3px; white-space: nowrap; }
+    #ll-root .entry-note { font-size: 12px; color: var(--p-dark); line-height: 1.5; padding-top: 2px; word-break: break-word; }
     #ll-root .del-btn {
       background: none; border: none; color: var(--sl-muted);
       font-size: 10px; cursor: pointer; text-decoration: underline;
       padding: 0; padding-top: 3px; justify-self: end;
     }
-    #ll-root .del-btn:hover { color: var(--sl-rust); }
+    #ll-root .del-btn:hover { color: var(--p-red); }
+    #ll-root .empty-state { text-align: center; padding: 30px 10px; color: var(--sl-muted); font-size: 12px; line-height: 1.8; }
+    #ll-root .footer-note { text-align: center; font-size: 10px; color: var(--sl-muted); margin-top: 30px; letter-spacing: 1px; }
 
-    #ll-root .empty-state {
-      text-align: center;
-      padding: 30px 10px;
-      color: var(--sl-muted);
-      font-size: 12px;
-      line-height: 1.8;
+    /* ---- Confirm delete modal ---- */
+    #ll-root .modal-backdrop {
+      position: fixed; inset: 0; z-index: 400;
+      background: rgba(19,30,33,0.5);
+      display: flex; align-items: center; justify-content: center;
+      padding: 20px;
     }
-
-    #ll-root .footer-note {
-      text-align: center;
-      font-size: 10px;
-      color: var(--sl-muted);
-      margin-top: 30px;
-      letter-spacing: 1px;
+    #ll-root .modal-card {
+      background: #fff; border: 2px solid var(--p-dark);
+      padding: 24px; max-width: 360px; width: 100%;
     }
-
-    /* ---- Daily highlights & reflection ---- */
-    #ll-root .daily-card {
-      border: 1px solid var(--sl-ink);
-      background: rgba(255,255,255,0.35);
-      padding: 16px;
-      margin-bottom: 26px;
-    }
-    #ll-root .daily-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 14px;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-    #ll-root .daily-title {
+    #ll-root .modal-title {
       font-family: 'Source Serif 4', serif;
-      font-size: 15px;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      color: var(--sl-moss-dark);
+      font-size: 16px; font-weight: 700; margin-bottom: 8px;
     }
-    #ll-root .daily-date-picker { display: flex; align-items: center; gap: 8px; }
-    #ll-root .daily-date-picker input[type="date"] {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 12px;
-      border: 1px solid var(--sl-ink);
-      background: transparent;
-      padding: 4px 6px;
-      color: var(--sl-ink);
+    #ll-root .modal-body { font-size: 12px; color: var(--sl-muted); line-height: 1.6; margin-bottom: 20px; }
+    #ll-root .modal-body strong { color: var(--p-dark); }
+    #ll-root .modal-actions { display: flex; gap: 10px; justify-content: flex-end; }
+    #ll-root .modal-cancel {
+      background: none; border: 1px solid var(--sl-border);
+      color: var(--sl-muted); padding: 8px 16px;
+      font-family: 'IBM Plex Mono', monospace; font-size: 11px;
+      text-transform: uppercase; letter-spacing: 1px; cursor: pointer;
     }
-    #ll-root .daily-today-btn {
-      border: 1px solid var(--sl-muted);
-      background: transparent;
-      color: var(--sl-muted);
-      padding: 3px 9px;
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 10px;
-      letter-spacing: 0.5px;
-      cursor: pointer;
+    #ll-root .modal-cancel:hover { border-color: var(--p-dark); color: var(--p-dark); }
+    #ll-root .modal-confirm-del {
+      background: var(--p-red); color: #fff; border: none;
+      padding: 8px 16px; font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px; text-transform: uppercase;
+      letter-spacing: 1px; cursor: pointer;
     }
-    #ll-root .daily-today-btn:hover { border-color: var(--sl-moss-dark); color: var(--sl-moss-dark); }
-
-    #ll-root .highlight-list { margin-bottom: 16px; }
-    #ll-root .highlight-item { display: flex; align-items: center; gap: 8px; margin-bottom: 7px; }
-    #ll-root .highlight-item input[type="checkbox"] {
-      width: 16px; height: 16px;
-      accent-color: var(--sl-moss-dark);
-      flex-shrink: 0; cursor: pointer;
-    }
-    #ll-root .highlight-item input[type="text"] {
-      flex: 1;
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 13px;
-      background: transparent;
-      border: none;
-      border-bottom: 1px solid var(--sl-paper-line);
-      padding: 4px 2px;
-      color: var(--sl-ink);
-    }
-    #ll-root .highlight-item input[type="text"]:focus { outline: none; border-bottom: 2px solid var(--sl-rust); }
-    #ll-root .highlight-item.done input[type="text"] { text-decoration: line-through; color: var(--sl-muted); }
-    #ll-root .highlight-remove-btn {
-      background: none; border: none; color: var(--sl-muted);
-      font-size: 15px; line-height: 1; cursor: pointer; flex-shrink: 0; padding: 0 2px;
-    }
-    #ll-root .highlight-remove-btn:hover { color: var(--sl-rust); }
-    #ll-root .highlight-add-btn {
-      border: 1px dashed var(--sl-muted);
-      background: transparent;
-      color: var(--sl-muted);
-      padding: 5px 12px;
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 11px;
-      letter-spacing: 0.5px;
-      cursor: pointer;
-    }
-    #ll-root .highlight-add-btn:hover { border-color: var(--sl-moss-dark); color: var(--sl-moss-dark); border-style: solid; }
-
-    #ll-root .reflection-label {
-      font-size: 10px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      color: var(--sl-muted);
-      display: block;
-      margin-bottom: 6px;
-    }
-    #ll-root .reflection-textarea {
-      width: 100%;
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 13px;
-      background: transparent;
-      border: 1px solid var(--sl-paper-line);
-      padding: 8px;
-      min-height: 90px;
-      color: var(--sl-ink);
-      resize: vertical;
-      box-sizing: border-box;
-    }
-    #ll-root .reflection-textarea:focus { outline: none; border-color: var(--sl-rust); }
-
-    #ll-root .daily-save-row {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-top: 12px;
-      flex-wrap: wrap;
-    }
-    #ll-root .daily-save-status { font-size: 10.5px; }
-    #ll-root .daily-save-status.dirty { color: var(--sl-rust); }
-    #ll-root .daily-save-status.saved { color: var(--sl-moss-dark); }
-    #ll-root .reflection-date-label {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 12px;
-      color: var(--sl-muted);
-    }
-
-    /* ---- Project board (kanban) ---- */
-    #ll-root .project-board {
-      border: 1px solid var(--sl-ink);
-      background: rgba(255,255,255,0.35);
-      padding: 16px;
-      margin-bottom: 26px;
-    }
-    #ll-root .project-board-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 16px;
-      flex-wrap: wrap;
-    }
-    #ll-root .project-board-title {
-      font-family: 'Source Serif 4', serif;
-      font-size: 15px;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      color: var(--sl-moss-dark);
-    }
-    #ll-root .project-board-add { display: flex; gap: 8px; align-items: center; }
-    #ll-root .project-board-add input {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 12.5px;
-      background: transparent;
-      border: none;
-      border-bottom: 1px solid var(--sl-ink);
-      padding: 4px 2px;
-      color: var(--sl-ink);
-      min-width: 160px;
-    }
-    #ll-root .project-board-add input:focus { outline: none; border-bottom: 2px solid var(--sl-rust); }
-
-    #ll-root .kanban-columns {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-    }
-    @media (max-width: 560px) {
-      #ll-root .kanban-columns { grid-template-columns: 1fr; }
-    }
-    #ll-root .kanban-column { border-left: 1px solid var(--sl-paper-line); padding-left: 12px; }
-    #ll-root .kanban-column:first-child { border-left: none; padding-left: 0; }
-    #ll-root .kanban-column-title {
-      font-size: 10px;
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-      color: var(--sl-muted);
-      margin-bottom: 10px;
-    }
-    #ll-root .kanban-card {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      border: 1px solid var(--sl-ink);
-      background: rgba(255,255,255,0.5);
-      padding: 8px 10px;
-      margin-bottom: 8px;
-    }
-    #ll-root .kanban-card-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
-    #ll-root .kanban-card-name { flex: 1; font-size: 12.5px; color: var(--sl-ink); word-break: break-word; }
-    #ll-root .kanban-card-actions { display: flex; gap: 2px; flex-shrink: 0; }
-    #ll-root .kanban-card-actions button {
-      background: none; border: none; color: var(--sl-muted);
-      font-size: 12px; line-height: 1; cursor: pointer; padding: 2px 4px;
-    }
-    #ll-root .kanban-card-actions button:hover { color: var(--sl-moss-dark); }
-    #ll-root .kanban-card-actions button:last-child:hover { color: var(--sl-rust); }
-    #ll-root .kanban-card-actions button:disabled { opacity: 0.25; cursor: not-allowed; }
+    #ll-root .modal-confirm-del:hover { opacity: 0.85; }
 
     /* ---- Calendar ---- */
     #ll-root .calendar-card {
-      border: 1px solid var(--sl-ink);
-      background: rgba(255,255,255,0.35);
-      padding: 16px;
-      margin-bottom: 26px;
+      border: 1px solid var(--sl-border);
+      background: var(--sl-card);
+      padding: 16px; margin-bottom: 26px;
     }
     #ll-root .calendar-header {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 12px;
-      flex-wrap: wrap;
+      display: flex; align-items: center;
+      gap: 10px; margin-bottom: 12px; flex-wrap: wrap;
     }
     #ll-root .calendar-nav-btn {
-      border: 1px solid var(--sl-ink);
-      background: transparent;
-      color: var(--sl-ink);
-      width: 26px; height: 26px;
+      border: 1px solid var(--sl-border); background: transparent;
+      color: var(--p-dark); width: 26px; height: 26px;
       line-height: 1; font-size: 15px; cursor: pointer;
     }
-    #ll-root .calendar-nav-btn:hover { background: rgba(0,0,0,0.06); }
+    #ll-root .calendar-nav-btn:hover { background: rgba(0,0,0,0.05); }
     #ll-root .calendar-month-label {
       font-family: 'Source Serif 4', serif;
       font-size: 14px; font-weight: 700;
-      color: var(--sl-moss-dark);
-      min-width: 90px;
+      color: var(--p-dark); min-width: 90px;
     }
     #ll-root .calendar-weekdays {
-      display: grid;
-      grid-template-columns: repeat(7, 1fr);
-      gap: 4px;
-      margin-bottom: 6px;
+      display: grid; grid-template-columns: repeat(7, 1fr);
+      gap: 4px; margin-bottom: 6px;
     }
     #ll-root .calendar-weekday {
-      text-align: center;
-      font-size: 9.5px;
-      color: var(--sl-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
+      text-align: center; font-size: 9.5px; color: var(--sl-muted);
+      text-transform: uppercase; letter-spacing: 0.5px;
     }
     #ll-root .calendar-grid {
-      display: grid;
-      grid-template-columns: repeat(7, 1fr);
-      gap: 4px;
-      margin-bottom: 16px;
+      display: grid; grid-template-columns: repeat(7, 1fr);
+      gap: 4px; margin-bottom: 16px;
     }
     #ll-root .calendar-cell {
-      aspect-ratio: 1;
-      border: 1px solid var(--sl-paper-line);
-      background: rgba(255,255,255,0.4);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 2px;
-      cursor: pointer;
-      font-family: 'IBM Plex Mono', monospace;
-      padding: 2px;
+      aspect-ratio: 1; border: 1px solid var(--sl-border);
+      background: rgba(255,255,255,0.6);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 2px; cursor: pointer;
+      font-family: 'IBM Plex Mono', monospace; padding: 2px;
     }
-    #ll-root .calendar-cell:hover { border-color: var(--sl-moss-dark); }
+    #ll-root .calendar-cell:hover { border-color: var(--p-teal); }
     #ll-root .calendar-cell.empty { border: none; background: none; cursor: default; }
-    #ll-root .calendar-cell.today { border-color: var(--sl-rust); border-width: 2px; }
-    #ll-root .calendar-cell.selected { background: rgba(55,73,47,0.15); border-color: var(--sl-moss-dark); }
-    #ll-root .calendar-daynum { font-size: 11px; color: var(--sl-ink); }
+    #ll-root .calendar-cell.today { border-color: var(--p-yellow); border-width: 2px; }
+    #ll-root .calendar-cell.selected { background: var(--sl-teal-bg); border-color: var(--p-teal); }
+    #ll-root .calendar-daynum { font-size: 11px; color: var(--p-dark); }
     #ll-root .calendar-indicators { display: flex; gap: 2px; height: 6px; }
     #ll-root .cal-dot { width: 5px; height: 5px; border-radius: 50%; display: inline-block; }
-    #ll-root .cal-dot-entry { background: var(--sl-moss-dark); }
-    #ll-root .cal-dot-highlight { background: var(--sl-rust); }
+    #ll-root .cal-dot-entry { background: var(--p-teal); }
+    #ll-root .cal-dot-highlight { background: var(--p-yellow); }
     #ll-root .cal-dot-reflection { background: var(--sl-sub-3); }
 
-    #ll-root .calendar-detail { border-top: 1px solid var(--sl-paper-line); padding-top: 12px; }
+    #ll-root .calendar-detail { border-top: 1px solid var(--sl-border); padding-top: 12px; }
     #ll-root .calendar-detail-title {
       font-family: 'Source Serif 4', serif;
-      font-size: 13px; font-weight: 700;
-      color: var(--sl-rust);
-      margin-bottom: 10px;
+      font-size: 13px; font-weight: 700; color: var(--p-teal); margin-bottom: 10px;
     }
     #ll-root .calendar-detail-section { margin-bottom: 12px; }
     #ll-root .calendar-detail-label {
-      font-size: 9.5px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      color: var(--sl-muted);
-      margin-bottom: 6px;
+      font-size: 9.5px; text-transform: uppercase;
+      letter-spacing: 1px; color: var(--sl-muted); margin-bottom: 6px;
     }
     #ll-root .calendar-detail-entry {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 12px;
-      margin-bottom: 5px;
+      display: flex; align-items: center;
+      gap: 8px; font-size: 12px; margin-bottom: 5px;
     }
     #ll-root .calendar-detail-note { color: var(--sl-muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
     #ll-root .calendar-detail-highlight { font-size: 12px; margin-bottom: 4px; }
@@ -827,7 +591,6 @@
         <a href="productivity.html" aria-current="page">Productivity</a>
         <a href="index.html#about">About</a>
       </nav>
-
       <button class="nav-toggle" aria-label="開啟選單" aria-expanded="false" aria-controls="nav-drawer">
         <span></span><span></span><span></span>
       </button>
@@ -861,7 +624,6 @@
 const { useState, useEffect, useMemo, useRef } = React;
 
 const CONFIG_KEY = 'sl-github-config-v1';
-
 const REPO_OWNER = 'tsinui';
 const REPO_NAME = 'tsinui.github.io';
 const ENTRIES_PATH = 'data/learning-log.csv';
@@ -880,14 +642,11 @@ const RATING_OPTIONS = [
   { value: 5, label: '5 — 已內化，不假思索' },
 ];
 
-const PROJECT_PALETTE = ['var(--sl-sub-1)', 'var(--sl-sub-2)', 'var(--sl-sub-3)', 'var(--sl-sub-4)', 'var(--sl-sub-5)', 'var(--sl-sub-6)'];
-
+const PROJECT_PALETTE = ['#00828E','#9c4a34','#6a529c','#ab8a3c','#3c7a86','#4f6b52'];
 function colorForProject(name) {
   let hash = 0;
   const s = String(name || '');
-  for (let i = 0; i < s.length; i++) {
-    hash = (hash * 31 + s.charCodeAt(i)) >>> 0;
-  }
+  for (let i = 0; i < s.length; i++) hash = (hash * 31 + s.charCodeAt(i)) >>> 0;
   return PROJECT_PALETTE[hash % PROJECT_PALETTE.length];
 }
 
@@ -896,282 +655,174 @@ function todayStr(d) {
   return `${t.getFullYear()}-${String(t.getMonth()+1).padStart(2,'0')}-${String(t.getDate()).padStart(2,'0')}`;
 }
 
+function offsetDate(days) {
+  const d = new Date();
+  d.setDate(d.getDate() + days);
+  return todayStr(d);
+}
+
 function fmtDate(iso) {
   const d = new Date(iso + 'T00:00:00');
-  const mm = d.getMonth() + 1;
-  const dd = d.getDate();
-  const wd = ['日','一','二','三','四','五','六'][d.getDay()];
-  return `${mm}/${dd} (${wd})`;
+  return `${d.getMonth()+1}/${d.getDate()} (${'日一二三四五六'[d.getDay()]})`;
+}
+
+function fmtShort(iso) {
+  const d = new Date(iso + 'T00:00:00');
+  return `${d.getMonth()+1}/${d.getDate()}`;
 }
 
 function calcStreak(entries) {
   const dates = new Set(entries.map(e => e.date));
-  let streak = 0;
-  let cursor = new Date();
+  let streak = 0, cursor = new Date();
   while (true) {
     const iso = todayStr(cursor);
-    if (dates.has(iso)) {
-      streak++;
-      cursor.setDate(cursor.getDate() - 1);
-    } else {
-      break;
-    }
+    if (dates.has(iso)) { streak++; cursor.setDate(cursor.getDate() - 1); }
+    else break;
   }
   return streak;
 }
 
 function last7DaysMinutes(entries) {
-  const now = new Date();
-  const start = new Date(now);
-  start.setDate(now.getDate() - 6);
-  start.setHours(0,0,0,0);
-  return entries
-    .filter(e => new Date(e.date + 'T00:00:00') >= start)
-    .reduce((sum, e) => sum + Number(e.minutes || 0), 0);
-}
-
-function projectBreakdown(entries) {
-  const map = new Map();
-  entries.forEach(e => {
-    const key = e.project || '未分類';
-    map.set(key, (map.get(key) || 0) + Number(e.minutes || 0));
-  });
-  return Array.from(map.entries())
-    .map(([project, minutes]) => ({ project, minutes }))
-    .sort((a, b) => b.minutes - a.minutes);
+  const start = new Date(); start.setDate(start.getDate() - 6); start.setHours(0,0,0,0);
+  return entries.filter(e => new Date(e.date+'T00:00:00') >= start).reduce((s,e) => s+Number(e.minutes||0), 0);
 }
 
 function last7DaysProjectBreakdown(entries) {
-  const now = new Date();
-  const start = new Date(now);
-  start.setDate(now.getDate() - 6);
-  start.setHours(0,0,0,0);
-  const recent = entries.filter(e => new Date(e.date + 'T00:00:00') >= start);
-  return projectBreakdown(recent);
+  const start = new Date(); start.setDate(start.getDate() - 6); start.setHours(0,0,0,0);
+  const recent = entries.filter(e => new Date(e.date+'T00:00:00') >= start);
+  const map = new Map();
+  recent.forEach(e => { const k = e.project||'未分類'; map.set(k,(map.get(k)||0)+Number(e.minutes||0)); });
+  return [...map.entries()].map(([project,minutes])=>({project,minutes})).sort((a,b)=>b.minutes-a.minutes);
 }
 
-function pad2(n) { return String(n).padStart(2, '0'); }
-
-function daysInMonth(year, month) {
-  return new Date(year, month + 1, 0).getDate();
-}
-
-function firstWeekdayOfMonth(year, month) {
-  return new Date(year, month, 1).getDay();
-}
-
-function ymdStr(year, month, day) {
-  return `${year}-${pad2(month + 1)}-${pad2(day)}`;
-}
-
-function monthLabel(year, month) {
-  return `${year} 年 ${month + 1} 月`;
-}
-
-function formatHM(totalMinutes) {
-  const m = Math.round(Number(totalMinutes) || 0);
-  const h = Math.floor(m / 60);
-  const rem = m % 60;
+function pad2(n) { return String(n).padStart(2,'0'); }
+function daysInMonth(y,m) { return new Date(y,m+1,0).getDate(); }
+function firstWeekday(y,m) { return new Date(y,m,1).getDay(); }
+function ymdStr(y,m,d) { return `${y}-${pad2(m+1)}-${pad2(d)}`; }
+function monthLabel(y,m) { return `${y} 年 ${m+1} 月`; }
+function formatHM(totalMin) {
+  const m = Math.round(Number(totalMin)||0), h = Math.floor(m/60), rem = m%60;
   return h > 0 ? `${h} 時 ${rem} 分` : `${rem} 分`;
 }
-
-function mmss(totalSeconds) {
-  const m = Math.floor(totalSeconds / 60);
-  const s = totalSeconds % 60;
-  return `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
-}
-
+function mmss(s) { return `${String(Math.floor(s/60)).padStart(2,'0')}:${String(s%60).padStart(2,'0')}`; }
 function csvEscape(val) {
-  const s = String(val ?? '');
-  if (/[",\n]/.test(s)) {
-    return '"' + s.replace(/"/g, '""') + '"';
-  }
-  return s;
+  const s = String(val??'');
+  return /[",\n]/.test(s) ? '"'+s.replace(/"/g,'""')+'"' : s;
 }
 
 function downloadCSV(entries) {
-  const header = ['date','project','subtopic','minutes','rating','note'];
-  const lines = [header.join(',')];
-  entries.forEach(e => {
-    lines.push([e.date, e.project, e.subtopic || '', e.minutes, e.rating, e.note].map(csvEscape).join(','));
-  });
-  const csv = '﻿' + lines.join('\r\n');
-  const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+  const lines = [['date','project','subtopic','minutes','rating','note'].join(',')];
+  entries.forEach(e => lines.push([e.date,e.project,e.subtopic||'',e.minutes,e.rating,e.note||''].map(csvEscape).join(',')));
+  const blob = new Blob(['﻿'+lines.join('\r\n')], {type:'text/csv;charset=utf-8;'});
   const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = `learning-log-${todayStr()}.csv`;
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-  URL.revokeObjectURL(url);
+  const a = Object.assign(document.createElement('a'),{href:url,download:`learning-log-${todayStr()}.csv`});
+  document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url);
 }
 
-// ================= Base64/UTF-8 helpers =================
-function utf8ToBase64(str) { return btoa(unescape(encodeURIComponent(str))); }
-function base64ToUtf8(b64) { return decodeURIComponent(escape(atob(b64))); }
+// ── Base64/UTF-8 ──
+function utf8ToB64(str) { return btoa(unescape(encodeURIComponent(str))); }
+function b64ToUtf8(b64) { return decodeURIComponent(escape(atob(b64))); }
 
-// ================= GitHub Contents API =================
-const GITHUB_API = 'https://api.github.com';
+// ── GitHub API ──
+const GH = 'https://api.github.com';
+// Encode path segments individually so '/' is not percent-encoded
+function encodePath(p) { return p.split('/').map(encodeURIComponent).join('/'); }
 
 async function ghGetFile(token, owner, repo, path) {
-  const res = await fetch(`${GITHUB_API}/repos/${owner}/${repo}/contents/${encodeURIComponent(path)}`, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-      Accept: 'application/vnd.github+json'
-    }
+  const res = await fetch(`${GH}/repos/${owner}/${repo}/contents/${encodePath(path)}`, {
+    headers: { Authorization: `Bearer ${token}`, Accept: 'application/vnd.github+json' }
   });
   if (res.status === 404) return { content: null, sha: null };
   if (!res.ok) throw new Error(`GitHub 讀取失敗（${res.status}）`);
   const data = await res.json();
-  const content = base64ToUtf8((data.content || '').replace(/\n/g, ''));
-  return { content, sha: data.sha };
+  return { content: b64ToUtf8((data.content||'').replace(/\n/g,'')), sha: data.sha };
 }
 
 async function ghSaveFile(token, owner, repo, path, content, message) {
   let sha = null;
-  try {
-    const current = await ghGetFile(token, owner, repo, path);
-    sha = current.sha;
-  } catch (e) { /* new file */ }
-
-  const body = { message, content: utf8ToBase64(content) };
+  try { const cur = await ghGetFile(token,owner,repo,path); sha = cur.sha; } catch(e){}
+  const body = { message, content: utf8ToB64(content) };
   if (sha) body.sha = sha;
-
-  const res = await fetch(`${GITHUB_API}/repos/${owner}/${repo}/contents/${encodeURIComponent(path)}`, {
+  const res = await fetch(`${GH}/repos/${owner}/${repo}/contents/${encodePath(path)}`, {
     method: 'PUT',
-    headers: {
-      Authorization: `Bearer ${token}`,
-      Accept: 'application/vnd.github+json',
-      'Content-Type': 'application/json'
-    },
+    headers: { Authorization: `Bearer ${token}`, Accept: 'application/vnd.github+json', 'Content-Type': 'application/json' },
     body: JSON.stringify(body)
   });
-  if (!res.ok) {
-    const errText = await res.text().catch(() => '');
-    throw new Error(`GitHub 寫入失敗（${res.status}）${errText ? ': ' + errText.slice(0,200) : ''}`);
-  }
-  const data = await res.json();
-  return data.content.sha;
+  if (!res.ok) { const t = await res.text().catch(()=>''); throw new Error(`GitHub 寫入失敗（${res.status}）${t?': '+t.slice(0,200):''}`); }
+  return (await res.json()).content.sha;
 }
 
-// ================= CSV <-> entries =================
+// ── CSV <-> entries ──
 function parseCSVRows(text) {
-  const rows = [];
-  let row = [];
-  let field = '';
-  let inQuotes = false;
-  for (let i = 0; i < text.length; i++) {
-    const c = text[i];
-    if (inQuotes) {
-      if (c === '"') {
-        if (text[i+1] === '"') { field += '"'; i++; }
-        else { inQuotes = false; }
-      } else {
-        field += c;
-      }
-    } else {
-      if (c === '"') { inQuotes = true; }
-      else if (c === ',') { row.push(field); field = ''; }
-      else if (c === '\r') { /* skip */ }
-      else if (c === '\n') { row.push(field); rows.push(row); row = []; field = ''; }
-      else { field += c; }
-    }
+  const rows=[]; let row=[],field='',inQ=false;
+  for(let i=0;i<text.length;i++){
+    const c=text[i];
+    if(inQ){ if(c==='"'){if(text[i+1]==='"'){field+='"';i++;}else inQ=false;}else field+=c; }
+    else{ if(c==='"')inQ=true; else if(c===','){row.push(field);field='';}
+      else if(c==='\r'){}
+      else if(c==='\n'){row.push(field);rows.push(row);row=[];field='';}
+      else field+=c; }
   }
-  if (field.length > 0 || row.length > 0) { row.push(field); rows.push(row); }
-  return rows.filter(r => !(r.length === 1 && r[0] === ''));
+  if(field.length>0||row.length>0){row.push(field);rows.push(row);}
+  return rows.filter(r=>!(r.length===1&&r[0]===''));
 }
 
 function entriesToCSV(entries) {
-  const header = ['id','date','project','subtopic','minutes','rating','note'];
-  const lines = [header.join(',')];
-  entries.forEach(e => {
-    lines.push([e.id, e.date, e.project, e.subtopic || '', e.minutes, e.rating, e.note || ''].map(csvEscape).join(','));
-  });
+  const lines=[['id','date','project','subtopic','minutes','rating','note'].join(',')];
+  entries.forEach(e=>lines.push([e.id,e.date,e.project,e.subtopic||'',e.minutes,e.rating,e.note||''].map(csvEscape).join(',')));
   return lines.join('\n');
 }
 
 function csvToEntries(text) {
-  if (!text || !text.trim()) return [];
-  const rows = parseCSVRows(text.trim());
-  if (rows.length < 2) return [];
-  // Support both 'project' and legacy 'subject' column
-  const header = rows[0].map(h => h.trim().toLowerCase());
-  const projectCol = header.indexOf('project') !== -1 ? header.indexOf('project') : header.indexOf('subject');
-  const body = rows.slice(1);
-  return body.map(r => ({
-    id: r[0] || (Date.now().toString(36) + Math.random().toString(36).slice(2,6)),
-    date: r[1] || todayStr(),
-    project: r[projectCol] || '',
-    subtopic: r[3] || '',
-    minutes: Number(r[4]) || 0,
-    rating: Number(r[5]) || 3,
-    note: r[6] || ''
-  })).filter(e => e.id && e.date);
+  if(!text||!text.trim()) return [];
+  const rows=parseCSVRows(text.trim());
+  if(rows.length<2) return [];
+  const header=rows[0].map(h=>h.trim().toLowerCase());
+  const pCol=header.indexOf('project')!==-1?header.indexOf('project'):header.indexOf('subject');
+  return rows.slice(1).map(r=>({
+    id:r[0]||(Date.now().toString(36)+Math.random().toString(36).slice(2,6)),
+    date:r[1]||todayStr(),
+    project:r[pCol]||'',
+    subtopic:r[3]||'',
+    minutes:Number(r[4])||0,
+    rating:Number(r[5])||3,
+    note:r[6]||''
+  })).filter(e=>e.id&&e.date);
 }
 
-// ---------------- Study Stopwatch ----------------
-const STOPWATCH_PRESETS = [15, 25, 45, 60];
-
-function StudyStopwatch({ onBank }) {
-  const [seconds, setSeconds] = useState(0);
-  const [running, setRunning] = useState(false);
-  const [targetMin, setTargetMin] = useState(null);
-  const intervalRef = useRef(null);
-
-  useEffect(() => {
-    if (running) {
-      intervalRef.current = setInterval(() => {
-        setSeconds(s => s + 1);
-      }, 1000);
-    }
-    return () => clearInterval(intervalRef.current);
-  }, [running]);
-
-  const toggleRun = () => setRunning(r => !r);
-  const reset = () => { setRunning(false); setSeconds(0); };
-  const selectTarget = (m) => setTargetMin(prev => (prev === m ? null : m));
-  const bankIntoForm = () => {
-    const mins = Math.floor(seconds / 60);
-    if (mins > 0) onBank(mins);
-    setRunning(false);
-    setSeconds(0);
-  };
-
-  const reached = targetMin !== null && seconds >= targetMin * 60;
-  const elapsedMin = Math.floor(seconds / 60);
-  const elapsedSec = seconds % 60;
-
-  return (
+// ── Stopwatch ──
+const SW_PRESETS=[15,25,45,60];
+function StudyStopwatch({onBank}){
+  const [secs,setSecs]=useState(0);
+  const [run,setRun]=useState(false);
+  const [target,setTarget]=useState(null);
+  const ref=useRef(null);
+  useEffect(()=>{
+    if(run){ref.current=setInterval(()=>setSecs(s=>s+1),1000);}
+    return ()=>clearInterval(ref.current);
+  },[run]);
+  const bank=()=>{const m=Math.floor(secs/60);if(m>0)onBank(m);setRun(false);setSecs(0);};
+  const reached=target!==null&&secs>=target*60;
+  return(
     <div className="timer-card">
-      <div className={`timer-dial ${reached ? 'goal-reached' : ''}`}>
-        <div className="time">{mmss(seconds)}</div>
+      <div className={`timer-dial${reached?' goal-reached':''}`}>
+        <div className="time">{mmss(secs)}</div>
       </div>
       <div className="timer-info">
         <div className="timer-mode-label">
-          {targetMin === null
-            ? '正計時中'
-            : reached
-              ? `已達成 ${targetMin} 分鐘目標！繼續計時中`
-              : `目標 ${targetMin} 分鐘`}
+          {target===null?'正計時中':reached?`已達成 ${target} 分鐘目標！`:`目標 ${target} 分鐘`}
         </div>
-        <div className="timer-sessions">已累積 {elapsedMin} 分 {elapsedSec} 秒</div>
+        <div className="timer-sessions">已累積 {Math.floor(secs/60)} 分 {secs%60} 秒</div>
         <div className="timer-controls">
-          <button className="timer-btn primary" onClick={toggleRun}>{running ? '暫停' : '開始'}</button>
-          <button className="timer-btn" onClick={reset}>重置</button>
-          <button className="timer-btn" onClick={bankIntoForm} disabled={seconds < 60}>帶入打卡表單 →</button>
+          <button className="timer-btn primary" onClick={()=>setRun(r=>!r)}>{run?'暫停':'開始'}</button>
+          <button className="timer-btn" onClick={()=>{setRun(false);setSecs(0);}}>重置</button>
+          <button className="timer-btn" onClick={bank} disabled={secs<60}>帶入打卡表單 →</button>
         </div>
         <div className="timer-presets">
           <span className="timer-presets-label">目標時長</span>
-          {STOPWATCH_PRESETS.map(m => (
-            <button
-              key={m}
-              type="button"
-              className={`preset-btn ${targetMin === m ? 'active' : ''}`}
-              onClick={() => selectTarget(m)}
-            >
-              {m} 分
-            </button>
+          {SW_PRESETS.map(m=>(
+            <button key={m} type="button" className={`preset-btn${target===m?' active':''}`}
+              onClick={()=>setTarget(p=>p===m?null:m)}>{m} 分</button>
           ))}
         </div>
       </div>
@@ -1179,420 +830,296 @@ function StudyStopwatch({ onBank }) {
   );
 }
 
-// ---------------- Setup screen ----------------
-function SetupScreen({ onSubmit, error, loading }) {
-  const [token, setToken] = useState('');
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    onSubmit(token);
-  };
-
-  return (
+// ── Setup screen ──
+function SetupScreen({onSubmit,error,loading}){
+  const [tok,setTok]=useState('');
+  return(
     <div className="gate-wrap">
       <div className="gate-card">
         <div className="gate-title">連接你的 GitHub 資料庫</div>
         <div className="gate-subtitle">
-          資料會存在 {REPO_OWNER}/{REPO_NAME} 這個 repo 裡的 <code>data/</code> 資料夾中。
-          建議用 Fine-grained Personal Access Token，只給這個 repo 的 Contents 讀寫權限。
-          Token 會存在你這台裝置的瀏覽器裡，換裝置要重新輸入一次。
+          資料儲存在 {REPO_OWNER}/{REPO_NAME} 的 <code>data/</code> 資料夾。
+          建議使用 Fine-grained PAT，只給此 repo 的 Contents 讀寫權限。
+          Token 存在此裝置的瀏覽器中，換裝置需重新輸入。
         </div>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={e=>{e.preventDefault();onSubmit(tok);}}>
           <div className="gate-field">
             <label>GitHub Personal Access Token</label>
-            <input type="password" value={token} onChange={e => setToken(e.target.value)} placeholder="github_pat_..." autoComplete="off" required />
+            <input type="password" value={tok} onChange={e=>setTok(e.target.value)} placeholder="github_pat_…" autoComplete="off" required />
           </div>
-          {error && <div className="gate-error">{error}</div>}
-          <button className="gate-btn" type="submit" disabled={loading}>{loading ? '連接中…' : '儲存並開始使用'}</button>
+          {error&&<div className="gate-error">{error}</div>}
+          <button className="gate-btn" type="submit" disabled={loading}>{loading?'連接中…':'儲存並開始使用'}</button>
         </form>
       </div>
     </div>
   );
 }
 
-function App() {
-  const [stage, setStage] = useState('loading');
-  const [config, setConfig] = useState(null);
-  const [token, setToken] = useState(null);
-  const [gateError, setGateError] = useState('');
-  const [gateLoading, setGateLoading] = useState(false);
+// ── Confirm delete modal ──
+function ConfirmDeleteModal({entry,onConfirm,onCancel}){
+  return(
+    <div className="modal-backdrop" onClick={onCancel}>
+      <div className="modal-card" onClick={e=>e.stopPropagation()}>
+        <div className="modal-title">確認刪除紀錄</div>
+        <div className="modal-body">
+          確定要刪除這筆紀錄嗎？<br/>
+          <strong>{fmtDate(entry.date)}</strong> · <strong>{entry.project}</strong> · {entry.minutes} 分鐘
+          {entry.note ? <><br/><span style={{fontSize:11}}>{entry.note.slice(0,60)}{entry.note.length>60?'…':''}</span></> : null}
+        </div>
+        <div className="modal-actions">
+          <button className="modal-cancel" onClick={onCancel}>取消</button>
+          <button className="modal-confirm-del" onClick={onConfirm}>確定刪除</button>
+        </div>
+      </div>
+    </div>
+  );
+}
 
-  const [entries, setEntries] = useState([]);
-  const [projects, setProjects] = useState(DEFAULT_PROJECTS);
-  const [syncing, setSyncing] = useState(false);
-  const [syncError, setSyncError] = useState('');
-  const [newProject, setNewProject] = useState('');
+// ── Main App ──
+function App(){
+  const [stage,setStage]=useState('loading');
+  const [config,setConfig]=useState(null);
+  const [token,setToken]=useState(null);
+  const [gateError,setGateError]=useState('');
+  const [gateLoading,setGateLoading]=useState(false);
 
-  const [dailyData, setDailyData] = useState({});
-  const [selectedDailyDate, setSelectedDailyDate] = useState(todayStr());
-  const [dailyDraftHighlights, setDailyDraftHighlights] = useState([]);
-  const [dailyDraftReflection, setDailyDraftReflection] = useState('');
-  const [dailySavedSnapshot, setDailySavedSnapshot] = useState({ highlights: [], reflection: '' });
-  const [highlightSaving, setHighlightSaving] = useState(false);
-  const [highlightSaveError, setHighlightSaveError] = useState('');
-  const [reflectionSaving, setReflectionSaving] = useState(false);
-  const [reflectionSaveError, setReflectionSaveError] = useState('');
-  const [filterProject, setFilterProject] = useState('__all__');
+  const [entries,setEntries]=useState([]);
+  const [projects,setProjects]=useState(DEFAULT_PROJECTS);
+  const [syncing,setSyncing]=useState(false);
+  const [syncError,setSyncError]=useState('');
+  const [newProject,setNewProject]=useState('');
+  const [confirmEntry,setConfirmEntry]=useState(null);
 
-  const [calendarCursor, setCalendarCursor] = useState(() => {
-    const d = new Date();
-    return { year: d.getFullYear(), month: d.getMonth() };
-  });
+  const [dailyData,setDailyData]=useState({});
+  const [selDate,setSelDate]=useState(todayStr());
+  const [draftHL,setDraftHL]=useState([]);
+  const [draftRef,setDraftRef]=useState('');
+  const [savedSnap,setSavedSnap]=useState({highlights:[],reflection:''});
+  const [hlSaving,setHlSaving]=useState(false);
+  const [hlErr,setHlErr]=useState('');
+  const [refSaving,setRefSaving]=useState(false);
+  const [refErr,setRefErr]=useState('');
+  const [filterProject,setFilterProject]=useState('__all__');
 
-  const [date, setDate] = useState(todayStr());
-  const [project, setProject] = useState('');
-  const [subtopic, setSubtopic] = useState('');
-  const [minutes, setMinutes] = useState('0');
-  const [note, setNote] = useState('');
-  const [rating, setRating] = useState(3);
+  const [calCursor,setCalCursor]=useState(()=>{const d=new Date();return{year:d.getFullYear(),month:d.getMonth()};});
+  const [date,setDate]=useState(todayStr());
+  const [project,setProject]=useState('');
+  const [subtopic,setSubtopic]=useState('');
+  const [minutes,setMinutes]=useState('0');
+  const [note,setNote]=useState('');
+  const [rating,setRating]=useState(3);
 
-  useEffect(() => {
-    const raw = localStorage.getItem(CONFIG_KEY);
-    if (raw) {
-      try {
-        const cfg = JSON.parse(raw);
-        if (cfg && cfg.token) {
-          // Ensure paths are set (migrate old configs)
-          cfg.owner = cfg.owner || REPO_OWNER;
-          cfg.repo = cfg.repo || REPO_NAME;
-          cfg.entriesPath = cfg.entriesPath || ENTRIES_PATH;
-          cfg.projectsPath = cfg.projectsPath || PROJECTS_PATH;
-          cfg.dailyPath = cfg.dailyPath || DAILY_PATH;
-          setConfig(cfg);
-          setToken(cfg.token);
-          setStage('ready');
-          loadDataFromGithub(cfg.token, cfg);
-          return;
+  useEffect(()=>{
+    const raw=localStorage.getItem(CONFIG_KEY);
+    if(raw){
+      try{
+        const cfg=JSON.parse(raw);
+        if(cfg&&cfg.token){
+          cfg.owner=cfg.owner||REPO_OWNER;
+          cfg.repo=cfg.repo||REPO_NAME;
+          cfg.entriesPath=cfg.entriesPath||ENTRIES_PATH;
+          cfg.projectsPath=cfg.projectsPath||PROJECTS_PATH;
+          cfg.dailyPath=cfg.dailyPath||DAILY_PATH;
+          setConfig(cfg);setToken(cfg.token);setStage('ready');
+          loadData(cfg.token,cfg);return;
         }
-      } catch (e) { /* fall through */ }
+      }catch(e){}
     }
     setStage('setup');
-  }, []);
+  },[]);
 
-  useEffect(() => {
-    const entry = dailyData[selectedDailyDate];
-    const highlights = entry && Array.isArray(entry.highlights) ? entry.highlights : [];
-    const reflection = entry && typeof entry.reflection === 'string' ? entry.reflection : '';
-    setDailyDraftHighlights(highlights);
-    setDailyDraftReflection(reflection);
-    setDailySavedSnapshot({ highlights, reflection });
-    setHighlightSaveError('');
-    setReflectionSaveError('');
-  }, [selectedDailyDate, dailyData]);
+  useEffect(()=>{
+    const entry=dailyData[selDate];
+    const hl=entry&&Array.isArray(entry.highlights)?entry.highlights:[];
+    const ref=entry&&typeof entry.reflection==='string'?entry.reflection:'';
+    setDraftHL(hl);setDraftRef(ref);setSavedSnap({highlights:hl,reflection:ref});
+    setHlErr('');setRefErr('');
+  },[selDate,dailyData]);
 
-  const loadDataFromGithub = async (tok, cfg) => {
-    setSyncing(true);
-    setSyncError('');
-    try {
-      const [entriesRes, projectsRes, dailyRes] = await Promise.all([
-        ghGetFile(tok, cfg.owner, cfg.repo, cfg.entriesPath),
-        ghGetFile(tok, cfg.owner, cfg.repo, cfg.projectsPath),
-        ghGetFile(tok, cfg.owner, cfg.repo, cfg.dailyPath)
+  const loadData=async(tok,cfg)=>{
+    setSyncing(true);setSyncError('');
+    try{
+      const[eRes,pRes,dRes]=await Promise.all([
+        ghGetFile(tok,cfg.owner,cfg.repo,cfg.entriesPath),
+        ghGetFile(tok,cfg.owner,cfg.repo,cfg.projectsPath),
+        ghGetFile(tok,cfg.owner,cfg.repo,cfg.dailyPath),
       ]);
-      const loadedEntries = entriesRes.content ? csvToEntries(entriesRes.content) : [];
-      setEntries(loadedEntries.sort((a,b) => b.date.localeCompare(a.date) || b.id.localeCompare(a.id)));
-
-      let loadedDaily = {};
-      if (dailyRes.content) {
-        try {
-          const parsed = JSON.parse(dailyRes.content);
-          if (parsed && typeof parsed === 'object') loadedDaily = parsed;
-        } catch (e) { /* ignore */ }
-      }
-      setDailyData(loadedDaily);
-
-      let loadedProjects = DEFAULT_PROJECTS;
-      if (projectsRes.content) {
-        try {
-          const parsed = JSON.parse(projectsRes.content);
-          if (Array.isArray(parsed) && parsed.length > 0) {
-            loadedProjects = parsed.map(p =>
-              typeof p === 'string' ? { name: p, status: 'not_started' } : { name: p.name, status: p.status || 'not_started' }
-            );
+      const loaded=eRes.content?csvToEntries(eRes.content):[];
+      setEntries(loaded.sort((a,b)=>b.date.localeCompare(a.date)||b.id.localeCompare(a.id)));
+      let dd={};
+      if(dRes.content){try{const p=JSON.parse(dRes.content);if(p&&typeof p==='object')dd=p;}catch(e){}}
+      setDailyData(dd);
+      let lp=DEFAULT_PROJECTS;
+      if(pRes.content){
+        try{
+          const p=JSON.parse(pRes.content);
+          if(Array.isArray(p)&&p.length>0){
+            lp=p.map(x=>typeof x==='string'?{name:x,status:'not_started'}:{name:x.name,status:x.status||'not_started'});
           }
-        } catch (e) { /* ignore */ }
+        }catch(e){}
       }
-      setProjects(loadedProjects);
-      setProject(prev => prev || loadedProjects[0]?.name || '');
-    } catch (e) {
-      console.error(e);
-      setSyncError('讀取 GitHub 資料失敗：' + e.message);
-    }
+      setProjects(lp);
+      setProject(prev=>prev||lp[0]?.name||'');
+    }catch(e){console.error(e);setSyncError('讀取 GitHub 資料失敗：'+e.message);}
     setSyncing(false);
   };
 
-  const handleSetupSubmit = async (rawToken) => {
+  const handleSetup=async(rawTok)=>{
     setGateError('');
-    if (!rawToken || !rawToken.trim()) {
-      setGateError('請輸入 GitHub Token。');
-      return;
-    }
+    if(!rawTok?.trim()){setGateError('請輸入 GitHub Token。');return;}
     setGateLoading(true);
-    try {
-      const cfg = {
-        token: rawToken.trim(),
-        owner: REPO_OWNER,
-        repo: REPO_NAME,
-        entriesPath: ENTRIES_PATH,
-        projectsPath: PROJECTS_PATH,
-        dailyPath: DAILY_PATH
-      };
-      localStorage.setItem(CONFIG_KEY, JSON.stringify(cfg));
-      setConfig(cfg);
-      setToken(cfg.token);
-      setStage('ready');
-      await loadDataFromGithub(cfg.token, cfg);
-    } catch (e) {
-      console.error(e);
-      setGateError('連接失敗，請確認輸入內容後再試一次。');
-    }
+    try{
+      const cfg={token:rawTok.trim(),owner:REPO_OWNER,repo:REPO_NAME,
+        entriesPath:ENTRIES_PATH,projectsPath:PROJECTS_PATH,dailyPath:DAILY_PATH};
+      localStorage.setItem(CONFIG_KEY,JSON.stringify(cfg));
+      setConfig(cfg);setToken(cfg.token);setStage('ready');
+      await loadData(cfg.token,cfg);
+    }catch(e){console.error(e);setGateError('連接失敗，請確認 Token 後再試。');}
     setGateLoading(false);
   };
 
-  const handleDisconnect = () => {
+  const handleDisconnect=()=>{
     localStorage.removeItem(CONFIG_KEY);
-    setConfig(null);
-    setToken(null);
-    setEntries([]);
-    setProjects(DEFAULT_PROJECTS);
-    setDailyData({});
-    setSelectedDailyDate(todayStr());
-    setGateError('');
-    setStage('setup');
+    setConfig(null);setToken(null);setEntries([]);setProjects(DEFAULT_PROJECTS);
+    setDailyData({});setSelDate(todayStr());setGateError('');setStage('setup');
   };
 
-  const handleRefresh = () => {
-    if (token && config) loadDataFromGithub(token, config);
-  };
-
-  const persistEntries = async (next) => {
-    setEntries(next);
-    setSyncing(true);
-    setSyncError('');
-    try {
-      await ghSaveFile(token, config.owner, config.repo, config.entriesPath, entriesToCSV(next), `learning-log update ${todayStr()}`);
-    } catch (e) {
-      console.error(e);
-      setSyncError('同步到 GitHub 失敗：' + e.message);
-    }
+  const persistEntries=async(next)=>{
+    setEntries(next);setSyncing(true);setSyncError('');
+    try{await ghSaveFile(token,config.owner,config.repo,config.entriesPath,entriesToCSV(next),`learning-log update ${todayStr()}`);}
+    catch(e){console.error(e);setSyncError('同步失敗：'+e.message);}
     setSyncing(false);
   };
 
-  const persistProjects = async (next) => {
-    setProjects(next);
-    setSyncing(true);
-    setSyncError('');
-    try {
-      await ghSaveFile(token, config.owner, config.repo, config.projectsPath, JSON.stringify(next, null, 2), '更新專案清單');
-    } catch (e) {
-      console.error(e);
-      setSyncError('同步專案清單失敗：' + e.message);
-    }
+  const persistProjects=async(next)=>{
+    setProjects(next);setSyncing(true);setSyncError('');
+    try{await ghSaveFile(token,config.owner,config.repo,config.projectsPath,JSON.stringify(next,null,2),'更新專案清單');}
+    catch(e){console.error(e);setSyncError('同步專案失敗：'+e.message);}
     setSyncing(false);
   };
 
-  const addProject = () => {
-    const name = newProject.trim();
-    if (!name || projects.some(p => p.name === name)) return;
-    const next = [...projects, { name, status: 'not_started' }];
+  const addProject=()=>{
+    const name=newProject.trim();
+    if(!name||projects.some(p=>p.name===name))return;
+    persistProjects([...projects,{name,status:'not_started'}]);
+    setNewProject('');if(!project)setProject(name);
+  };
+
+  const moveProject=(name,dir)=>{
+    persistProjects(projects.map(p=>{
+      if(p.name!==name)return p;
+      const idx=KANBAN_STATUSES.indexOf(p.status||'not_started');
+      const ni=idx+dir;
+      return(ni<0||ni>=KANBAN_STATUSES.length)?p:{...p,status:KANBAN_STATUSES[ni]};
+    }));
+  };
+
+  const removeProject=(name)=>{
+    const next=projects.filter(p=>p.name!==name);
     persistProjects(next);
-    setNewProject('');
-    if (!project) setProject(name);
+    if(project===name)setProject(next[0]?.name||'');
+    if(filterProject===name)setFilterProject('__all__');
   };
 
-  const removeProject = (name) => {
-    const next = projects.filter(p => p.name !== name);
-    persistProjects(next);
-    if (project === name) setProject(next[0]?.name || '');
-    if (filterProject === name) setFilterProject('__all__');
+  const saveDailyData=async(nextDD,commitMsg)=>{
+    try{
+      await ghSaveFile(token,config.owner,config.repo,config.dailyPath,JSON.stringify(nextDD,null,2),commitMsg);
+      setDailyData(nextDD);
+    }catch(e){throw e;}
   };
 
-  const moveProject = (name, direction) => {
-    const next = projects.map(p => {
-      if (p.name !== name) return p;
-      const idx = KANBAN_STATUSES.indexOf(p.status || 'not_started');
-      const newIdx = idx + direction;
-      if (newIdx < 0 || newIdx >= KANBAN_STATUSES.length) return p;
-      return { ...p, status: KANBAN_STATUSES[newIdx] };
-    });
-    persistProjects(next);
+  const autosaveHL=async(nextHL)=>{
+    setHlSaving(true);setHlErr('');
+    const cleaned=nextHL.filter(h=>h.text.trim()!=='');
+    const existRef=(dailyData[selDate]&&dailyData[selDate].reflection)||'';
+    const next={...dailyData,[selDate]:{highlights:cleaned,reflection:existRef,updatedAt:new Date().toISOString()}};
+    try{await saveDailyData(next,`更新 Daily Highlight - ${selDate}`);}
+    catch(e){console.error(e);setHlErr('自動儲存失敗：'+e.message);}
+    setHlSaving(false);
   };
 
-  const autosaveHighlights = async (nextHighlights) => {
-    setHighlightSaving(true);
-    setHighlightSaveError('');
-    const cleaned = nextHighlights.filter(h => h.text.trim() !== '');
-    const existingReflection = (dailyData[selectedDailyDate] && dailyData[selectedDailyDate].reflection) || '';
-    const nextDailyData = {
-      ...dailyData,
-      [selectedDailyDate]: {
-        highlights: cleaned,
-        reflection: existingReflection,
-        updatedAt: new Date().toISOString()
-      }
-    };
-    try {
-      await ghSaveFile(
-        token, config.owner, config.repo, config.dailyPath,
-        JSON.stringify(nextDailyData, null, 2),
-        `更新 Daily Highlight - ${selectedDailyDate}`
-      );
-      setDailyData(nextDailyData);
-    } catch (e) {
-      console.error(e);
-      setHighlightSaveError('自動儲存失敗：' + e.message);
-    }
-    setHighlightSaving(false);
+  const addHL=()=>setDraftHL(prev=>[...prev,{id:Date.now().toString(36)+Math.random().toString(36).slice(2,5),text:'',done:false}]);
+  const updateHLText=(id,text)=>setDraftHL(prev=>prev.map(h=>h.id===id?{...h,text}:h));
+  const handleHLBlur=()=>autosaveHL(draftHL);
+  const toggleHLDone=(id)=>setDraftHL(prev=>{const next=prev.map(h=>h.id===id?{...h,done:!h.done}:h);autosaveHL(next);return next;});
+  const removeHL=(id)=>setDraftHL(prev=>{const next=prev.filter(h=>h.id!==id);autosaveHL(next);return next;});
+
+  const isRefDirty=draftRef!==savedSnap.reflection;
+  const saveRef=async()=>{
+    setRefSaving(true);setRefErr('');
+    const existHL=(dailyData[selDate]&&dailyData[selDate].highlights)||draftHL.filter(h=>h.text.trim()!=='');
+    const next={...dailyData,[selDate]:{highlights:existHL,reflection:draftRef,updatedAt:new Date().toISOString()}};
+    try{await saveDailyData(next,`更新每日反思 - ${selDate}`);}
+    catch(e){console.error(e);setRefErr('儲存反思失敗：'+e.message);}
+    setRefSaving(false);
   };
 
-  const addHighlightItem = () => {
-    setDailyDraftHighlights(prev => [
-      ...prev,
-      { id: Date.now().toString(36) + Math.random().toString(36).slice(2,5), text: '', done: false }
-    ]);
-  };
-
-  const updateHighlightText = (id, text) => {
-    setDailyDraftHighlights(prev => prev.map(h => h.id === id ? { ...h, text } : h));
-  };
-
-  const handleHighlightBlur = () => {
-    autosaveHighlights(dailyDraftHighlights);
-  };
-
-  const toggleHighlightDone = (id) => {
-    setDailyDraftHighlights(prev => {
-      const next = prev.map(h => h.id === id ? { ...h, done: !h.done } : h);
-      autosaveHighlights(next);
-      return next;
-    });
-  };
-
-  const removeHighlightItem = (id) => {
-    setDailyDraftHighlights(prev => {
-      const next = prev.filter(h => h.id !== id);
-      autosaveHighlights(next);
-      return next;
-    });
-  };
-
-  const isReflectionDirty = dailyDraftReflection !== dailySavedSnapshot.reflection;
-
-  const saveReflection = async () => {
-    setReflectionSaving(true);
-    setReflectionSaveError('');
-    const existingHighlights = (dailyData[selectedDailyDate] && dailyData[selectedDailyDate].highlights)
-      || dailyDraftHighlights.filter(h => h.text.trim() !== '');
-    const nextDailyData = {
-      ...dailyData,
-      [selectedDailyDate]: {
-        highlights: existingHighlights,
-        reflection: dailyDraftReflection,
-        updatedAt: new Date().toISOString()
-      }
-    };
-    try {
-      await ghSaveFile(
-        token, config.owner, config.repo, config.dailyPath,
-        JSON.stringify(nextDailyData, null, 2),
-        `更新每日反思 - ${selectedDailyDate}`
-      );
-      setDailyData(nextDailyData);
-    } catch (e) {
-      console.error(e);
-      setReflectionSaveError('儲存反思失敗：' + e.message);
-    }
-    setReflectionSaving(false);
-  };
-
-  const addEntry = async (e) => {
+  const addEntry=async(e)=>{
     e.preventDefault();
-    if (!minutes || Number(minutes) <= 0 || !project) return;
-    const newEntry = {
-      id: Date.now().toString(36) + Math.random().toString(36).slice(2,6),
-      date, project, subtopic: subtopic.trim(), minutes: Number(minutes), note, rating
-    };
-    const next = [newEntry, ...entries].sort((a,b) => b.date.localeCompare(a.date) || b.id.localeCompare(a.id));
+    if(!minutes||Number(minutes)<=0||!project)return;
+    const ne={id:Date.now().toString(36)+Math.random().toString(36).slice(2,6),
+      date,project,subtopic:subtopic.trim(),minutes:Number(minutes),note,rating};
+    const next=[ne,...entries].sort((a,b)=>b.date.localeCompare(a.date)||b.id.localeCompare(a.id));
     await persistEntries(next);
-    setNote('');
-    setSubtopic('');
-    setMinutes('0');
-    setRating(3);
-    setFilterProject('__all__');
+    setNote('');setSubtopic('');setMinutes('0');setRating(3);setFilterProject('__all__');
   };
 
-  const removeEntry = async (id) => {
-    await persistEntries(entries.filter(e => e.id !== id));
+  const confirmRemoveEntry=()=>{
+    if(!confirmEntry)return;
+    persistEntries(entries.filter(e=>e.id!==confirmEntry.id));
+    setConfirmEntry(null);
   };
 
-  const bankMinutesFromTimer = (bankedMin) => {
-    setMinutes(prev => String((Number(prev) || 0) + bankedMin));
-  };
+  const streak=useMemo(()=>calcStreak(entries),[entries]);
+  const todayDateStr=todayStr();
+  const todaysEntries=useMemo(()=>entries.filter(e=>e.date===todayDateStr),[entries,todayDateStr]);
+  const todaysMins=useMemo(()=>todaysEntries.reduce((s,e)=>s+Number(e.minutes||0),0),[todaysEntries]);
+  const last7=useMemo(()=>last7DaysMinutes(entries),[entries]);
+  const last7BD=useMemo(()=>last7DaysProjectBreakdown(entries),[entries]);
+  const maxBD=last7BD.length?last7BD[0].minutes:0;
 
-  const streak = useMemo(() => calcStreak(entries), [entries]);
-  const todayDateStr = todayStr();
-  const todaysEntries = useMemo(() => entries.filter(e => e.date === todayDateStr), [entries, todayDateStr]);
-  const todaysMinutes = useMemo(() => todaysEntries.reduce((s,e) => s + Number(e.minutes||0), 0), [todaysEntries]);
-  const last7Days = useMemo(() => last7DaysMinutes(entries), [entries]);
-  const last7Breakdown = useMemo(() => last7DaysProjectBreakdown(entries), [entries]);
-  const maxLast7BreakdownMinutes = last7Breakdown.length ? last7Breakdown[0].minutes : 0;
-
-  const goPrevMonth = () => {
-    setCalendarCursor(prev => {
-      let { year, month } = prev;
-      month -= 1;
-      if (month < 0) { month = 11; year -= 1; }
-      return { year, month };
-    });
-  };
-  const goNextMonth = () => {
-    setCalendarCursor(prev => {
-      let { year, month } = prev;
-      month += 1;
-      if (month > 11) { month = 0; year += 1; }
-      return { year, month };
-    });
-  };
-  const goThisMonth = () => {
-    const d = new Date();
-    setCalendarCursor({ year: d.getFullYear(), month: d.getMonth() });
-  };
-
-  const calendarCells = useMemo(() => {
-    const { year, month } = calendarCursor;
-    const totalDays = daysInMonth(year, month);
-    const startWd = firstWeekdayOfMonth(year, month);
-    const cells = [];
-    for (let i = 0; i < startWd; i++) cells.push(null);
-    for (let d = 1; d <= totalDays; d++) {
-      const dateStr = ymdStr(year, month, d);
-      const entryCount = entries.filter(e => e.date === dateStr).length;
-      const dayData = dailyData[dateStr];
-      const hasHighlights = !!(dayData && Array.isArray(dayData.highlights) && dayData.highlights.some(h => h.text && h.text.trim() !== ''));
-      const hasReflection = !!(dayData && typeof dayData.reflection === 'string' && dayData.reflection.trim() !== '');
-      cells.push({ dateStr, day: d, entryCount, hasHighlights, hasReflection });
+  const calCells=useMemo(()=>{
+    const{year,month}=calCursor;
+    const cells=[];
+    for(let i=0;i<firstWeekday(year,month);i++)cells.push(null);
+    for(let d=1;d<=daysInMonth(year,month);d++){
+      const ds=ymdStr(year,month,d);
+      const ec=entries.filter(e=>e.date===ds).length;
+      const dd=dailyData[ds];
+      cells.push({dateStr:ds,day:d,entryCount:ec,
+        hasHL:!!(dd&&Array.isArray(dd.highlights)&&dd.highlights.some(h=>h.text?.trim())),
+        hasRef:!!(dd&&typeof dd.reflection==='string'&&dd.reflection.trim())
+      });
     }
     return cells;
-  }, [calendarCursor, entries, dailyData]);
+  },[calCursor,entries,dailyData]);
 
-  const selectedDayEntries = useMemo(() => entries.filter(e => e.date === selectedDailyDate), [entries, selectedDailyDate]);
-  const selectedDayData = dailyData[selectedDailyDate];
+  const selDayEntries=useMemo(()=>entries.filter(e=>e.date===selDate),[entries,selDate]);
+  const selDayData=dailyData[selDate];
 
-  const visibleEntries = useMemo(() => {
-    if (filterProject === '__all__') return entries;
-    return entries.filter(e => e.project === filterProject);
-  }, [entries, filterProject]);
+  const visEntries=useMemo(()=>filterProject==='__all__'?entries:entries.filter(e=>e.project===filterProject),[entries,filterProject]);
 
-  if (stage === 'loading') {
-    return <div style={{padding: 40, fontFamily: 'monospace', color: '#756a54'}}>載入中…</div>;
-  }
+  // Back-3-days quick nav data
+  const backDays=useMemo(()=>[1,2,3].map(n=>{
+    const ds=offsetDate(-n);
+    const dd=dailyData[ds];
+    const hasContent=!!(dd&&((Array.isArray(dd.highlights)&&dd.highlights.some(h=>h.text?.trim()))||(typeof dd.reflection==='string'&&dd.reflection.trim())));
+    return{dateStr:ds,label:fmtShort(ds),hasContent};
+  }),[dailyData]);
 
-  if (stage === 'setup') {
-    return <SetupScreen onSubmit={handleSetupSubmit} error={gateError} loading={gateLoading} />;
-  }
+  if(stage==='loading') return <div style={{padding:40,fontFamily:'monospace',color:'#666'}}>載入中…</div>;
+  if(stage==='setup') return <SetupScreen onSubmit={handleSetup} error={gateError} loading={gateLoading}/>;
 
-  return (
+  return(
     <div className="sl-page">
+      {confirmEntry&&(
+        <ConfirmDeleteModal
+          entry={confirmEntry}
+          onConfirm={confirmRemoveEntry}
+          onCancel={()=>setConfirmEntry(null)}
+        />
+      )}
+
       <div className="masthead">
         <div>
           <h1>自學紀錄工具</h1>
@@ -1606,83 +1133,60 @@ function App() {
 
       <div className="sync-bar">
         <span className="sync-repo">🔗 {config.owner}/{config.repo}</span>
-        <span className={`sync-status ${syncing ? '' : (syncError ? 'err' : 'ok')}`}>
-          {syncing ? '同步中…' : (syncError ? '同步失敗' : '已同步')}
+        <span className={`sync-status ${syncing?'':(syncError?'err':'ok')}`}>
+          {syncing?'同步中…':(syncError?'同步失敗':'已同步')}
         </span>
-        <button className="refresh-btn" onClick={handleRefresh} disabled={syncing}>重新整理</button>
-        <button className="lock-btn" onClick={handleDisconnect}>🔌 中斷連線</button>
+        <button className="sl-btn-ghost" onClick={()=>loadData(token,config)} disabled={syncing}>重新整理</button>
+        <button className="sl-btn-ghost" onClick={handleDisconnect}>🔌 中斷連線</button>
       </div>
-      {syncError && <div className="sync-error-banner">{syncError}</div>}
+      {syncError&&<div className="sync-error-banner">{syncError}</div>}
 
       <div className="stats-row">
-        <div className="stat">
-          <div className="num">{todaysEntries.length}</div>
-          <div className="lbl">今日紀錄數</div>
-        </div>
-        <div className="stat">
-          <div className="num">{formatHM(todaysMinutes)}</div>
-          <div className="lbl">今日累積時數</div>
-        </div>
-        <div className="stat">
-          <div className="num">{formatHM(last7Days)}</div>
-          <div className="lbl">近 7 天累積時間</div>
-        </div>
+        <div className="stat"><div className="num">{todaysEntries.length}</div><div className="lbl">今日紀錄數</div></div>
+        <div className="stat"><div className="num">{formatHM(todaysMins)}</div><div className="lbl">今日累積時數</div></div>
+        <div className="stat"><div className="num">{formatHM(last7)}</div><div className="lbl">近 7 天時間</div></div>
       </div>
 
       <div className="breakdown-card">
-        <div className="breakdown-title">近七天依專案累計分鐘數</div>
-        {last7Breakdown.length === 0 ? (
-          <div className="breakdown-empty">還沒有資料可以統計。</div>
-        ) : (
-          last7Breakdown.map(b => (
+        <div className="sl-card-title">近七天依專案累計</div>
+        {last7BD.length===0?<div className="breakdown-empty">還沒有資料。</div>:
+          last7BD.map(b=>(
             <div className="breakdown-row" key={b.project}>
               <div className="breakdown-name">{b.project}</div>
               <div className="breakdown-track">
-                <div
-                  className="breakdown-fill"
-                  style={{
-                    width: `${maxLast7BreakdownMinutes ? (b.minutes / maxLast7BreakdownMinutes) * 100 : 0}%`,
-                    background: colorForProject(b.project)
-                  }}
-                />
+                <div className="breakdown-fill" style={{width:`${maxBD?(b.minutes/maxBD)*100:0}%`,background:colorForProject(b.project)}}/>
               </div>
               <div className="breakdown-mins">{b.minutes} 分</div>
             </div>
           ))
-        )}
+        }
       </div>
 
       <div className="project-board">
         <div className="project-board-header">
-          <div className="project-board-title">專案看板</div>
+          <div className="sl-section-title">專案看板</div>
           <div className="project-board-add">
-            <input
-              placeholder="新增專案…"
-              value={newProject}
-              onChange={e => setNewProject(e.target.value)}
-              onKeyDown={e => { if (e.key === 'Enter') { e.preventDefault(); addProject(); } }}
-            />
-            <button className="project-add-btn" type="button" onClick={addProject} disabled={!newProject.trim()}>新增</button>
+            <input placeholder="新增專案…" value={newProject}
+              onChange={e=>setNewProject(e.target.value)}
+              onKeyDown={e=>{if(e.key==='Enter'){e.preventDefault();addProject();}}}/>
+            <button className="sl-add-btn" type="button" onClick={addProject} disabled={!newProject.trim()}>新增</button>
           </div>
         </div>
-
-        {projects.length === 0 ? (
-          <div className="breakdown-empty">還沒有專案，上面新增一個開始吧。</div>
-        ) : (
+        {projects.length===0?<div className="breakdown-empty">還沒有專案，上面新增一個開始吧。</div>:
           <div className="kanban-columns">
-            {KANBAN_STATUSES.map(status => (
+            {KANBAN_STATUSES.map(status=>(
               <div className="kanban-column" key={status}>
                 <div className="kanban-column-title">{KANBAN_COLUMN_LABELS[status]}</div>
-                {projects.filter(p => (p.status || 'not_started') === status).map(p => {
-                  const idx = KANBAN_STATUSES.indexOf(p.status || 'not_started');
-                  return (
+                {projects.filter(p=>(p.status||'not_started')===status).map(p=>{
+                  const idx=KANBAN_STATUSES.indexOf(p.status||'not_started');
+                  return(
                     <div className="kanban-card" key={p.name}>
-                      <span className="kanban-card-dot" style={{ background: colorForProject(p.name) }}></span>
+                      <span className="kanban-card-dot" style={{background:colorForProject(p.name)}}/>
                       <span className="kanban-card-name">{p.name}</span>
                       <div className="kanban-card-actions">
-                        <button type="button" onClick={() => moveProject(p.name, -1)} disabled={idx <= 0} aria-label="移到前一欄">‹</button>
-                        <button type="button" onClick={() => moveProject(p.name, 1)} disabled={idx >= KANBAN_STATUSES.length - 1} aria-label="移到下一欄">›</button>
-                        <button type="button" onClick={() => removeProject(p.name)} aria-label={`刪除 ${p.name}`}>×</button>
+                        <button type="button" onClick={()=>moveProject(p.name,-1)} disabled={idx<=0} aria-label="移到前一欄">‹</button>
+                        <button type="button" onClick={()=>moveProject(p.name,1)} disabled={idx>=KANBAN_STATUSES.length-1} aria-label="移到下一欄">›</button>
+                        <button type="button" onClick={()=>removeProject(p.name)} aria-label={`刪除 ${p.name}`}>×</button>
                       </div>
                     </div>
                   );
@@ -1690,147 +1194,130 @@ function App() {
               </div>
             ))}
           </div>
-        )}
+        }
       </div>
 
       <div className="daily-card">
         <div className="daily-header">
-          <div className="daily-title">Daily Highlight</div>
+          <div className="sl-section-title">Daily Highlight</div>
           <div className="daily-date-picker">
-            <input
-              type="date"
-              value={selectedDailyDate}
-              onChange={e => setSelectedDailyDate(e.target.value)}
-              max={todayStr()}
-            />
-            {selectedDailyDate !== todayStr() && (
-              <button type="button" className="daily-today-btn" onClick={() => setSelectedDailyDate(todayStr())}>
-                回到今天
-              </button>
+            <input type="date" value={selDate} onChange={e=>setSelDate(e.target.value)} max={todayStr()}/>
+            {selDate!==todayStr()&&(
+              <button type="button" className="sl-link-btn" onClick={()=>setSelDate(todayStr())}>回到今天</button>
             )}
           </div>
         </div>
 
+        <div className="back-days-row">
+          {backDays.map(({dateStr,label,hasContent})=>(
+            <button key={dateStr} type="button"
+              className={`back-day-btn${selDate===dateStr?' active':''}`}
+              onClick={()=>setSelDate(dateStr)}>
+              {label}{hasContent&&<span className="day-dot"/>}
+            </button>
+          ))}
+        </div>
+
         <div className="highlight-list">
-          {dailyDraftHighlights.length === 0 && (
-            <div className="rating-hint">還沒有項目，點下面「新增項目」開始列這天的重點。</div>
-          )}
-          {dailyDraftHighlights.map(h => (
-            <div className={`highlight-item ${h.done ? 'done' : ''}`} key={h.id}>
-              <input type="checkbox" checked={h.done} onChange={() => toggleHighlightDone(h.id)} />
-              <input
-                type="text"
-                value={h.text}
-                onChange={e => updateHighlightText(h.id, e.target.value)}
-                onBlur={handleHighlightBlur}
-                placeholder="輸入重點 / to-do…"
-              />
-              <button type="button" className="highlight-remove-btn" onClick={() => removeHighlightItem(h.id)} aria-label="刪除項目">×</button>
+          {draftHL.length===0&&<div className="rating-hint">還沒有項目，點「＋ 新增項目」開始。</div>}
+          {draftHL.map(h=>(
+            <div className={`highlight-item${h.done?' done':''}`} key={h.id}>
+              <input type="checkbox" checked={h.done} onChange={()=>toggleHLDone(h.id)}/>
+              <input type="text" value={h.text} onChange={e=>updateHLText(h.id,e.target.value)}
+                onBlur={handleHLBlur} placeholder="輸入重點 / to-do…"/>
+              <button type="button" className="highlight-remove-btn" onClick={()=>removeHL(h.id)} aria-label="刪除項目">×</button>
             </div>
           ))}
-          <button type="button" className="highlight-add-btn" onClick={addHighlightItem}>+ 新增項目</button>
+          <button type="button" className="highlight-add-btn" onClick={addHL}>＋ 新增項目</button>
         </div>
-
         <div className="daily-save-row">
-          <span className={`daily-save-status ${highlightSaving ? '' : (highlightSaveError ? 'dirty' : 'saved')}`}>
-            {highlightSaving ? '自動儲存中…' : (highlightSaveError ? '自動儲存失敗' : '已自動儲存')}
+          <span className={`daily-save-status${hlSaving?'':(hlErr?' dirty':' saved')}`}>
+            {hlSaving?'自動儲存中…':(hlErr?'自動儲存失敗':'已自動儲存')}
           </span>
         </div>
-        {highlightSaveError && <div className="sync-error-banner">{highlightSaveError}</div>}
+        {hlErr&&<div className="sync-error-banner">{hlErr}</div>}
       </div>
 
-      <StudyStopwatch onBank={bankMinutesFromTimer} />
+      <StudyStopwatch onBank={m=>setMinutes(prev=>String((Number(prev)||0)+m))}/>
 
       <form className="entry" onSubmit={addEntry}>
         <div className="row">
           <div className="col">
             <label>日期</label>
-            <input type="date" value={date} onChange={e => setDate(e.target.value)} max={todayStr()} required />
+            <input type="date" value={date} onChange={e=>setDate(e.target.value)} max={todayStr()} required/>
           </div>
           <div className="col">
             <label>專案</label>
-            {projects.length === 0 ? (
-              <div className="rating-hint">請先在上方新增至少一個專案</div>
-            ) : (
-              <select value={project} onChange={e => setProject(e.target.value)}>
-                {projects.map(p => <option key={p.name} value={p.name}>{p.name}</option>)}
+            {projects.length===0?<div className="rating-hint">請先新增專案</div>:
+              <select value={project} onChange={e=>setProject(e.target.value)}>
+                {projects.map(p=><option key={p.name} value={p.name}>{p.name}</option>)}
               </select>
-            )}
+            }
           </div>
-          <div className="col" style={{maxWidth: 100}}>
+          <div className="col" style={{maxWidth:100}}>
             <label>分鐘</label>
-            <input type="number" min="1" value={minutes} onChange={e => setMinutes(e.target.value)} required />
+            <input type="number" min="1" value={minutes} onChange={e=>setMinutes(e.target.value)} required/>
           </div>
         </div>
         <div className="row">
           <div className="col">
             <label>細項主題（選填）</label>
-            <input
-              placeholder="例：發音、戰術分析、動詞變化…"
-              value={subtopic}
-              onChange={e => setSubtopic(e.target.value)}
-            />
+            <input placeholder="例：發音、戰術分析…" value={subtopic} onChange={e=>setSubtopic(e.target.value)}/>
           </div>
         </div>
         <div className="row">
           <div className="col">
             <label>今天學到 / 練了什麼</label>
-            <textarea value={note} onChange={e => setNote(e.target.value)} placeholder="例：搞懂越位規則跟區域防守的差別、複習了荷蘭文動詞變化…" />
+            <textarea value={note} onChange={e=>setNote(e.target.value)} placeholder="例：搞懂越位規則、複習荷蘭文動詞變化…"/>
           </div>
         </div>
         <div className="row">
           <div className="col">
             <label>掌握度自評</label>
-            <select value={rating} onChange={e => setRating(Number(e.target.value))}>
-              {RATING_OPTIONS.map(r => <option key={r.value} value={r.value}>{r.label}</option>)}
+            <select value={rating} onChange={e=>setRating(Number(e.target.value))}>
+              {RATING_OPTIONS.map(r=><option key={r.value} value={r.value}>{r.label}</option>)}
             </select>
           </div>
         </div>
-        <button className="submit-btn" type="submit" disabled={syncing || projects.length === 0}>
-          {syncing ? '同步中…' : '蓋章打卡'}
+        <button className="submit-btn" type="submit" disabled={syncing||projects.length===0}>
+          {syncing?'同步中…':'蓋章打卡'}
         </button>
       </form>
 
       <div className="log-card">
         <div className="log-heading-row">
-          <div className="log-heading">紀錄</div>
+          <div className="sl-section-title">紀錄</div>
           <div className="log-heading-actions">
-            <select className="filter-select" value={filterProject} onChange={e => setFilterProject(e.target.value)}>
+            <select className="filter-select" value={filterProject} onChange={e=>setFilterProject(e.target.value)}>
               <option value="__all__">全部專案</option>
-              {projects.map(p => <option key={p.name} value={p.name}>{p.name}</option>)}
+              {projects.map(p=><option key={p.name} value={p.name}>{p.name}</option>)}
             </select>
-            <button className="export-btn" onClick={() => downloadCSV(visibleEntries)} disabled={visibleEntries.length === 0}>匯出 CSV</button>
+            <button className="export-btn" onClick={()=>downloadCSV(visEntries)} disabled={visEntries.length===0}>匯出 CSV</button>
           </div>
         </div>
-
-        {visibleEntries.length === 0 ? (
+        {visEntries.length===0?(
           <div className="empty-state">
-            {entries.length === 0
-              ? <React.Fragment>還沒有紀錄。<br/>今天學了什麼，寫下來蓋第一個章吧。</React.Fragment>
-              : '這個專案目前沒有紀錄。'}
+            {entries.length===0
+              ?<React.Fragment>還沒有紀錄。<br/>今天學了什麼，寫下來蓋第一個章吧。</React.Fragment>
+              :'這個專案目前沒有紀錄。'}
           </div>
-        ) : (
+        ):(
           <React.Fragment>
             <div className="log-table-header">
-              <span>日期</span>
-              <span>專案</span>
-              <span>細項</span>
-              <span>時長</span>
-              <span>掌握度</span>
-              <span>學到什麼</span>
-              <span></span>
+              <span>日期</span><span>專案</span><span>細項</span>
+              <span>時長</span><span>掌握度</span><span>學到什麼</span><span></span>
             </div>
-            {visibleEntries.map(e => {
-              const ratingLabel = RATING_OPTIONS.find(r => r.value === e.rating);
-              return (
+            {visEntries.map(e=>{
+              const rl=RATING_OPTIONS.find(r=>r.value===e.rating);
+              return(
                 <div className="entry-row" key={e.id}>
                   <div className="entry-date">{fmtDate(e.date)}</div>
-                  <span className="entry-topic" style={{ background: colorForProject(e.project) }}>{e.project}</span>
-                  <span className="entry-subtopic" title={e.subtopic || ''}>{e.subtopic || '—'}</span>
+                  <span className="entry-topic" style={{background:colorForProject(e.project)}}>{e.project}</span>
+                  <span className="entry-subtopic" title={e.subtopic||''}>{e.subtopic||'—'}</span>
                   <span className="entry-minutes">{e.minutes} 分</span>
-                  <span className="entry-rating-short" title={ratingLabel ? ratingLabel.label : ''}>掌握 {e.rating}/5</span>
-                  <span className="entry-note" title={e.note || ''}>{e.note || '—'}</span>
-                  <button className="del-btn" onClick={() => removeEntry(e.id)}>刪除</button>
+                  <span className="entry-rating-short" title={rl?.label||''}>掌握 {e.rating}/5</span>
+                  <span className="entry-note" title={e.note||''}>{e.note||'—'}</span>
+                  <button className="del-btn" onClick={()=>setConfirmEntry(e)}>刪除</button>
                 </div>
               );
             })}
@@ -1840,86 +1327,77 @@ function App() {
 
       <div className="daily-card">
         <div className="daily-header">
-          <div className="daily-title">今日反思</div>
-          <div className="daily-date-picker">
-            <span className="reflection-date-label">{fmtDate(selectedDailyDate)}</span>
-          </div>
+          <div className="sl-section-title">今日反思</div>
+          <span className="reflection-date-label">{fmtDate(selDate)}</span>
         </div>
-        <textarea
-          className="reflection-textarea"
-          value={dailyDraftReflection}
-          onChange={e => setDailyDraftReflection(e.target.value)}
-          placeholder="今天過得怎麼樣？學到了什麼、卡在哪裡、有什麼想法…"
-        />
+        <textarea className="reflection-textarea" value={draftRef}
+          onChange={e=>setDraftRef(e.target.value)}
+          placeholder="今天過得怎麼樣？學到了什麼、卡在哪裡、有什麼想法…"/>
         <div className="daily-save-row">
-          <button className="submit-btn" type="button" onClick={saveReflection} disabled={reflectionSaving || !isReflectionDirty}>
-            {reflectionSaving ? '儲存中…' : '💾 儲存反思'}
+          <button className="submit-btn" type="button" onClick={saveRef} disabled={refSaving||!isRefDirty}>
+            {refSaving?'儲存中…':'💾 儲存反思'}
           </button>
-          <span className={`daily-save-status ${isReflectionDirty ? 'dirty' : 'saved'}`}>
-            {reflectionSaving ? '同步中…' : (isReflectionDirty ? '尚未儲存' : '已儲存')}
+          <span className={`daily-save-status${isRefDirty?' dirty':' saved'}`}>
+            {refSaving?'同步中…':(isRefDirty?'尚未儲存':'已儲存')}
           </span>
         </div>
-        {reflectionSaveError && <div className="sync-error-banner">{reflectionSaveError}</div>}
+        {refErr&&<div className="sync-error-banner">{refErr}</div>}
       </div>
 
       <div className="calendar-card">
         <div className="calendar-header">
-          <button type="button" className="calendar-nav-btn" onClick={goPrevMonth}>‹</button>
-          <div className="calendar-month-label">{monthLabel(calendarCursor.year, calendarCursor.month)}</div>
-          <button type="button" className="calendar-nav-btn" onClick={goNextMonth}>›</button>
-          <button type="button" className="daily-today-btn" onClick={goThisMonth}>回到本月</button>
+          <button type="button" className="calendar-nav-btn" onClick={()=>setCalCursor(p=>{let{year,month}=p;month--;if(month<0){month=11;year--;}return{year,month};})}>‹</button>
+          <div className="calendar-month-label">{monthLabel(calCursor.year,calCursor.month)}</div>
+          <button type="button" className="calendar-nav-btn" onClick={()=>setCalCursor(p=>{let{year,month}=p;month++;if(month>11){month=0;year++;}return{year,month};})}>›</button>
+          <button type="button" className="sl-link-btn" onClick={()=>{const d=new Date();setCalCursor({year:d.getFullYear(),month:d.getMonth()});}}>回到本月</button>
         </div>
         <div className="calendar-weekdays">
-          {['日','一','二','三','四','五','六'].map(w => <div key={w} className="calendar-weekday">{w}</div>)}
+          {['日','一','二','三','四','五','六'].map(w=><div key={w} className="calendar-weekday">{w}</div>)}
         </div>
         <div className="calendar-grid">
-          {calendarCells.map((cell, idx) => cell ? (
-            <button
-              type="button"
-              key={cell.dateStr}
-              className={`calendar-cell ${cell.dateStr === selectedDailyDate ? 'selected' : ''} ${cell.dateStr === todayStr() ? 'today' : ''}`}
-              onClick={() => setSelectedDailyDate(cell.dateStr)}
-            >
+          {calCells.map((cell,idx)=>cell?(
+            <button type="button" key={cell.dateStr}
+              className={`calendar-cell${cell.dateStr===selDate?' selected':''}${cell.dateStr===todayStr()?' today':''}`}
+              onClick={()=>setSelDate(cell.dateStr)}>
               <span className="calendar-daynum">{cell.day}</span>
               <span className="calendar-indicators">
-                {cell.entryCount > 0 && <span className="cal-dot cal-dot-entry" title={`${cell.entryCount} 筆打卡`}></span>}
-                {cell.hasHighlights && <span className="cal-dot cal-dot-highlight" title="有 Daily Highlight"></span>}
-                {cell.hasReflection && <span className="cal-dot cal-dot-reflection" title="有反思"></span>}
+                {cell.entryCount>0&&<span className="cal-dot cal-dot-entry" title={`${cell.entryCount} 筆打卡`}/>}
+                {cell.hasHL&&<span className="cal-dot cal-dot-highlight" title="有 Highlight"/>}
+                {cell.hasRef&&<span className="cal-dot cal-dot-reflection" title="有反思"/>}
               </span>
             </button>
-          ) : <div key={'blank-' + idx} className="calendar-cell empty" />)}
+          ):<div key={'b'+idx} className="calendar-cell empty"/>)}
         </div>
-
         <div className="calendar-detail">
-          <div className="calendar-detail-title">{fmtDate(selectedDailyDate)} 摘要</div>
-          {selectedDayEntries.length === 0 && !(selectedDayData && selectedDayData.highlights && selectedDayData.highlights.length > 0) && !(selectedDayData && selectedDayData.reflection) ? (
+          <div className="calendar-detail-title">{fmtDate(selDate)} 摘要</div>
+          {selDayEntries.length===0&&!(selDayData?.highlights?.length)&&!selDayData?.reflection?(
             <div className="rating-hint">這天還沒有任何紀錄。</div>
-          ) : (
+          ):(
             <React.Fragment>
-              {selectedDayEntries.length > 0 && (
+              {selDayEntries.length>0&&(
                 <div className="calendar-detail-section">
-                  <div className="calendar-detail-label">打卡（{selectedDayEntries.length}）</div>
-                  {selectedDayEntries.map(e => (
+                  <div className="calendar-detail-label">打卡（{selDayEntries.length}）</div>
+                  {selDayEntries.map(e=>(
                     <div className="calendar-detail-entry" key={e.id}>
-                      <span className="entry-topic" style={{ background: colorForProject(e.project) }}>{e.project}</span>
+                      <span className="entry-topic" style={{background:colorForProject(e.project)}}>{e.project}</span>
                       <span>{e.minutes} 分</span>
-                      <span className="calendar-detail-note">{e.note || e.subtopic || ''}</span>
+                      <span className="calendar-detail-note">{e.note||e.subtopic||''}</span>
                     </div>
                   ))}
                 </div>
               )}
-              {selectedDayData && selectedDayData.highlights && selectedDayData.highlights.length > 0 && (
+              {selDayData?.highlights?.length>0&&(
                 <div className="calendar-detail-section">
                   <div className="calendar-detail-label">Daily Highlight</div>
-                  {selectedDayData.highlights.map(h => (
-                    <div className={`calendar-detail-highlight ${h.done ? 'done' : ''}`} key={h.id}>{h.done ? '✓' : '○'} {h.text}</div>
+                  {selDayData.highlights.map(h=>(
+                    <div className={`calendar-detail-highlight${h.done?' done':''}`} key={h.id}>{h.done?'✓':'○'} {h.text}</div>
                   ))}
                 </div>
               )}
-              {selectedDayData && selectedDayData.reflection && (
+              {selDayData?.reflection&&(
                 <div className="calendar-detail-section">
                   <div className="calendar-detail-label">反思</div>
-                  <div className="calendar-detail-reflection">{selectedDayData.reflection}</div>
+                  <div className="calendar-detail-reflection">{selDayData.reflection}</div>
                 </div>
               )}
             </React.Fragment>
@@ -1932,7 +1410,7 @@ function App() {
   );
 }
 
-ReactDOM.createRoot(document.getElementById('ll-root')).render(<App />);
+ReactDOM.createRoot(document.getElementById('ll-root')).render(<App/>);
   </script>
 </body>
 </html>

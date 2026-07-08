@@ -1,3 +1,10 @@
 [
-  {"name": "架設個人網站", "status": "in_progress"}
+  {
+    "name": "架設個人網站",
+    "status": "in_progress"
+  },
+  {
+    "name": "Mind the Game - Football",
+    "status": "not_started"
+  }
 ]

@@ -7,98 +7,66 @@
   <link rel="stylesheet" href="styles.css" />
   <script defer src="script.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
   <style>
-    /* ── Learning log scoped styles ── */
+    /* ── Self-study tool scoped styles ── */
+    :root {
+      --sl-ink: #1c2b2f;
+      --sl-paper: #eee7d6;
+      --sl-paper-line: #d8cdb2;
+      --sl-moss: #4f6b52;
+      --sl-moss-dark: #37492f;
+      --sl-rust: #9c4a34;
+      --sl-rust-light: #c97a5f;
+      --sl-muted: #756a54;
+      --sl-sub-1: #4f6b52;
+      --sl-sub-2: #9c4a34;
+      --sl-sub-3: #7a6a9c;
+      --sl-sub-4: #ab8a3c;
+      --sl-sub-5: #3c7a86;
+      --sl-sub-6: #8a5a3c;
+    }
+
     #ll-root {
       font-family: 'IBM Plex Mono', monospace;
+      background: var(--sl-paper);
+      background-image: repeating-linear-gradient(transparent, transparent 27px, var(--sl-paper-line) 28px);
+      color: var(--sl-ink);
+      min-height: 100vh;
+      padding: 28px 20px 60px;
+    }
+
+    #ll-root .sl-page {
       max-width: 720px;
       margin: 0 auto;
-      padding: 32px 20px 80px;
     }
 
-    /* Login screen */
-    .ll-login {
-      max-width: 420px;
-      margin: 60px auto;
-      border: 1px solid var(--p-dark);
-      padding: 28px 24px;
-      background: rgba(255,255,255,0.6);
-    }
-    .ll-login h2 {
-      font-family: 'Source Serif 4', serif;
-      font-size: 1.2rem;
-      margin: 0 0 6px;
-    }
-    .ll-login p {
-      font-size: 11px;
-      color: #756a54;
-      margin: 0 0 20px;
-      line-height: 1.7;
-    }
-    .ll-login input {
-      width: 100%;
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 13px;
-      border: none;
-      border-bottom: 1px solid var(--p-dark);
-      padding: 6px 2px;
-      background: transparent;
-      margin-bottom: 14px;
-    }
-    .ll-login input:focus { outline: none; border-bottom: 2px solid var(--p-teal); }
-    .ll-login-btn {
-      background: var(--p-teal);
-      color: #fff;
-      border: none;
-      padding: 9px 20px;
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-      cursor: pointer;
-    }
-    .ll-login-btn:hover { background: var(--p-dark); }
-    .ll-login-error { color: #c0392b; font-size: 11px; margin-top: 8px; }
-
-    /* Masthead */
-    .ll-masthead {
+    #ll-root .masthead {
       display: flex;
       justify-content: space-between;
       align-items: flex-end;
-      border-bottom: 3px double var(--p-dark);
+      border-bottom: 3px double var(--sl-ink);
       padding-bottom: 10px;
       margin-bottom: 4px;
     }
-    .ll-masthead h1 {
+    #ll-root .masthead h1 {
       font-family: 'Source Serif 4', serif;
       font-weight: 700;
-      font-size: 1.5rem;
+      font-size: 26px;
       margin: 0;
+      letter-spacing: 0.3px;
     }
-    .ll-masthead .ll-subtitle {
-      font-size: 10px;
-      color: #756a54;
+    #ll-root .masthead .subtitle {
+      font-size: 11px;
+      color: var(--sl-muted);
       letter-spacing: 1.5px;
       text-transform: uppercase;
       margin-top: 3px;
     }
-    .ll-logout-btn {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 10px;
-      background: none;
-      border: 1px solid #b0a898;
-      color: #756a54;
-      padding: 4px 10px;
-      cursor: pointer;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-    }
-    .ll-logout-btn:hover { border-color: var(--p-teal); color: var(--p-teal); }
 
-    .ll-stamp {
-      border: 2px solid var(--p-red);
-      color: var(--p-red);
+    #ll-root .stamp {
+      border: 2px solid var(--sl-rust);
+      color: var(--sl-rust);
       border-radius: 50%;
       width: 62px;
       height: 62px;
@@ -111,39 +79,172 @@
       line-height: 1;
       flex-shrink: 0;
     }
-    .ll-stamp .n { font-size: 22px; font-weight: 700; }
-    .ll-stamp .label { font-size: 7px; letter-spacing: 1px; text-transform: uppercase; margin-top: 2px; }
+    #ll-root .stamp .n { font-size: 22px; font-weight: 700; }
+    #ll-root .stamp .label { font-size: 7px; letter-spacing: 1px; text-transform: uppercase; margin-top: 2px; }
 
-    /* Stats */
-    .ll-stats-row { display: flex; gap: 14px; margin: 18px 0 16px; flex-wrap: wrap; }
-    .ll-stat {
-      flex: 1; min-width: 130px;
-      border: 1px solid var(--p-dark);
+    /* ---- Sync status bar ---- */
+    #ll-root .sync-bar {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      font-size: 10.5px;
+      color: var(--sl-muted);
+      margin: 10px 0 16px;
+    }
+    #ll-root .sync-repo { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 100px; }
+    #ll-root .sync-status.ok { color: var(--sl-moss-dark); }
+    #ll-root .sync-status.err { color: var(--sl-rust); }
+    #ll-root .lock-btn, #ll-root .refresh-btn {
+      background: none;
+      border: 1px solid var(--sl-muted);
+      color: var(--sl-muted);
+      font-size: 10px;
+      padding: 3px 9px;
+      cursor: pointer;
+      font-family: 'IBM Plex Mono', monospace;
+      letter-spacing: 0.5px;
+    }
+    #ll-root .lock-btn:hover, #ll-root .refresh-btn:hover { border-color: var(--sl-rust); color: var(--sl-rust); }
+    #ll-root .sync-error-banner {
+      border: 1px solid var(--sl-rust);
+      color: var(--sl-rust);
+      background: rgba(156,74,52,0.08);
+      padding: 8px 12px;
+      font-size: 11px;
+      margin-bottom: 14px;
+      line-height: 1.5;
+    }
+
+    /* ---- Gate screens ---- */
+    #ll-root .gate-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: calc(100vh - 88px);
+    }
+    #ll-root .gate-card {
+      border: 1px solid var(--sl-ink);
+      background: rgba(255,255,255,0.4);
+      padding: 26px 24px;
+      max-width: 440px;
+      width: 100%;
+    }
+    #ll-root .gate-title {
+      font-family: 'Source Serif 4', serif;
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    #ll-root .gate-subtitle {
+      font-size: 11px;
+      color: var(--sl-muted);
+      margin-bottom: 18px;
+      letter-spacing: 0.3px;
+      line-height: 1.6;
+    }
+    #ll-root .gate-field { margin-bottom: 14px; }
+    #ll-root .gate-field label {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--sl-muted);
+      display: block;
+      margin-bottom: 4px;
+    }
+    #ll-root .gate-field input {
+      width: 100%;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 13px;
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid var(--sl-ink);
+      padding: 6px 2px;
+      color: var(--sl-ink);
+    }
+    #ll-root .gate-field input:focus { outline: none; border-bottom: 2px solid var(--sl-rust); }
+    #ll-root .gate-error { font-size: 11px; color: var(--sl-rust); margin: 10px 0; line-height: 1.5; }
+    #ll-root .gate-btn {
+      width: 100%;
+      margin-top: 8px;
+      background: var(--sl-moss-dark);
+      color: var(--sl-paper);
+      border: none;
+      padding: 10px;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      cursor: pointer;
+    }
+    #ll-root .gate-btn:hover { background: var(--sl-rust); }
+    #ll-root .gate-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    /* ---- Stats ---- */
+    #ll-root .stats-row {
+      display: flex;
+      gap: 14px;
+      margin: 18px 0 16px;
+      flex-wrap: wrap;
+    }
+    #ll-root .stat {
+      flex: 1;
+      min-width: 130px;
+      border: 1px solid var(--sl-ink);
       padding: 10px 12px;
       background: rgba(255,255,255,0.25);
     }
-    .ll-stat .num { font-family: 'Source Serif 4', serif; font-size: 22px; font-weight: 700; color: var(--p-teal); }
-    .ll-stat .lbl { font-size: 10px; color: #756a54; text-transform: uppercase; letter-spacing: 1px; margin-top: 2px; }
+    #ll-root .stat .num { font-family: 'Source Serif 4', serif; font-size: 20px; font-weight: 700; color: var(--sl-moss-dark); }
+    #ll-root .stat .lbl { font-size: 10px; color: var(--sl-muted); text-transform: uppercase; letter-spacing: 1px; margin-top: 2px; }
 
-    /* Breakdown */
-    .ll-breakdown-card {
-      border: 1px solid var(--p-dark);
+    /* ---- Project breakdown ---- */
+    #ll-root .breakdown-card {
+      border: 1px solid var(--sl-ink);
       background: rgba(255,255,255,0.25);
       padding: 12px 14px 4px;
       margin-bottom: 22px;
     }
-    .ll-breakdown-title { font-size: 10px; text-transform: uppercase; letter-spacing: 1.5px; color: #756a54; margin-bottom: 10px; }
-    .ll-breakdown-row { display: flex; align-items: center; gap: 10px; margin-bottom: 9px; font-size: 11.5px; }
-    .ll-breakdown-name { width: 92px; flex-shrink: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .ll-breakdown-track { flex: 1; height: 8px; background: rgba(0,0,0,0.08); position: relative; }
-    .ll-breakdown-fill { height: 100%; }
-    .ll-breakdown-mins { width: 64px; flex-shrink: 0; text-align: right; color: #756a54; font-size: 10.5px; }
-    .ll-breakdown-empty { font-size: 11px; color: #756a54; padding-bottom: 10px; }
+    #ll-root .breakdown-title {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--sl-muted);
+      margin-bottom: 10px;
+    }
+    #ll-root .breakdown-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 9px;
+      font-size: 11.5px;
+    }
+    #ll-root .breakdown-name {
+      width: 92px;
+      flex-shrink: 0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    #ll-root .breakdown-track {
+      flex: 1;
+      height: 8px;
+      background: rgba(28,43,47,0.08);
+      position: relative;
+    }
+    #ll-root .breakdown-fill { height: 100%; }
+    #ll-root .breakdown-mins {
+      width: 64px;
+      flex-shrink: 0;
+      text-align: right;
+      color: var(--sl-muted);
+      font-size: 10.5px;
+    }
+    #ll-root .breakdown-empty { font-size: 11px; color: var(--sl-muted); padding-bottom: 10px; }
 
-    /* Timer */
-    .ll-timer-card {
-      border: 1px solid var(--p-dark);
-      background: rgba(0, 130, 142, 0.05);
+    /* ---- Timer ---- */
+    #ll-root .timer-card {
+      border: 1px solid var(--sl-ink);
+      background: rgba(55,73,47,0.06);
       padding: 16px;
       margin-bottom: 26px;
       display: flex;
@@ -151,208 +252,560 @@
       gap: 18px;
       flex-wrap: wrap;
     }
-    .ll-timer-dial {
-      width: 84px; height: 84px;
+    #ll-root .timer-dial {
+      width: 84px;
+      height: 84px;
       border-radius: 50%;
-      border: 2px solid var(--p-teal);
-      display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0; position: relative;
+      border: 2px solid var(--sl-moss-dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      position: relative;
+      background: var(--sl-paper);
     }
-    .ll-timer-dial.goal-reached { border-color: var(--p-red); background: rgba(255,25,3,0.06); }
-    .ll-timer-dial .time { font-family: 'Source Serif 4', serif; font-size: 19px; font-weight: 700; }
-    .ll-timer-info { flex: 1; min-width: 160px; }
-    .ll-timer-mode-label { font-size: 10px; text-transform: uppercase; letter-spacing: 1.5px; color: #756a54; margin-bottom: 4px; }
-    .ll-timer-sessions { font-size: 11px; color: #756a54; margin-bottom: 8px; }
-    .ll-timer-controls { display: flex; gap: 8px; flex-wrap: wrap; }
-    .ll-timer-btn {
-      border: 1px solid var(--p-dark); background: transparent; color: var(--p-dark);
-      padding: 6px 12px; font-family: 'IBM Plex Mono', monospace;
-      font-size: 11px; text-transform: uppercase; letter-spacing: 1px; cursor: pointer;
+    #ll-root .timer-dial.goal-reached { border-color: var(--sl-rust); background: rgba(156,74,52,0.08); }
+    #ll-root .timer-dial .time {
+      font-family: 'Source Serif 4', serif;
+      font-size: 19px;
+      font-weight: 700;
     }
-    .ll-timer-btn.primary { background: var(--p-teal); color: #fff; border-color: var(--p-teal); }
-    .ll-timer-btn.primary:hover { background: var(--p-dark); border-color: var(--p-dark); }
-    .ll-timer-btn:not(.primary):hover { background: rgba(0,0,0,0.06); }
-    .ll-timer-btn:disabled { opacity: 0.4; cursor: not-allowed; }
-    .ll-timer-presets { display: flex; gap: 6px; margin-top: 10px; align-items: center; flex-wrap: wrap; }
-    .ll-timer-presets-label { font-size: 10px; color: #756a54; text-transform: uppercase; letter-spacing: 1px; }
-    .ll-preset-btn {
-      border: 1px solid #b0a898; background: transparent; color: #756a54;
-      padding: 3px 10px; font-family: 'IBM Plex Mono', monospace;
-      font-size: 10.5px; cursor: pointer; border-radius: 12px;
+    #ll-root .timer-info { flex: 1; min-width: 160px; }
+    #ll-root .timer-mode-label {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--sl-muted);
+      margin-bottom: 4px;
     }
-    .ll-preset-btn:hover { border-color: var(--p-teal); color: var(--p-teal); }
-    .ll-preset-btn.active { background: var(--p-teal); color: #fff; border-color: var(--p-teal); }
+    #ll-root .timer-sessions { font-size: 11px; color: var(--sl-muted); margin-bottom: 8px; }
+    #ll-root .timer-controls { display: flex; gap: 8px; flex-wrap: wrap; }
+    #ll-root .timer-btn {
+      border: 1px solid var(--sl-ink);
+      background: transparent;
+      color: var(--sl-ink);
+      padding: 6px 12px;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      cursor: pointer;
+    }
+    #ll-root .timer-btn.primary { background: var(--sl-moss-dark); color: var(--sl-paper); border-color: var(--sl-moss-dark); }
+    #ll-root .timer-btn.primary:hover { background: var(--sl-rust); border-color: var(--sl-rust); }
+    #ll-root .timer-btn:hover { background: rgba(0,0,0,0.06); }
+    #ll-root .timer-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+    #ll-root .timer-presets { display: flex; gap: 6px; margin-top: 10px; align-items: center; flex-wrap: wrap; }
+    #ll-root .timer-presets-label {
+      font-size: 10px;
+      color: var(--sl-muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-right: 2px;
+    }
+    #ll-root .preset-btn {
+      border: 1px solid var(--sl-muted);
+      background: transparent;
+      color: var(--sl-muted);
+      padding: 3px 10px;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10.5px;
+      cursor: pointer;
+      border-radius: 12px;
+    }
+    #ll-root .preset-btn:hover { border-color: var(--sl-moss-dark); color: var(--sl-moss-dark); }
+    #ll-root .preset-btn.active { background: var(--sl-moss-dark); color: var(--sl-paper); border-color: var(--sl-moss-dark); }
 
-    /* Kanban board */
-    .ll-kanban-wrap {
-      border: 1px solid var(--p-dark); margin-bottom: 18px;
+    /* ---- Project board add row ---- */
+    #ll-root .project-add-row { display: flex; gap: 8px; }
+    #ll-root .project-add-row input {
+      flex: 1;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 12.5px;
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid var(--sl-ink);
+      padding: 5px 2px;
+      color: var(--sl-ink);
+    }
+    #ll-root .project-add-row input:focus { outline: none; border-bottom: 2px solid var(--sl-rust); }
+    #ll-root .project-add-btn {
+      border: 1px solid var(--sl-ink);
+      background: transparent;
+      color: var(--sl-ink);
+      padding: 4px 12px;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      cursor: pointer;
+    }
+    #ll-root .project-add-btn:hover { background: var(--sl-moss-dark); color: var(--sl-paper); border-color: var(--sl-moss-dark); }
+    #ll-root .project-add-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+    /* ---- Entry form ---- */
+    #ll-root form.entry {
+      border: 1px solid var(--sl-ink);
+      padding: 16px;
+      margin-bottom: 26px;
       background: rgba(255,255,255,0.35);
     }
-    .ll-kanban-header {
-      display: flex; align-items: center; justify-content: space-between;
-      gap: 12px; padding: 12px 16px 10px; border-bottom: 1px solid rgba(19,30,33,0.1);
+    #ll-root form.entry .row { display: flex; gap: 10px; margin-bottom: 10px; flex-wrap: wrap; }
+    #ll-root form.entry label {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--sl-muted);
+      display: block;
+      margin-bottom: 4px;
+    }
+    #ll-root form.entry input, #ll-root form.entry select, #ll-root form.entry textarea {
+      width: 100%;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 13px;
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid var(--sl-ink);
+      padding: 5px 2px;
+      color: var(--sl-ink);
+    }
+    #ll-root form.entry select { cursor: pointer; }
+    #ll-root form.entry input:focus, #ll-root form.entry select:focus, #ll-root form.entry textarea:focus {
+      outline: none;
+      border-bottom: 2px solid var(--sl-rust);
+    }
+    #ll-root form.entry .col { flex: 1; min-width: 130px; }
+    #ll-root form.entry textarea { resize: vertical; min-height: 40px; }
+
+    #ll-root .rating-hint { font-size: 10.5px; color: var(--sl-muted); margin-top: 4px; font-style: italic; }
+
+    #ll-root .submit-btn {
+      margin-top: 6px;
+      background: var(--sl-moss-dark);
+      color: var(--sl-paper);
+      border: none;
+      padding: 9px 18px;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      cursor: pointer;
+    }
+    #ll-root .submit-btn:hover { background: var(--sl-rust); }
+    #ll-root .submit-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    /* ---- Log card ---- */
+    #ll-root .log-card {
+      border: 1px solid var(--sl-ink);
+      background: rgba(255,255,255,0.35);
+      padding: 16px;
+      margin-bottom: 26px;
+    }
+    #ll-root .log-heading-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--sl-ink);
+      padding-bottom: 6px;
+      margin-bottom: 14px;
+      gap: 10px;
       flex-wrap: wrap;
     }
-    .ll-kanban-board {
-      display: grid; grid-template-columns: repeat(3,1fr); gap: 0;
+    #ll-root .log-heading {
+      font-family: 'Source Serif 4', serif;
+      font-size: 15px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--sl-moss-dark);
     }
-    .ll-kanban-col {
-      padding: 10px 12px; border-right: 1px solid rgba(19,30,33,0.1);
-      min-height: 90px; transition: background 150ms;
+    #ll-root .log-heading-actions { display: flex; gap: 10px; align-items: center; }
+    #ll-root .filter-select {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10.5px;
+      background: transparent;
+      border: 1px solid var(--sl-muted);
+      color: var(--sl-muted);
+      padding: 4px 6px;
+      cursor: pointer;
     }
-    .ll-kanban-col:last-child { border-right: none; }
-    .ll-kanban-col-over { background: rgba(0,130,142,0.08); }
-    .ll-kanban-col-title {
-      font-size: 9px; font-weight: 800; letter-spacing: 1.5px;
-      text-transform: uppercase; color: #756a54; margin-bottom: 8px;
+    #ll-root .export-btn {
+      background: none;
+      border: 1px solid var(--sl-muted);
+      color: var(--sl-muted);
+      font-size: 10px;
+      padding: 4px 10px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      cursor: pointer;
+      font-family: 'IBM Plex Mono', monospace;
     }
-    .ll-kanban-card {
-      display: flex; align-items: center; justify-content: space-between;
-      gap: 6px; background: #fff; border: 1px solid rgba(19,30,33,0.15);
-      border-radius: 3px; padding: 6px 8px; margin-bottom: 6px;
-      font-size: 12px; cursor: grab; user-select: none;
-    }
-    .ll-kanban-card:active { cursor: grabbing; opacity: 0.7; }
-    .ll-kanban-name { flex: 1; cursor: text; }
-    .ll-kanban-name:hover { text-decoration: underline; text-decoration-style: dotted; }
-    .ll-kanban-edit {
-      flex: 1; font-family: 'IBM Plex Mono', monospace; font-size: 12px;
-      border: none; border-bottom: 1px solid var(--p-teal); background: transparent;
-      outline: none; padding: 0; min-width: 0;
-    }
-    .ll-kanban-actions { display: flex; align-items: center; gap: 2px; flex-shrink: 0; }
-    .ll-kanban-move {
-      background: none; border: 1px solid rgba(19,30,33,0.2); color: #756a54;
-      font-size: 14px; line-height: 1; padding: 1px 5px; border-radius: 2px;
-      cursor: pointer; font-weight: bold;
-    }
-    .ll-kanban-move:hover { background: var(--p-teal); color: #fff; border-color: var(--p-teal); }
-    @media (max-width: 540px) {
-      .ll-kanban-board { grid-template-columns: 1fr; }
-      .ll-kanban-col { border-right: none; border-bottom: 1px solid rgba(19,30,33,0.1); }
-      .ll-kanban-col:last-child { border-bottom: none; }
-    }
-    /* Subject manager label reused */
-    .ll-subject-manager-label { font-size: 10px; text-transform: uppercase; letter-spacing: 1.5px; color: #756a54; margin-bottom: 0; }
-    .ll-subject-add-row { display: flex; gap: 8px; }
-    .ll-subject-add-row input {
-      flex: 1; font-family: 'IBM Plex Mono', monospace; font-size: 12.5px;
-      background: transparent; border: none; border-bottom: 1px solid var(--p-dark);
-      padding: 5px 2px; color: var(--p-dark);
-    }
-    .ll-subject-add-row input:focus { outline: none; border-bottom: 2px solid var(--p-teal); }
-    .ll-subject-add-btn {
-      border: 1px solid var(--p-dark); background: transparent; color: var(--p-dark);
-      padding: 4px 12px; font-family: 'IBM Plex Mono', monospace;
-      font-size: 11px; text-transform: uppercase; letter-spacing: 1px; cursor: pointer;
-    }
-    .ll-subject-add-btn:hover { background: var(--p-teal); color: #fff; border-color: var(--p-teal); }
-    .ll-subject-add-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+    #ll-root .export-btn:hover { border-color: var(--sl-moss-dark); color: var(--sl-moss-dark); }
+    #ll-root .export-btn:disabled { opacity: 0.4; cursor: not-allowed; }
 
-    /* Entry form */
-    form.ll-entry {
-      border: 1px solid var(--p-dark); padding: 16px;
-      margin-bottom: 26px; background: rgba(255,255,255,0.35);
-    }
-    form.ll-entry .row { display: flex; gap: 10px; margin-bottom: 10px; flex-wrap: wrap; }
-    form.ll-entry label {
-      font-size: 10px; text-transform: uppercase; letter-spacing: 1px;
-      color: #756a54; display: block; margin-bottom: 4px;
-    }
-    form.ll-entry input, form.ll-entry select, form.ll-entry textarea {
-      width: 100%; font-family: 'IBM Plex Mono', monospace; font-size: 13px;
-      background: transparent; border: none; border-bottom: 1px solid var(--p-dark);
-      padding: 5px 2px; color: var(--p-dark);
-    }
-    form.ll-entry select { cursor: pointer; }
-    form.ll-entry input:focus, form.ll-entry select:focus, form.ll-entry textarea:focus {
-      outline: none; border-bottom: 2px solid var(--p-teal);
-    }
-    form.ll-entry .col { flex: 1; min-width: 130px; }
-    form.ll-entry textarea { resize: vertical; min-height: 40px; }
-
-    .ll-submit-btn {
-      margin-top: 6px; background: var(--p-teal); color: #fff;
-      border: none; padding: 9px 18px; font-family: 'IBM Plex Mono', monospace;
-      font-size: 12px; text-transform: uppercase; letter-spacing: 1.5px; cursor: pointer;
-    }
-    .ll-submit-btn:hover { background: var(--p-dark); }
-    .ll-submit-btn:disabled { opacity: 0.5; cursor: not-allowed; }
-    .ll-saving-note { font-size: 11px; color: #756a54; margin-top: 8px; }
-
-    /* Log */
-    .ll-log-heading-row {
-      display: flex; justify-content: space-between; align-items: center;
-      border-bottom: 1px solid var(--p-dark); padding-bottom: 6px;
-      margin-bottom: 14px; gap: 10px; flex-wrap: wrap;
-    }
-    .ll-log-heading {
-      font-family: 'Source Serif 4', serif; font-size: 15px;
-      text-transform: uppercase; letter-spacing: 2px; color: var(--p-teal);
-    }
-    .ll-log-heading-actions { display: flex; gap: 10px; align-items: center; }
-    .ll-filter-select {
-      font-family: 'IBM Plex Mono', monospace; font-size: 10.5px;
-      background: transparent; border: 1px solid #b0a898; color: #756a54; padding: 4px 6px; cursor: pointer;
-    }
-    .ll-export-btn {
-      background: none; border: 1px solid #b0a898; color: #756a54;
-      font-size: 10px; padding: 4px 10px; letter-spacing: 1px;
-      text-transform: uppercase; cursor: pointer; font-family: 'IBM Plex Mono', monospace;
-    }
-    .ll-export-btn:hover { border-color: var(--p-teal); color: var(--p-teal); }
-    .ll-export-btn:disabled { opacity: 0.4; cursor: not-allowed; }
-
-    .ll-table-header {
+    #ll-root .log-table-header {
       display: grid;
       grid-template-columns: 56px 84px 84px 52px 60px minmax(0,1fr) 30px;
-      gap: 10px; align-items: center; padding: 0 0 6px;
-      font-size: 9.5px; text-transform: uppercase; letter-spacing: 1px;
-      color: #756a54; border-bottom: 1px solid var(--p-dark);
+      gap: 10px;
+      align-items: center;
+      padding: 0 0 6px;
+      font-size: 9.5px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--sl-muted);
+      border-bottom: 1px solid var(--sl-ink);
     }
-    .ll-entry-row {
+    #ll-root .entry-row {
       display: grid;
       grid-template-columns: 56px 84px 84px 52px 60px minmax(0,1fr) 30px;
-      gap: 10px; align-items: start; padding: 10px 0;
-      border-bottom: 1px dashed #d8d0c0;
+      gap: 10px;
+      align-items: start;
+      padding: 10px 0;
+      border-bottom: 1px dashed var(--sl-paper-line);
     }
     @media (max-width: 520px) {
-      .ll-table-header, .ll-entry-row {
+      #ll-root .log-table-header, #ll-root .entry-row {
         grid-template-columns: 48px 70px 44px 54px minmax(0,1fr) 24px;
       }
-      .ll-table-header > *:nth-child(3),
-      .ll-entry-row .entry-subtopic { display: none; }
+      #ll-root .log-table-header > *:nth-child(3),
+      #ll-root .entry-row .entry-subtopic {
+        display: none;
+      }
     }
-    .ll-entry-date {
-      font-family: 'Source Serif 4', serif; font-weight: 700;
-      font-size: 12.5px; color: var(--p-red); padding-top: 1px;
+    #ll-root .entry-date {
+      font-family: 'Source Serif 4', serif;
+      font-weight: 700;
+      font-size: 12.5px;
+      color: var(--sl-rust);
+      padding-top: 1px;
     }
-    .ll-entry-topic {
-      font-size: 11.5px; font-weight: 600; display: inline-block;
-      color: #fff; padding: 2px 7px; line-height: 1.4;
+    #ll-root .entry-topic {
+      font-size: 11.5px;
+      font-weight: 600;
+      display: inline-block;
+      color: var(--sl-paper);
+      padding: 2px 7px;
+      line-height: 1.4;
     }
-    .ll-entry-subtopic {
-      font-size: 10.5px; color: #756a54; padding-top: 3px;
-      overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    #ll-root .entry-subtopic {
+      font-size: 10.5px;
+      color: var(--sl-muted);
+      padding-top: 3px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
-    .ll-entry-minutes { font-size: 11px; color: #756a54; padding-top: 3px; text-align: right; white-space: nowrap; }
-    .ll-entry-rating { font-size: 10.5px; color: var(--p-teal); padding-top: 3px; white-space: nowrap; }
-    .ll-entry-note { font-size: 12px; color: var(--p-dark); line-height: 1.5; padding-top: 2px; word-break: break-word; }
-    .ll-del-btn {
-      background: none; border: none; color: #b0a898;
+    #ll-root .entry-minutes { font-size: 11px; color: var(--sl-muted); padding-top: 3px; text-align: right; white-space: nowrap; }
+    #ll-root .entry-rating-short { font-size: 10.5px; color: var(--sl-moss-dark); padding-top: 3px; white-space: nowrap; }
+    #ll-root .entry-note { font-size: 12px; color: var(--sl-ink); line-height: 1.5; padding-top: 2px; word-break: break-word; }
+    #ll-root .del-btn {
+      background: none; border: none; color: var(--sl-muted);
       font-size: 10px; cursor: pointer; text-decoration: underline;
       padding: 0; padding-top: 3px; justify-self: end;
     }
-    .ll-del-btn:hover { color: var(--p-red); }
+    #ll-root .del-btn:hover { color: var(--sl-rust); }
 
-    .ll-empty-state {
-      text-align: center; padding: 30px 10px;
-      color: #756a54; font-size: 12px; line-height: 1.8;
+    #ll-root .empty-state {
+      text-align: center;
+      padding: 30px 10px;
+      color: var(--sl-muted);
+      font-size: 12px;
+      line-height: 1.8;
     }
-    .ll-footer-note {
-      text-align: center; font-size: 10px; color: #b0a898;
-      margin-top: 30px; letter-spacing: 1px;
+
+    #ll-root .footer-note {
+      text-align: center;
+      font-size: 10px;
+      color: var(--sl-muted);
+      margin-top: 30px;
+      letter-spacing: 1px;
     }
+
+    /* ---- Daily highlights & reflection ---- */
+    #ll-root .daily-card {
+      border: 1px solid var(--sl-ink);
+      background: rgba(255,255,255,0.35);
+      padding: 16px;
+      margin-bottom: 26px;
+    }
+    #ll-root .daily-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    #ll-root .daily-title {
+      font-family: 'Source Serif 4', serif;
+      font-size: 15px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--sl-moss-dark);
+    }
+    #ll-root .daily-date-picker { display: flex; align-items: center; gap: 8px; }
+    #ll-root .daily-date-picker input[type="date"] {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 12px;
+      border: 1px solid var(--sl-ink);
+      background: transparent;
+      padding: 4px 6px;
+      color: var(--sl-ink);
+    }
+    #ll-root .daily-today-btn {
+      border: 1px solid var(--sl-muted);
+      background: transparent;
+      color: var(--sl-muted);
+      padding: 3px 9px;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+    }
+    #ll-root .daily-today-btn:hover { border-color: var(--sl-moss-dark); color: var(--sl-moss-dark); }
+
+    #ll-root .highlight-list { margin-bottom: 16px; }
+    #ll-root .highlight-item { display: flex; align-items: center; gap: 8px; margin-bottom: 7px; }
+    #ll-root .highlight-item input[type="checkbox"] {
+      width: 16px; height: 16px;
+      accent-color: var(--sl-moss-dark);
+      flex-shrink: 0; cursor: pointer;
+    }
+    #ll-root .highlight-item input[type="text"] {
+      flex: 1;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 13px;
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid var(--sl-paper-line);
+      padding: 4px 2px;
+      color: var(--sl-ink);
+    }
+    #ll-root .highlight-item input[type="text"]:focus { outline: none; border-bottom: 2px solid var(--sl-rust); }
+    #ll-root .highlight-item.done input[type="text"] { text-decoration: line-through; color: var(--sl-muted); }
+    #ll-root .highlight-remove-btn {
+      background: none; border: none; color: var(--sl-muted);
+      font-size: 15px; line-height: 1; cursor: pointer; flex-shrink: 0; padding: 0 2px;
+    }
+    #ll-root .highlight-remove-btn:hover { color: var(--sl-rust); }
+    #ll-root .highlight-add-btn {
+      border: 1px dashed var(--sl-muted);
+      background: transparent;
+      color: var(--sl-muted);
+      padding: 5px 12px;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+    }
+    #ll-root .highlight-add-btn:hover { border-color: var(--sl-moss-dark); color: var(--sl-moss-dark); border-style: solid; }
+
+    #ll-root .reflection-label {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--sl-muted);
+      display: block;
+      margin-bottom: 6px;
+    }
+    #ll-root .reflection-textarea {
+      width: 100%;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 13px;
+      background: transparent;
+      border: 1px solid var(--sl-paper-line);
+      padding: 8px;
+      min-height: 90px;
+      color: var(--sl-ink);
+      resize: vertical;
+      box-sizing: border-box;
+    }
+    #ll-root .reflection-textarea:focus { outline: none; border-color: var(--sl-rust); }
+
+    #ll-root .daily-save-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 12px;
+      flex-wrap: wrap;
+    }
+    #ll-root .daily-save-status { font-size: 10.5px; }
+    #ll-root .daily-save-status.dirty { color: var(--sl-rust); }
+    #ll-root .daily-save-status.saved { color: var(--sl-moss-dark); }
+    #ll-root .reflection-date-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 12px;
+      color: var(--sl-muted);
+    }
+
+    /* ---- Project board (kanban) ---- */
+    #ll-root .project-board {
+      border: 1px solid var(--sl-ink);
+      background: rgba(255,255,255,0.35);
+      padding: 16px;
+      margin-bottom: 26px;
+    }
+    #ll-root .project-board-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+    #ll-root .project-board-title {
+      font-family: 'Source Serif 4', serif;
+      font-size: 15px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--sl-moss-dark);
+    }
+    #ll-root .project-board-add { display: flex; gap: 8px; align-items: center; }
+    #ll-root .project-board-add input {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 12.5px;
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid var(--sl-ink);
+      padding: 4px 2px;
+      color: var(--sl-ink);
+      min-width: 160px;
+    }
+    #ll-root .project-board-add input:focus { outline: none; border-bottom: 2px solid var(--sl-rust); }
+
+    #ll-root .kanban-columns {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    @media (max-width: 560px) {
+      #ll-root .kanban-columns { grid-template-columns: 1fr; }
+    }
+    #ll-root .kanban-column { border-left: 1px solid var(--sl-paper-line); padding-left: 12px; }
+    #ll-root .kanban-column:first-child { border-left: none; padding-left: 0; }
+    #ll-root .kanban-column-title {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--sl-muted);
+      margin-bottom: 10px;
+    }
+    #ll-root .kanban-card {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid var(--sl-ink);
+      background: rgba(255,255,255,0.5);
+      padding: 8px 10px;
+      margin-bottom: 8px;
+    }
+    #ll-root .kanban-card-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+    #ll-root .kanban-card-name { flex: 1; font-size: 12.5px; color: var(--sl-ink); word-break: break-word; }
+    #ll-root .kanban-card-actions { display: flex; gap: 2px; flex-shrink: 0; }
+    #ll-root .kanban-card-actions button {
+      background: none; border: none; color: var(--sl-muted);
+      font-size: 12px; line-height: 1; cursor: pointer; padding: 2px 4px;
+    }
+    #ll-root .kanban-card-actions button:hover { color: var(--sl-moss-dark); }
+    #ll-root .kanban-card-actions button:last-child:hover { color: var(--sl-rust); }
+    #ll-root .kanban-card-actions button:disabled { opacity: 0.25; cursor: not-allowed; }
+
+    /* ---- Calendar ---- */
+    #ll-root .calendar-card {
+      border: 1px solid var(--sl-ink);
+      background: rgba(255,255,255,0.35);
+      padding: 16px;
+      margin-bottom: 26px;
+    }
+    #ll-root .calendar-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+    #ll-root .calendar-nav-btn {
+      border: 1px solid var(--sl-ink);
+      background: transparent;
+      color: var(--sl-ink);
+      width: 26px; height: 26px;
+      line-height: 1; font-size: 15px; cursor: pointer;
+    }
+    #ll-root .calendar-nav-btn:hover { background: rgba(0,0,0,0.06); }
+    #ll-root .calendar-month-label {
+      font-family: 'Source Serif 4', serif;
+      font-size: 14px; font-weight: 700;
+      color: var(--sl-moss-dark);
+      min-width: 90px;
+    }
+    #ll-root .calendar-weekdays {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 4px;
+      margin-bottom: 6px;
+    }
+    #ll-root .calendar-weekday {
+      text-align: center;
+      font-size: 9.5px;
+      color: var(--sl-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    #ll-root .calendar-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 4px;
+      margin-bottom: 16px;
+    }
+    #ll-root .calendar-cell {
+      aspect-ratio: 1;
+      border: 1px solid var(--sl-paper-line);
+      background: rgba(255,255,255,0.4);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
+      cursor: pointer;
+      font-family: 'IBM Plex Mono', monospace;
+      padding: 2px;
+    }
+    #ll-root .calendar-cell:hover { border-color: var(--sl-moss-dark); }
+    #ll-root .calendar-cell.empty { border: none; background: none; cursor: default; }
+    #ll-root .calendar-cell.today { border-color: var(--sl-rust); border-width: 2px; }
+    #ll-root .calendar-cell.selected { background: rgba(55,73,47,0.15); border-color: var(--sl-moss-dark); }
+    #ll-root .calendar-daynum { font-size: 11px; color: var(--sl-ink); }
+    #ll-root .calendar-indicators { display: flex; gap: 2px; height: 6px; }
+    #ll-root .cal-dot { width: 5px; height: 5px; border-radius: 50%; display: inline-block; }
+    #ll-root .cal-dot-entry { background: var(--sl-moss-dark); }
+    #ll-root .cal-dot-highlight { background: var(--sl-rust); }
+    #ll-root .cal-dot-reflection { background: var(--sl-sub-3); }
+
+    #ll-root .calendar-detail { border-top: 1px solid var(--sl-paper-line); padding-top: 12px; }
+    #ll-root .calendar-detail-title {
+      font-family: 'Source Serif 4', serif;
+      font-size: 13px; font-weight: 700;
+      color: var(--sl-rust);
+      margin-bottom: 10px;
+    }
+    #ll-root .calendar-detail-section { margin-bottom: 12px; }
+    #ll-root .calendar-detail-label {
+      font-size: 9.5px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--sl-muted);
+      margin-bottom: 6px;
+    }
+    #ll-root .calendar-detail-entry {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      margin-bottom: 5px;
+    }
+    #ll-root .calendar-detail-note { color: var(--sl-muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    #ll-root .calendar-detail-highlight { font-size: 12px; margin-bottom: 4px; }
+    #ll-root .calendar-detail-highlight.done { color: var(--sl-muted); text-decoration: line-through; }
+    #ll-root .calendar-detail-reflection { font-size: 12.5px; line-height: 1.6; white-space: pre-wrap; }
   </style>
 </head>
 <body>
@@ -405,283 +858,320 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.5/babel.min.js"></script>
   <script type="text/babel">
-const { useState, useEffect, useMemo, useRef, useCallback } = React;
+const { useState, useEffect, useMemo, useRef } = React;
 
-// ── GitHub config ──
-const GH_OWNER = 'tsinui';
-const GH_REPO  = 'tsinui.github.io';
-const GH_PATH  = 'data/learning-log.csv';
-const GH_PROJECTS_PATH = 'data/projects.csv';
-const GH_BRANCH = 'main';
-const TOKEN_KEY = 'll-gh-token';
+const CONFIG_KEY = 'sl-github-config-v1';
 
-// ── GitHub API helpers ──
-function ghHeaders(token) {
-  return { Authorization: `token ${token}`, 'Content-Type': 'application/json' };
-}
+const REPO_OWNER = 'tsinui';
+const REPO_NAME = 'tsinui.github.io';
+const ENTRIES_PATH = 'data/learning-log.csv';
+const PROJECTS_PATH = 'data/projects.json';
+const DAILY_PATH = 'data/daily.json';
 
-function toB64(str) {
-  return btoa(encodeURIComponent(str).replace(/%([0-9A-F]{2})/g, (_, p) => String.fromCharCode(parseInt(p, 16))));
-}
-function fromB64(b64) {
-  return decodeURIComponent(Array.from(atob(b64.replace(/\n/g,'')), c => '%' + c.charCodeAt(0).toString(16).padStart(2,'0')).join(''));
-}
+const DEFAULT_PROJECTS = [];
+const KANBAN_STATUSES = ['not_started', 'in_progress', 'done'];
+const KANBAN_COLUMN_LABELS = { not_started: 'NOT STARTED', in_progress: 'IN PROGRESS', done: 'DONE' };
 
-async function ghGetCSV(token) {
-  const res = await fetch(`https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${GH_PATH}`, {
-    headers: ghHeaders(token)
-  });
-  if (res.status === 404) return { entries: [], sha: null };
-  if (res.status === 401 || res.status === 403) throw new Error('auth');
-  if (!res.ok) throw new Error('fetch');
-  const data = await res.json();
-  return { entries: parseCSV(fromB64(data.content)), sha: data.sha };
-}
+const RATING_OPTIONS = [
+  { value: 1, label: '1 — 還很生疏，幾乎要重學' },
+  { value: 2, label: '2 — 有點印象，但不熟練' },
+  { value: 3, label: '3 — 大致掌握，偶爾卡住' },
+  { value: 4, label: '4 — 熟練，能自然運用' },
+  { value: 5, label: '5 — 已內化，不假思索' },
+];
 
-async function ghPutCSV(token, sha, entries) {
-  const csv = entriesToCSV(entries);
-  const body = {
-    message: `learning-log update ${new Date().toISOString().slice(0,10)}`,
-    content: toB64(csv),
-    branch: GH_BRANCH,
-  };
-  if (sha) body.sha = sha;
-  const res = await fetch(`https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${GH_PATH}`, {
-    method: 'PUT',
-    headers: ghHeaders(token),
-    body: JSON.stringify(body),
-  });
-  if (!res.ok) throw new Error('save');
-  const data = await res.json();
-  return data.content.sha;
+const PROJECT_PALETTE = ['var(--sl-sub-1)', 'var(--sl-sub-2)', 'var(--sl-sub-3)', 'var(--sl-sub-4)', 'var(--sl-sub-5)', 'var(--sl-sub-6)'];
+
+function colorForProject(name) {
+  let hash = 0;
+  const s = String(name || '');
+  for (let i = 0; i < s.length; i++) {
+    hash = (hash * 31 + s.charCodeAt(i)) >>> 0;
+  }
+  return PROJECT_PALETTE[hash % PROJECT_PALETTE.length];
 }
 
-// ── Projects GitHub API ──
-async function ghGetProjects(token) {
-  const res = await fetch(`https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${GH_PROJECTS_PATH}`, {
-    headers: ghHeaders(token)
-  });
-  if (res.status === 404) return { projects: [], sha: null };
-  if (!res.ok) throw new Error('fetch');
-  const data = await res.json();
-  return { projects: parseProjectsCSV(fromB64(data.content)), sha: data.sha };
-}
-async function ghPutProjects(token, sha, projects) {
-  const csv = projectsToCSV(projects);
-  const body = { message: 'Update projects', content: toB64(csv), branch: GH_BRANCH };
-  if (sha) body.sha = sha;
-  const res = await fetch(`https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${GH_PROJECTS_PATH}`, {
-    method: 'PUT', headers: ghHeaders(token), body: JSON.stringify(body),
-  });
-  if (!res.ok) throw new Error('save');
-  return (await res.json()).content.sha;
-}
-
-// ── CSV helpers ──
-function csvEscape(v) {
-  const s = String(v ?? '');
-  return /[",\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s;
-}
-function parseCSV(text) {
-  const lines = text.trim().split(/\r?\n/);
-  if (lines.length < 2) return [];
-  return lines.slice(1).map(line => {
-    const cols = [];
-    let cur = '', inQ = false;
-    for (let i = 0; i < line.length; i++) {
-      const ch = line[i];
-      if (ch === '"') { inQ ? (line[i+1] === '"' ? (cur += '"', i++) : inQ = false) : inQ = true; }
-      else if (ch === ',' && !inQ) { cols.push(cur); cur = ''; }
-      else cur += ch;
-    }
-    cols.push(cur);
-    const [id, date, subject, subtopic, minutes, rating, ...noteParts] = cols;
-    return { id, date, subject, subtopic, minutes: Number(minutes)||0, rating: Number(rating)||3, note: noteParts.join(',') };
-  }).filter(e => e.id && e.date);
-}
-function entriesToCSV(entries) {
-  const header = 'id,date,subject,subtopic,minutes,rating,note';
-  const rows = entries.map(e =>
-    [e.id, e.date, e.subject, e.subtopic||'', e.minutes, e.rating, e.note||''].map(csvEscape).join(',')
-  );
-  return [header, ...rows].join('\r\n') + '\r\n';
-}
-function downloadCSV(entries) {
-  const csv = '﻿' + entriesToCSV(entries);
-  const url = URL.createObjectURL(new Blob([csv], { type: 'text/csv;charset=utf-8;' }));
-  const a = Object.assign(document.createElement('a'), { href: url, download: `learning-log-${todayStr()}.csv` });
-  document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url);
-}
-
-function parseProjectsCSV(text) {
-  const lines = text.trim().split(/\r?\n/);
-  if (lines.length < 2) return [];
-  return lines.slice(1).map(line => {
-    const [id, name, status] = line.split(',');
-    return { id: id?.trim(), name: name?.trim(), status: status?.trim() || 'Not Started' };
-  }).filter(p => p.id && p.name);
-}
-function projectsToCSV(projects) {
-  const rows = projects.map(p => [p.id, p.name, p.status].map(v => csvEscape(v||'')).join(','));
-  return ['id,name,status', ...rows].join('\r\n') + '\r\n';
-}
-
-// ── Utilities ──
 function todayStr(d) {
   const t = d || new Date();
   return `${t.getFullYear()}-${String(t.getMonth()+1).padStart(2,'0')}-${String(t.getDate()).padStart(2,'0')}`;
 }
+
 function fmtDate(iso) {
   const d = new Date(iso + 'T00:00:00');
-  return `${d.getMonth()+1}/${d.getDate()} (${'日一二三四五六'[d.getDay()]})`;
+  const mm = d.getMonth() + 1;
+  const dd = d.getDate();
+  const wd = ['日','一','二','三','四','五','六'][d.getDay()];
+  return `${mm}/${dd} (${wd})`;
 }
-function mmss(s) { return `${String(Math.floor(s/60)).padStart(2,'0')}:${String(s%60).padStart(2,'0')}`; }
-function formatHM(m) {
-  const h = Math.floor(m/60), rem = m%60;
-  return h > 0 ? `${h} 時 ${rem} 分` : `${rem} 分`;
-}
+
 function calcStreak(entries) {
   const dates = new Set(entries.map(e => e.date));
-  let streak = 0, cursor = new Date();
-  while (dates.has(todayStr(cursor))) {
-    streak++; cursor.setDate(cursor.getDate()-1);
+  let streak = 0;
+  let cursor = new Date();
+  while (true) {
+    const iso = todayStr(cursor);
+    if (dates.has(iso)) {
+      streak++;
+      cursor.setDate(cursor.getDate() - 1);
+    } else {
+      break;
+    }
   }
   return streak;
 }
+
 function last7DaysMinutes(entries) {
-  const cutoff = new Date(); cutoff.setDate(cutoff.getDate()-6); cutoff.setHours(0,0,0,0);
-  return entries.filter(e => new Date(e.date+'T00:00:00') >= cutoff).reduce((s,e) => s+Number(e.minutes||0), 0);
+  const now = new Date();
+  const start = new Date(now);
+  start.setDate(now.getDate() - 6);
+  start.setHours(0,0,0,0);
+  return entries
+    .filter(e => new Date(e.date + 'T00:00:00') >= start)
+    .reduce((sum, e) => sum + Number(e.minutes || 0), 0);
 }
-function subjectBreakdown(entries) {
+
+function projectBreakdown(entries) {
   const map = new Map();
-  entries.forEach(e => map.set(e.subject, (map.get(e.subject)||0)+Number(e.minutes||0)));
-  return [...map.entries()].map(([subject,minutes]) => ({subject,minutes})).sort((a,b) => b.minutes-a.minutes);
+  entries.forEach(e => {
+    const key = e.project || '未分類';
+    map.set(key, (map.get(key) || 0) + Number(e.minutes || 0));
+  });
+  return Array.from(map.entries())
+    .map(([project, minutes]) => ({ project, minutes }))
+    .sort((a, b) => b.minutes - a.minutes);
 }
 
-const SUBJECT_PALETTE = ['#4f6b52','#9c4a34','#7a6a9c','#ab8a3c','#3c7a86','#8a5a3c'];
-function colorForSubject(name) {
-  let h = 0; for (let c of String(name||'')) h = (h*31+c.charCodeAt(0))>>>0;
-  return SUBJECT_PALETTE[h % SUBJECT_PALETTE.length];
+function last7DaysProjectBreakdown(entries) {
+  const now = new Date();
+  const start = new Date(now);
+  start.setDate(now.getDate() - 6);
+  start.setHours(0,0,0,0);
+  const recent = entries.filter(e => new Date(e.date + 'T00:00:00') >= start);
+  return projectBreakdown(recent);
 }
 
-const RATING_OPTIONS = [
-  {value:1,label:'1 — 還很生疏，幾乎要重學'},
-  {value:2,label:'2 — 有點印象，但不熟練'},
-  {value:3,label:'3 — 大致掌握，偶爾卡住'},
-  {value:4,label:'4 — 熟練，能自然運用'},
-  {value:5,label:'5 — 已內化，不假思索'},
-];
-const KANBAN_COLS = ['Not Started','In Progress','Done'];
-const STOPWATCH_PRESETS = [15,25,45,60];
+function pad2(n) { return String(n).padStart(2, '0'); }
 
-// ── Kanban Board ──
-function KanbanBoard({ projects, onMove, onAdd, onDelete, onRename, saving }) {
-  const [newName, setNewName] = React.useState('');
-  const [dragId, setDragId] = React.useState(null);
-  const [overCol, setOverCol] = React.useState(null);
-  const [editingId, setEditingId] = React.useState(null);
-  const [editVal, setEditVal] = React.useState('');
-
-  const add = () => {
-    const name = newName.trim();
-    if (!name) return;
-    onAdd({ id: Date.now().toString(36), name, status: 'Not Started' });
-    setNewName('');
-  };
-
-  const startEdit = (p) => { setEditingId(p.id); setEditVal(p.name); };
-  const commitEdit = (p) => {
-    const name = editVal.trim();
-    if (name && name !== p.name) onRename(p.id, p.name, name);
-    setEditingId(null);
-  };
-
-  return (
-    <div className="ll-kanban-wrap">
-      <div className="ll-kanban-header">
-        <div className="ll-subject-manager-label">專案看板</div>
-        <div className="ll-subject-add-row" style={{marginBottom:0}}>
-          <input placeholder="新增專案…" value={newName}
-            onChange={e=>setNewName(e.target.value)}
-            onKeyDown={e=>{if(e.key==='Enter'){e.preventDefault();add();}}} />
-          <button className="ll-subject-add-btn" type="button" onClick={add} disabled={!newName.trim()}>新增</button>
-        </div>
-      </div>
-      <div className="ll-kanban-board">
-        {KANBAN_COLS.map(col => (
-          <div key={col}
-            className={`ll-kanban-col${overCol===col?' ll-kanban-col-over':''}`}
-            onDragOver={e=>{e.preventDefault();setOverCol(col);}}
-            onDragLeave={()=>setOverCol(null)}
-            onDrop={e=>{e.preventDefault();setOverCol(null);if(dragId)onMove(dragId,col);}}>
-            <div className="ll-kanban-col-title">{col}</div>
-            {projects.filter(p=>p.status===col).map(p=>{
-              const colIdx = KANBAN_COLS.indexOf(col);
-              return (
-                <div key={p.id} className="ll-kanban-card"
-                  draggable={editingId!==p.id}
-                  onDragStart={()=>editingId!==p.id&&setDragId(p.id)}
-                  onDragEnd={()=>setDragId(null)}>
-                  {editingId===p.id
-                    ? <input className="ll-kanban-edit" autoFocus value={editVal}
-                        onChange={e=>setEditVal(e.target.value)}
-                        onBlur={()=>commitEdit(p)}
-                        onKeyDown={e=>{if(e.key==='Enter')commitEdit(p);if(e.key==='Escape')setEditingId(null);}} />
-                    : <span className="ll-kanban-name" onClick={()=>startEdit(p)} title="點擊改名">{p.name}</span>
-                  }
-                  <div className="ll-kanban-actions">
-                    {colIdx>0&&<button className="ll-kanban-move" type="button" onClick={()=>onMove(p.id,KANBAN_COLS[colIdx-1])} title="往左移">‹</button>}
-                    {colIdx<KANBAN_COLS.length-1&&<button className="ll-kanban-move" type="button" onClick={()=>onMove(p.id,KANBAN_COLS[colIdx+1])} title="往右移">›</button>}
-                    <button className="ll-del-btn" type="button" onClick={()=>onDelete(p.id)} title="刪除">×</button>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        ))}
-      </div>
-      {saving && <div className="ll-saving-note">更新專案至 GitHub…</div>}
-    </div>
-  );
+function daysInMonth(year, month) {
+  return new Date(year, month + 1, 0).getDate();
 }
 
-// ── Stopwatch ──
+function firstWeekdayOfMonth(year, month) {
+  return new Date(year, month, 1).getDay();
+}
+
+function ymdStr(year, month, day) {
+  return `${year}-${pad2(month + 1)}-${pad2(day)}`;
+}
+
+function monthLabel(year, month) {
+  return `${year} 年 ${month + 1} 月`;
+}
+
+function formatHM(totalMinutes) {
+  const m = Math.round(Number(totalMinutes) || 0);
+  const h = Math.floor(m / 60);
+  const rem = m % 60;
+  return h > 0 ? `${h} 時 ${rem} 分` : `${rem} 分`;
+}
+
+function mmss(totalSeconds) {
+  const m = Math.floor(totalSeconds / 60);
+  const s = totalSeconds % 60;
+  return `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+}
+
+function csvEscape(val) {
+  const s = String(val ?? '');
+  if (/[",\n]/.test(s)) {
+    return '"' + s.replace(/"/g, '""') + '"';
+  }
+  return s;
+}
+
+function downloadCSV(entries) {
+  const header = ['date','project','subtopic','minutes','rating','note'];
+  const lines = [header.join(',')];
+  entries.forEach(e => {
+    lines.push([e.date, e.project, e.subtopic || '', e.minutes, e.rating, e.note].map(csvEscape).join(','));
+  });
+  const csv = '﻿' + lines.join('\r\n');
+  const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `learning-log-${todayStr()}.csv`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+// ================= Base64/UTF-8 helpers =================
+function utf8ToBase64(str) { return btoa(unescape(encodeURIComponent(str))); }
+function base64ToUtf8(b64) { return decodeURIComponent(escape(atob(b64))); }
+
+// ================= GitHub Contents API =================
+const GITHUB_API = 'https://api.github.com';
+
+async function ghGetFile(token, owner, repo, path) {
+  const res = await fetch(`${GITHUB_API}/repos/${owner}/${repo}/contents/${encodeURIComponent(path)}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      Accept: 'application/vnd.github+json'
+    }
+  });
+  if (res.status === 404) return { content: null, sha: null };
+  if (!res.ok) throw new Error(`GitHub 讀取失敗（${res.status}）`);
+  const data = await res.json();
+  const content = base64ToUtf8((data.content || '').replace(/\n/g, ''));
+  return { content, sha: data.sha };
+}
+
+async function ghSaveFile(token, owner, repo, path, content, message) {
+  let sha = null;
+  try {
+    const current = await ghGetFile(token, owner, repo, path);
+    sha = current.sha;
+  } catch (e) { /* new file */ }
+
+  const body = { message, content: utf8ToBase64(content) };
+  if (sha) body.sha = sha;
+
+  const res = await fetch(`${GITHUB_API}/repos/${owner}/${repo}/contents/${encodeURIComponent(path)}`, {
+    method: 'PUT',
+    headers: {
+      Authorization: `Bearer ${token}`,
+      Accept: 'application/vnd.github+json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(body)
+  });
+  if (!res.ok) {
+    const errText = await res.text().catch(() => '');
+    throw new Error(`GitHub 寫入失敗（${res.status}）${errText ? ': ' + errText.slice(0,200) : ''}`);
+  }
+  const data = await res.json();
+  return data.content.sha;
+}
+
+// ================= CSV <-> entries =================
+function parseCSVRows(text) {
+  const rows = [];
+  let row = [];
+  let field = '';
+  let inQuotes = false;
+  for (let i = 0; i < text.length; i++) {
+    const c = text[i];
+    if (inQuotes) {
+      if (c === '"') {
+        if (text[i+1] === '"') { field += '"'; i++; }
+        else { inQuotes = false; }
+      } else {
+        field += c;
+      }
+    } else {
+      if (c === '"') { inQuotes = true; }
+      else if (c === ',') { row.push(field); field = ''; }
+      else if (c === '\r') { /* skip */ }
+      else if (c === '\n') { row.push(field); rows.push(row); row = []; field = ''; }
+      else { field += c; }
+    }
+  }
+  if (field.length > 0 || row.length > 0) { row.push(field); rows.push(row); }
+  return rows.filter(r => !(r.length === 1 && r[0] === ''));
+}
+
+function entriesToCSV(entries) {
+  const header = ['id','date','project','subtopic','minutes','rating','note'];
+  const lines = [header.join(',')];
+  entries.forEach(e => {
+    lines.push([e.id, e.date, e.project, e.subtopic || '', e.minutes, e.rating, e.note || ''].map(csvEscape).join(','));
+  });
+  return lines.join('\n');
+}
+
+function csvToEntries(text) {
+  if (!text || !text.trim()) return [];
+  const rows = parseCSVRows(text.trim());
+  if (rows.length < 2) return [];
+  // Support both 'project' and legacy 'subject' column
+  const header = rows[0].map(h => h.trim().toLowerCase());
+  const projectCol = header.indexOf('project') !== -1 ? header.indexOf('project') : header.indexOf('subject');
+  const body = rows.slice(1);
+  return body.map(r => ({
+    id: r[0] || (Date.now().toString(36) + Math.random().toString(36).slice(2,6)),
+    date: r[1] || todayStr(),
+    project: r[projectCol] || '',
+    subtopic: r[3] || '',
+    minutes: Number(r[4]) || 0,
+    rating: Number(r[5]) || 3,
+    note: r[6] || ''
+  })).filter(e => e.id && e.date);
+}
+
+// ---------------- Study Stopwatch ----------------
+const STOPWATCH_PRESETS = [15, 25, 45, 60];
+
 function StudyStopwatch({ onBank }) {
   const [seconds, setSeconds] = useState(0);
   const [running, setRunning] = useState(false);
   const [targetMin, setTargetMin] = useState(null);
-  const ref = useRef(null);
+  const intervalRef = useRef(null);
 
   useEffect(() => {
-    if (running) { ref.current = setInterval(() => setSeconds(s => s+1), 1000); }
-    return () => clearInterval(ref.current);
+    if (running) {
+      intervalRef.current = setInterval(() => {
+        setSeconds(s => s + 1);
+      }, 1000);
+    }
+    return () => clearInterval(intervalRef.current);
   }, [running]);
 
+  const toggleRun = () => setRunning(r => !r);
   const reset = () => { setRunning(false); setSeconds(0); };
-  const bank = () => { const m = Math.floor(seconds/60); if (m>0) onBank(m); reset(); };
-  const reached = targetMin !== null && seconds >= targetMin*60;
+  const selectTarget = (m) => setTargetMin(prev => (prev === m ? null : m));
+  const bankIntoForm = () => {
+    const mins = Math.floor(seconds / 60);
+    if (mins > 0) onBank(mins);
+    setRunning(false);
+    setSeconds(0);
+  };
+
+  const reached = targetMin !== null && seconds >= targetMin * 60;
+  const elapsedMin = Math.floor(seconds / 60);
+  const elapsedSec = seconds % 60;
 
   return (
-    <div className="ll-timer-card">
-      <div className={`ll-timer-dial${reached?' goal-reached':''}`}>
+    <div className="timer-card">
+      <div className={`timer-dial ${reached ? 'goal-reached' : ''}`}>
         <div className="time">{mmss(seconds)}</div>
       </div>
-      <div className="ll-timer-info">
-        <div className="ll-timer-mode-label">
-          {targetMin===null ? '正計時中' : reached ? `已達成 ${targetMin} 分鐘！` : `目標 ${targetMin} 分鐘`}
+      <div className="timer-info">
+        <div className="timer-mode-label">
+          {targetMin === null
+            ? '正計時中'
+            : reached
+              ? `已達成 ${targetMin} 分鐘目標！繼續計時中`
+              : `目標 ${targetMin} 分鐘`}
         </div>
-        <div className="ll-timer-sessions">已累積 {Math.floor(seconds/60)} 分 {seconds%60} 秒</div>
-        <div className="ll-timer-controls">
-          <button className="ll-timer-btn primary" onClick={() => setRunning(r => !r)}>{running?'暫停':'開始'}</button>
-          <button className="ll-timer-btn" onClick={reset}>重置</button>
-          <button className="ll-timer-btn" onClick={bank} disabled={seconds<60}>帶入打卡表單 →</button>
+        <div className="timer-sessions">已累積 {elapsedMin} 分 {elapsedSec} 秒</div>
+        <div className="timer-controls">
+          <button className="timer-btn primary" onClick={toggleRun}>{running ? '暫停' : '開始'}</button>
+          <button className="timer-btn" onClick={reset}>重置</button>
+          <button className="timer-btn" onClick={bankIntoForm} disabled={seconds < 60}>帶入打卡表單 →</button>
         </div>
-        <div className="ll-timer-presets">
-          <span className="ll-timer-presets-label">目標</span>
+        <div className="timer-presets">
+          <span className="timer-presets-label">目標時長</span>
           {STOPWATCH_PRESETS.map(m => (
-            <button key={m} type="button"
-              className={`ll-preset-btn${targetMin===m?' active':''}`}
-              onClick={() => setTargetMin(p => p===m?null:m)}>{m} 分</button>
+            <button
+              key={m}
+              type="button"
+              className={`preset-btn ${targetMin === m ? 'active' : ''}`}
+              onClick={() => selectTarget(m)}
+            >
+              {m} 分
+            </button>
           ))}
         </div>
       </div>
@@ -689,61 +1179,65 @@ function StudyStopwatch({ onBank }) {
   );
 }
 
-// ── Login screen ──
-function LoginScreen({ onLogin }) {
+// ---------------- Setup screen ----------------
+function SetupScreen({ onSubmit, error, loading }) {
   const [token, setToken] = useState('');
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
 
-  const submit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    if (!token.trim()) return;
-    setLoading(true); setError('');
-    try {
-      await ghGetCSV(token.trim());
-      onLogin(token.trim());
-    } catch {
-      setError('Token 無效或沒有權限，請確認後再試。');
-    }
-    setLoading(false);
+    onSubmit(token);
   };
 
   return (
-    <div className="ll-login">
-      <h2>自學紀錄</h2>
-      <p>
-        請輸入 GitHub Personal Access Token（需要 <code>contents: write</code> 權限）。<br/>
-        Token 只會存在你的瀏覽器裡，不會出現在原始碼中。
-      </p>
-      <form onSubmit={submit}>
-        <input
-          type="password"
-          placeholder="ghp_xxxxxxxxxxxxxxxxxxxx"
-          value={token}
-          onChange={e => setToken(e.target.value)}
-          autoComplete="off"
-          spellCheck={false}
-        />
-        <button className="ll-login-btn" type="submit" disabled={loading || !token.trim()}>
-          {loading ? '驗證中…' : '登入'}
-        </button>
-        {error && <div className="ll-login-error">{error}</div>}
-      </form>
+    <div className="gate-wrap">
+      <div className="gate-card">
+        <div className="gate-title">連接你的 GitHub 資料庫</div>
+        <div className="gate-subtitle">
+          資料會存在 {REPO_OWNER}/{REPO_NAME} 這個 repo 裡的 <code>data/</code> 資料夾中。
+          建議用 Fine-grained Personal Access Token，只給這個 repo 的 Contents 讀寫權限。
+          Token 會存在你這台裝置的瀏覽器裡，換裝置要重新輸入一次。
+        </div>
+        <form onSubmit={handleSubmit}>
+          <div className="gate-field">
+            <label>GitHub Personal Access Token</label>
+            <input type="password" value={token} onChange={e => setToken(e.target.value)} placeholder="github_pat_..." autoComplete="off" required />
+          </div>
+          {error && <div className="gate-error">{error}</div>}
+          <button className="gate-btn" type="submit" disabled={loading}>{loading ? '連接中…' : '儲存並開始使用'}</button>
+        </form>
+      </div>
     </div>
   );
 }
 
-// ── Main App ──
 function App() {
-  const [token, setToken] = useState(() => localStorage.getItem(TOKEN_KEY) || '');
+  const [stage, setStage] = useState('loading');
+  const [config, setConfig] = useState(null);
+  const [token, setToken] = useState(null);
+  const [gateError, setGateError] = useState('');
+  const [gateLoading, setGateLoading] = useState(false);
+
   const [entries, setEntries] = useState([]);
-  const [sha, setSha] = useState(null);
-  const [projects, setProjects] = useState([]);
-  const [projectSha, setProjectSha] = useState(null);
-  const [loaded, setLoaded] = useState(false);
-  const [saving, setSaving] = useState(false);
-  const [savingProjects, setSavingProjects] = useState(false);
+  const [projects, setProjects] = useState(DEFAULT_PROJECTS);
+  const [syncing, setSyncing] = useState(false);
+  const [syncError, setSyncError] = useState('');
+  const [newProject, setNewProject] = useState('');
+
+  const [dailyData, setDailyData] = useState({});
+  const [selectedDailyDate, setSelectedDailyDate] = useState(todayStr());
+  const [dailyDraftHighlights, setDailyDraftHighlights] = useState([]);
+  const [dailyDraftReflection, setDailyDraftReflection] = useState('');
+  const [dailySavedSnapshot, setDailySavedSnapshot] = useState({ highlights: [], reflection: '' });
+  const [highlightSaving, setHighlightSaving] = useState(false);
+  const [highlightSaveError, setHighlightSaveError] = useState('');
+  const [reflectionSaving, setReflectionSaving] = useState(false);
+  const [reflectionSaveError, setReflectionSaveError] = useState('');
   const [filterProject, setFilterProject] = useState('__all__');
+
+  const [calendarCursor, setCalendarCursor] = useState(() => {
+    const d = new Date();
+    return { year: d.getFullYear(), month: d.getMonth() };
+  });
 
   const [date, setDate] = useState(todayStr());
   const [project, setProject] = useState('');
@@ -752,254 +1246,688 @@ function App() {
   const [note, setNote] = useState('');
   const [rating, setRating] = useState(3);
 
-  const handleLogin = (t) => {
-    localStorage.setItem(TOKEN_KEY, t);
-    setToken(t);
-  };
-  const handleLogout = () => {
-    localStorage.removeItem(TOKEN_KEY);
-    setToken(''); setEntries([]); setSha(null); setProjects([]); setProjectSha(null); setLoaded(false);
-  };
-  const handleRefresh = () => {
-    setLoaded(false);
-    Promise.all([ghGetCSV(token), ghGetProjects(token)]).then(([{entries: e, sha: s}, {projects: p, sha: ps}]) => {
-      setEntries(e); setSha(s);
-      setProjects(p); setProjectSha(ps);
-      setLoaded(true);
-    }).catch(() => { handleLogout(); });
-  };
+  useEffect(() => {
+    const raw = localStorage.getItem(CONFIG_KEY);
+    if (raw) {
+      try {
+        const cfg = JSON.parse(raw);
+        if (cfg && cfg.token) {
+          // Ensure paths are set (migrate old configs)
+          cfg.owner = cfg.owner || REPO_OWNER;
+          cfg.repo = cfg.repo || REPO_NAME;
+          cfg.entriesPath = cfg.entriesPath || ENTRIES_PATH;
+          cfg.projectsPath = cfg.projectsPath || PROJECTS_PATH;
+          cfg.dailyPath = cfg.dailyPath || DAILY_PATH;
+          setConfig(cfg);
+          setToken(cfg.token);
+          setStage('ready');
+          loadDataFromGithub(cfg.token, cfg);
+          return;
+        }
+      } catch (e) { /* fall through */ }
+    }
+    setStage('setup');
+  }, []);
 
   useEffect(() => {
-    if (!token) return;
-    Promise.all([ghGetCSV(token), ghGetProjects(token)]).then(([{entries: e, sha: s}, {projects: p, sha: ps}]) => {
-      setEntries(e); setSha(s);
-      setProjects(p); setProjectSha(ps);
-      setLoaded(true);
-      const first = p.find(x => x.status === 'In Progress') || p[0];
-      if (first) setProject(first.name);
-    }).catch(() => { handleLogout(); });
-  }, [token]);
+    const entry = dailyData[selectedDailyDate];
+    const highlights = entry && Array.isArray(entry.highlights) ? entry.highlights : [];
+    const reflection = entry && typeof entry.reflection === 'string' ? entry.reflection : '';
+    setDailyDraftHighlights(highlights);
+    setDailyDraftReflection(reflection);
+    setDailySavedSnapshot({ highlights, reflection });
+    setHighlightSaveError('');
+    setReflectionSaveError('');
+  }, [selectedDailyDate, dailyData]);
 
-  const saveEntries = async (next) => {
-    setEntries(next); setSaving(true);
+  const loadDataFromGithub = async (tok, cfg) => {
+    setSyncing(true);
+    setSyncError('');
     try {
-      const latestSha = sha || (await ghGetCSV(token)).sha;
-      const newSha = await ghPutCSV(token, latestSha, next);
-      setSha(newSha);
-    } catch {
-      // Retry once with a fresh SHA on conflict
-      try {
-        const { sha: freshSha } = await ghGetCSV(token);
-        const newSha = await ghPutCSV(token, freshSha, next);
-        setSha(newSha);
-      } catch { alert('儲存失敗，請稍後再試。'); }
-    }
-    setSaving(false);
-  };
-
-  const saveProjects = async (next) => {
-    setProjects(next); setSavingProjects(true);
-    try {
-      const latestSha = projectSha || (await ghGetProjects(token)).sha;
-      const newSha = await ghPutProjects(token, latestSha, next);
-      setProjectSha(newSha);
-    } catch {
-      try {
-        const { sha: freshSha } = await ghGetProjects(token);
-        const newSha = await ghPutProjects(token, freshSha, next);
-        setProjectSha(newSha);
-      } catch { alert('專案儲存失敗。'); }
-    }
-    setSavingProjects(false);
-  };
-
-  const handleProjectMove = (id, status) => {
-    saveProjects(projects.map(p => p.id === id ? {...p, status} : p));
-  };
-  const handleProjectAdd = (p) => saveProjects([...projects, p]);
-  const handleProjectDelete = (id) => saveProjects(projects.filter(p => p.id !== id));
-  const handleProjectRename = async (id, oldName, newName) => {
-    setSaving(true); setSavingProjects(true);
-    try {
-      // Always fetch latest SHAs before writing to avoid stale-SHA conflicts
-      const [{ sha: latestESha, entries: latestEntries }, { sha: latestPSha, projects: latestProjects }] =
-        await Promise.all([ghGetCSV(token), ghGetProjects(token)]);
-      const nextProjects = latestProjects.map(p => p.id === id ? {...p, name: newName} : p);
-      const nextEntries = latestEntries.map(e => e.subject === oldName ? {...e, subject: newName} : e);
-      const [newPSha, newESha] = await Promise.all([
-        ghPutProjects(token, latestPSha, nextProjects),
-        ghPutCSV(token, latestESha, nextEntries),
+      const [entriesRes, projectsRes, dailyRes] = await Promise.all([
+        ghGetFile(tok, cfg.owner, cfg.repo, cfg.entriesPath),
+        ghGetFile(tok, cfg.owner, cfg.repo, cfg.projectsPath),
+        ghGetFile(tok, cfg.owner, cfg.repo, cfg.dailyPath)
       ]);
-      setProjects(nextProjects); setProjectSha(newPSha);
-      setEntries(nextEntries); setSha(newESha);
-      if (project === oldName) setProject(newName);
-    } catch { alert('改名儲存失敗。'); }
-    setSaving(false); setSavingProjects(false);
+      const loadedEntries = entriesRes.content ? csvToEntries(entriesRes.content) : [];
+      setEntries(loadedEntries.sort((a,b) => b.date.localeCompare(a.date) || b.id.localeCompare(a.id)));
+
+      let loadedDaily = {};
+      if (dailyRes.content) {
+        try {
+          const parsed = JSON.parse(dailyRes.content);
+          if (parsed && typeof parsed === 'object') loadedDaily = parsed;
+        } catch (e) { /* ignore */ }
+      }
+      setDailyData(loadedDaily);
+
+      let loadedProjects = DEFAULT_PROJECTS;
+      if (projectsRes.content) {
+        try {
+          const parsed = JSON.parse(projectsRes.content);
+          if (Array.isArray(parsed) && parsed.length > 0) {
+            loadedProjects = parsed.map(p =>
+              typeof p === 'string' ? { name: p, status: 'not_started' } : { name: p.name, status: p.status || 'not_started' }
+            );
+          }
+        } catch (e) { /* ignore */ }
+      }
+      setProjects(loadedProjects);
+      setProject(prev => prev || loadedProjects[0]?.name || '');
+    } catch (e) {
+      console.error(e);
+      setSyncError('讀取 GitHub 資料失敗：' + e.message);
+    }
+    setSyncing(false);
+  };
+
+  const handleSetupSubmit = async (rawToken) => {
+    setGateError('');
+    if (!rawToken || !rawToken.trim()) {
+      setGateError('請輸入 GitHub Token。');
+      return;
+    }
+    setGateLoading(true);
+    try {
+      const cfg = {
+        token: rawToken.trim(),
+        owner: REPO_OWNER,
+        repo: REPO_NAME,
+        entriesPath: ENTRIES_PATH,
+        projectsPath: PROJECTS_PATH,
+        dailyPath: DAILY_PATH
+      };
+      localStorage.setItem(CONFIG_KEY, JSON.stringify(cfg));
+      setConfig(cfg);
+      setToken(cfg.token);
+      setStage('ready');
+      await loadDataFromGithub(cfg.token, cfg);
+    } catch (e) {
+      console.error(e);
+      setGateError('連接失敗，請確認輸入內容後再試一次。');
+    }
+    setGateLoading(false);
+  };
+
+  const handleDisconnect = () => {
+    localStorage.removeItem(CONFIG_KEY);
+    setConfig(null);
+    setToken(null);
+    setEntries([]);
+    setProjects(DEFAULT_PROJECTS);
+    setDailyData({});
+    setSelectedDailyDate(todayStr());
+    setGateError('');
+    setStage('setup');
+  };
+
+  const handleRefresh = () => {
+    if (token && config) loadDataFromGithub(token, config);
+  };
+
+  const persistEntries = async (next) => {
+    setEntries(next);
+    setSyncing(true);
+    setSyncError('');
+    try {
+      await ghSaveFile(token, config.owner, config.repo, config.entriesPath, entriesToCSV(next), `learning-log update ${todayStr()}`);
+    } catch (e) {
+      console.error(e);
+      setSyncError('同步到 GitHub 失敗：' + e.message);
+    }
+    setSyncing(false);
+  };
+
+  const persistProjects = async (next) => {
+    setProjects(next);
+    setSyncing(true);
+    setSyncError('');
+    try {
+      await ghSaveFile(token, config.owner, config.repo, config.projectsPath, JSON.stringify(next, null, 2), '更新專案清單');
+    } catch (e) {
+      console.error(e);
+      setSyncError('同步專案清單失敗：' + e.message);
+    }
+    setSyncing(false);
+  };
+
+  const addProject = () => {
+    const name = newProject.trim();
+    if (!name || projects.some(p => p.name === name)) return;
+    const next = [...projects, { name, status: 'not_started' }];
+    persistProjects(next);
+    setNewProject('');
+    if (!project) setProject(name);
+  };
+
+  const removeProject = (name) => {
+    const next = projects.filter(p => p.name !== name);
+    persistProjects(next);
+    if (project === name) setProject(next[0]?.name || '');
+    if (filterProject === name) setFilterProject('__all__');
+  };
+
+  const moveProject = (name, direction) => {
+    const next = projects.map(p => {
+      if (p.name !== name) return p;
+      const idx = KANBAN_STATUSES.indexOf(p.status || 'not_started');
+      const newIdx = idx + direction;
+      if (newIdx < 0 || newIdx >= KANBAN_STATUSES.length) return p;
+      return { ...p, status: KANBAN_STATUSES[newIdx] };
+    });
+    persistProjects(next);
+  };
+
+  const autosaveHighlights = async (nextHighlights) => {
+    setHighlightSaving(true);
+    setHighlightSaveError('');
+    const cleaned = nextHighlights.filter(h => h.text.trim() !== '');
+    const existingReflection = (dailyData[selectedDailyDate] && dailyData[selectedDailyDate].reflection) || '';
+    const nextDailyData = {
+      ...dailyData,
+      [selectedDailyDate]: {
+        highlights: cleaned,
+        reflection: existingReflection,
+        updatedAt: new Date().toISOString()
+      }
+    };
+    try {
+      await ghSaveFile(
+        token, config.owner, config.repo, config.dailyPath,
+        JSON.stringify(nextDailyData, null, 2),
+        `更新 Daily Highlight - ${selectedDailyDate}`
+      );
+      setDailyData(nextDailyData);
+    } catch (e) {
+      console.error(e);
+      setHighlightSaveError('自動儲存失敗：' + e.message);
+    }
+    setHighlightSaving(false);
+  };
+
+  const addHighlightItem = () => {
+    setDailyDraftHighlights(prev => [
+      ...prev,
+      { id: Date.now().toString(36) + Math.random().toString(36).slice(2,5), text: '', done: false }
+    ]);
+  };
+
+  const updateHighlightText = (id, text) => {
+    setDailyDraftHighlights(prev => prev.map(h => h.id === id ? { ...h, text } : h));
+  };
+
+  const handleHighlightBlur = () => {
+    autosaveHighlights(dailyDraftHighlights);
+  };
+
+  const toggleHighlightDone = (id) => {
+    setDailyDraftHighlights(prev => {
+      const next = prev.map(h => h.id === id ? { ...h, done: !h.done } : h);
+      autosaveHighlights(next);
+      return next;
+    });
+  };
+
+  const removeHighlightItem = (id) => {
+    setDailyDraftHighlights(prev => {
+      const next = prev.filter(h => h.id !== id);
+      autosaveHighlights(next);
+      return next;
+    });
+  };
+
+  const isReflectionDirty = dailyDraftReflection !== dailySavedSnapshot.reflection;
+
+  const saveReflection = async () => {
+    setReflectionSaving(true);
+    setReflectionSaveError('');
+    const existingHighlights = (dailyData[selectedDailyDate] && dailyData[selectedDailyDate].highlights)
+      || dailyDraftHighlights.filter(h => h.text.trim() !== '');
+    const nextDailyData = {
+      ...dailyData,
+      [selectedDailyDate]: {
+        highlights: existingHighlights,
+        reflection: dailyDraftReflection,
+        updatedAt: new Date().toISOString()
+      }
+    };
+    try {
+      await ghSaveFile(
+        token, config.owner, config.repo, config.dailyPath,
+        JSON.stringify(nextDailyData, null, 2),
+        `更新每日反思 - ${selectedDailyDate}`
+      );
+      setDailyData(nextDailyData);
+    } catch (e) {
+      console.error(e);
+      setReflectionSaveError('儲存反思失敗：' + e.message);
+    }
+    setReflectionSaving(false);
   };
 
   const addEntry = async (e) => {
     e.preventDefault();
     if (!minutes || Number(minutes) <= 0 || !project) return;
-    const entry = { id: Date.now().toString(36), date, subject: project, subtopic: subtopic.trim(), minutes: Number(minutes), note, rating };
-    const next = [entry, ...entries].sort((a,b) => b.date.localeCompare(a.date)||b.id.localeCompare(a.id));
-    await saveEntries(next);
-    setNote(''); setSubtopic(''); setMinutes('0'); setRating(3); setFilterProject('__all__');
+    const newEntry = {
+      id: Date.now().toString(36) + Math.random().toString(36).slice(2,6),
+      date, project, subtopic: subtopic.trim(), minutes: Number(minutes), note, rating
+    };
+    const next = [newEntry, ...entries].sort((a,b) => b.date.localeCompare(a.date) || b.id.localeCompare(a.id));
+    await persistEntries(next);
+    setNote('');
+    setSubtopic('');
+    setMinutes('0');
+    setRating(3);
+    setFilterProject('__all__');
   };
-  const removeEntry = (id) => saveEntries(entries.filter(e => e.id !== id));
+
+  const removeEntry = async (id) => {
+    await persistEntries(entries.filter(e => e.id !== id));
+  };
+
+  const bankMinutesFromTimer = (bankedMin) => {
+    setMinutes(prev => String((Number(prev) || 0) + bankedMin));
+  };
 
   const streak = useMemo(() => calcStreak(entries), [entries]);
-  const last7 = useMemo(() => last7DaysMinutes(entries), [entries]);
-  const totalMin = useMemo(() => entries.reduce((s,e) => s+Number(e.minutes||0), 0), [entries]);
-  const breakdown = useMemo(() => subjectBreakdown(entries), [entries]);
-  const maxBreak = breakdown.length ? breakdown[0].minutes : 0;
-  const visibleEntries = useMemo(() => filterProject==='__all__'?entries:entries.filter(e=>e.subject===filterProject), [entries, filterProject]);
+  const todayDateStr = todayStr();
+  const todaysEntries = useMemo(() => entries.filter(e => e.date === todayDateStr), [entries, todayDateStr]);
+  const todaysMinutes = useMemo(() => todaysEntries.reduce((s,e) => s + Number(e.minutes||0), 0), [todaysEntries]);
+  const last7Days = useMemo(() => last7DaysMinutes(entries), [entries]);
+  const last7Breakdown = useMemo(() => last7DaysProjectBreakdown(entries), [entries]);
+  const maxLast7BreakdownMinutes = last7Breakdown.length ? last7Breakdown[0].minutes : 0;
 
-  if (!token) return <LoginScreen onLogin={handleLogin} />;
-  if (!loaded) return <div style={{padding:40,fontFamily:'monospace',color:'#756a54'}}>載入紀錄中…</div>;
+  const goPrevMonth = () => {
+    setCalendarCursor(prev => {
+      let { year, month } = prev;
+      month -= 1;
+      if (month < 0) { month = 11; year -= 1; }
+      return { year, month };
+    });
+  };
+  const goNextMonth = () => {
+    setCalendarCursor(prev => {
+      let { year, month } = prev;
+      month += 1;
+      if (month > 11) { month = 0; year += 1; }
+      return { year, month };
+    });
+  };
+  const goThisMonth = () => {
+    const d = new Date();
+    setCalendarCursor({ year: d.getFullYear(), month: d.getMonth() });
+  };
+
+  const calendarCells = useMemo(() => {
+    const { year, month } = calendarCursor;
+    const totalDays = daysInMonth(year, month);
+    const startWd = firstWeekdayOfMonth(year, month);
+    const cells = [];
+    for (let i = 0; i < startWd; i++) cells.push(null);
+    for (let d = 1; d <= totalDays; d++) {
+      const dateStr = ymdStr(year, month, d);
+      const entryCount = entries.filter(e => e.date === dateStr).length;
+      const dayData = dailyData[dateStr];
+      const hasHighlights = !!(dayData && Array.isArray(dayData.highlights) && dayData.highlights.some(h => h.text && h.text.trim() !== ''));
+      const hasReflection = !!(dayData && typeof dayData.reflection === 'string' && dayData.reflection.trim() !== '');
+      cells.push({ dateStr, day: d, entryCount, hasHighlights, hasReflection });
+    }
+    return cells;
+  }, [calendarCursor, entries, dailyData]);
+
+  const selectedDayEntries = useMemo(() => entries.filter(e => e.date === selectedDailyDate), [entries, selectedDailyDate]);
+  const selectedDayData = dailyData[selectedDailyDate];
+
+  const visibleEntries = useMemo(() => {
+    if (filterProject === '__all__') return entries;
+    return entries.filter(e => e.project === filterProject);
+  }, [entries, filterProject]);
+
+  if (stage === 'loading') {
+    return <div style={{padding: 40, fontFamily: 'monospace', color: '#756a54'}}>載入中…</div>;
+  }
+
+  if (stage === 'setup') {
+    return <SetupScreen onSubmit={handleSetupSubmit} error={gateError} loading={gateLoading} />;
+  }
 
   return (
-    <div>
-      <div className="ll-masthead">
+    <div className="sl-page">
+      <div className="masthead">
         <div>
           <h1>自學紀錄工具</h1>
-          <div className="ll-subtitle">Self-Study Log</div>
+          <div className="subtitle">Self-Study Log</div>
         </div>
-        <div style={{display:'flex',flexDirection:'column',alignItems:'flex-end',gap:8}}>
-          <div className="ll-stamp">
-            <div className="n">{streak}</div>
-            <div className="label">Day Streak</div>
-          </div>
-          <button className="ll-logout-btn" onClick={handleRefresh} style={{marginBottom:4}}>重新整理</button>
-          <button className="ll-logout-btn" onClick={handleLogout}>登出</button>
+        <div className="stamp">
+          <div className="n">{streak}</div>
+          <div className="label">Day Streak</div>
         </div>
       </div>
 
-      <div className="ll-stats-row">
-        <div className="ll-stat">
-          <div className="num">{formatHM(last7)}</div>
-          <div className="lbl">過去 7 天</div>
+      <div className="sync-bar">
+        <span className="sync-repo">🔗 {config.owner}/{config.repo}</span>
+        <span className={`sync-status ${syncing ? '' : (syncError ? 'err' : 'ok')}`}>
+          {syncing ? '同步中…' : (syncError ? '同步失敗' : '已同步')}
+        </span>
+        <button className="refresh-btn" onClick={handleRefresh} disabled={syncing}>重新整理</button>
+        <button className="lock-btn" onClick={handleDisconnect}>🔌 中斷連線</button>
+      </div>
+      {syncError && <div className="sync-error-banner">{syncError}</div>}
+
+      <div className="stats-row">
+        <div className="stat">
+          <div className="num">{todaysEntries.length}</div>
+          <div className="lbl">今日紀錄數</div>
         </div>
-        <div className="ll-stat">
-          <div className="num">{formatHM(totalMin)}</div>
-          <div className="lbl">累計時數</div>
+        <div className="stat">
+          <div className="num">{formatHM(todaysMinutes)}</div>
+          <div className="lbl">今日累積時數</div>
         </div>
-        <div className="ll-stat">
-          <div className="num">{entries.length}</div>
-          <div className="lbl">總紀錄數</div>
+        <div className="stat">
+          <div className="num">{formatHM(last7Days)}</div>
+          <div className="lbl">近 7 天累積時間</div>
         </div>
       </div>
 
-      <div className="ll-breakdown-card">
-        <div className="ll-breakdown-title">依專案累計</div>
-        {breakdown.length === 0
-          ? <div className="ll-breakdown-empty">還沒有資料。</div>
-          : breakdown.map(b => (
-            <div className="ll-breakdown-row" key={b.subject}>
-              <div className="ll-breakdown-name">{b.subject}</div>
-              <div className="ll-breakdown-track">
-                <div className="ll-breakdown-fill" style={{width:`${maxBreak?(b.minutes/maxBreak)*100:0}%`,background:colorForSubject(b.subject)}} />
+      <div className="breakdown-card">
+        <div className="breakdown-title">近七天依專案累計分鐘數</div>
+        {last7Breakdown.length === 0 ? (
+          <div className="breakdown-empty">還沒有資料可以統計。</div>
+        ) : (
+          last7Breakdown.map(b => (
+            <div className="breakdown-row" key={b.project}>
+              <div className="breakdown-name">{b.project}</div>
+              <div className="breakdown-track">
+                <div
+                  className="breakdown-fill"
+                  style={{
+                    width: `${maxLast7BreakdownMinutes ? (b.minutes / maxLast7BreakdownMinutes) * 100 : 0}%`,
+                    background: colorForProject(b.project)
+                  }}
+                />
               </div>
-              <div className="ll-breakdown-mins">{formatHM(b.minutes)}</div>
+              <div className="breakdown-mins">{b.minutes} 分</div>
             </div>
           ))
-        }
+        )}
       </div>
 
-      <StudyStopwatch onBank={min => setMinutes(prev => String((Number(prev)||0)+min))} />
+      <div className="project-board">
+        <div className="project-board-header">
+          <div className="project-board-title">專案看板</div>
+          <div className="project-board-add">
+            <input
+              placeholder="新增專案…"
+              value={newProject}
+              onChange={e => setNewProject(e.target.value)}
+              onKeyDown={e => { if (e.key === 'Enter') { e.preventDefault(); addProject(); } }}
+            />
+            <button className="project-add-btn" type="button" onClick={addProject} disabled={!newProject.trim()}>新增</button>
+          </div>
+        </div>
 
-      <KanbanBoard
-        projects={projects}
-        onMove={handleProjectMove}
-        onAdd={handleProjectAdd}
-        onDelete={handleProjectDelete}
-        onRename={handleProjectRename}
-        saving={savingProjects}
-      />
+        {projects.length === 0 ? (
+          <div className="breakdown-empty">還沒有專案，上面新增一個開始吧。</div>
+        ) : (
+          <div className="kanban-columns">
+            {KANBAN_STATUSES.map(status => (
+              <div className="kanban-column" key={status}>
+                <div className="kanban-column-title">{KANBAN_COLUMN_LABELS[status]}</div>
+                {projects.filter(p => (p.status || 'not_started') === status).map(p => {
+                  const idx = KANBAN_STATUSES.indexOf(p.status || 'not_started');
+                  return (
+                    <div className="kanban-card" key={p.name}>
+                      <span className="kanban-card-dot" style={{ background: colorForProject(p.name) }}></span>
+                      <span className="kanban-card-name">{p.name}</span>
+                      <div className="kanban-card-actions">
+                        <button type="button" onClick={() => moveProject(p.name, -1)} disabled={idx <= 0} aria-label="移到前一欄">‹</button>
+                        <button type="button" onClick={() => moveProject(p.name, 1)} disabled={idx >= KANBAN_STATUSES.length - 1} aria-label="移到下一欄">›</button>
+                        <button type="button" onClick={() => removeProject(p.name)} aria-label={`刪除 ${p.name}`}>×</button>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
 
-      <form className="ll-entry" onSubmit={addEntry}>
+      <div className="daily-card">
+        <div className="daily-header">
+          <div className="daily-title">Daily Highlight</div>
+          <div className="daily-date-picker">
+            <input
+              type="date"
+              value={selectedDailyDate}
+              onChange={e => setSelectedDailyDate(e.target.value)}
+              max={todayStr()}
+            />
+            {selectedDailyDate !== todayStr() && (
+              <button type="button" className="daily-today-btn" onClick={() => setSelectedDailyDate(todayStr())}>
+                回到今天
+              </button>
+            )}
+          </div>
+        </div>
+
+        <div className="highlight-list">
+          {dailyDraftHighlights.length === 0 && (
+            <div className="rating-hint">還沒有項目，點下面「新增項目」開始列這天的重點。</div>
+          )}
+          {dailyDraftHighlights.map(h => (
+            <div className={`highlight-item ${h.done ? 'done' : ''}`} key={h.id}>
+              <input type="checkbox" checked={h.done} onChange={() => toggleHighlightDone(h.id)} />
+              <input
+                type="text"
+                value={h.text}
+                onChange={e => updateHighlightText(h.id, e.target.value)}
+                onBlur={handleHighlightBlur}
+                placeholder="輸入重點 / to-do…"
+              />
+              <button type="button" className="highlight-remove-btn" onClick={() => removeHighlightItem(h.id)} aria-label="刪除項目">×</button>
+            </div>
+          ))}
+          <button type="button" className="highlight-add-btn" onClick={addHighlightItem}>+ 新增項目</button>
+        </div>
+
+        <div className="daily-save-row">
+          <span className={`daily-save-status ${highlightSaving ? '' : (highlightSaveError ? 'dirty' : 'saved')}`}>
+            {highlightSaving ? '自動儲存中…' : (highlightSaveError ? '自動儲存失敗' : '已自動儲存')}
+          </span>
+        </div>
+        {highlightSaveError && <div className="sync-error-banner">{highlightSaveError}</div>}
+      </div>
+
+      <StudyStopwatch onBank={bankMinutesFromTimer} />
+
+      <form className="entry" onSubmit={addEntry}>
         <div className="row">
           <div className="col">
             <label>日期</label>
-            <input type="date" value={date} onChange={e=>setDate(e.target.value)} max={todayStr()} required />
+            <input type="date" value={date} onChange={e => setDate(e.target.value)} max={todayStr()} required />
           </div>
           <div className="col">
             <label>專案</label>
-            <select value={project} onChange={e=>setProject(e.target.value)}>
-              {projects.map(p => <option key={p.id} value={p.name}>{p.name} {p.status==='In Progress'?'▶':p.status==='Done'?'✓':''}</option>)}
-            </select>
+            {projects.length === 0 ? (
+              <div className="rating-hint">請先在上方新增至少一個專案</div>
+            ) : (
+              <select value={project} onChange={e => setProject(e.target.value)}>
+                {projects.map(p => <option key={p.name} value={p.name}>{p.name}</option>)}
+              </select>
+            )}
           </div>
-          <div className="col" style={{maxWidth:100}}>
+          <div className="col" style={{maxWidth: 100}}>
             <label>分鐘</label>
-            <input type="number" min="1" value={minutes} onChange={e=>setMinutes(e.target.value)} required />
+            <input type="number" min="1" value={minutes} onChange={e => setMinutes(e.target.value)} required />
           </div>
         </div>
         <div className="row">
           <div className="col">
             <label>細項主題（選填）</label>
-            <input placeholder="例：發音、戰術分析、動詞變化…" value={subtopic} onChange={e=>setSubtopic(e.target.value)} />
+            <input
+              placeholder="例：發音、戰術分析、動詞變化…"
+              value={subtopic}
+              onChange={e => setSubtopic(e.target.value)}
+            />
           </div>
         </div>
         <div className="row">
           <div className="col">
             <label>今天學到 / 練了什麼</label>
-            <textarea value={note} onChange={e=>setNote(e.target.value)} placeholder="例：搞懂越位規則、複習荷蘭文動詞變化…" />
+            <textarea value={note} onChange={e => setNote(e.target.value)} placeholder="例：搞懂越位規則跟區域防守的差別、複習了荷蘭文動詞變化…" />
           </div>
         </div>
         <div className="row">
           <div className="col">
             <label>掌握度自評</label>
-            <select value={rating} onChange={e=>setRating(Number(e.target.value))}>
+            <select value={rating} onChange={e => setRating(Number(e.target.value))}>
               {RATING_OPTIONS.map(r => <option key={r.value} value={r.value}>{r.label}</option>)}
             </select>
           </div>
         </div>
-        <button className="ll-submit-btn" type="submit" disabled={saving||projects.length===0}>
-          {saving ? '儲存至 GitHub…' : '蓋章打卡'}
+        <button className="submit-btn" type="submit" disabled={syncing || projects.length === 0}>
+          {syncing ? '同步中…' : '蓋章打卡'}
         </button>
-        {saving && <div className="ll-saving-note">正在更新 GitHub 上的 CSV…</div>}
       </form>
 
-      <div className="ll-log-heading-row">
-        <div className="ll-log-heading">紀錄</div>
-        <div className="ll-log-heading-actions">
-          <select className="ll-filter-select" value={filterProject} onChange={e=>setFilterProject(e.target.value)}>
-            <option value="__all__">全部專案</option>
-            {projects.map(p => <option key={p.id} value={p.name}>{p.name}</option>)}
-          </select>
-          <button className="ll-export-btn" onClick={()=>downloadCSV(visibleEntries)} disabled={visibleEntries.length===0}>匯出 CSV</button>
+      <div className="log-card">
+        <div className="log-heading-row">
+          <div className="log-heading">紀錄</div>
+          <div className="log-heading-actions">
+            <select className="filter-select" value={filterProject} onChange={e => setFilterProject(e.target.value)}>
+              <option value="__all__">全部專案</option>
+              {projects.map(p => <option key={p.name} value={p.name}>{p.name}</option>)}
+            </select>
+            <button className="export-btn" onClick={() => downloadCSV(visibleEntries)} disabled={visibleEntries.length === 0}>匯出 CSV</button>
+          </div>
+        </div>
+
+        {visibleEntries.length === 0 ? (
+          <div className="empty-state">
+            {entries.length === 0
+              ? <React.Fragment>還沒有紀錄。<br/>今天學了什麼，寫下來蓋第一個章吧。</React.Fragment>
+              : '這個專案目前沒有紀錄。'}
+          </div>
+        ) : (
+          <React.Fragment>
+            <div className="log-table-header">
+              <span>日期</span>
+              <span>專案</span>
+              <span>細項</span>
+              <span>時長</span>
+              <span>掌握度</span>
+              <span>學到什麼</span>
+              <span></span>
+            </div>
+            {visibleEntries.map(e => {
+              const ratingLabel = RATING_OPTIONS.find(r => r.value === e.rating);
+              return (
+                <div className="entry-row" key={e.id}>
+                  <div className="entry-date">{fmtDate(e.date)}</div>
+                  <span className="entry-topic" style={{ background: colorForProject(e.project) }}>{e.project}</span>
+                  <span className="entry-subtopic" title={e.subtopic || ''}>{e.subtopic || '—'}</span>
+                  <span className="entry-minutes">{e.minutes} 分</span>
+                  <span className="entry-rating-short" title={ratingLabel ? ratingLabel.label : ''}>掌握 {e.rating}/5</span>
+                  <span className="entry-note" title={e.note || ''}>{e.note || '—'}</span>
+                  <button className="del-btn" onClick={() => removeEntry(e.id)}>刪除</button>
+                </div>
+              );
+            })}
+          </React.Fragment>
+        )}
+      </div>
+
+      <div className="daily-card">
+        <div className="daily-header">
+          <div className="daily-title">今日反思</div>
+          <div className="daily-date-picker">
+            <span className="reflection-date-label">{fmtDate(selectedDailyDate)}</span>
+          </div>
+        </div>
+        <textarea
+          className="reflection-textarea"
+          value={dailyDraftReflection}
+          onChange={e => setDailyDraftReflection(e.target.value)}
+          placeholder="今天過得怎麼樣？學到了什麼、卡在哪裡、有什麼想法…"
+        />
+        <div className="daily-save-row">
+          <button className="submit-btn" type="button" onClick={saveReflection} disabled={reflectionSaving || !isReflectionDirty}>
+            {reflectionSaving ? '儲存中…' : '💾 儲存反思'}
+          </button>
+          <span className={`daily-save-status ${isReflectionDirty ? 'dirty' : 'saved'}`}>
+            {reflectionSaving ? '同步中…' : (isReflectionDirty ? '尚未儲存' : '已儲存')}
+          </span>
+        </div>
+        {reflectionSaveError && <div className="sync-error-banner">{reflectionSaveError}</div>}
+      </div>
+
+      <div className="calendar-card">
+        <div className="calendar-header">
+          <button type="button" className="calendar-nav-btn" onClick={goPrevMonth}>‹</button>
+          <div className="calendar-month-label">{monthLabel(calendarCursor.year, calendarCursor.month)}</div>
+          <button type="button" className="calendar-nav-btn" onClick={goNextMonth}>›</button>
+          <button type="button" className="daily-today-btn" onClick={goThisMonth}>回到本月</button>
+        </div>
+        <div className="calendar-weekdays">
+          {['日','一','二','三','四','五','六'].map(w => <div key={w} className="calendar-weekday">{w}</div>)}
+        </div>
+        <div className="calendar-grid">
+          {calendarCells.map((cell, idx) => cell ? (
+            <button
+              type="button"
+              key={cell.dateStr}
+              className={`calendar-cell ${cell.dateStr === selectedDailyDate ? 'selected' : ''} ${cell.dateStr === todayStr() ? 'today' : ''}`}
+              onClick={() => setSelectedDailyDate(cell.dateStr)}
+            >
+              <span className="calendar-daynum">{cell.day}</span>
+              <span className="calendar-indicators">
+                {cell.entryCount > 0 && <span className="cal-dot cal-dot-entry" title={`${cell.entryCount} 筆打卡`}></span>}
+                {cell.hasHighlights && <span className="cal-dot cal-dot-highlight" title="有 Daily Highlight"></span>}
+                {cell.hasReflection && <span className="cal-dot cal-dot-reflection" title="有反思"></span>}
+              </span>
+            </button>
+          ) : <div key={'blank-' + idx} className="calendar-cell empty" />)}
+        </div>
+
+        <div className="calendar-detail">
+          <div className="calendar-detail-title">{fmtDate(selectedDailyDate)} 摘要</div>
+          {selectedDayEntries.length === 0 && !(selectedDayData && selectedDayData.highlights && selectedDayData.highlights.length > 0) && !(selectedDayData && selectedDayData.reflection) ? (
+            <div className="rating-hint">這天還沒有任何紀錄。</div>
+          ) : (
+            <React.Fragment>
+              {selectedDayEntries.length > 0 && (
+                <div className="calendar-detail-section">
+                  <div className="calendar-detail-label">打卡（{selectedDayEntries.length}）</div>
+                  {selectedDayEntries.map(e => (
+                    <div className="calendar-detail-entry" key={e.id}>
+                      <span className="entry-topic" style={{ background: colorForProject(e.project) }}>{e.project}</span>
+                      <span>{e.minutes} 分</span>
+                      <span className="calendar-detail-note">{e.note || e.subtopic || ''}</span>
+                    </div>
+                  ))}
+                </div>
+              )}
+              {selectedDayData && selectedDayData.highlights && selectedDayData.highlights.length > 0 && (
+                <div className="calendar-detail-section">
+                  <div className="calendar-detail-label">Daily Highlight</div>
+                  {selectedDayData.highlights.map(h => (
+                    <div className={`calendar-detail-highlight ${h.done ? 'done' : ''}`} key={h.id}>{h.done ? '✓' : '○'} {h.text}</div>
+                  ))}
+                </div>
+              )}
+              {selectedDayData && selectedDayData.reflection && (
+                <div className="calendar-detail-section">
+                  <div className="calendar-detail-label">反思</div>
+                  <div className="calendar-detail-reflection">{selectedDayData.reflection}</div>
+                </div>
+              )}
+            </React.Fragment>
+          )}
         </div>
       </div>
 
-      {visibleEntries.length === 0 ? (
-        <div className="ll-empty-state">
-          {entries.length===0
-            ? <>還沒有紀錄。<br/>今天學了什麼，寫下來蓋第一個章吧。</>
-            : '這個專案目前沒有紀錄。'}
-        </div>
-      ) : (
-        <>
-          <div className="ll-table-header">
-            <span>日期</span><span>學科</span><span>細項</span>
-            <span>時長</span><span>掌握度</span><span>學到什麼</span><span></span>
-          </div>
-          {visibleEntries.map(e => {
-            const rl = RATING_OPTIONS.find(r => r.value===e.rating);
-            return (
-              <div className="ll-entry-row" key={e.id}>
-                <div className="ll-entry-date">{fmtDate(e.date)}</div>
-                <span className="ll-entry-topic" style={{background:colorForSubject(e.subject)}}>{e.subject}</span>
-                <span className="ll-entry-subtopic entry-subtopic" title={e.subtopic||''}>{e.subtopic||'—'}</span>
-                <span className="ll-entry-minutes">{e.minutes} 分</span>
-                <span className="ll-entry-rating" title={rl?rl.label:''}>掌握 {e.rating}/5</span>
-                <span className="ll-entry-note">{e.note||'—'}</span>
-                <button className="ll-del-btn" onClick={()=>removeEntry(e.id)}>刪除</button>
-              </div>
-            );
-          })}
-        </>
-      )}
-
-      <div className="ll-footer-note">資料同步至 GitHub · {GH_OWNER}/{GH_REPO}</div>
+      <div className="footer-note">資料同步至 GitHub · {config.owner}/{config.repo}</div>
     </div>
   );
 }

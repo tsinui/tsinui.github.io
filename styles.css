@@ -3973,3 +3973,263 @@ html:has(body.home-page) {
 [data-variant="home"] .world-svg .graticule {
   display: none;
 }
+
+/* ── 地形底圖試作版（map-terrain.html） ── */
+.sm-terrain .sm-map {
+  /* MapLibre 的樣式會把地圖容器設成 position: relative，高度就變成 0；這裡蓋回來 */
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 45%, #f6f1e6 0%, #e9e4d8 70%);
+}
+
+.sm-terrain .maplibregl-ctrl-attrib {
+  font-family: var(--font-ui);
+  font-size: 0.68rem;
+}
+
+.sm-terrain .maplibregl-ctrl-group {
+  border-radius: 10px;
+  box-shadow: 0 4px 14px rgba(19, 30, 33, 0.12);
+}
+
+/* 上一篇／下一篇：國旗＋地名 */
+.sm-pager .map-flag {
+  width: 16px;
+  height: 12px;
+  margin: 0 6px 0 4px;
+  vertical-align: -1px;
+}
+
+.sm-pager button:last-child .map-flag {
+  margin-left: 0;
+}
+
+/* 地形版：底圖切換（地形圖／衛星影像） */
+.sm-basemap {
+  position: absolute;
+  right: 56px;
+  bottom: 30px;
+  z-index: 3;
+  display: flex;
+  padding: 3px;
+  border-radius: 999px;
+  background: rgba(255, 250, 243, 0.92);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 4px 14px rgba(19, 30, 33, 0.12);
+}
+
+.sm-basemap button {
+  border: 0;
+  border-radius: 999px;
+  padding: 6px 14px;
+  background: transparent;
+  font-family: var(--font-meta);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--p-dark);
+  cursor: pointer;
+}
+
+.sm-basemap button[aria-pressed="true"] {
+  background: var(--p-dark);
+  color: #fff8ef;
+}
+
+@media (max-width: 860px) {
+  .sm-basemap {
+    right: 8px;
+    bottom: auto;
+    top: 48px;
+  }
+
+  .sm-basemap button {
+    padding: 5px 10px;
+    font-size: 0.68rem;
+  }
+}
+
+/* 地點清單：地區在上（國旗＋地名），故事標題在下 */
+.sm-list .sm-list-text strong {
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+}
+
+.sm-list .sm-list-text strong .map-flag {
+  width: 18px;
+  height: 13px;
+  margin-right: 8px;
+}
+
+.sm-list .sm-list-text small {
+  display: block;
+  font-family: var(--font-ui);
+  font-size: 0.8rem;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.35;
+  color: var(--muted);
+}
+
+.sm-list-dot {
+  margin-top: 5px;
+}
+
+/* 地形版：投影說明 */
+.sm-proj-note {
+  position: absolute;
+  right: 56px;
+  bottom: 72px;
+  z-index: 3;
+  max-width: 260px;
+  margin: 0;
+  padding: 5px 10px;
+  border-radius: 8px;
+  background: rgba(19, 30, 33, 0.6);
+  color: #fff8ef;
+  font-family: var(--font-ui);
+  font-size: 0.7rem;
+  line-height: 1.35;
+  text-align: right;
+  pointer-events: none;
+}
+
+@media (max-width: 860px) {
+  .sm-proj-note {
+    right: 8px;
+    bottom: auto;
+    top: 84px;
+    max-width: 200px;
+    font-size: 0.64rem;
+  }
+}
+
+/* 地形版：農地圖例 */
+.sm-legend {
+  position: absolute;
+  right: 56px;
+  bottom: 130px;
+  z-index: 3;
+  width: 220px;
+  padding: 10px 12px 8px;
+  border-radius: 12px;
+  background: rgba(255, 250, 243, 0.94);
+  box-shadow: 0 4px 14px rgba(19, 30, 33, 0.12);
+  font-family: var(--font-ui);
+}
+
+.sm-legend[hidden] {
+  display: none;
+}
+
+.sm-legend-title {
+  margin: 0 0 6px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--p-dark);
+}
+
+/* 跟地圖上一樣：原本的橘色色階轉成綠色 */
+.sm-legend-bar {
+  height: 8px;
+  border-radius: 4px;
+  background: linear-gradient(90deg, #fee4bf, #faa764, #e86b1d, #bc3f02, #6b2704);
+  filter: hue-rotate(85deg);
+  opacity: 0.85;
+}
+
+.sm-legend-scale {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 3px;
+  font-size: 0.66rem;
+  color: var(--muted);
+}
+
+@media (max-width: 860px) {
+  .sm-legend {
+    right: 8px;
+    bottom: auto;
+    top: 136px;
+    width: 180px;
+  }
+}
+
+/* 作物圖例：四級綠色，跟地圖上的分級一樣 */
+.sm-legend-steps {
+  display: flex;
+  overflow: hidden;
+  background: none;
+  filter: none;
+  opacity: 1;
+}
+
+.sm-legend-steps span {
+  flex: 1;
+}
+
+.sm-legend-steps span:nth-child(1) { background: rgb(217, 240, 163); }
+.sm-legend-steps span:nth-child(2) { background: rgb(120, 198, 121); }
+.sm-legend-steps span:nth-child(3) { background: rgb(49, 163, 84); }
+.sm-legend-steps span:nth-child(4) { background: rgb(0, 104, 55); }
+
+.sm-crop-select {
+  margin: 0 2px;
+  padding: 2px 4px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: #fffaf3;
+  font: inherit;
+  font-weight: 700;
+  color: var(--p-dark);
+}
+
+.sm-legend-title {
+  display: block;
+}
+
+.sm-legend-note {
+  margin: 5px 0 0;
+  font-size: 0.62rem;
+  color: var(--muted);
+}
+
+/* 土地使用圖例 */
+.sm-legend-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3px 10px;
+  font-size: 0.68rem;
+  color: var(--muted);
+}
+
+.sm-legend-list li {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.sm-legend-list li span {
+  flex: none;
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  box-shadow: inset 0 0 0 1px rgba(19, 30, 33, 0.12);
+}
+
+/* 農地：排第一、整行、粗體 */
+.sm-legend-list li.is-key {
+  grid-column: 1 / -1;
+  font-weight: 700;
+  color: var(--p-dark);
+  font-size: 0.74rem;
+}
+
+.sm-legend-list li.is-key span {
+  width: 16px;
+  height: 16px;
+}

@@ -6,8 +6,10 @@
     <title>Research Map | The Sinasera</title>
     <meta name="description" content="A story map of the places Herman has studied." />
     <link rel="stylesheet" href="styles.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js"></script>
+    <!-- 地圖：MapLibre GL JS（開源，BSD-3）＋ topojson（畫全國尺度故事的國界） -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/maplibre-gl@5/dist/maplibre-gl.css" />
+    <script src="https://cdn.jsdelivr.net/npm/maplibre-gl@5/dist/maplibre-gl.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js"></script>
     <script defer src="script.js"></script>
     <script defer src="story-map.js"></script>
   </head>
@@ -46,13 +48,23 @@
         <a href="index.html#about">About</a>
       </nav>
 
-      <main class="sm-page" data-story-map>
+      <main class="sm-page sm-terrain" data-story-map>
         <h1 class="visually-hidden">Research map: stories from the places I study</h1>
         <section class="sm-layout">
           <div class="sm-map-wrap">
             <div class="sm-map"></div>
             <div class="sm-tip" role="tooltip" hidden></div>
             <div class="sm-filters" role="group" aria-label="Filter by theme"></div>
+            <p class="sm-proj-note">Web Mercator projection: areas far from the equator look larger than they are (Greenland is about 1/14 the size of Africa).</p>
+            <div class="sm-legend" hidden>
+              <p class="sm-legend-title">Land use, 2024</p>
+              <ul class="sm-legend-list"></ul>
+              <p class="sm-legend-note">Sentinel-2 10 m land cover (Esri | Impact Observatory)</p>
+            </div>
+            <div class="sm-basemap" role="group" aria-label="Base map">
+              <button type="button" data-basemap="satellite" aria-pressed="true">Satellite</button>
+              <button type="button" data-basemap="landuse" aria-pressed="false">Land use</button>
+            </div>
             <aside class="sm-panel" aria-live="polite"></aside>
           </div>
         </section>

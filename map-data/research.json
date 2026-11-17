@@ -3,11 +3,11 @@
     "id": "bolivia-sprinkler",
     "place": "Bolivia",
     "iso2": "bo",
-    "lat": -17.4,
-    "lon": -66.2,
+    "lat": -17.55,
+    "lon": -65.85,
     "zoom": 5,
     "tags": [
-      "Land Management"
+      "Crops & Irrigation"
     ],
     "title_en": "Saving Water, Losing Sleep",
     "title_zh": "省了水，賠上睡眠",
@@ -23,7 +23,7 @@
     "lon": 21.7,
     "zoom": 6,
     "tags": [
-      "Land Management"
+      "Land Degradation"
     ],
     "title_en": "Feeding Soil with Local Agri-Food Waste",
     "title_zh": "用在地農食殘渣養回土壤",
@@ -65,7 +65,7 @@
     "lon": 4.837,
     "zoom": 9,
     "tags": [
-      "Land Management"
+      "Land Degradation"
     ],
     "title_en": "Farming Livelihoods under Climate Goals",
     "title_zh": "減碳目標與酪農生計的拉扯",
@@ -81,7 +81,7 @@
     "lon": -6.55,
     "zoom": 6,
     "tags": [
-      "Land Management"
+      "Crops & Irrigation"
     ],
     "extreme": true,
     "title_en": "Drought Exposes Unequal Access to Water",
@@ -148,7 +148,7 @@
     "lon": -5.25,
     "zoom": 6,
     "tags": [
-      "Land Management"
+      "Crops & Irrigation"
     ],
     "title_en": "Drip Irrigation Pumps More Water",
     "title_zh": "滴灌反而抽更多水",
@@ -163,14 +163,75 @@
     ]
   },
   {
+    "id": "alqueva-outsiders",
+    "place": "Alqueva, Portugal",
+    "iso2": "pt",
+    "lat": 38.2,
+    "lon": -7.5,
+    "zoom": 7,
+    "tags": [
+      "Crops & Irrigation"
+    ],
+    "title_en": "Investors Pushing Irrigation Past Its Borders",
+    "title_zh": "把灌區邊界往外推的投資者",
+    "story_zh": "葡萄牙南部的阿連特茹，原本是乾燥的雨養農業區。加入歐盟、阿爾克瓦水壩完工後，大量的水被送進來，政府也劃好了官方灌區。可是外來投資者在灌區邊界外買地、接水，種起密集的果園，被稱為「precários」，也就是沒有正式身分的用水戶。他們原本是局外人，卻因為已經在用水，一步步被承認、被納入。灌區的邊界不是畫好就固定，而是被資本和既成事實推著往外走。",
+    "story_en": "Alentejo in southern Portugal used to be a dry region of rain-fed farming. After EU membership and the completion of the Alqueva dam, large volumes of water arrived and the government drew official irrigation perimeters. Outside investors then bought land just beyond those borders, connected to the water and planted intensive orchards; locally they are called 'precários', irrigators without formal status. They started as outsiders, but because they were already using water, they were gradually recognised and absorbed into the system. The lesson for me is that an irrigation boundary is not fixed once it is drawn: capital and facts on the ground keep pushing it outward.",
+    "note": "Atlas/🇵🇹 Alqueva – Irrigation Expansion by Outsiders.md",
+    "sources": [
+      {
+        "text": "Rap, E. et al. (2026). When outsiders become insiders [course reading, Wageningen University]."
+      }
+    ]
+  },
+  {
+    "id": "nile-delta-et",
+    "place": "Nile Delta, Egypt",
+    "iso2": "eg",
+    "lat": 30.8,
+    "lon": 31.0,
+    "zoom": 7,
+    "tags": [
+      "Water Systems"
+    ],
+    "title_en": "Satellites Misread the Nile Delta's Water Use",
+    "title_zh": "被衛星誤讀的三角洲用水",
+    "story_zh": "在埃及，研究者用衛星遙測模型（SEBAL）估算每一塊田的蒸發散。尼羅河三角洲的數值很高，被解讀成「用水沒效率」，於是有人建議訓練農民省水，並把水送到沙漠的新墾區，因為那裡的灌溉看起來更有效率。但三角洲在流域的下游，田裡多出來的水會流回渠道和排水系統，被下一塊田再用一次。一個像素看起來的浪費，放到整個流域，可能根本不是浪費。",
+    "story_en": "In Egypt, researchers used a satellite model (SEBAL) to estimate evapotranspiration field by field. The Nile Delta showed high values, which were read as inefficient water use. The advice that followed was to train delta farmers to save water and to send more water to new desert schemes, where irrigation looked more efficient. But the delta sits at the downstream end of the basin: water that leaves one field returns to canals and drains and is used again by the next. What looks like waste in a single pixel may not be waste at all at the scale of the basin, and comparing delta rice with desert orchards is not a fair comparison to begin with.",
+    "note": "Atlas/🇪🇬 Nile Delta – Misreading Satellite ET.md"
+  },
+  {
+    "id": "burundi-hillsides",
+    "place": "Gitega, Burundi",
+    "iso2": "bi",
+    "lat": -3.5,
+    "lon": 29.85,
+    "zoom": 8,
+    "tags": [
+      "Land Degradation"
+    ],
+    "title_en": "Family Farm Plans Against Hillside Erosion",
+    "title_zh": "用家庭農場計畫對抗坡地沖蝕",
+    "story_zh": "蒲隆地人口密集，農民只能在陡峭的坡地上耕作，土壤一年年被雨水沖走。2014 年起，基特加等省推動「整合農場規劃」（PIP）：全家人一起畫出農場現在的樣子和三到五年後想要的樣子，再一起訂計畫，挖等高溝、種樹、做堆肥。計畫不發錢、不發糧，而是讓先做的農民教鄰居，最後整個村子一起動起來。影響研究發現，農場種樹的比例從約三成提高到九成以上。",
+    "story_en": "Burundi is densely populated, and many farmers have no choice but to cultivate steep hillsides that lose soil to the rain every year. Since 2014, the Integrated Farm Planning (PIP) approach has been introduced in provinces such as Gitega. The whole family draws their farm as it is today and as they want it to be in three to five years, then agrees on a plan: contour trenches, trees, compost pits, a vegetable garden. There is no cash or food for work; instead, the first farmers become trainers for their neighbours, until the whole village takes collective action. An impact study found that the share of farms with planted trees rose from about 30% to over 90%. What strikes me is that the starting point is not technology but motivation.",
+    "note": "Atlas/🇧🇮 Burundi – Hillside Soil Degradation.md",
+    "sources": [
+      {
+        "text": "Kessler, A., Reemst, L., Beun, M., Slingerland, E., Pol, L., & De Winne, R. (2021). Mobilizing farmers to stop land degradation: A different discourse from Burundi. Land Degradation & Development, 32(12), 3403–3414.",
+        "url": "https://doi.org/10.1002/ldr.3763"
+      }
+    ]
+  },
+  {
     "id": "taiwan-agri-risk",
     "place": "Taiwan",
     "iso2": "tw",
     "lat": 23.75,
     "lon": 120.6,
     "zoom": 6,
+    "scale": "country",
+    "iso_n3": "158",
     "tags": [
-      "Land Management"
+      "Crops & Irrigation"
     ],
     "extreme": true,
     "title_en": "Hidden Agri-Food Losses under Climate Risk",
@@ -279,9 +340,11 @@
     "id": "mexico-nafta",
     "place": "Mexico",
     "iso2": "mx",
-    "lat": 19.43,
-    "lon": -99.13,
+    "lat": 20.6,
+    "lon": -101.2,
     "zoom": 4,
+    "scale": "country",
+    "iso_n3": "484",
     "tags": [
       "Food Security"
     ],
@@ -309,9 +372,11 @@
     "id": "brazil-soy",
     "place": "Brazil",
     "iso2": "br",
-    "lat": -15.8,
-    "lon": -47.9,
+    "lat": -12.6,
+    "lon": -55.7,
     "zoom": 3.5,
+    "scale": "country",
+    "iso_n3": "076",
     "tags": [
       "Food Security"
     ],
@@ -333,11 +398,13 @@
   },
   {
     "id": "argentina-export-controls",
-    "place": "Buenos Aires, Argentina",
+    "place": "Argentina",
     "iso2": "ar",
-    "lat": -34.6,
-    "lon": -58.38,
+    "lat": -34.8,
+    "lon": -61.5,
     "zoom": 4,
+    "scale": "country",
+    "iso_n3": "032",
     "tags": [
       "Food Security"
     ],
@@ -357,9 +424,11 @@
     "id": "japan-ageing-protein",
     "place": "Japan",
     "iso2": "jp",
-    "lat": 35.68,
-    "lon": 139.69,
+    "lat": 36.2,
+    "lon": 139.9,
     "zoom": 5,
+    "scale": "country",
+    "iso_n3": "392",
     "tags": [
       "Food Security"
     ],
@@ -379,9 +448,11 @@
     "id": "spain-mediterranean-diet",
     "place": "Spain",
     "iso2": "es",
-    "lat": 40.42,
-    "lon": -3.7,
+    "lat": 39.4,
+    "lon": -3.0,
     "zoom": 5,
+    "scale": "country",
+    "iso_n3": "724",
     "tags": [
       "Food Security"
     ],

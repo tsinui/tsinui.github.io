@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Research Map | The Sinasera</title>
+    <meta name="description" content="A story map of the places Herman has studied." />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js"></script>
+    <script defer src="script.js"></script>
+    <script defer src="story-map.js"></script>
+  </head>
+  <body>
+    <div class="page-shell">
+      <div class="ambient ambient-left"></div>
+      <div class="ambient ambient-right"></div>
+
+      <header class="site-header">
+        <a class="brand" href="index.html" aria-label="The Sinasera home">
+          <span class="brand-text brand-wordmark">
+            <span class="brand-prefix">the</span>
+            <span class="brand-name">sinasera</span>
+          </span>
+        </a>
+
+        <nav class="site-nav" aria-label="Primary">
+          <a href="index.html">Home</a>
+          <a href="articles/index.html">Writing</a>
+          <a href="portfolio.html">Portfolio</a>
+          <a href="map.html" aria-current="page">Map</a>
+          <a href="index.html#about">About</a>
+        </nav>
+
+        <button class="nav-toggle" aria-label="開啟選單" aria-expanded="false" aria-controls="nav-drawer">
+          <span></span><span></span><span></span>
+        </button>
+      </header>
+
+      <div class="nav-backdrop" id="nav-backdrop"></div>
+      <nav class="nav-drawer" id="nav-drawer" aria-label="Primary">
+        <a href="index.html">Home</a>
+        <a href="articles/index.html">Writing</a>
+        <a href="portfolio.html">Portfolio</a>
+        <a href="map.html" aria-current="page">Map</a>
+        <a href="index.html#about">About</a>
+      </nav>
+
+      <main class="sm-page" data-story-map>
+        <h1 class="visually-hidden">Research map: stories from the places I study</h1>
+        <section class="sm-layout">
+          <div class="sm-map-wrap">
+            <div class="sm-map"></div>
+            <div class="sm-tip" role="tooltip" hidden></div>
+            <div class="sm-filters" role="group" aria-label="Filter by theme"></div>
+            <aside class="sm-panel" aria-live="polite"></aside>
+          </div>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        <p><a href="index.html">Back to home</a></p>
+        <p class="footer-center"><a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">Creative Commons Attribution 4.0 International (CC BY 4.0)</a></p>
+      </footer>
+    </div>
+  </body>
+</html>

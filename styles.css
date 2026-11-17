@@ -1,28 +1,65 @@
 @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap");
 
+/* 中文：源漾明體為主、源漾黑體為輔（子集化 WOFF，見 assets/fonts/web） */
+/* 明體（內文、強調）：M；粗體（<strong> 等 700 以上）才用 B */
 @font-face {
-  font-family: "Noto Sans TC";
-  src: url("./assets/fonts/Noto_Sans_TC/NotoSansTC-VariableFont_wght.ttf") format("truetype");
-  font-weight: 100 900;
+  font-family: "GenYoMin Text";
+  src: url("./assets/fonts/web/GenYoMin2TW-M.woff") format("woff");
+  font-weight: 100 600;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: "Source Han Serif TC";
-  src: url("./assets/fonts/SourceHanSerifTC-VF.ttf") format("truetype");
+  font-family: "GenYoMin Text";
+  src: url("./assets/fonts/web/GenYoMin2TW-B.woff") format("woff");
+  font-weight: 700 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* 黑體 M 固定字重（標題、引言框）：不受元素 font-weight 影響 */
+@font-face {
+  font-family: "GenYoGothic M";
+  src: url("./assets/fonts/web/GenYoGothic2TW-M.woff") format("woff");
   font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* 黑體（介面）：R / M / B */
+@font-face {
+  font-family: "GenYoGothic TW";
+  src: url("./assets/fonts/web/GenYoGothic2TW-R.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "GenYoGothic TW";
+  src: url("./assets/fonts/web/GenYoGothic2TW-M.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "GenYoGothic TW";
+  src: url("./assets/fonts/web/GenYoGothic2TW-B.woff") format("woff");
+  font-weight: 700;
   font-style: normal;
   font-display: swap;
 }
 
 :root {
-  --font-brand: "Playfair Display", "Source Han Serif TC", Georgia, serif;
-  --font-display: "Playfair Display", "Source Han Serif TC", Georgia, serif;
-  --font-body: "Source Serif 4", "Source Han Serif TC", Georgia, serif;
-  --font-cta: "Noto Sans TC", system-ui, sans-serif;
-  --font-ui: "Noto Sans TC", system-ui, sans-serif;
-  --font-meta: "Noto Sans TC", system-ui, sans-serif;
+  --font-brand: "Playfair Display", "GenYoGothic M", Georgia, serif;
+  --font-display: "Playfair Display", "GenYoGothic M", Georgia, serif;
+  --font-body: "Source Serif 4", "GenYoMin Text", Georgia, serif;
+  --font-quote: "GenYoGothic M", system-ui, sans-serif;
+  --font-cta: "GenYoGothic TW", system-ui, sans-serif;
+  --font-ui: "GenYoGothic TW", system-ui, sans-serif;
+  --font-meta: "GenYoGothic TW", system-ui, sans-serif;
   /* Background stays warm */
   --bg: #f6efe4;
   --bg-2: #efe4d2;
@@ -60,7 +97,7 @@ body {
   margin: 0;
   color: var(--text);
   font-family: var(--font-body);
-  background: #ffffff;
+  background: var(--bg);
 }
 
 a {
@@ -630,7 +667,7 @@ a {
   line-height: 1.5;
   font-weight: 500;
   max-width: 34ch;
-  font-family: var(--font-body);
+  font-family: var(--font-ui);
 }
 
 .article-feature-copy .eyebrow {
@@ -821,7 +858,7 @@ a {
 
 .sidebar-card p,
 .sidebar-card a {
-  font-family: var(--font-body);
+  font-family: var(--font-ui);
   color: var(--muted);
   line-height: 1.45;
 }
@@ -956,7 +993,7 @@ a {
   line-height: 1.5;
   font-weight: 500;
   max-width: 34ch;
-  font-family: var(--font-body);
+  font-family: var(--font-ui);
 }
 
 .article-break {
@@ -965,21 +1002,48 @@ a {
   margin: 30px 0;
 }
 
-.article-section-heading {
+.article-section-heading,
+.article-body h2,
+.article-body h3 {
   margin: 0 0 14px;
-  font-family: var(--font-display);
+  font-family: var(--font-ui);
+  font-weight: 700;
   font-size: clamp(1.2rem, 1.8vw, 1.6rem);
-  line-height: 1.1;
-  letter-spacing: -0.02em;
+  line-height: 1.35;
+  letter-spacing: 0.01em;
+}
+
+.article-body h2 {
+  margin-top: 2em;
+}
+
+.article-body h3 {
+  margin-top: 1.6em;
+  font-size: clamp(1.05rem, 1.4vw, 1.25rem);
 }
 
 .article-header p,
 .article-body,
 .article-gallery,
-.article-highlight,
-.gallery-figure figcaption,
-.gallery-figure figcaption p {
+.article-highlight {
   font-family: var(--font-body);
+}
+
+/* 中文副標：源漾黑體（需蓋過 .article-header p） */
+.article-header .article-title-zh {
+  font-family: var(--font-ui);
+}
+
+/* 圖說與註解：源漾黑體 */
+.gallery-figure figcaption,
+.gallery-figure figcaption p,
+.article-body figcaption,
+.article-body small,
+.article-note {
+  font-family: var(--font-ui);
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: var(--muted);
 }
 
 .article-meta {
@@ -1013,7 +1077,7 @@ a {
   border-left: 4px solid var(--accent-2);
   background: rgba(31, 111, 84, 0.06);
   color: var(--text);
-  font-family: var(--font-body);
+  font-family: var(--font-quote);
   font-size: 1.15rem;
   line-height: 1.7;
 }
@@ -1024,7 +1088,7 @@ a {
   border-left: 4px solid var(--accent);
   background: rgba(154, 103, 56, 0.08);
   color: var(--text);
-  font-family: var(--font-body);
+  font-family: var(--font-quote);
   font-size: 1.18rem;
   line-height: 1.75;
 }
@@ -1366,21 +1430,25 @@ a {
 
 .home-page {
   margin: 0;
-  background: #ffffff;
+  background: var(--bg);
 }
 
 /* Full-bleed hero */
+/* ── Hero：照片填滿整個螢幕、整張完整呈現；往下捲時標題往上飄，
+   頁面吸附到下一層（Feature Story），再下一層是 Around the World ── */
 .site-hero {
+  --hero-p: 0;
+  --sky-mid: 22%;
   position: relative;
-  height: 80svh;
-  min-height: 380px;
-  max-height: 620px;
+  height: 100svh;
+  min-height: 480px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   border-bottom: 5px solid var(--p-teal);
+  isolation: isolate;
 }
 
 .site-hero-img {
@@ -1390,16 +1458,29 @@ a {
   height: 100%;
   object-fit: cover;
   object-position: center center;
+  /* 不放大；捲動時微微視差 */
+  transform: translate3d(0, calc(var(--hero-p) * 12%), 0);
+  will-change: transform;
+  z-index: -3;
 }
 
+/* 只在最上緣留一點點陰影，讓導覽列在亮天空上也讀得到 */
 .site-hero-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    to top,
-    rgba(0, 0, 0, 0.45) 0%,
-    transparent 45%
-  );
+  z-index: -2;
+  background: linear-gradient(to bottom, rgba(0, 30, 50, 0.16) 0%, transparent 16%);
+  pointer-events: none;
+}
+
+/* 往下捲時整張照片慢慢暗下來（停在頂端時完全透明） */
+.site-hero-shade {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background: var(--p-dark);
+  opacity: 0;
+  pointer-events: none;
 }
 
 /* Nav floating on hero */
@@ -1410,9 +1491,9 @@ a {
   right: 0;
   display: flex;
   justify-content: center;
-  gap: 0;
+  gap: 4px;
   z-index: 2;
-  padding-top: 6px;
+  padding-top: 12px;
 }
 
 .hero-nav a {
@@ -1421,14 +1502,21 @@ a {
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: rgba(255, 248, 239, 0.78);
-  padding: 14px 22px;
+  color: rgba(255, 248, 239, 0.82);
+  padding: 9px 18px;
   text-decoration: none;
-  transition: color 0.15s;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.25);
+  transition: color 0.25s ease, text-shadow 0.25s ease;
 }
 
-.hero-nav a:hover {
-  color: var(--p-yellow);
+/* 微微亮起來：文字變亮、外圈透出柔光 */
+.hero-nav a:hover,
+.hero-nav a:focus-visible {
+  color: #fff;
+  text-shadow:
+    0 0 10px rgba(255, 255, 255, 0.85),
+    0 0 26px rgba(255, 255, 255, 0.45);
+  outline: none;
 }
 
 .hero-toggle {
@@ -1449,12 +1537,19 @@ a {
   }
 }
 
-/* Masthead centered on hero */
+/* Masthead：放在藍天的正中間（--sky-mid 由 JS 依照片實際顯示位置算出），
+   捲動時往上飄並淡出 */
 .hero-masthead {
-  position: relative;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: var(--sky-mid);
   z-index: 2;
   text-align: center;
   padding: 0 20px;
+  transform: translate3d(0, calc(-50% - var(--hero-p) * 26vh), 0);
+  opacity: calc(1 - var(--hero-p) * 2);
+  will-change: transform, opacity;
 }
 
 .hero-brand {
@@ -1464,8 +1559,25 @@ a {
   letter-spacing: -0.02em;
   line-height: 0.95;
   color: #fff8ef;
-  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.35);
+  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.3);
   margin: 0;
+  cursor: default;
+}
+
+.hero-word {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+/* 每個字母依滑鼠距離 --k（0–1）微微浮起、透出白色柔光 */
+.hero-ch {
+  --k: 0;
+  display: inline-block;
+  transform: translateY(calc(var(--k) * -0.07em));
+  text-shadow:
+    0 2px 24px rgba(0, 0, 0, 0.3),
+    0 0 calc(var(--k) * 30px) rgba(255, 255, 255, calc(var(--k) * 0.8));
+  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), text-shadow 0.4s ease;
 }
 
 .hero-tagline {
@@ -1475,7 +1587,99 @@ a {
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--p-yellow);
-  margin: 14px 0 0;
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.25);
+  margin: 16px 0 0;
+}
+
+/* 往下滑的引導：一條細線，中間有一顆光點一直往下滑 */
+.hero-scroll {
+  position: absolute;
+  left: 50%;
+  bottom: 22px;
+  z-index: 2;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  color: rgba(255, 248, 239, 0.85);
+  text-decoration: none;
+  font-family: var(--font-meta);
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.4);
+  opacity: calc(1 - var(--hero-p) * 4);
+  transition: color 0.25s ease, text-shadow 0.25s ease;
+}
+
+.hero-scroll i {
+  position: relative;
+  width: 1px;
+  height: 46px;
+  background: rgba(255, 248, 239, 0.4);
+  overflow: hidden;
+}
+
+.hero-scroll i::after {
+  content: "";
+  position: absolute;
+  left: -1px;
+  top: -14px;
+  width: 3px;
+  height: 14px;
+  border-radius: 2px;
+  background: #fff8ef;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+  animation: hero-scroll-drop 1.8s cubic-bezier(0.6, 0, 0.3, 1) infinite;
+}
+
+.hero-scroll:hover,
+.hero-scroll:focus-visible {
+  color: #fff;
+  text-shadow: 0 0 12px rgba(255, 255, 255, 0.8);
+  outline: none;
+}
+
+@keyframes hero-scroll-drop {
+  0% { transform: translateY(0); }
+  70%, 100% { transform: translateY(62px); }
+}
+
+/* 照片拍攝地點：左下角的小圖說，滑鼠移到封面上時微微亮起來 */
+.hero-caption {
+  position: absolute;
+  left: clamp(18px, 3vw, 40px);
+  bottom: 22px;
+  z-index: 2;
+  margin: 0;
+  font-family: var(--font-meta);
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255, 248, 239, 0.72);
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.45);
+  opacity: calc(1 - var(--hero-p) * 3);
+  transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.site-hero:hover .hero-caption {
+  color: #fff;
+  text-shadow:
+    0 1px 8px rgba(0, 0, 0, 0.45),
+    0 0 18px rgba(255, 255, 255, 0.4);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-hero-img,
+  .hero-masthead {
+    transform: none;
+  }
+  .hero-scroll i::after {
+    animation: none;
+  }
 }
 
 
@@ -1549,7 +1753,7 @@ a {
 }
 
 .home-feature-card-sub {
-  font-family: var(--font-body);
+  font-family: var(--font-ui);
   font-size: 0.88rem;
   color: rgba(255, 248, 239, 0.65);
   margin: 0;
@@ -1735,9 +1939,43 @@ a {
   }
 }
 
-/* ── World map ── */
+/* ── World map（首頁 + map.html 共用） ── */
 .world-map-section {
   margin-top: 40px;
+}
+
+.world-map-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.world-map-more {
+  font-family: var(--font-meta);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--p-teal);
+  text-decoration: none;
+  padding: 6px 12px;
+  border-radius: 999px;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.world-map-more span {
+  display: inline-block;
+  transition: transform 0.2s ease;
+}
+
+.world-map-more:hover {
+  background: var(--p-teal);
+  color: #fff8ef;
+}
+
+.world-map-more:hover span {
+  transform: translateX(4px);
 }
 
 .world-map-layout {
@@ -1747,17 +1985,193 @@ a {
   align-items: start;
 }
 
-#world-map {
+.world-map-frame {
+  position: relative;
+}
+
+#world-map,
+.world-map-canvas {
   width: 100%;
-  background: transparent;
   border-radius: 12px;
   overflow: hidden;
 }
 
+.world-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.world-svg .sphere {
+  fill: rgba(0, 130, 142, 0.05);
+  stroke: rgba(0, 130, 142, 0.18);
+  stroke-width: 0.8px;
+  vector-effect: non-scaling-stroke;
+}
+
+.world-svg .graticule {
+  fill: none;
+  stroke: rgba(0, 130, 142, 0.09);
+  stroke-width: 0.5px;
+  vector-effect: non-scaling-stroke;
+  pointer-events: none;
+}
+
+.world-svg .country {
+  fill: #ddd5c8;
+  stroke: #f6efe4;
+  stroke-width: 0.5px;
+  vector-effect: non-scaling-stroke;
+  transition: fill 0.25s ease, opacity 0.25s ease, stroke 0.2s ease;
+}
+
+.world-svg .country:hover {
+  fill: #cfc5b5;
+}
+
+/* 目前圖層裡的國家 */
+.layer-visited .country.is-visited,
+.layer-read .country.is-read {
+  cursor: pointer;
+}
+
+.is-drawn .layer-visited .country.is-visited {
+  fill: var(--p-yellow);
+  stroke: #d9a900;
+}
+
+.is-drawn .layer-read .country.is-read {
+  fill: var(--p-teal);
+  stroke: #006770;
+}
+
+/* 進場：依序亮起 */
+.world-svg .country.is-visited,
+.world-svg .country.is-read {
+  transition-delay: calc(var(--i, 0) * 55ms);
+}
+
+.is-settled .world-svg .country {
+  transition-delay: 0ms;
+}
+
+/* hover：其他國家變淡，被指到的國家亮起來 */
+.world-svg.has-hover .country {
+  opacity: 0.55;
+}
+
+.world-svg .country.is-hover,
+.world-svg .country.is-selected {
+  opacity: 1;
+  stroke: var(--p-dark);
+  stroke-width: 1.4px;
+}
+
+.layer-visited .country.is-visited.is-hover,
+.layer-visited .country.is-visited.is-selected {
+  fill: #ffdc4a;
+  filter: drop-shadow(0 0 6px rgba(255, 205, 0, 0.85));
+}
+
+.layer-read .country.is-read.is-hover,
+.layer-read .country.is-read.is-selected {
+  fill: #12a3b0;
+  filter: drop-shadow(0 0 6px rgba(0, 130, 142, 0.7));
+}
+
+/* tooltip */
+.map-tooltip {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 5;
+  min-width: 140px;
+  max-width: 240px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: rgba(19, 30, 33, 0.92);
+  color: #fff8ef;
+  box-shadow: 0 10px 30px rgba(19, 30, 33, 0.25);
+  pointer-events: none;
+  font-family: var(--font-ui);
+  font-size: 0.8rem;
+  line-height: 1.5;
+  backdrop-filter: blur(4px);
+}
+
+.map-tooltip[hidden] {
+  display: none;
+}
+
+.map-tooltip p {
+  margin: 0;
+}
+
+.map-tip-name {
+  font-weight: 700;
+  font-size: 0.92rem;
+  letter-spacing: 0.01em;
+}
+
+.map-tip-name span {
+  margin-left: 6px;
+  font-weight: 400;
+  opacity: 0.75;
+}
+
+.map-tip-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 6px !important;
+}
+
+.map-badge {
+  font-family: var(--font-meta);
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  padding: 1px 7px;
+  border-radius: 999px;
+}
+
+.map-badge.is-visited {
+  background: var(--p-yellow);
+  color: var(--p-dark);
+}
+
+.map-badge.is-read {
+  background: var(--p-teal);
+  color: #fff;
+}
+
+.map-tip-line {
+  margin-top: 6px !important;
+  font-weight: 500;
+}
+
+.map-tip-note {
+  margin-top: 4px !important;
+  opacity: 0.82;
+}
+
+.map-tip-muted {
+  margin-top: 2px !important;
+  opacity: 0.6;
+  font-size: 0.74rem;
+}
+
+.map-tip-hint {
+  margin-top: 8px !important;
+  font-size: 0.7rem;
+  color: var(--p-yellow);
+}
+
+/* 首頁國家清單：hover 與地圖連動 */
 .country-list {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 2px;
   padding-top: 4px;
 }
 
@@ -1770,6 +2184,11 @@ a {
   font-weight: 600;
   color: var(--p-dark);
   letter-spacing: 0.04em;
+  text-decoration: none;
+  padding: 3px 8px;
+  margin-left: -8px;
+  border-radius: 6px;
+  transition: background-color 0.15s ease, color 0.15s ease, transform 0.15s ease;
 }
 
 .country-list-item::before {
@@ -1780,6 +2199,21 @@ a {
   border-radius: 50%;
   background: var(--p-yellow);
   flex-shrink: 0;
+  transition: box-shadow 0.15s ease;
+}
+
+.country-list-item:hover,
+.country-list-item:focus-visible,
+.country-list-item.is-active {
+  background: var(--p-dark);
+  color: #fff8ef;
+  transform: translateX(4px);
+  outline: none;
+}
+
+.country-list-item.is-active::before,
+.country-list-item:hover::before {
+  box-shadow: 0 0 0 3px rgba(255, 205, 0, 0.35);
 }
 
 .country-list-count {
@@ -1800,50 +2234,307 @@ a {
   .country-list {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 6px 12px;
+    gap: 4px 12px;
+  }
+  .country-list-count {
+    grid-column: 1 / -1;
   }
 }
 
-#world-map svg {
+/* ── map.html ── */
+.map-page-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 18px;
+}
+
+.map-page-head h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1.05;
+  margin: 6px 0 8px;
+}
+
+.map-page-intro {
+  margin: 0;
+  max-width: 46ch;
+  color: var(--muted);
+  font-size: 1rem;
+  line-height: 1.8;
+}
+
+.map-layers {
+  display: inline-flex;
+  padding: 4px;
+  gap: 4px;
+  border-radius: 999px;
+  background: rgba(19, 30, 33, 0.06);
+}
+
+.map-layers button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 0;
+  border-radius: 999px;
+  padding: 8px 16px;
+  background: transparent;
+  color: var(--p-dark);
+  font-family: var(--font-meta);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.map-layers button::before {
+  content: "";
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--p-yellow);
+}
+
+.map-layers button[data-layer="read"]::before {
+  background: var(--p-teal);
+}
+
+.map-layers button:hover {
+  background: rgba(255, 255, 255, 0.7);
+}
+
+.map-layers button[aria-pressed="true"] {
+  background: var(--p-dark);
+  color: #fff8ef;
+  box-shadow: 0 6px 18px rgba(19, 30, 33, 0.18);
+}
+
+.map-layer-count {
+  font-weight: 500;
+  opacity: 0.7;
+}
+
+.map-page-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 280px;
+  gap: 24px;
+  align-items: start;
+}
+
+.map-page-layout .world-map-frame {
+  border-radius: 18px;
+  background: var(--surface-strong);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  padding: 10px;
+}
+
+.map-page-layout .world-map-canvas {
+  cursor: grab;
+}
+
+.map-page-layout .world-map-canvas:active {
+  cursor: grabbing;
+}
+
+.map-zoom-controls {
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.map-zoom-controls button {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: #fffaf3;
+  color: var(--p-dark);
+  font-family: var(--font-meta);
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.map-zoom-controls button:hover {
+  background: var(--p-dark);
+  color: #fff8ef;
+}
+
+.map-zoom-controls button[data-zoom="reset"] {
+  font-size: 0.7rem;
+}
+
+.map-panel {
+  position: sticky;
+  top: 24px;
+  max-height: calc(100vh - 48px);
+  overflow: auto;
+  padding: 20px;
+  border-radius: 18px;
+  background: var(--surface-strong);
+  border: 1px solid var(--border);
+  font-family: var(--font-ui);
+}
+
+.map-panel-label {
+  margin: 14px 0 4px;
+  font-family: var(--font-meta);
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.map-panel-label:first-child {
+  margin-top: 0;
+}
+
+.map-panel-title {
+  margin: 0 0 10px;
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  line-height: 1.2;
+}
+
+.map-panel-title span {
   display: block;
+  margin-top: 4px;
+  font-family: var(--font-ui);
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--muted);
+}
+
+.map-panel-text,
+.map-panel-empty {
+  margin: 0;
+  font-size: 0.92rem;
+  line-height: 1.7;
+}
+
+.map-panel-empty {
+  color: var(--muted);
+}
+
+.map-panel-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.map-panel-list button,
+.map-panel-list button[data-id] {
   width: 100%;
-  height: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 10px;
+  padding: 7px 10px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--p-dark);
+  font-family: var(--font-ui);
+  font-size: 0.86rem;
+  font-weight: 500;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease;
 }
 
-#world-map .graticule {
-  fill: none;
-  stroke: rgba(86, 64, 46, 0.08);
-  stroke-width: 0.3px;
+.map-panel-list small {
+  font-size: 0.75rem;
+  color: var(--muted);
 }
 
-#world-map .country {
-  fill: #d4d4d4;
-  stroke: #b8b8b8;
-  stroke-width: 0.3px;
-  transition: fill 0.2s;
+.map-panel-list button:hover,
+.map-panel-list button:focus-visible,
+.map-panel-list button.is-active {
+  background: var(--p-dark);
+  color: #fff8ef;
+  outline: none;
 }
 
-#world-map .country.visited {
-  fill: var(--p-yellow);
-  stroke: #c9a200;
-  stroke-width: 0.5px;
+.map-panel-list button:hover small,
+.map-panel-list button.is-active small {
+  color: rgba(255, 248, 239, 0.7);
 }
 
-#world-map .country.visited:hover {
-  fill: #e6b800;
+.map-back {
+  border: 0;
+  background: transparent;
+  padding: 4px 0;
+  margin-bottom: 8px;
+  font-family: var(--font-meta);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--p-teal);
   cursor: pointer;
 }
 
-.map-caption {
-  font-family: var(--font-meta);
-  font-size: 0.68rem;
-  color: var(--muted);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  text-align: right;
-  margin-top: 6px;
+.map-back:hover {
+  color: var(--p-dark);
 }
 
+.map-readings {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.map-reading p {
+  margin: 0;
+}
+
+.map-reading-title {
+  font-weight: 700;
+  font-size: 0.92rem;
+}
+
+.map-reading-title a {
+  color: var(--p-dark);
+  text-decoration-color: var(--p-teal);
+  text-underline-offset: 3px;
+}
+
+.map-reading-meta {
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+.map-reading-note {
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  line-height: 1.65;
+  margin-top: 4px !important;
+}
+
+@media (max-width: 860px) {
+  .map-page-layout {
+    grid-template-columns: 1fr;
+  }
+  .map-panel {
+    position: static;
+    max-height: none;
+  }
+}
 
 /* ── Article tags ── */
 .article-tags {
@@ -1867,3 +2558,1418 @@ a {
 
 .tag:nth-child(2) { background: var(--p-red); }
 .tag:nth-child(3) { background: var(--p-dark); }
+
+
+/* ── 卡片微光：游標附近微微亮起來，卡片輕輕浮起 ── */
+.home-feature-card,
+.story-card {
+  --mx: 50%;
+  --my: 50%;
+  transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.35s ease;
+}
+
+.home-feature-card:hover,
+.story-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 34px rgba(19, 30, 33, 0.16);
+}
+
+.home-feature-card img {
+  transition: transform 0.6s ease;
+}
+
+.home-feature-card:hover img {
+  transform: scale(1.015);
+}
+
+/* 小卡進場時依序浮上來 */
+.home-articles .story-card {
+  opacity: 0;
+  translate: 0 16px;
+  transition:
+    opacity 0.6s ease,
+    translate 0.6s cubic-bezier(0.2, 0.8, 0.2, 1),
+    transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 0.35s ease;
+}
+
+.home-articles.is-visible .story-card {
+  opacity: 1;
+  translate: 0 0;
+}
+
+.home-articles.is-visible .story-card:nth-child(2) { transition-delay: 80ms, 80ms, 0ms, 0ms; }
+.home-articles.is-visible .story-card:nth-child(3) { transition-delay: 160ms, 160ms, 0ms, 0ms; }
+.home-articles.is-visible .story-card:nth-child(4) { transition-delay: 240ms, 240ms, 0ms, 0ms; }
+.home-articles.is-visible .story-card:nth-child(5) { transition-delay: 320ms, 320ms, 0ms, 0ms; }
+.home-articles.is-visible .story-card:nth-child(n + 6) { transition-delay: 400ms, 400ms, 0ms, 0ms; }
+
+@media (prefers-reduced-motion: reduce) {
+  .home-articles .story-card {
+    opacity: 1;
+    translate: none;
+  }
+}
+
+/* ── 地圖：國旗、首頁版的地圖工具 ── */
+.map-flag {
+  display: inline-block;
+  width: 20px;
+  height: 15px;
+  margin-right: 8px;
+  vertical-align: -2px;
+  border-radius: 2px;
+  object-fit: cover;
+  box-shadow: 0 0 0 1px rgba(19, 30, 33, 0.12);
+}
+
+.map-tooltip .map-flag {
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.25);
+}
+
+.map-panel-title .map-flag {
+  width: 26px;
+  height: 19px;
+  margin-right: 10px;
+  vertical-align: 0;
+}
+
+.map-panel-name {
+  display: inline-flex;
+  align-items: center;
+}
+
+.map-wheel-hint {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0;
+  padding: 10px 16px;
+  border-radius: 999px;
+  background: rgba(19, 30, 33, 0.82);
+  color: #fff8ef;
+  font-family: var(--font-ui);
+  font-size: 0.82rem;
+  pointer-events: none;
+  z-index: 6;
+}
+
+.map-wheel-hint[hidden] {
+  display: none;
+}
+
+/* 首頁：手機上單指留給頁面捲動，雙指才縮放地圖 */
+[data-variant="home"] .world-svg {
+  touch-action: pan-y;
+}
+
+.world-map-section .map-page-head {
+  align-items: flex-end;
+}
+
+.world-map-section .map-page-intro {
+  margin-top: 10px;
+}
+
+/* 首頁的面板跟地圖一樣高，國家清單在裡面捲動 */
+.world-map-section .map-page-layout {
+  align-items: stretch;
+}
+
+.world-map-section .map-panel {
+  position: relative;
+  top: auto;
+  max-height: none;
+  contain: size;
+}
+
+@media (max-width: 860px) {
+  .world-map-section .map-panel {
+    contain: none;
+    max-height: 420px;
+  }
+}
+
+/* Portfolio：典藏中的小工具 */
+.portfolio-card-badge {
+  display: inline-block;
+  padding: 1px 8px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  font-family: var(--font-meta);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+.portfolio-card.is-archived {
+  opacity: 0.82;
+}
+
+.portfolio-card.is-archived:hover {
+  opacity: 1;
+}
+
+@media (max-width: 600px) {
+  .map-zoom-controls {
+    flex-direction: row;
+    right: 14px;
+    bottom: 14px;
+    gap: 4px;
+  }
+  .map-zoom-controls button {
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+  }
+  .map-zoom-controls button[data-zoom="reset"] {
+    width: auto;
+    padding: 0 8px;
+    font-size: 0.62rem;
+  }
+}
+
+/* ── 首頁三層：封面 → Feature Story → Around the World ──
+   捲動時頁面會吸附到每一層的開頭，像翻頁一樣跳到下一層 */
+html:has(body.home-page) {
+  scroll-snap-type: y proximity;
+}
+
+.home-page .site-hero,
+.home-page #writing,
+.home-page #map {
+  scroll-snap-align: start;
+}
+
+.home-page .site-footer {
+  scroll-snap-align: end;
+}
+
+/* 每一層至少一個螢幕高，內容從上方留一點呼吸空間開始 */
+.home-page #writing,
+.home-page #map {
+  min-height: 100svh;
+  box-sizing: border-box;
+  padding-top: clamp(28px, 6vh, 64px);
+}
+
+.home-page .home-content {
+  padding-top: 0;
+}
+
+.home-page .world-map-section {
+  margin-top: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-bottom: clamp(28px, 6vh, 64px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html:has(body.home-page) {
+    scroll-snap-type: none;
+  }
+}
+
+/* ── Articles 頁標題 ── */
+.writing-archive-page .archive-header {
+  align-items: flex-end;
+  margin-bottom: 2.6rem;
+}
+
+.writing-archive-page .archive-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 4.5vw, 3.2rem);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  text-transform: none;
+  line-height: 1;
+}
+
+.archive-intro {
+  margin: 10px 0 0;
+  font-family: var(--font-ui);
+  font-size: 0.92rem;
+  color: var(--muted);
+}
+
+/* ── 時間軸 ── */
+.timeline {
+  --tl-p: 0;
+  --date-w: 74px;
+  --rail-x: calc(var(--date-w) + 22px);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  padding: 6px 0 20px;
+}
+
+.tl-rail {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: var(--rail-x);
+  width: 2px;
+  margin-left: -1px;
+  background: rgba(19, 30, 33, 0.1);
+  border-radius: 2px;
+}
+
+/* 捲動時軸線跟著填滿 */
+.tl-progress {
+  position: absolute;
+  inset: 0;
+  transform-origin: top;
+  transform: scaleY(var(--tl-p));
+  background: linear-gradient(to bottom, var(--p-teal), #2fb3bf);
+  border-radius: 2px;
+}
+
+/* 年份：掛在軸線上的標籤 */
+.tl-year {
+  position: relative;
+  padding-left: calc(var(--rail-x) + 26px);
+  margin: 14px 0 -4px;
+}
+
+.tl-year::before {
+  content: "";
+  position: absolute;
+  left: var(--rail-x);
+  top: 50%;
+  width: 14px;
+  height: 2px;
+  background: var(--p-dark);
+}
+
+.tl-year span {
+  font-family: var(--font-display);
+  font-size: 1.7rem;
+  font-weight: 700;
+  color: var(--p-dark);
+  letter-spacing: -0.01em;
+}
+
+.tl-year:first-child,
+.tl-rail + .tl-year {
+  margin-top: 0;
+}
+
+/* 每一篇：日期 | 節點 | 卡片 */
+.tl-item {
+  position: relative;
+  display: grid;
+  grid-template-columns: var(--date-w) 44px minmax(0, 1fr);
+  align-items: center;
+  opacity: 0;
+  translate: 0 22px;
+  transition: opacity 0.6s ease, translate 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.tl-item.is-in {
+  opacity: 1;
+  translate: 0 0;
+}
+
+.tl-date {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+  font-family: var(--font-meta);
+  color: var(--muted);
+  transition: color 0.3s ease;
+}
+
+.tl-month {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+}
+
+.tl-day {
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+/* 節點：經過時填滿，目前這篇會放大並發出柔光 */
+.tl-dot {
+  justify-self: center;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 2px solid rgba(19, 30, 33, 0.28);
+  position: relative;
+  z-index: 1;
+  transition: background-color 0.3s ease, border-color 0.3s ease, transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.35s ease;
+}
+
+.tl-item.is-past .tl-dot {
+  background: var(--p-teal);
+  border-color: var(--p-teal);
+}
+
+.tl-item.is-current .tl-dot,
+.tl-item:hover .tl-dot {
+  transform: scale(1.45);
+  box-shadow: 0 0 0 5px rgba(0, 130, 142, 0.15), 0 0 16px rgba(0, 130, 142, 0.45);
+}
+
+.tl-item.is-current .tl-date,
+.tl-item:hover .tl-date {
+  color: var(--p-teal);
+}
+
+/* 卡片：文字在左、照片在右；標籤、標題、副標間距統一 */
+.tl-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 240px;
+  gap: 22px;
+  align-items: center;
+  padding: 18px;
+  border-radius: 16px;
+  background: var(--surface-strong);
+  border: 1px solid var(--border);
+  color: inherit;
+  text-decoration: none;
+  transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.35s ease, border-color 0.35s ease;
+}
+
+.tl-card:hover,
+.tl-card:focus-visible,
+.tl-item.is-current .tl-card {
+  border-color: rgba(0, 130, 142, 0.35);
+}
+
+.tl-card:hover,
+.tl-card:focus-visible {
+  transform: translateX(6px);
+  box-shadow: 0 14px 34px rgba(19, 30, 33, 0.12);
+  outline: none;
+}
+
+.tl-card-copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  min-width: 0;
+}
+
+.tl-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0;
+}
+
+.tl-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.15rem, 2vw, 1.45rem);
+  line-height: 1.3;
+  color: var(--p-dark);
+}
+
+.tl-sub {
+  margin: 0;
+  font-family: var(--font-ui);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+.tl-cta {
+  margin-top: 2px;
+  font-family: var(--font-meta);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--p-teal);
+  opacity: 0;
+  translate: -6px 0;
+  transition: opacity 0.3s ease, translate 0.3s ease;
+}
+
+.tl-card:hover .tl-cta,
+.tl-card:focus-visible .tl-cta,
+.tl-item.is-current .tl-cta {
+  opacity: 1;
+  translate: 0 0;
+}
+
+.tl-card-media {
+  border-radius: 10px;
+  overflow: hidden;
+  aspect-ratio: 16 / 10;
+  background: var(--bg-2);
+}
+
+.tl-card-media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.tl-card:hover .tl-card-media img {
+  transform: scale(1.04);
+}
+
+/* 手機：軸線靠左，日期放在卡片上方 */
+@media (max-width: 680px) {
+  .timeline {
+    --date-w: 0px;
+    --rail-x: 9px;
+  }
+
+  .tl-year {
+    padding-left: 30px;
+  }
+
+  .tl-item {
+    grid-template-columns: 18px minmax(0, 1fr);
+    grid-template-areas:
+      "dot date"
+      ".   card";
+    row-gap: 6px;
+    column-gap: 12px;
+    align-items: center;
+  }
+
+  .tl-date {
+    grid-area: date;
+    flex-direction: row;
+    align-items: baseline;
+    gap: 6px;
+  }
+
+  .tl-day {
+    font-size: 0.95rem;
+  }
+
+  .tl-dot {
+    grid-area: dot;
+  }
+
+  .tl-card {
+    grid-area: card;
+    grid-template-columns: 1fr;
+    gap: 14px;
+    padding: 14px;
+  }
+
+  .tl-card-media {
+    order: -1;
+  }
+
+  .tl-cta {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tl-item {
+    opacity: 1;
+    translate: none;
+  }
+}
+
+/* Articles 時間軸：標題回到明體，副標也用明體；文章開頭的一兩句用黑體 */
+.tl-title {
+  font-family: "Playfair Display", "GenYoMin Text", Georgia, serif;
+  font-weight: 700;
+  line-height: 1.42;
+}
+
+.tl-sub {
+  font-family: "Source Serif 4", "GenYoMin Text", Georgia, serif;
+  font-size: 0.95rem;
+  color: var(--muted);
+}
+
+.tl-excerpt {
+  margin: 0;
+  font-family: var(--font-ui);
+  font-size: 0.88rem;
+  line-height: 1.75;
+  color: #3d4d51;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ── 首頁第二層：三排。第一排 Feature Story；
+   第二排 More Stories 最新的兩篇（各佔一半）；第三排其餘三篇（各佔三分之一）。
+   整層剛好一個螢幕高，內容佔畫面上下約 85% ── */
+@media (min-width: 1000px) {
+  .home-page #writing {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100svh;
+    min-height: 640px;
+    padding: 3.5svh 0;
+    box-sizing: border-box;
+  }
+
+  .home-page .home-feature-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 0;
+  }
+
+  .home-page .home-feature-wrap .stories-section-label,
+  .home-page #writing > .stories-section-label {
+    margin: 0;
+    align-self: flex-start;
+  }
+
+  .home-page #writing > .stories-section-label {
+    margin-top: clamp(14px, 2.6svh, 24px);
+    margin-bottom: 10px;
+  }
+
+  .home-page .home-feature-card img {
+    aspect-ratio: auto;
+    height: clamp(260px, 43svh, 540px);
+    object-fit: cover;
+    object-position: center 35%;
+  }
+
+  .home-page .stories-grid {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    grid-auto-flow: row;
+    grid-auto-rows: clamp(120px, 17.5svh, 220px);
+    gap: 10px;
+    overflow: visible;
+  }
+
+  /* 最新的兩篇各佔一半，其餘每篇佔三分之一 */
+  .home-page .stories-grid > .story-card {
+    grid-column: span 2;
+    aspect-ratio: auto;
+    height: auto;
+  }
+
+  .home-page .stories-grid > .story-card:nth-child(-n + 2) {
+    grid-column: span 3;
+  }
+}
+
+/* ── 首頁第三層：地圖在上面、用滿寬度；國家清單攤平成一排排「國旗 + 國名」放在地圖下面 ── */
+.home-page #map .map-page-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.home-page #map .map-panel {
+  position: static;
+  width: auto;
+  max-height: none;
+  contain: none;
+  overflow: visible;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 14px;
+}
+
+.home-page #map .map-panel-label {
+  margin: 0;
+}
+
+.home-page #map .map-panel-list {
+  flex: 1 1 0;
+  min-width: 0;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.home-page #map .map-panel-list button {
+  width: auto;
+  padding: 5px 12px 5px 8px;
+  border-radius: 999px;
+  background: rgba(255, 250, 243, 0.85);
+  border: 1px solid var(--border);
+  font-size: 0.8rem;
+}
+
+.home-page #map .map-panel-list button:hover,
+.home-page #map .map-panel-list button:focus-visible,
+.home-page #map .map-panel-list button.is-active {
+  background: rgba(0, 130, 142, 0.08);
+  border-color: rgba(0, 130, 142, 0.35);
+  color: var(--p-teal);
+}
+
+.home-page #map .map-panel .map-flag {
+  margin-right: 6px;
+}
+
+/* Visited 國家清單放在地圖上方 */
+.home-page #map .map-panel {
+  order: -1;
+}
+
+/* 點了國家之後的細節，也排成一行 */
+.home-page #map .map-back {
+  margin: 0;
+}
+
+.home-page #map .map-panel-title {
+  margin: 0;
+  font-size: 1.15rem;
+}
+
+.home-page #map .map-panel-title span {
+  display: inline;
+  margin-left: 8px;
+}
+
+.home-page #map .map-panel-text {
+  margin: 0;
+}
+
+@media (min-width: 1000px) {
+  .home-page #map {
+    width: min(1480px, calc(100vw - 48px));
+    margin-left: 50%;
+    translate: -50% 0;
+    /* 整層剛好一個螢幕高，上下都留白；地圖在中間的空間裡等比例放到最大 */
+    height: 100svh;
+    min-height: 620px;
+    padding: 5svh 0;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 14px;
+  }
+
+  .home-page #map .map-page-head {
+    margin: 0;
+    flex: none;
+    align-items: center;
+  }
+
+  .home-page #map .map-page-layout {
+    flex: 1;
+    min-height: 0;
+  }
+
+  /* 框框貼著地圖的高度，不再撐滿剩下的空間：多出來的高度放到整層的上下，而不是塞在地圖框裡 */
+  .home-page #map .map-page-layout {
+    flex: none;
+  }
+
+  .home-page #map .world-map-frame {
+    flex: none;
+    box-sizing: border-box;
+  }
+
+  .home-page #map .world-map-canvas {
+    width: 100%;
+    height: auto;
+  }
+
+  .home-page #map .world-svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    /* 螢幕比較扁時，地圖高度不超過畫面剩下的空間 */
+    max-height: calc(100svh - 10svh - 200px);
+    overflow: hidden;
+  }
+
+  .home-page #map .map-panel {
+    flex: none;
+    /* 固定兩排國家的高度：點國家看細節時，地圖不會跟著跳動 */
+    min-height: 66px;
+    align-content: flex-start;
+  }
+}
+
+/* ── 國家清單：滑過時不再整條反白，只把文字轉成 teal ── */
+.map-panel-list button:hover,
+.map-panel-list button:focus-visible,
+.map-panel-list button.is-active {
+  background: rgba(0, 130, 142, 0.07);
+  color: var(--p-teal);
+}
+
+.map-panel-list button:hover small,
+.map-panel-list button.is-active small {
+  color: var(--muted);
+}
+
+/* ── Research story map（map.html） ── */
+.sm-head {
+  padding-bottom: 8px;
+}
+
+.sm-head h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1.08;
+  margin: 8px 0 8px;
+}
+
+.sm-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 18px;
+}
+
+.sm-filter {
+  --c: var(--p-dark);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: rgba(255, 250, 243, 0.8);
+  color: var(--p-dark);
+  font-family: var(--font-meta);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.sm-filter::before {
+  content: "";
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--c);
+}
+
+.sm-filter:hover {
+  border-color: var(--c);
+}
+
+.sm-filter[aria-pressed="true"] {
+  background: var(--c);
+  border-color: var(--c);
+  color: #fff8ef;
+}
+
+.sm-filter[aria-pressed="true"]::before {
+  background: #fff8ef;
+}
+
+.sm-sphere {
+  fill: rgba(0, 130, 142, 0.05);
+  stroke: rgba(0, 130, 142, 0.18);
+  stroke-width: 0.8px;
+  vector-effect: non-scaling-stroke;
+}
+
+.sm-graticule {
+  fill: none;
+  stroke: rgba(0, 130, 142, 0.08);
+  stroke-width: 0.5px;
+  vector-effect: non-scaling-stroke;
+}
+
+.sm-land {
+  fill: #ddd5c8;
+  stroke: #f6efe4;
+  stroke-width: 0.5px;
+  vector-effect: non-scaling-stroke;
+}
+
+.sm-marker {
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+.sm-dot {
+  fill: var(--c);
+  /* 外圈：有第二個主題就是那個主題的顏色，沒有就是白邊 */
+  stroke: var(--c2, #fffaf3);
+  stroke-width: 1.6px;
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: transform 0.2s ease;
+}
+
+.sm-pulse {
+  fill: var(--c);
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.sm-marker.is-active .sm-pulse {
+  animation: sm-pulse 1.8s ease-out infinite;
+}
+
+.sm-marker.is-active .sm-dot {
+  transform: scale(1.45);
+}
+
+.sm-marker.is-dimmed {
+  opacity: 0.2;
+}
+
+@keyframes sm-pulse {
+  0% { opacity: 0.55; transform: scale(1); }
+  100% { opacity: 0; transform: scale(3.2); }
+}
+
+.sm-intro {
+  border-left-color: var(--p-dark);
+}
+
+.sm-index {
+  margin: 0 0 10px;
+  font-family: var(--font-meta);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--c);
+}
+
+.sm-intro .sm-index {
+  color: var(--muted);
+}
+
+.sm-place {
+  display: flex;
+  align-items: center;
+  margin: 0 0 6px;
+  font-family: var(--font-meta);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.sm-title {
+  margin: 0 0 12px;
+  font-family: "Playfair Display", "GenYoMin Text", Georgia, serif;
+  font-size: clamp(1.35rem, 2vw, 1.7rem);
+  line-height: 1.25;
+}
+
+.sm-title span {
+  display: block;
+  margin-top: 6px;
+  font-family: "Source Serif 4", "GenYoMin Text", Georgia, serif;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--muted);
+}
+
+.sm-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+.sm-tag {
+  padding: 2px 9px;
+  border-radius: 999px;
+  background: var(--c);
+  color: #fff;
+  font-family: var(--font-meta);
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.sm-story-zh {
+  margin: 0 0 12px;
+  font-family: var(--font-ui);
+  font-size: 0.95rem;
+  line-height: 1.85;
+}
+
+.sm-story-en {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: #3d4d51;
+}
+
+.sm-soon {
+  margin: 0;
+  font-family: var(--font-ui);
+  font-size: 0.86rem;
+  color: var(--muted);
+}
+
+/* story map 頁：overflow: hidden 會讓 sticky 失效，改用 clip（一樣會裁掉溢出的背景光暈） */
+.page-shell:has(.sm-page) {
+  overflow: clip;
+}
+
+/* 英文故事：桌機直接展開；手機預設收起，點 English 才展開，卡片不會蓋滿整個螢幕 */
+.sm-en summary {
+  display: none;
+}
+
+@media (max-width: 860px) {
+  .sm-en summary {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    list-style: none;
+    font-family: var(--font-meta);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--c);
+  }
+
+  .sm-en summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .sm-en summary::after {
+    content: "↓";
+  }
+
+  .sm-en[open] summary::after {
+    content: "↑";
+  }
+
+  .sm-en[open] .sm-story-en {
+    margin-top: 10px;
+  }
+}
+
+/* 主題篩選：被選取的按鈕用主題色填滿 */
+.sm-map-wrap .sm-filter[aria-pressed="true"] {
+  background: var(--c);
+  border-color: var(--c);
+  color: #fff8ef;
+}
+
+/* 故事卡最下方的引用來源 */
+.sm-sources {
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+}
+
+.sm-sources-label {
+  margin: 0 0 6px;
+  font-family: var(--font-meta);
+  font-size: 0.64rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.sm-sources ol {
+  margin: 0;
+  padding-left: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.sm-sources li {
+  font-family: var(--font-body);
+  font-size: 0.76rem;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+.sm-sources a {
+  color: inherit;
+  text-decoration-color: rgba(0, 130, 142, 0.4);
+  text-underline-offset: 2px;
+}
+
+.sm-sources a:hover {
+  color: var(--p-teal);
+}
+
+/* 引用來源預設收起，點了才展開，卡片不會太長 */
+.sm-sources summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  list-style: none;
+}
+
+.sm-sources summary::-webkit-details-marker {
+  display: none;
+}
+
+.sm-sources summary::after {
+  content: "↓";
+}
+
+.sm-sources[open] summary::after {
+  content: "↑";
+}
+
+.sm-sources summary:hover {
+  color: var(--p-teal);
+}
+
+.sm-sources[open] ol {
+  margin-top: 8px;
+}
+
+/* ── Research map：滿版地圖，點地圖上的點看故事 ── */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* 地圖頁不要外框留白：地圖直接從導覽列下方開始，填滿整個畫面 */
+.page-shell:has(.sm-page) {
+  padding: 56px 0 0;
+}
+
+.page-shell:has(.sm-page) .site-footer {
+  margin: 0;
+}
+
+.sm-map-wrap {
+  position: relative;
+  height: calc(100svh - 56px);
+  min-height: 520px;
+  overflow: hidden;
+}
+
+.sm-map {
+  position: absolute;
+  inset: 0;
+  background: #eef0ea;
+}
+
+.sm-svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  cursor: grab;
+}
+
+.sm-svg:active {
+  cursor: grabbing;
+}
+
+.sm-hit {
+  fill: transparent;
+}
+
+.sm-marker:hover .sm-dot,
+.sm-marker:focus-visible .sm-dot {
+  transform: scale(1.35);
+}
+
+.sm-marker:focus {
+  outline: none;
+}
+
+/* 滑過點時的小提示 */
+.sm-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  max-width: 240px;
+  padding: 8px 12px;
+  border-radius: 10px;
+  background: rgba(19, 30, 33, 0.92);
+  color: #fff8ef;
+  pointer-events: none;
+  font-family: var(--font-ui);
+  font-size: 0.8rem;
+  box-shadow: 0 10px 30px rgba(19, 30, 33, 0.25);
+}
+
+.sm-tip[hidden] {
+  display: none;
+}
+
+.sm-tip span {
+  display: flex;
+  align-items: center;
+  opacity: 0.8;
+  font-size: 0.74rem;
+}
+
+/* 主題篩選：地圖右上角 */
+.sm-map-wrap .sm-filters {
+  position: absolute;
+  top: 18px;
+  right: 22px;
+  z-index: 3;
+  margin: 0;
+  justify-content: flex-end;
+  max-width: 55vw;
+}
+
+.sm-map-wrap .sm-filter {
+  background: rgba(255, 250, 243, 0.92);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 4px 14px rgba(19, 30, 33, 0.08);
+}
+
+.sm-map-wrap .sm-filter[aria-pressed="true"] {
+  background: var(--c);
+  border-color: var(--c);
+  color: #fff8ef;
+}
+
+/* 故事面板：浮在地圖左側；內容太長時在面板裡捲動 */
+.sm-panel {
+  --c: var(--p-dark);
+  position: absolute;
+  top: 18px;
+  left: 20px;
+  z-index: 4;
+  width: min(420px, calc(100% - 40px));
+  max-height: calc(100% - 36px);
+  overflow-y: auto;
+  box-sizing: border-box;
+  padding: 22px 22px 20px;
+  border-radius: 18px;
+  background: rgba(255, 250, 243, 0.95);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--c);
+  box-shadow: 0 18px 40px rgba(19, 30, 33, 0.14);
+  scrollbar-width: thin;
+}
+
+.sm-panel .sm-index {
+  color: var(--muted);
+}
+
+.sm-hint {
+  margin: 0 0 12px;
+  font-family: var(--font-ui);
+  font-size: 0.84rem;
+  color: var(--muted);
+}
+
+.sm-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.sm-list button {
+  --c: var(--p-teal);
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 8px 10px;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.sm-list button:hover,
+.sm-list button:focus-visible {
+  background: rgba(0, 130, 142, 0.07);
+  outline: none;
+}
+
+.sm-list-dot {
+  flex: none;
+  width: 10px;
+  height: 10px;
+  margin-top: 6px;
+  border-radius: 50%;
+  background: var(--c);
+  box-shadow: 0 0 0 2px var(--c2, transparent);
+}
+
+.sm-list-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.sm-list-text strong {
+  font-family: "Playfair Display", "GenYoMin Text", Georgia, serif;
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: var(--p-dark);
+}
+
+.sm-list-text small {
+  display: flex;
+  align-items: center;
+  font-family: var(--font-meta);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+}
+
+.sm-list-text .map-flag {
+  width: 16px;
+  height: 12px;
+  margin-right: 6px;
+}
+
+.sm-back {
+  border: 0;
+  background: transparent;
+  padding: 0;
+  margin: 0 0 12px;
+  font-family: var(--font-meta);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--c);
+  cursor: pointer;
+}
+
+.sm-back:hover {
+  color: var(--p-dark);
+}
+
+/* 上一篇／下一篇 */
+.sm-pager {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+  font-family: var(--font-meta);
+  font-size: 0.7rem;
+  color: var(--muted);
+}
+
+.sm-pager button {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  background: transparent;
+  padding: 4px 0;
+  font-family: var(--font-meta);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--p-dark);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: pointer;
+}
+
+.sm-pager button:first-child {
+  text-align: left;
+}
+
+.sm-pager button:last-child {
+  text-align: right;
+}
+
+.sm-pager button:hover {
+  color: var(--c);
+}
+
+/* 手機：故事面板變成貼在下方的抽屜，篩選按鈕在上方一排 */
+@media (max-width: 860px) {
+  .sm-map-wrap .sm-filters {
+    top: 10px;
+    left: 8px;
+    right: 8px;
+    max-width: none;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    justify-content: flex-start;
+    scrollbar-width: none;
+  }
+
+  .sm-map-wrap .sm-filter {
+    flex: none;
+    padding: 5px 10px;
+    font-size: 0.7rem;
+  }
+
+  .sm-panel {
+    top: auto;
+    left: 8px;
+    right: 8px;
+    bottom: 8px;
+    width: auto;
+    max-height: 52%;
+    padding: 16px 16px 14px;
+  }
+}
+
+/* 極端事件是「情境」不是主題：點的外圈加粗成紅色，標籤用外框樣式 */
+.sm-marker.is-extreme .sm-dot {
+  stroke-width: 2.4px;
+}
+
+.sm-tag-context {
+  background: transparent;
+  color: var(--c);
+  box-shadow: inset 0 0 0 1.5px var(--c);
+}
+
+.sm-filter-context::before {
+  background: transparent;
+  box-shadow: inset 0 0 0 2px var(--c);
+}
+
+/* 首頁世界地圖：不畫地球外框的橢圓和經緯線，整個框都是淡淡的海，
+   這樣上方不會凸出一塊橢圓，下方也不會被切掉 */
+[data-variant="home"] .world-map-canvas {
+  background: rgba(0, 130, 142, 0.05);
+}
+
+[data-variant="home"] .world-svg .sphere,
+[data-variant="home"] .world-svg .graticule {
+  display: none;
+}

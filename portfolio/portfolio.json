@@ -24,5 +24,19 @@
         "date": "2024"
       }
     ]
+  },
+  {
+    "sport": "好用的小工具",
+    "items": [
+      {
+        "type": "tool",
+        "id": "productivity",
+        "title": "自學紀錄工具",
+        "description": "記錄每天的學習時數、專注計時與反思。目前先典藏起來，暫時沒有在更新。",
+        "url": "productivity.html",
+        "date": "Archive",
+        "archived": true
+      }
+    ]
   }
 ]

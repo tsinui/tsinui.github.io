@@ -1,0 +1,9 @@
+# macOS
+.DS_Store
+
+# 本機設定與待刪檔案
+.claude/settings.local.json
+_to_delete/
+
+# 原始字型檔（約 183MB，網站只用 assets/fonts/web 裡的子集字型）
+assets/fonts/*.otf

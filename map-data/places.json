@@ -1,0 +1,132 @@
+{
+  "visited": [
+    {
+      "id": 158,
+      "iso2": "tw",
+      "name": "Taiwan",
+      "nameZh": "臺灣",
+      "cities": [
+        "臺北"
+      ],
+      "note": "在臺大地理系讀完大學"
+    },
+    {
+      "id": 344,
+      "iso2": "hk",
+      "name": "Hong Kong",
+      "nameZh": "香港"
+    },
+    {
+      "id": 156,
+      "iso2": "cn",
+      "name": "China",
+      "nameZh": "中國"
+    },
+    {
+      "id": 496,
+      "iso2": "mn",
+      "name": "Mongolia",
+      "nameZh": "蒙古"
+    },
+    {
+      "id": 703,
+      "iso2": "sk",
+      "name": "Slovakia",
+      "nameZh": "斯洛伐克"
+    },
+    {
+      "id": 392,
+      "iso2": "jp",
+      "name": "Japan",
+      "nameZh": "日本"
+    },
+    {
+      "id": 792,
+      "iso2": "tr",
+      "name": "Turkey",
+      "nameZh": "土耳其"
+    },
+    {
+      "id": 528,
+      "iso2": "nl",
+      "name": "Netherlands",
+      "nameZh": "荷蘭",
+      "cities": [
+        "Wageningen"
+      ],
+      "note": "攻讀 International Land and Water Management 碩士"
+    },
+    {
+      "id": 276,
+      "iso2": "de",
+      "name": "Germany",
+      "nameZh": "德國"
+    },
+    {
+      "id": 250,
+      "iso2": "fr",
+      "name": "France",
+      "nameZh": "法國"
+    },
+    {
+      "id": 724,
+      "iso2": "es",
+      "name": "Spain",
+      "nameZh": "西班牙"
+    },
+    {
+      "id": 620,
+      "iso2": "pt",
+      "name": "Portugal",
+      "nameZh": "葡萄牙"
+    },
+    {
+      "id": 56,
+      "iso2": "be",
+      "name": "Belgium",
+      "nameZh": "比利時"
+    },
+    {
+      "id": 40,
+      "iso2": "at",
+      "name": "Austria",
+      "nameZh": "奧地利"
+    },
+    {
+      "id": 348,
+      "iso2": "hu",
+      "name": "Hungary",
+      "nameZh": "匈牙利"
+    },
+    {
+      "id": 705,
+      "iso2": "si",
+      "name": "Slovenia",
+      "nameZh": "斯洛維尼亞"
+    },
+    {
+      "id": 616,
+      "iso2": "pl",
+      "name": "Poland",
+      "nameZh": "波蘭"
+    },
+    {
+      "id": 246,
+      "iso2": "fi",
+      "name": "Finland",
+      "nameZh": "芬蘭"
+    },
+    {
+      "id": 428,
+      "iso2": "lv",
+      "name": "Latvia",
+      "nameZh": "拉脫維亞"
+    },
+    {
+      "id": 440,
+      "iso2": "lt",
+      "name": "Lithuania",
+      "nameZh": "立陶宛"
+    }
+  ]
+}

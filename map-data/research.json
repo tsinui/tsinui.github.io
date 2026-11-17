@@ -1,0 +1,404 @@
+[
+  {
+    "id": "bolivia-sprinkler",
+    "place": "Bolivia",
+    "iso2": "bo",
+    "lat": -17.4,
+    "lon": -66.2,
+    "zoom": 5,
+    "tags": [
+      "Land Management"
+    ],
+    "title_en": "Saving Water, Losing Sleep",
+    "title_zh": "省了水，賠上睡眠",
+    "story_zh": "在玻利維亞的山坡地上，噴灌被當成幫小農省水的新技術。可是機器不會自己走：坡地上的噴頭，得靠農民一次次親手搬動。最適合灑水的時間，是風最小、蒸發最少的凌晨三四點，農民只好經常半夜起床。推廣的人也沒有把用法說清楚，大家只能邊做邊學。省下來的水，換成了被犧牲的睡眠和勞力。一項技術適不適合小農，不只看效率，也要看誰為它付出時間。",
+    "story_en": "On the hillsides of Bolivia, sprinklers were introduced to help smallholder farmers save water. But the machines do not move by themselves: farmers have to shift them by hand across steep plots. The best time to irrigate is around three or four in the morning, when the wind is calm and the least water evaporates. The water saved is paid for with sleep and labour, and few people explained how to run the system well. Whether a technology fits small farms depends not only on efficiency, but on who gives their time to make it work.",
+    "note": "Atlas/🇧🇴 Bolivia – Smallholder Sprinkler Adoption"
+  },
+  {
+    "id": "west-macedonia-waste4soil",
+    "place": "West Macedonia, Greece",
+    "iso2": "gr",
+    "lat": 40.4,
+    "lon": 21.7,
+    "zoom": 6,
+    "tags": [
+      "Land Management"
+    ],
+    "title_en": "Feeding Soil with Local Agri-Food Waste",
+    "title_zh": "用在地農食殘渣養回土壤",
+    "story_zh": "希臘西馬其頓曾是褐煤能源重鎮，露天礦讓好幾個村莊被迫搬遷，如今這裡正在告別煤礦。農地長期依賴化肥，土壤裡的有機質越來越少，乳品、烘焙和橄欖工廠的殘渣卻被送進掩埋場。Waste4Soil 計畫想把這些殘渣做成堆肥和回收肥料，讓碳和養分回到田裡。但目前的證據大多停在處理效率，土壤和農民端的效果還沒被證明，真正管理土地的農民，也還沒出現在對話裡。",
+    "story_en": "West Macedonia in northern Greece powered the country with lignite for decades, and it is now leaving coal behind. Its farmland has leaned on chemical fertiliser for years, slowly losing the organic matter that keeps soil alive. Meanwhile, leftovers from dairy, bakery and olive factories end up in landfills. A European project, Waste4Soil, is testing how to turn these leftovers into compost and recovered nutrients that can go back to the fields. The technology looks promising, but the farmers who actually manage the land are still missing from the conversation.",
+    "note": "Atlas/🇬🇷 West Macedonia – Food Waste to Soil Improvers",
+    "sources": [
+      {
+        "text": "Waste4Soil. Living Lab Northern Greece – Region of West Macedonia.",
+        "url": "https://www.waste4soil.eu/living-labs/northern-greece-region-west-macedonia"
+      },
+      {
+        "text": "MARGIN-UP. Greek use case.",
+        "url": "https://margin-up.eu/replication-hub/greek-use-case"
+      }
+    ]
+  },
+  {
+    "id": "markermeer",
+    "place": "Markermeer, Netherlands",
+    "iso2": "nl",
+    "lat": 52.53,
+    "lon": 5.22,
+    "zoom": 8,
+    "tags": [
+      "Water Systems"
+    ],
+    "title_en": "Murky Water Starving a Lake's Ecology",
+    "title_zh": "湖水混濁拖垮整座湖的生態",
+    "story_zh": "馬克湖原本是海的一部分，1930 年代被規劃要填成陸地，2004 年填海計畫喊停，它從此成了一座「沒有命運」的湖。堤防完成後，細軟的沉積物讓湖水變得混濁，陽光照不到湖底，魚、貝類和鳥都越來越少。生態達不到歐盟標準，周邊城市也難以發展。在課堂的角色扮演遊戲裡，我扮演提供模型的知識機構，才發現科學怎麼被使用，本身也是一場談判。",
+    "story_en": "The Markermeer used to be part of the sea, until dikes turned it into a lake. After the Houtribdijk was built, the water grew murky, and fish, mussels and birds began to disappear. But the lake is not only an ecosystem: shipping, recreation, fishing and nature groups all want a say in its future. In class, we played a role-playing game to see how each decision ripples into the water and wildlife. It showed me that saving a lake is as much about negotiation as it is about ecology.",
+    "note": "Atlas/🇳🇱 Markermeer – Lake Ecological Decline"
+  },
+  {
+    "id": "zegveld-peat",
+    "place": "Zegveld, Netherlands",
+    "iso2": "nl",
+    "lat": 52.115,
+    "lon": 4.837,
+    "zoom": 9,
+    "tags": [
+      "Land Management"
+    ],
+    "title_en": "Farming Livelihoods under Climate Goals",
+    "title_zh": "減碳目標與酪農生計的拉扯",
+    "story_zh": "在荷蘭的澤夫爾德，綠油油的牧草地底下是泥炭。為了讓乳牛場能運作，溝渠水位被壓在地表下六十到八十公分，泥炭接觸空氣後慢慢分解，土地每年下沉約一公分，還排出二氧化碳、讓房子出現裂痕。把水位拉高能減少排放，但我們拜訪的農民擔心收入會大幅減少。同一個水位，既是氣候政策的工具，也是農業生產的條件，水利會要做的，其實是不同價值之間的取捨。",
+    "story_en": "Beneath the green dairy meadows of Zegveld lies a thick layer of peat. To keep the land dry enough for cows, ditch water levels are kept low, and the exposed peat slowly breaks down. The ground sinks about one centimetre every year, releasing carbon dioxide and cracking the foundations of houses. Raising the water would cut emissions, but it would also put farm incomes at risk. For the local water board, the real question is not technical, but which values come first.",
+    "note": "Atlas/🇳🇱 Zegveld – Peat Subsidence and Emissions"
+  },
+  {
+    "id": "tadla-irrigation",
+    "place": "Tadla, Morocco",
+    "iso2": "ma",
+    "lat": 32.45,
+    "lon": -6.55,
+    "zoom": 6,
+    "tags": [
+      "Land Management"
+    ],
+    "extreme": true,
+    "title_en": "Drought Exposes Unequal Access to Water",
+    "title_zh": "乾旱放大的用水不平等",
+    "story_zh": "摩洛哥的塔德拉灌溉區，渠道送來的水常常不夠作物用，農民只好抽地下水，地下水位一年年下降。但缺水的經驗並不平均：只能依賴渠道配水的小農，乾旱時輪灌間隔可能從十天拉長到二十天，只好種穀物、養牲畜分散風險；資本雄厚的出口農場，則用滴灌種柑橘。我用衛星氣候資料估算作物需水量，發現這裡的問題不只是缺水，而是誰有能力面對缺水。",
+    "story_en": "In the Tadla irrigation scheme in Morocco, the water delivered by canals often falls short of what crops need. To fill the gap, farmers pump groundwater, and the water table keeps dropping. Modernisation programmes backed by the World Bank promote drip irrigation and high-value crops, but many smallholders cannot afford them. Using satellite climate data, I estimated how much water the crops actually need. The deeper problem is not only scarcity, but who is able to cope with it.",
+    "note": "Atlas/🇲🇦 Tadla – Irrigation Supply vs Crop Demand",
+    "sources": [
+      {
+        "text": "Boularbah, S., Kuper, M., Hammani, A., Mailhol, J.-C., & Taky, A. (2019). The blind angle: Performance assessment of drip irrigation-in-use in a large-scale irrigation scheme in Morocco. Irrigation and Drainage, 68(5), 925–936.",
+        "url": "https://agritrop.cirad.fr/593361"
+      }
+    ]
+  },
+  {
+    "id": "tonle-sap-fisheries",
+    "place": "Tonle Sap, Cambodia",
+    "iso2": "kh",
+    "lat": 12.9,
+    "lon": 104.1,
+    "zoom": 6,
+    "tags": [
+      "Water Systems"
+    ],
+    "title_en": "A Shared Lake Enclosed for the Few",
+    "title_zh": "公共湖泊變成少數人的漁場",
+    "story_zh": "柬埔寨的洞里薩湖每年隨著湄公河的洪水漲退，這股節奏養活了大量的魚，也養活了靠湖維生的漁民。但國家把湖面切成一塊塊商業漁區租給業者，小漁民能捕魚的地方越來越少；上游的水壩，又改變了魚賴以為生的洪水節奏。學者把這種過程稱為「掠奪式積累」：公共的資源被圈起來，變成少數人的利益。可是魚會游動，不像土地能被圍住，這讓水上的圈地變得更加複雜。",
+    "story_en": "Every year, the Tonle Sap lake in Cambodia swells and shrinks with the Mekong flood, feeding huge numbers of fish and the families who live from them. The state divided parts of the lake into commercial fishing lots and leased them out, leaving less room for small-scale fishers. Upstream, dams are changing the rhythm of the flood that the fish depend on. Unlike land, fish move, so enclosing them is never simple. This case showed me how food, water and power are tied together on a single lake.",
+    "note": "Atlas/🇰🇭 Tonle Sap – Fisheries Enclosure",
+    "sources": [
+      {
+        "text": "Sneddon, C. (2007). Nature's materiality and the circuitous paths of accumulation: Dispossession of freshwater fisheries in Cambodia. Antipode, 39(1), 167–193.",
+        "url": "https://doi.org/10.1111/j.1467-8330.2007.00511.x"
+      }
+    ]
+  },
+  {
+    "id": "hydrosocial-territory",
+    "place": "Chiang Mai, Thailand",
+    "iso2": "th",
+    "lat": 18.79,
+    "lon": 98.98,
+    "zoom": 6,
+    "tags": [
+      "Water Systems"
+    ],
+    "title_en": "One Canal, Four Competing Claims",
+    "title_zh": "一條水路，四方在爭",
+    "story_zh": "在泰國清邁的城郊，一套古老的灌溉水系，同時被看成農田水路、城市排水與傾倒垃圾的地方、防洪設施，以及社區的信仰網絡。研究者訪談了三十二個人，用「水社會領域」的概念和反向製圖，畫出不同的人如何爭奪同一片水景，也讓被邊緣化的聲音被看見。我讀完之後想問：把這些地圖疊在一起之後，能不能再用空間分析說明，誰在哪裡、為什麼承受了改變？",
+    "story_en": "On the edge of Chiang Mai, Thailand, an old irrigation system is seen in four different ways at once. For farmers it carries water to fields, for the city it drains sewage, for planners it controls floods, and for communities it is part of a spiritual network. Researchers used the idea of a hydrosocial territory to show how power and competing visions reshape the same waterscape. Their maps put these claims side by side, but overlap alone cannot explain who loses and why. In my critique, I asked how spatial analysis could turn these overlapping stories into clearer causes and better decisions.",
+    "note": "Output/Notes/Hydrosocial Territory",
+    "sources": [
+      {
+        "text": "Chayakul, J., Veldwisch, G. J., Bruins, B., & Boelens, R. (2026). Contested waters: Hydrosocial territories and power dynamics in the landscape of peri-urban Chiang Mai, Thailand. Geoforum, 169, 104457.",
+        "url": "https://dare.uva.nl/id/a4cf1e1f-998f-4bdd-b047-432bbd472905"
+      }
+    ]
+  },
+  {
+    "id": "saiss-drip-paradox",
+    "place": "Saïss Plain, Morocco",
+    "iso2": "ma",
+    "lat": 33.95,
+    "lon": -5.25,
+    "zoom": 6,
+    "tags": [
+      "Land Management"
+    ],
+    "title_en": "Drip Irrigation Pumps More Water",
+    "title_zh": "滴灌反而抽更多水",
+    "story_zh": "在摩洛哥的賽斯平原，政府補助農民改用滴灌，希望節省地下水。滴灌讓灌溉更有效率，也更有利可圖，農民反而擴大種植面積、改種更耗水的作物，抽出的地下水比以前更多。這就是「效率悖論」：我們施加的解方沒有解決問題，反而和真正的問題背道而馳。我第一次遇到它是在伊朗的案例，後來才明白，一塊田省下來的水，不一定會留在整個流域裡。",
+    "story_en": "On the Saïss plain in Morocco, the government subsidised drip irrigation to help farmers save groundwater. Drip made irrigation more efficient, and also more profitable. Farmers used the savings to expand their fields and grow thirstier, high-value crops. In the end, more groundwater was pumped than before. This is the efficiency paradox: water saved on one field does not necessarily stay in the ground.",
+    "note": "Atlas/🇲🇦 Saïss Plain – Drip Irrigation Paradox",
+    "sources": [
+      {
+        "text": "Benouniche, M., Kuper, M., Hammani, A., & Boesveld, H. (2014). Making the user visible: Analysing irrigation practices and farmers' logic to explain actual drip irrigation performance. Irrigation Science, 32, 405–420.",
+        "url": "https://doi.org/10.1007/s00271-014-0438-0"
+      }
+    ]
+  },
+  {
+    "id": "taiwan-agri-risk",
+    "place": "Taiwan",
+    "iso2": "tw",
+    "lat": 23.75,
+    "lon": 120.6,
+    "zoom": 6,
+    "tags": [
+      "Land Management"
+    ],
+    "extreme": true,
+    "title_en": "Hidden Agri-Food Losses under Climate Risk",
+    "title_zh": "氣候風險下看不見的農業損失",
+    "story_zh": "臺灣的農業災損紀錄，是為了行政補償而設計的：颱風或寒害來了、農民申報、官員現勘，損失才被看見。但高溫讓稻穗出現空包彈、米粒出現腹白，這種緩慢的衰退很少被記錄。公糧收購讓農民撐過單次災害，卻也讓大家更難離開水稻；補償的紅利常落在地主身上，風險卻由實際耕作的人承擔。短期的安全網，長期下來反而可能讓整個農業系統更脆弱。",
+    "story_en": "In Taiwan, farm losses are recorded by a system built for compensation rather than for understanding risk. When a typhoon hits, farmers report damage, officials inspect the fields, and the loss becomes visible. But rising heat can leave rice grains empty or lower their quality, and this slow decline is rarely counted. Government rice purchasing protects farmers from single disasters, yet it also makes it harder to move away from rice. Over time, short-term safety can turn into long-term vulnerability.",
+    "note": "Output/Projects/Taiwan Agricultural Risk and Policy"
+  },
+  {
+    "id": "tajikistan-meat-imports",
+    "place": "Dushanbe, Tajikistan",
+    "iso2": "tj",
+    "lat": 38.56,
+    "lon": 68.79,
+    "zoom": 5,
+    "tags": [
+      "Food Security"
+    ],
+    "title_en": "Post-Soviet Cities Living on Imported Meat",
+    "title_zh": "經濟轉型後靠進口肉的城市",
+    "story_zh": "在中亞的塔吉克，城市並不是因為經濟起飛而長大。蘇聯解體後，國家經歷了一段漫長的經濟轉型，農村逐漸衰退，人們往城市移動，城市的糧食也越來越依賴進口和跨國零售商。今天，塔吉克城市餐桌上有很大一部分的肉，來自國外。城市人口增加了，蛋白質的來源卻沒有跟著在地長出來，而是寄託在國際市場的價格與供應上。都市化，不一定伴隨更強的在地糧食系統。",
+    "story_en": "In Tajikistan, cities did not grow mainly because the economy was booming. After the Soviet Union collapsed, the country went through a long economic transition, rural areas declined, and people moved to cities. Urban food supply came to depend more and more on imports and international retailers. Today, a large share of the meat on urban tables in Tajikistan comes from abroad. As cities grow, their protein supply is tied to global markets rather than to local farms.",
+    "sources": [
+      {
+        "text": "Asadov, S. (2013). Food security and the agricultural cooperation agenda in Central Asia with a focus on Tajikistan. SSRN.",
+        "url": "https://doi.org/10.2139/ssrn.2943847"
+      },
+      {
+        "text": "Liefert, W. M., Serova, E., & Liefert, O. (2010). The growing importance of the former USSR countries in world agricultural markets. Agricultural Economics, 41, 65–71.",
+        "url": "https://doi.org/10.1111/j.1574-0862.2010.00489.x"
+      }
+    ],
+    "note": "Literature on urban food systems (bachelor thesis reading)"
+  },
+  {
+    "id": "guinea-bissau-extraction",
+    "place": "Bissau, Guinea-Bissau",
+    "iso2": "gw",
+    "lat": 11.86,
+    "lon": -15.6,
+    "zoom": 6,
+    "tags": [
+      "Food Security"
+    ],
+    "title_en": "Pseudo-Urbanization without Better Diets",
+    "title_zh": "假性都市化下的單調餐桌",
+    "story_zh": "在西非的幾內亞比索，城市的擴張和自然資源的開採緊緊綁在一起。人口往城市聚集，但道路、冷藏和市場這些基礎設施沒有跟上，城市裡能買到的食物種類非常有限。研究發現，這裡的城市飲食仍以澱粉類主食和加工食品為主，蛋白質的攝取一直偏低。城市長大了，餐桌卻沒有變得更豐富。都市化帶來什麼，不只取決於有多少人搬進城市，也取決於城市是怎麼長出來的。",
+    "story_en": "In Guinea-Bissau, urban growth has been closely tied to the extraction of natural resources. People moved into cities, but roads, cold storage and markets did not keep pace. As a result, the food available in urban areas remains limited in variety. Studies found that urban diets are still dominated by staple carbohydrates and processed foods, and protein intake stays low. A growing city does not automatically mean a richer table; it depends on how the city grows.",
+    "sources": [
+      {
+        "text": "Patsche, C. B., Rudolf, F., Da Silva Mendes, A. M., Da Cunha, I., Gomes, V. F., Wejse, C., & Jeppesen, C. (2019). Dietary intake in undernourished adults living in Guinea-Bissau: A cross-sectional study. BMC Nutrition, 5, 13.",
+        "url": "https://doi.org/10.1186/s40795-019-0276-9"
+      }
+    ],
+    "note": "Literature on urban food systems (bachelor thesis reading)"
+  },
+  {
+    "id": "togo-cold-chain",
+    "place": "Lomé, Togo",
+    "iso2": "tg",
+    "lat": 6.13,
+    "lon": 1.22,
+    "zoom": 6,
+    "tags": [
+      "Food Security"
+    ],
+    "title_en": "Unstable Food Access without a Cold Chain",
+    "title_zh": "缺乏冷鏈下不穩定的食物取得",
+    "story_zh": "在多哥首都洛美，想在城市裡穩定地吃到肉、魚或蛋，並不容易。這裡缺乏冷藏運輸的冷鏈，也缺少大規模的供應系統，許多家庭只能在露天市場和街頭攤販購買動物性蛋白質，品質和供應都時有時無。在洛美，營養能不能送到城市居民手上，關鍵不只是有沒有錢，而是有沒有一條能把食物保持新鮮的路。城市的飲食，往往取決於那些我們平常看不見的物流。",
+    "story_en": "In Lomé, the capital of Togo, getting a steady supply of meat, fish or eggs in the city is not easy. There is little cold-chain infrastructure to keep food chilled, and few large-scale suppliers. Many households buy animal-source protein from open-air stalls and street vendors. As a result, both the quality and the availability of protein can change from day to day. Here, whether nutrition reaches city residents depends not only on money, but on a path that keeps food fresh.",
+    "sources": [
+      {
+        "text": "Toumoudagou N’oueni, P., Zinsou-Klassou, K., & Chenal, J. (2024). State of food and nutritional security of urban households in Grand Lomé: Approach by measuring household indicators. Foods, 13, 3345.",
+        "url": "https://doi.org/10.3390/foods13213345"
+      }
+    ],
+    "note": "Literature on urban food systems (bachelor thesis reading)"
+  },
+  {
+    "id": "namibia-supermarkets",
+    "place": "Northern Namibia",
+    "iso2": "na",
+    "lat": -17.79,
+    "lon": 15.7,
+    "zoom": 5,
+    "tags": [
+      "Food Security"
+    ],
+    "title_en": "Foreign Capital Brings the Cold Chain",
+    "title_zh": "外資帶來的超市與冷鏈",
+    "story_zh": "同樣在非洲，納米比亞的城市走出了另一條路。來自南非的外資和連鎖超市大量進駐，連北部的中小型城鎮也出現了超市，研究者稱之為「第二波超市革命」。超市背後是一整套冷藏運輸的冷鏈，讓肉、乳製品和蛋能穩定且多樣地送到城市居民手上。把它和多哥放在一起看，就能看見一座城市吃得好不好，常常取決於投資和物流這些看不見的條件。",
+    "story_en": "Elsewhere in Africa, Namibia's cities took a different path. Foreign investment and supermarket chains, especially from South Africa, have spread even into smaller towns in the north, a shift researchers call a secondary supermarket revolution. Behind these supermarkets is an integrated cold chain that keeps meat, dairy and eggs chilled. This makes protein supply in Namibian cities more reliable and more diverse. Compared with Togo, it shows how much a city's diet depends on investment and logistics we rarely see.",
+    "sources": [
+      {
+        "text": "Crush, J., & Frayne, B. (2011). Supermarket expansion and the informal food economy in Southern African cities: Implications for urban food security. Journal of Southern African Studies, 37, 781–807.",
+        "url": ""
+      },
+      {
+        "text": "Kazembe, L., Crush, J., & Nickanor, N. (2022). Secondary supermarket revolution: Food sources and food security in Northern Namibia. Urban Transformations, 4, 14.",
+        "url": "https://doi.org/10.1186/s42854-022-00043-7"
+      }
+    ],
+    "note": "Literature on urban food systems (bachelor thesis reading)"
+  },
+  {
+    "id": "mexico-nafta",
+    "place": "Mexico",
+    "iso2": "mx",
+    "lat": 19.43,
+    "lon": -99.13,
+    "zoom": 4,
+    "tags": [
+      "Food Security"
+    ],
+    "title_en": "NAFTA Reshapes Mexico's Protein Diet",
+    "title_zh": "自由貿易改變了墨西哥人的飲食",
+    "story_zh": "墨西哥人吃的肉變多了，但原因不全是收入提高。北美自由貿易協定（NAFTA）上路後，大量的玉米和牛肉進口，國內生產也跟著重新調整，肉、乳製品和蛋變得更便宜，傳統的豆類卻越吃越少。但這份豐富並沒有平均分配：許多城市貧困家庭要花一半以上的收入在食物上，價格一波動就首當其衝。結果，營養不良和肥胖同時出現在同一座城市裡。",
+    "story_en": "People in Mexico eat more meat than before, but not mainly because incomes rose. After the North American Free Trade Agreement (NAFTA), large imports of maize and beef reshaped the food system, making meat, dairy and eggs cheaper. Meanwhile, traditional beans and other legumes slowly disappeared from the table. Yet many poor urban households still spend more than half of their income on food and are hit hardest when prices swing. Undernutrition and obesity now exist side by side in the same cities.",
+    "sources": [
+      {
+        "text": "Sánchez-Ortiz, N. A., Unar-Munguía, M., Bautista-Arredondo, S., Shamah-Levy, T., & Colchero, M. A. (2022). Changes in apparent consumption of staple food in Mexico associated with the gradual implementation of the NAFTA. PLOS Global Public Health.",
+        "url": "https://doi.org/10.1371/journal.pgph.0001144"
+      },
+      {
+        "text": "Cruz-Sánchez, Y. (2024). The availability of food in Mexico: An approach to measuring food security. Agriculture & Food Security, 13.",
+        "url": "https://doi.org/10.1186/s40066-024-00484-2"
+      },
+      {
+        "text": "Romo-Aviles, M. (2018). Energy and nutrient supply according to food insecurity severity among Mexican households. Food Security.",
+        "url": "https://doi.org/10.1007/s12571-018-0836-x"
+      }
+    ],
+    "note": "Literature on urban food systems (bachelor thesis reading)"
+  },
+  {
+    "id": "brazil-soy",
+    "place": "Brazil",
+    "iso2": "br",
+    "lat": -15.8,
+    "lon": -47.9,
+    "zoom": 3.5,
+    "tags": [
+      "Food Security"
+    ],
+    "title_en": "Export-First Farming Leaves Staples Behind",
+    "title_zh": "出口優先下停滯的主食",
+    "story_zh": "巴西是全球領先的大豆出口國，國家的蛋白質供應也隨著農業擴張一起增加。但土地和資源大量轉向出口作物，米、豆子和樹薯這些傳統主食的生產反而停滯，甚至減少。食物變貴、貧富差距又大，許多城市家庭只能改買比較便宜的雞肉、雞蛋和超加工食品。巴西曾用家庭補助金（Bolsa Família）等計畫來縮小落差，但近年政策支持轉弱。出口的豐收，並沒有自動變成每個家庭的營養。",
+    "story_en": "Brazil has become a global leader in soybean exports, and its national protein supply has grown alongside agricultural expansion. But as land and resources shifted toward export crops, production of traditional staples like rice, beans and cassava stalled or even declined. With rising food prices and deep income inequality, many urban families turned to cheaper chicken, eggs and ultra-processed foods. Programmes such as Bolsa Família once helped narrow the gap, but policy support has weakened in recent years. An export boom does not automatically become nutrition on every family's table.",
+    "sources": [
+      {
+        "text": "Souza, R. M. D., & Ribeiro, J. C. (2025). The impact of Brazil’s agricultural export boom on domestic food security. Law and Economy, 4, 38–47.",
+        "url": "https://doi.org/10.56397/LE.2025.01.05"
+      },
+      {
+        "text": "Levy, R. B., Andrade, G. C., Cruz, G. L. D., Rauber, F., Louzada, M. L. D. C., Claro, R. M., & Monteiro, C. A. (2022). Three decades of household food availability according to NOVA – Brazil, 1987–2018. Revista de Saúde Pública, 56, 75.",
+        "url": "https://doi.org/10.11606/s1518-8787.2022056004570"
+      }
+    ],
+    "note": "Literature on urban food systems (bachelor thesis reading)"
+  },
+  {
+    "id": "argentina-export-controls",
+    "place": "Buenos Aires, Argentina",
+    "iso2": "ar",
+    "lat": -34.6,
+    "lon": -58.38,
+    "zoom": 4,
+    "tags": [
+      "Food Security"
+    ],
+    "title_en": "Export Controls That Failed to Feed Cities",
+    "title_zh": "沒讓城市吃得更好的出口管制",
+    "story_zh": "阿根廷是高度都市化的國家。為了讓城市居民買得起食物，政府長期對小麥和牛肉等農產品設下出口配額、課徵出口稅，希望把國內價格壓低。但這個保護措施反而削弱了它想守護的供應系統：農民拿到的價格太低、法規又反覆變動，於是減少了小麥和牛肉的生產。到了 2014 年，食物價格幾乎和通膨同步上漲。全國的蛋白質總量其實足夠，城市裡的窮人卻越來越吃不起富含蛋白質的飲食。",
+    "story_en": "Argentina is a highly urbanised country, and to keep food affordable for city residents, the government has long used export quotas and taxes on products like wheat and beef. The goal was to hold down domestic prices. Instead, the policy weakened the very supply system it was meant to protect. With low farmgate prices and constantly changing rules, farmers cut back on wheat and beef production. By 2014, food prices were rising almost as fast as inflation, and protein-rich diets slipped out of reach for the urban poor.",
+    "sources": [
+      {
+        "text": "Feeney, R., & MacClay, P. (2016). Food security in Argentina: A production or distribution problem? International Food and Agribusiness Management Review, 19.",
+        "url": "https://doi.org/10.22004/ag.econ.234954"
+      }
+    ],
+    "note": "Literature on urban food systems (bachelor thesis reading)"
+  },
+  {
+    "id": "japan-ageing-protein",
+    "place": "Japan",
+    "iso2": "jp",
+    "lat": 35.68,
+    "lon": 139.69,
+    "zoom": 5,
+    "tags": [
+      "Food Security"
+    ],
+    "title_en": "An Aging Society Reshapes Japan's Diet",
+    "title_zh": "高齡化改變的飲食組成",
+    "story_zh": "在日本，住在城市的人口比例過去二十年持續上升，全國的蛋白質供應卻維持持平，甚至略微下降。這背後是一個正在變老的社會：年長的日本人吃比較少的雞肉，吃更多的魚和黃豆製品，更貼近傳統的飲食習慣。國家的飲食指南也開始強調健康地變老，鼓勵適量攝取蛋白質，重視品質、好消化，以及來自植物的蛋白質。在這裡，吃多少已經不是重點，怎麼吃得剛剛好，才是高齡社會的課題。",
+    "story_en": "In Japan, the share of people living in cities has kept rising over the past two decades, yet the national protein supply has stayed flat or even declined slightly. Behind this is an aging society. Older Japanese people eat less chicken and more fish and soy foods, staying close to traditional diets. National dietary guidelines now emphasise healthy aging, encouraging moderate protein intake with attention to quality, digestibility and plant-based sources. In an aging society, the question is no longer how much to eat, but how to eat just right.",
+    "sources": [
+      {
+        "text": "Nomura, M., Yamaguchi, M., Inada, Y., & Nishi, N. (2023). Current dietary intake of the Japanese population in reference to the planetary health diet – preliminary assessment. Frontiers in Nutrition, 10, 1116105.",
+        "url": "https://doi.org/10.3389/fnut.2023.1116105"
+      }
+    ],
+    "note": "Literature on urban food systems (bachelor thesis reading)"
+  },
+  {
+    "id": "spain-mediterranean-diet",
+    "place": "Spain",
+    "iso2": "es",
+    "lat": 40.42,
+    "lon": -3.7,
+    "zoom": 5,
+    "tags": [
+      "Food Security"
+    ],
+    "title_en": "Mediterranean Diet in Aging Spain",
+    "title_zh": "高齡化下的地中海飲食",
+    "story_zh": "西班牙同樣是一個快速都市化、也快速老化的社會。1970 年代，西班牙人的肉類消費快速成長，到了 1980 年代卻趨於平穩，這被視為文化偏好和健康意識開始比經濟更能左右飲食的早期訊號。今天，世代之間的餐桌出現分歧：年長者仍保有以豆類、魚和橄欖油為主的傳統飲食，年輕的城市世代卻逐漸離開地中海飲食，轉向加工食品和紅肉。在西班牙，決定吃什麼的已經不只是收入，還有年紀和文化。",
+    "story_en": "Spain is a society that is both urbanising and aging quickly. Meat consumption rose rapidly through the 1970s but levelled off in the 1980s, an early sign that culture and health awareness had started to matter more than income alone. Today, a generational divide shows up at the table. Older adults keep a traditional diet built on legumes, fish and olive oil, while younger urban people are drifting away from the Mediterranean diet toward processed foods and red meat. In Spain, what people eat is shaped not only by income, but by age and culture.",
+    "sources": [
+      {
+        "text": "Delgado, P. (2023). From affluence to processed food: Meat consumption in Spain from 1950 to the present. Historia Agraria.",
+        "url": "https://doi.org/10.26882/histagrar.091e04d"
+      },
+      {
+        "text": "Partearroyo, T., Samaniego-Vaesken, M. D. L., Ruiz, E., Aranceta-Bartrina, J., Gil, Á., González-Gross, M., Ortega, R. M., Serra-Majem, L., & Varela-Moreiras, G. (2019). Current food consumption amongst the Spanish ANIBES study population. Nutrients, 11, 2663.",
+        "url": "https://doi.org/10.3390/nu11112663"
+      }
+    ],
+    "note": "Literature on urban food systems (bachelor thesis reading)"
+  }
+]

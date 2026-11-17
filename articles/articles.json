@@ -1,55 +1,86 @@
 [
   {
+    "slug": "next-summit",
+    "title": "下一座山頭",
+    "titleZh": "",
+    "date": "2026-09-12",
+    "tags": [
+      "Reflect"
+    ],
+    "image": "../images/practice-4.jpg",
+    "imageAlt": "下一座山頭",
+    "description": "如果用職業運動員的人生比喻，二十四歲的我有點像是剛走完新秀合約的 NBA 球員",
+    "externalUrl": "https://citipedia.substack.com/p/f61",
+    "excerpt": "如果用職業運動員的人生比喻，我覺得二十四歲的我有點像是剛走完新秀合約的 NBA 的球員。"
+  },
+  {
     "slug": "admission-to-wageningen",
     "title": "Next Stop: Wageningen.",
     "titleZh": "收到瓦大錄取信的所思所想",
     "date": "2026-02-15",
-    "tags": ["Reflect", "Feature Story"],
+    "tags": [
+      "Reflect",
+      "Feature Story"
+    ],
     "image": "../images/r508-celebration-admission.JPG",
     "imageAlt": "Admission celebration photo",
-    "description": "收到瓦大錄取信的所思所想"
+    "description": "收到瓦大錄取信的所思所想",
+    "excerpt": "我不是一個人獨自走到這裡，而是承接了很多人的光"
   },
   {
     "slug": "brain-overload-march",
     "title": "關於大腦過載、連結依賴，與慢慢學會照顧自己的三月回顧",
     "titleZh": "",
     "date": "2026-04-05",
-    "tags": ["Reflect"],
+    "tags": [
+      "Reflect"
+    ],
     "image": "../images/practice-3.webp",
     "imageAlt": "三月回顧",
     "description": "關於大腦過載、連結依賴，與慢慢學會照顧自己",
-    "externalUrl": "https://citipedia.substack.com/p/39b"
+    "externalUrl": "https://citipedia.substack.com/p/39b",
+    "excerpt": "我知道你很會照顧別人，但你有好好照顧自己嗎？",
+    "imagePosition": "center 18%"
   },
   {
     "slug": "ntu-geography-dept-graduation-speech",
     "title": "Speaking at the NTU Geography Commencement.",
     "titleZh": "臺大地理系小畢典畢業生代表致詞",
     "date": "2025-05-24",
-    "tags": ["Public Comment"],
+    "tags": [
+      "Public Comment"
+    ],
     "image": "../images/ntu-geography-speech-01.jpg",
     "imageAlt": "NTU Geography commencement speech photo",
-    "description": "臺大地理系小畢典畢業生代表致詞"
+    "description": "臺大地理系小畢典畢業生代表致詞",
+    "excerpt": "臺大地理系小畢典畢業生代表致詞"
   },
   {
     "slug": "accepting-stuck-self",
     "title": "練習接受卡住的自己，是我靠近恆星時刻的第一步",
     "titleZh": "",
     "date": "2025-09-01",
-    "tags": ["Reflect"],
+    "tags": [
+      "Reflect"
+    ],
     "image": "../images/practice-2.jpeg",
     "imageAlt": "練習接受卡住的自己",
     "description": "練習接受卡住的自己，是我靠近恆星時刻的第一步",
-    "externalUrl": "https://citipedia.substack.com/p/002"
+    "externalUrl": "https://citipedia.substack.com/p/002",
+    "excerpt": "最近的你，有覺得自己很自由嗎？對你來說，自由又是個什麼模樣呢？"
   },
   {
     "slug": "research-distance-from-people",
     "title": "我以為自己適合做研究，直到我發現自己離人群與土地越來越遠",
     "titleZh": "",
     "date": "2025-08-18",
-    "tags": ["Reflect"],
+    "tags": [
+      "Reflect"
+    ],
     "image": "../images/practice-1.JPG",
     "imageAlt": "離人群與土地越來越遠",
     "description": "我以為自己適合做研究，直到我發現自己離人群與土地越來越遠",
-    "externalUrl": "https://citipedia.substack.com/p/001"
+    "externalUrl": "https://citipedia.substack.com/p/001",
+    "excerpt": "理解發生，不等於真正靠近"
   }
 ]

@@ -10,17 +10,19 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js"></script>
     <script defer src="script.js"></script>
+    <script defer src="world-map.js"></script>
   </head>
   <body class="home-page">
 
-    <div class="site-hero">
-      <img class="site-hero-img" src="images/Banner.JPG" alt="" aria-hidden="true" />
+    <div class="site-hero" id="hero">
+      <img class="site-hero-img" src="images/banner.jpeg" alt="" aria-hidden="true" fetchpriority="high" />
       <div class="site-hero-overlay"></div>
+      <div class="site-hero-shade" aria-hidden="true"></div>
 
       <nav class="hero-nav" aria-label="Primary">
         <a href="articles/index.html">Writing</a>
         <a href="portfolio.html">Portfolio</a>
-        <a href="productivity.html">Productivity</a>
+        <a href="map.html">Map</a>
         <a href="#about">About</a>
       </nav>
 
@@ -29,27 +31,52 @@
       </button>
 
       <div class="hero-masthead">
-        <h1 class="hero-brand">The Sinasera</h1>
+        <h1 class="hero-brand" aria-label="The Sinasera">The Sinasera</h1>
         <p class="hero-tagline">Reading the land. Reading the game.</p>
       </div>
+
+      <p class="hero-caption">Outskirts of Ulaanbaatar, Mongolia</p>
+
+      <a class="hero-scroll" href="#writing" aria-label="Scroll to stories">
+        <span>Scroll</span>
+        <i aria-hidden="true"></i>
+      </a>
     </div>
 
     <div class="nav-backdrop" id="nav-backdrop"></div>
     <nav class="nav-drawer" id="nav-drawer" aria-label="Primary">
       <a href="articles/index.html">Writing</a>
       <a href="portfolio.html">Portfolio</a>
-      <a href="productivity.html">Productivity</a>
+      <a href="map.html">Map</a>
       <a href="#about">About</a>
     </nav>
 
 <main class="home-content">
       <div class="home-articles reveal" id="writing" data-articles-root="articles"></div>
 
-      <section class="world-map-section reveal">
-        <p class="stories-section-label">Around the world</p>
-        <div class="world-map-layout">
-          <div id="world-map"></div>
-          <div class="country-list" id="country-list"></div>
+      <section class="world-map-section reveal" id="map">
+        <div class="map-page-head">
+          <div>
+            <p class="stories-section-label">Around the world</p>
+          </div>
+          <div class="map-layers" role="group" aria-label="Map layers">
+            <button type="button" data-layer="visited" aria-pressed="true">Visited</button>
+            <button type="button" data-layer="read" aria-pressed="false">Reading</button>
+          </div>
+        </div>
+
+        <div class="map-page-layout">
+          <div class="world-map-frame">
+            <div class="world-map-canvas" data-map="full" data-variant="home"></div>
+            <div class="map-tooltip" role="status" hidden></div>
+            <p class="map-wheel-hint" hidden>Hold ⌘ or Ctrl and scroll to zoom</p>
+            <div class="map-zoom-controls">
+              <button type="button" data-zoom="in" aria-label="Zoom in">+</button>
+              <button type="button" data-zoom="out" aria-label="Zoom out">−</button>
+              <button type="button" data-zoom="reset" aria-label="Reset view">ALL</button>
+            </div>
+          </div>
+          <aside class="map-panel" id="map-panel" aria-live="polite"></aside>
         </div>
       </section>
 

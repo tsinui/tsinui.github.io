@@ -74,5 +74,6 @@
   - Crops & Irrigation：作物和灌溉，例如作物生產與損失、灌溉技術、灌區擴張。
   - Water Systems：較大的水體或整個流域的水，例如湖泊、河流、流域的水量與治理。
   - Food Security：糧食供應與飲食（暫定，之後再檢討）。
+  - Energy Transition：能源轉型、再生能源。
 - `extreme`：選填，`true` 表示故事發生在極端事件（乾旱、高溫、颱風）的情境下，地圖上的點外面會多一圈圓環。
   新主題可以直接寫；顏色在 `story-map.js` 最上面的 `TAG_COLORS` 加一行。

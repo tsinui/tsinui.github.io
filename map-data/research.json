@@ -197,7 +197,17 @@
     "title_zh": "被衛星誤讀的三角洲用水",
     "story_zh": "在埃及，研究者用衛星遙測模型（SEBAL）估算每一塊田的蒸發散。尼羅河三角洲的數值很高，被解讀成「用水沒效率」，於是有人建議訓練農民省水，並把水送到沙漠的新墾區，因為那裡的灌溉看起來更有效率。但三角洲在流域的下游，田裡多出來的水會流回渠道和排水系統，被下一塊田再用一次。一個像素看起來的浪費，放到整個流域，可能根本不是浪費。",
     "story_en": "In Egypt, researchers used a satellite model (SEBAL) to estimate evapotranspiration field by field. The Nile Delta showed high values, which were read as inefficient water use. The advice that followed was to train delta farmers to save water and to send more water to new desert schemes, where irrigation looked more efficient. But the delta sits at the downstream end of the basin: water that leaves one field returns to canals and drains and is used again by the next. What looks like waste in a single pixel may not be waste at all at the scale of the basin, and comparing delta rice with desert orchards is not a fair comparison to begin with.",
-    "note": "Atlas/🇪🇬 Nile Delta – Misreading Satellite ET.md"
+    "note": "Atlas/🇪🇬 Nile Delta – Misreading Satellite ET.md",
+    "sources": [
+      {
+        "text": "Molle, F., Gaafar, I., El-Agha, D. E., & Rap, E. (2018). The Nile delta's water and salt balances and implications for management. Agricultural Water Management, 197, 110–121.",
+        "url": "https://hdl.handle.net/10568/92089"
+      },
+      {
+        "text": "Tawfik, M., Hoogesteger, J., Moussa, M., & Hellegers, P. (2024). 'Squeezing out' the Nile Delta's drainage water to irrigate Egypt's desert land. Water, 16(1), 157.",
+        "url": "https://doi.org/10.3390/w16010157"
+      }
+    ]
   },
   {
     "id": "burundi-hillsides",
@@ -239,6 +249,183 @@
     "story_zh": "臺灣的農業災損紀錄，是為了行政補償而設計的：颱風或寒害來了、農民申報、官員現勘，損失才被看見。但高溫讓稻穗出現空包彈、米粒出現腹白，這種緩慢的衰退很少被記錄。公糧收購讓農民撐過單次災害，卻也讓大家更難離開水稻；補償的紅利常落在地主身上，風險卻由實際耕作的人承擔。短期的安全網，長期下來反而可能讓整個農業系統更脆弱。",
     "story_en": "In Taiwan, farm losses are recorded by a system built for compensation rather than for understanding risk. When a typhoon hits, farmers report damage, officials inspect the fields, and the loss becomes visible. But rising heat can leave rice grains empty or lower their quality, and this slow decline is rarely counted. Government rice purchasing protects farmers from single disasters, yet it also makes it harder to move away from rice. Over time, short-term safety can turn into long-term vulnerability.",
     "note": "Output/Projects/Taiwan Agricultural Risk and Policy"
+  },
+  {
+    "id": "fuli-cooperation",
+    "place": "Fuli, Taiwan",
+    "iso2": "tw",
+    "lat": 23.18,
+    "lon": 121.25,
+    "zoom": 9,
+    "mapZoom": 10.5,
+    "tags": [
+      "Crops & Irrigation"
+    ],
+    "title_en": "Cornered Into Cooperation",
+    "title_zh": "被絕境逼出來的團結",
+    "story_zh": "富里在花蓮和台東的交界，是許多資源最後才抵達的地方。這裡有不少新住民，也有當年在別處爭不到落腳處、最後才遷來的人；坡地脆弱，不少農田建在河床上，還曾面對垃圾掩埋場這類建設的進逼。被逼到這樣的處境，人們只能團結，也因此長出很強的農民組織：在農會與產銷班的合作下，有機稻農幾乎不必負擔保費，就能投保保障更多的水稻保險。天賜糧源（MANNAFOODS）替每一戶畫出代表家的符碼，用穀稻秋聲音樂祭把外面的音樂和文化帶進來，也讓在地居民的表演被看見。富里種出的不只是有機米，而是一個更有機的地方。",
+    "story_en": "Fuli sits on the border between Hualien and Taitung, the place where many resources, tangible or not, arrive last. Many residents are new immigrants, or families who moved here after failing to secure a place elsewhere; the slopes are fragile, many fields were built on riverbeds, and the township has faced unwanted projects such as a landfill. Pushed into such a vulnerable position, people had to unite, and Fuli now has remarkably strong farmers' organisations: through cooperation between the farmers' association and production groups, organic rice farmers can buy enhanced rice insurance while paying almost nothing themselves. MANNAFOODS designed an emblem for every household and uses an autumn harvest music festival to bring outside music and culture in, while giving local residents a stage of their own. What Fuli grows is not only organic rice, but a more organic place.",
+    "note": "大學：青年壯遊 A039（2022）；Herman 的口述回顧（20 歲的故事）",
+    "sources": [
+      {
+        "text": "餓・拾穗 (2022). 花東永續生活與慢食踏訪：成果報告書. 教育部青年發展署 111 年青年壯遊臺灣－尋找感動地圖實踐計畫 (A039)."
+      }
+    ]
+  },
+  {
+    "id": "wulai-landslides",
+    "place": "Wulai, Taiwan",
+    "iso2": "tw",
+    "lat": 24.86,
+    "lon": 121.55,
+    "zoom": 9,
+    "mapZoom": 11,
+    "tags": [
+      "Land Degradation"
+    ],
+    "extreme": true,
+    "title_en": "Landslides Meet an Aging Mountain Town",
+    "title_zh": "崩塌遇上高齡化的山城",
+    "story_zh": "烏來位在新北市最南端，大部分坡度超過三十度，年雨量三到四千毫米，颱風一來就容易崩塌。2015 年蘇迪勒颱風在烏來全區引發大量崩塌，老街的溫泉區停業數月，觀光收入驟減。我們用 SINMAP 模擬坡地的穩定度，再分析歷年的社會脆弱度，發現老化指數和扶養比快速上升，正一點一點削弱這裡面對災害的能力。災害風險不只來自地形，也來自一個社會怎麼變老。",
+    "story_en": "Wulai lies at the southern tip of New Taipei, where most slopes are steeper than 30 degrees and annual rainfall reaches 3,000 to 4,000 mm. In 2015, Typhoon Soudelor triggered landslides across almost the whole district, and the hot-spring old street had to close for months. In a group project, we modelled slope stability with SINMAP and analysed how social vulnerability changed over the years. We found that a rapidly rising ageing index and dependency ratio are steadily weakening the town's capacity to cope with disasters. Disaster risk here comes not only from the terrain, but also from how a society grows old.",
+    "note": "大學：烏來地區自然災害脆弱性之時空分析（小組報告）",
+    "sources": [
+      {
+        "text": "Group 3 (2024). 烏來地區自然災害脆弱性之時空分析：環境與社會變遷之綜合評估. Group course report, Department of Geography, National Taiwan University."
+      }
+    ]
+  },
+  {
+    "id": "liugui-badland",
+    "place": "18 Arhats Mountain, Taiwan",
+    "iso2": "tw",
+    "lat": 22.955,
+    "lon": 120.615,
+    "zoom": 9,
+    "mapZoom": 12,
+    "tags": [
+      "Land Degradation"
+    ],
+    "title_en": "Plants Clinging to a Conglomerate Badland",
+    "title_zh": "在礫岩惡地夾縫求生的植物",
+    "story_zh": "高雄六龜的十八羅漢山是礫岩惡地，岩壁陡峭，雨水一沖就崩落，植物很難生根。我用 Google Earth Engine 比較 1990、2005 和 2019 年的 NDVI，看到不同區段的植被有增有減，莫拉克風災後河道改變，舊河床上也長出新的植被。保護區管理人力不足、調查資料多年沒有更新；林務局想保育，在地居民想靠觀光重振經濟，雙方卻缺乏對話。惡地上的植物能不能留下來，最後取決於人怎麼談。",
+    "story_en": "The Eighteen Arhats Mountain in Liugui, Kaohsiung, is a conglomerate badland: steep rock walls crumble with every heavy rain, and plants struggle to take root. Using Google Earth Engine, I compared NDVI in 1990, 2005 and 2019 and saw vegetation gaining in some sections and losing in others; after Typhoon Morakot shifted the river, new vegetation even grew on the old riverbed. The nature reserve is short of staff, and its survey data have not been updated for years. The forestry bureau wants conservation, local residents hope tourism can revive the economy, and the two sides rarely talk. Whether plants can hold on to this badland depends, in the end, on how people negotiate.",
+    "note": "大學：十八羅漢間夾縫求生：礫岩惡地之於植被保護的挑戰（2023）",
+    "sources": [
+      {
+        "text": "Ho, C.-W. (2023). 十八羅漢間夾縫求生：礫岩惡地之於植被保護的挑戰. Course report, Department of Geography, National Taiwan University."
+      }
+    ]
+  },
+  {
+    "id": "jiadong-subsidence",
+    "place": "Jiadong, Taiwan",
+    "iso2": "tw",
+    "lat": 22.41,
+    "lon": 120.555,
+    "zoom": 9,
+    "mapZoom": 13,
+    "tags": [
+      "Land Degradation"
+    ],
+    "title_en": "Groundwater Pumping Sinks a Fishing Village",
+    "title_zh": "抽地下水抽沉的漁村",
+    "story_zh": "屏東佳冬的塭豐村，魚塭一座座高出地面，像架高的游泳池。過去為了養殖用水，居民大量抽取地下水，含水層得不到足夠的補注，土地一年年往下陷。實察那天看到，許多民房已經陷下將近一層樓高，新房子只能加裝擋水閘門、做斜坡。站在海堤上，堤內和堤外的高低差一目了然，未來還可能面對海水入侵和土壤鹽化。這裡有很高的產值，卻也一直在跟土地討價還價。",
+    "story_en": "In Wenfeng Village, Jiadong, Pingtung, fishponds rise above the ground like elevated swimming pools. For years, residents pumped large amounts of groundwater for aquaculture, and because the aquifer was not recharged enough, the land kept sinking. On our field trip we saw houses that had sunk by almost a full storey, while new houses were built with flood gates and ramps. Standing on the sea dike, the height difference between the land inside and the sea outside is plain to see, and seawater intrusion and soil salinisation may follow. This is a place of high economic value that is constantly bargaining with its own land.",
+    "note": "大學：地形學實察筆記（2022）",
+    "sources": [
+      {
+        "text": "Ho, C.-W. (2022). 地形學實察筆記：屏東佳冬塭豐村. Field notes, Geomorphology field course, National Taiwan University."
+      }
+    ]
+  },
+  {
+    "id": "luye-yongan",
+    "place": "Yongan Village, Luye, Taiwan",
+    "iso2": "tw",
+    "lat": 22.935,
+    "lon": 121.115,
+    "zoom": 9,
+    "mapZoom": 12,
+    "tags": [
+      "Crops & Irrigation"
+    ],
+    "title_en": "A Bypassed Village That Learned to Stand Alone",
+    "title_zh": "被省道繞過後學會自立的社區",
+    "story_zh": "鹿野永安村過去就在舊台九線上，後來被截彎取直的省道繞過，開闢近百年的武陵綠色隧道變得人跡罕至，咖啡產銷班的咖啡也賣不出去。這裡有許多軍眷後代，信念很有感染力，也很獨立：居民在極少的預算下辦起咖啡節，後來發展成東台灣最大的農村市集「2626 市集」，攤位要環保、有機，營運靠社區公共基金，不靠政府補助。社區裡處處是手作的智慧，用石頭疊成的清水生態設施、用廢棄物做成的地景裝置，都是自己動手的成果。",
+    "story_en": "Yongan Village in Luye once sat on the old Provincial Highway 9, until the straightened highway bypassed it; the century-old Wuling Green Tunnel was almost forgotten, and local coffee farmers struggled to sell their beans. Many residents are descendants of military families, and their convictions are contagious and fiercely independent. On a very small budget they started a coffee festival, which grew into the 2626 Market, the largest rural market in eastern Taiwan: stalls must be eco-friendly and organic, and the market runs on a community fund rather than government subsidies. Handmade wisdom is everywhere, from stone-built structures that keep the streams clean to landscape art made from discarded objects.",
+    "note": "大學：青年壯遊 A039（2022）四-6；Herman 的口述回顧（20 歲的故事）",
+    "sources": [
+      {
+        "text": "餓・拾穗 (2022). 花東永續生活與慢食踏訪：成果報告書. 教育部青年發展署 111 年青年壯遊臺灣－尋找感動地圖實踐計畫 (A039)."
+      }
+    ]
+  },
+  {
+    "id": "fenglin-soybeans",
+    "place": "Fenglin, Taiwan",
+    "iso2": "tw",
+    "lat": 23.745,
+    "lon": 121.452,
+    "zoom": 9,
+    "mapZoom": 12,
+    "tags": [
+      "Crops & Irrigation"
+    ],
+    "title_en": "A Hakka Town Where Slow Food Takes Root",
+    "title_zh": "慢食在客家小鎮紮根",
+    "story_zh": "花蓮鳳林是以客家人為主的小鎮，地方組織緊密，加上客家族群團結的文化，大家在同一個議題上比較容易形成共識，慢食和永續的理念也因此推得動。拾豆屋的老闆是返鄉青年，自己種黃豆、做豆花和豆漿，和其他豆農組成合作社，店裡的收入用來支持青年培力工作站，讓返鄉和移居的年輕人有落地生根的地方。他說，鳳林的「慢」要真的住下來才懂。在這裡我看到，一個地方的人和文化，會決定它的農業長成什麼樣子。",
+    "story_en": "Fenglin in Hualien is a predominantly Hakka town. Local organisations are tightly knit and the Hakka community is known for its solidarity, so people reach consensus on shared issues more easily, which helps ideas like slow food and sustainability take root. The owner of 拾豆屋 came back to his hometown to grow soybeans and make tofu pudding and soy milk; he formed a cooperative with other soybean farmers, and the shop's income supports a youth station that helps young people who return or move here settle down. For him, Fenglin's 'slow' is something you only understand after living here. Fenglin showed me how the people and culture of a place shape what its agriculture becomes.",
+    "note": "大學：青年壯遊 A039（2022）四-10；Herman 的口述回顧（20 歲的故事）",
+    "sources": [
+      {
+        "text": "餓・拾穗 (2022). 花東永續生活與慢食踏訪：成果報告書. 教育部青年發展署 111 年青年壯遊臺灣－尋找感動地圖實踐計畫 (A039)."
+      }
+    ]
+  },
+  {
+    "id": "taipei-garden-city",
+    "place": "Taipei, Taiwan",
+    "iso2": "tw",
+    "lat": 25.04,
+    "lon": 121.54,
+    "zoom": 9,
+    "mapZoom": 11,
+    "tags": [
+      "Food Security"
+    ],
+    "title_en": "Urban Farms Planted for Show",
+    "title_zh": "種給誰看的田園城市",
+    "story_zh": "1960 年代末，臺北市還有七千多公頃的農地，到了 2023 年只剩不到兩千八百公頃。2014 年起的田園城市政策在全市開闢了 751 處田園基地，看起來成果豐碩。但我用空間分析檢查可近性，排除校園、社宅、大樓和綠屋頂之後，只剩 254 處是一般市民真正走得進去的，大約三分之一。田園城市是種給誰吃，還是種給誰看？真正能參與的農園，應該回到街角空地和社區綠帶。",
+    "story_en": "In the late 1960s, Taipei still had more than 7,000 hectares of farmland; by 2023 less than 2,800 hectares remained. Since 2014, the city's Garden City policy has created 751 urban farm sites, which looks like a success on paper. But when I checked their accessibility with spatial analysis and removed sites inside schools, social housing, private buildings and green roofs, only 254 remained that ordinary residents could actually walk into, about one third. So who are these gardens for: people who eat from them, or people who look at them? Truly participatory urban farms, I argue, belong on street-corner plots and community green belts.",
+    "note": "大學：種給誰看？臺北田園城市的空間幻象與參與結構",
+    "sources": [
+      {
+        "text": "Ho, C.-W. (2025). 種給誰看？臺北田園城市的空間幻象與參與結構. Course report, Department of Geography, National Taiwan University."
+      }
+    ]
+  },
+  {
+    "id": "taiwan-offshore-wind",
+    "place": "Changhua Offshore, Taiwan",
+    "iso2": "tw",
+    "lat": 24.05,
+    "lon": 120.15,
+    "zoom": 9,
+    "mapZoom": 9,
+    "tags": [
+      "Energy Transition"
+    ],
+    "title_en": "Offshore Wind Caught Between Localization and Cheap Power",
+    "title_zh": "夾在國產化與低電價之間的離岸風電",
+    "story_zh": "台灣海峽的強風，讓彰化外海成為離岸風電的重要基地。2024 年的課堂演講讓我看到，風機能不能轉起來，不只看風，也看政策和資金。政府推動國產化，想培養本地供應鏈，卻引來歐盟向 WTO 提出爭端諮商，允能風場的滑樁事件也暴露出技術落差。風場融資大多靠國際銀行，而台灣電價長期偏低，企業不願買較貴的綠電，開發商就更難找到長期購電合約。能源轉型的瓶頸，常常不在海上。",
+    "story_en": "Strong winds in the Taiwan Strait have turned the waters off Changhua into a hub for offshore wind. A 2024 lecture showed me that whether the turbines turn depends not only on wind, but on policy and money. Taiwan's push to localise the supply chain led the EU to request WTO dispute consultations, and a pile-sliding incident at the Yunneng wind farm exposed technical gaps. Most project finance comes from international banks, while Taiwan's long-standing low electricity prices make companies reluctant to buy more expensive green power, so developers struggle to secure long-term purchase contracts. The bottlenecks of the energy transition are often not at sea at all.",
+    "note": "大學：離岸風力發電導論 心得報告：風能政策（2024/12/12）",
+    "sources": [
+      {
+        "text": "Ho, C.-W. (2024). 風能政策：演講心得報告. Introduction to Offshore Wind Power (course), National Taiwan University."
+      }
+    ]
   },
   {
     "id": "tajikistan-meat-imports",

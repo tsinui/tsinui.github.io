@@ -12,6 +12,7 @@
     "Land Degradation": "#cf3f32",
     "Crops & Irrigation": "#8a4fbf",
     "Water Systems": "#2b8fd0",
+    "Energy Transition": "#d6338a",
   };
   const OTHER_COLOR = "#7a5c99";
   const EXTREME = "Extreme Events";
@@ -24,6 +25,7 @@
     "Land Degradation": "#ff5a4a",
     "Crops & Irrigation": "#d39bff",
     "Water Systems": "#9fdcff",
+    "Energy Transition": "#ff7ac2",
   };
   const SAT_OTHER = "#d7a6ff";
   const SAT_EXTREME = "#ffffff";

@@ -33,6 +33,25 @@
       <div class="hero-masthead">
         <h1 class="hero-brand" aria-label="The Sinasera">The Sinasera</h1>
         <p class="hero-tagline">Reading the land. Reading the game.</p>
+        <!-- 暫時的預約按鈕（Google 日曆預約）：不需要時，刪掉從這裡到 end 的整段 -->
+        <div class="hero-book-wrap">
+          <link href="https://calendar.google.com/calendar/scheduling-button-script.css" rel="stylesheet" />
+          <script src="https://calendar.google.com/calendar/scheduling-button-script.js" async></script>
+          <script>
+            (function () {
+              var target = document.currentScript;
+              window.addEventListener("load", function () {
+                calendar.schedulingButton.load({
+                  url: "https://calendar.google.com/calendar/appointments/AcZssZ0oCu40POqwGUMUz94fTjvfkJdyfQg1u8xxkro=?gv=true",
+                  color: "#FFCD00",
+                  label: "Book a time with Herman",
+                  target,
+                });
+              });
+            })();
+          </script>
+        </div>
+        <!-- end Google 日曆預約 -->
       </div>
 
       <p class="hero-caption">Outskirts of Ulaanbaatar, Mongolia</p>

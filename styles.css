@@ -4233,3 +4233,29 @@ html:has(body.home-page) {
   width: 16px;
   height: 16px;
 }
+
+/* 首頁大圖上的預約按鈕（暫時，Google 日曆預約）：按鈕本身由 Google 的程式產生，這裡只控制位置 */
+.hero-book-wrap {
+  margin-top: 22px;
+  display: flex;
+  justify-content: center;
+}
+
+/* Google 預約按鈕：配合網站的字型，黃底配深色字 */
+.hero-book-wrap button {
+  font-family: var(--font-meta) !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.06em !important;
+  color: var(--p-dark) !important;
+  border-radius: 999px !important;
+}
+
+/* Google 預約的彈出視窗：Google 預設是半透明深色底，會透出後面的網站；改成不透明的白底。
+   Google 的 class 名稱是亂碼、可能會變，所以用「裝著預約 iframe 的那一層」來選 */
+div:has(> iframe[src*="calendar.google.com/calendar/appointments"]) {
+  background: #fff !important;
+}
+
+iframe[src*="calendar.google.com/calendar/appointments"] {
+  background: #fff !important;
+}
